@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Remove blue rectangle when click on mobile device, idk finded on stakoverflow */
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
