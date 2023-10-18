@@ -7,36 +7,36 @@ import { AuthContext } from '../app/AuthContext';
 import CartIcon from './icons/cart';
 import PackageIcon from './icons/package';
 
-export default function Navbar() {
+export default function Navbar({ cart }: { cart: any[] }) {
   const { user, googleSignIn, googleSignOut } = useContext(AuthContext);
   //console.log(user);
-  const quantity = 0;
+  const quantity = cart.reduce((total, current) => total + current.quantity, 0);
   return (
-    <nav className="bg-white/80 backdrop-blur">
+    <nav className="fixed w-full top-0 left-0 z-10 bg-white/80 backdrop-blur">
       <div className="mx-auto max-w-6xl flex items-center justify-between p-5 text-sm">
         <div className="flex items-center gap-6">
           <Link href="/" className="flex items-center gap-2">
             <PackageIcon classname="w-8 h-8" />
-            rStore
+            RetroStore
           </Link>
           <Link href="/search" className="flex">
-            All
+            All products
           </Link>
-          <Link href="/search/shirts" className="flex">
-            Shirts
+          <Link href="/search/phones" className="flex">
+            Phones
           </Link>
-          <Link href="/search/hoodies" className="flex">
-            Hoodies
+          <Link href="/search/hats" className="flex">
+            Hats
           </Link>
         </div>
         <div className="flex items-center gap-4">
           <Link
             href="/cart"
-            className="relative flex text-neutral-500 hover:scale-110 transition-transform"
+            className="relative flex text-neutral-500 hover:scale-105 transition-transform"
           >
             <CartIcon classname="w-6 h-6" />
             {quantity > 0 && (
-              <div className="absolute top-0 right-0 -mr-2 -mt-2 flex items-center justify-center h-4 w-4 rounded-full text-[11px] font-medium text-white bg-green-600">
+              <div className="absolute top-0 right-0 -mr-2 -mt-2 flex items-center justify-center h-4 w-4 rounded-full text-[11px] font-medium text-white bg-blue-500">
                 {quantity}
               </div>
             )}
