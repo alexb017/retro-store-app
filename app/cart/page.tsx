@@ -1,20 +1,37 @@
+'use client';
+
 import Link from 'next/link';
 import ArrowLeftIcon from '@/components/icons/arrow-left';
-import { getCart } from '@/lib/actions';
 import Image from 'next/image';
 import EditItemQuantity from '@/components/edit-item-cart';
 import DeleteItemCart from '@/components/delete-item-cart';
 import Footer from '@/components/footer';
+import { useState, useEffect } from 'react';
+import { collection, onSnapshot } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
-export default async function Cart() {
-  const cart: any[] = await getCart();
+export default function Cart() {
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    const q = collection(db, 'cart');
+    const unsubsribe = onSnapshot(q, (querySnapshot) => {
+      const productsCart: any = [];
+      querySnapshot.forEach((doc) => {
+        productsCart.push({ id: doc.id, ...doc.data() });
+      });
+      setCart(productsCart);
+    });
+
+    return () => unsubsribe();
+  }, []);
 
   const totalPrice = cart.reduce(
-    (total, current) => total + Number.parseInt(current?.price, 10),
+    (total, current: any) => total + Number.parseInt(current?.price, 10),
     0
   );
 
-  console.log(cart);
+  //console.log(cart);
 
   return (
     <>
@@ -34,7 +51,7 @@ export default async function Cart() {
           <>
             <div className="flex flex-col md:flex-row md:justify-between md:gap-5">
               <ul className="flex flex-col md:w-4/6">
-                {cart?.map((item, index) => {
+                {cart?.map((item: any, index) => {
                   const price = Number.parseInt(item?.price, 10);
                   let formattedPrice = null;
 
