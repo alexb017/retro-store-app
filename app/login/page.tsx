@@ -20,7 +20,7 @@ export default function Login() {
             <GoogleIcon classname="w-4 h-4" />
             Sign in with Google
           </button>
-          <button className="flex items-center gap-2 text-sm text-neutral-500 mt-2 bg-neutral-200 border rounded-lg border-neutral-300 hover:border-neutral-400 px-3.5 py-1 transition-colors">
+          <button className="flex items-center gap-2 text-sm text-neutral-500 hover:text-black mt-2 bg-neutral-100 border rounded-lg border-neutral-200 hover:border-neutral-300 px-3.5 py-1 transition-colors">
             <UserIcon classname="w-4 h-4" />
             Sign in Anonymously
           </button>
