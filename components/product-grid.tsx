@@ -24,8 +24,8 @@ function Item({ product }: { product: Product }) {
     formattedPrice = price;
   }
 
-  if (price >= 1000) {
-    formattedPrice = (price / 100).toLocaleString('en-US');
+  if (price >= 1000 && price < 10000) {
+    formattedPrice = (price / 1000).toLocaleString('en-US');
   }
 
   return (

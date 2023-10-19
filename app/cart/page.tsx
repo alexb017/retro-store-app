@@ -50,10 +50,6 @@ export default async function Cart() {
                     formattedPrice = (price / 1000).toLocaleString('en-US');
                   }
 
-                  if (price >= 10000) {
-                    formattedPrice = (price / 100).toLocaleString('en-US');
-                  }
-
                   return (
                     <li
                       key={index}
