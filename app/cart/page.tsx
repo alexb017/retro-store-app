@@ -6,28 +6,15 @@ import Image from 'next/image';
 import EditItemQuantity from '@/components/edit-item-cart';
 import DeleteItemCart from '@/components/delete-item-cart';
 import Footer from '@/components/footer';
-import { useState, useEffect } from 'react';
-import { collection, onSnapshot } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import useCartData from '@/lib/useCartData';
+import FormattedPrice from '@/components/formatted-price';
 
 export default function Cart() {
-  const [cart, setCart] = useState([]);
-
-  useEffect(() => {
-    const q = collection(db, 'cart');
-    const unsubsribe = onSnapshot(q, (querySnapshot) => {
-      const productsCart: any = [];
-      querySnapshot.forEach((doc) => {
-        productsCart.push({ id: doc.id, ...doc.data() });
-      });
-      setCart(productsCart);
-    });
-
-    return () => unsubsribe();
-  }, []);
+  const [cart] = useCartData();
 
   const totalPrice = cart.reduce(
-    (total, current: any) => total + Number.parseInt(current?.price, 10),
+    (total, current: any) =>
+      total + Number.parseInt(current?.price, 10) * current.quantity,
     0
   );
 
@@ -52,20 +39,7 @@ export default function Cart() {
             <div className="flex flex-col md:flex-row md:justify-between md:gap-5">
               <ul className="flex flex-col md:w-4/6">
                 {cart?.map((item: any, index) => {
-                  const price = Number.parseInt(item?.price, 10);
-                  let formattedPrice = null;
-
-                  if (price < 100) {
-                    formattedPrice = price.toFixed(2);
-                  }
-
-                  if (price >= 100 && price < 1000) {
-                    formattedPrice = price;
-                  }
-
-                  if (price >= 1000 && price < 10000) {
-                    formattedPrice = (price / 1000).toLocaleString('en-US');
-                  }
+                  const price = FormattedPrice(item?.price);
 
                   return (
                     <li
@@ -97,7 +71,7 @@ export default function Cart() {
                         </div>
                       </div>
                       <div className="flex flex-col items-start justify-between">
-                        <p>${formattedPrice} USD</p>
+                        <p>{price}</p>
                         <DeleteItemCart id={item.id} />
                       </div>
                     </li>

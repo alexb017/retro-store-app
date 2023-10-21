@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { getProducts } from '@/lib/actions';
+import FormattedPrice from './formatted-price';
 
 type Product = {
   id: string;
@@ -12,21 +13,7 @@ type Product = {
 };
 
 function Item({ product }: { product: Product }) {
-  const price = Number.parseInt(product?.price, 10);
-
-  let formattedPrice = null;
-
-  if (price < 100) {
-    formattedPrice = price.toFixed(2);
-  }
-
-  if (price >= 100 && price < 1000) {
-    formattedPrice = price;
-  }
-
-  if (price >= 1000 && price < 10000) {
-    formattedPrice = (price / 1000).toLocaleString('en-US');
-  }
+  const price = FormattedPrice(product?.price);
 
   return (
     <Link
@@ -39,15 +26,15 @@ function Item({ product }: { product: Product }) {
           alt={product.name}
           width={300}
           height={300}
-          className="object-contain transition-all ease-in-out group-hover:scale-110"
+          className="object-contain transition-all ease-in-out group-hover:scale-105"
         />
       </div>
       <div className="flex flex-col items-center p-5 pt-0">
         <h1 className="text-2xl font-bold">{product.name}</h1>
         {product?.category === 'tech' ? (
-          <p className="text-sm text-neutral-500">From ${formattedPrice} USD</p>
+          <p className="text-sm text-neutral-500">{price}</p>
         ) : (
-          <p className="text-sm text-neutral-500">${formattedPrice} USD</p>
+          <p className="text-sm text-neutral-500">{price}</p>
         )}
       </div>
     </Link>

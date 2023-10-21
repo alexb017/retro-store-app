@@ -1,6 +1,8 @@
 import PlusIcon from './icons/plus';
 import { setCart } from '@/lib/actions';
 import { useRouter } from 'next/navigation';
+import { useContext } from 'react';
+import { AuthContext } from '../app/AuthContext';
 
 export default function AddToCart({
   product,
@@ -11,6 +13,7 @@ export default function AddToCart({
   color: string;
   space: string;
 }) {
+  const { user, googleSignIn, googleSignOut } = useContext(AuthContext);
   const router = useRouter();
   let defaultVariant = color === '' || space === '';
 
@@ -56,7 +59,7 @@ export default function AddToCart({
       }`}
       onClick={async () => {
         await setCart(data);
-        router.refresh();
+        //router.refresh();
       }}
     >
       <PlusIcon classname="w-6 h-6" />

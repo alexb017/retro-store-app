@@ -6,11 +6,16 @@ import Image from 'next/image';
 import { AuthContext } from '../app/AuthContext';
 import CartIcon from './icons/cart';
 import PackageIcon from './icons/package';
+import useCartData from '@/lib/useCartData';
 
-export default function Navbar({ cart }: { cart: any[] }) {
+export default function Navbar() {
   const { user, googleSignIn, googleSignOut } = useContext(AuthContext);
+  const [cart] = useCartData();
   //console.log(user);
-  const quantity = cart.reduce((total, current) => total + current.quantity, 0);
+  const quantity = cart.reduce(
+    (total, current: any) => total + current.quantity,
+    0
+  );
   return (
     <nav className="fixed w-full top-0 left-0 z-10 bg-white/80 backdrop-blur">
       <div className="mx-auto max-w-6xl flex items-center justify-between p-5 text-sm">
