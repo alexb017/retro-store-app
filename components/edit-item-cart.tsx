@@ -22,7 +22,7 @@ export default function EditItemQuantity({
 
     await updateProductCart(quantity, item?.id);
 
-    router.refresh();
+    //router.refresh();
   }
 
   return (

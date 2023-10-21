@@ -8,7 +8,7 @@ export default function DeleteItemCart({ id }: { id: string }) {
 
   async function deleteItem(id: string) {
     await deleteProductCart(id);
-    router.refresh();
+    //router.refresh();
   }
 
   return (
