@@ -1,5 +1,5 @@
 import PlusIcon from './icons/plus';
-import { setCart } from '@/lib/actions';
+import { setCartUser } from '@/lib/actions';
 import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
 import { AuthContext } from '../app/AuthContext';
@@ -40,12 +40,16 @@ export default function AddToCart({
   }
 
   const data = {
-    name: product?.name,
-    price,
-    color,
-    space,
-    image: product?.images[0],
-    quantity: 1,
+    cart: [
+      {
+        name: product?.name,
+        price,
+        color,
+        space,
+        image: product?.images[0],
+        quantity: 1,
+      },
+    ],
   };
 
   return (
@@ -58,7 +62,7 @@ export default function AddToCart({
           : 'cursor-pointer opacity-100'
       }`}
       onClick={async () => {
-        await setCart(data);
+        await setCartUser(user?.uid, data);
         //router.refresh();
       }}
     >

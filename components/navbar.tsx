@@ -7,15 +7,21 @@ import { AuthContext } from '../app/AuthContext';
 import CartIcon from './icons/cart';
 import PackageIcon from './icons/package';
 import useCartData from '@/lib/useCartData';
+import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
   const { user, googleSignIn, googleSignOut } = useContext(AuthContext);
-  const [cart] = useCartData();
-  //console.log(user);
+  const [cart] = useCartData(user?.uid);
+  const router = useRouter();
+  const username: string = user?.displayName;
+  const usernameURL = username?.toLowerCase().replace(/\s+/g, '-');
+  console.log(cart);
+
   const quantity = cart.reduce(
     (total, current: any) => total + current.quantity,
     0
   );
+
   return (
     <nav className="fixed w-full top-0 left-0 z-10 bg-white/80 backdrop-blur">
       <div className="mx-auto max-w-6xl flex items-center justify-between p-5 text-sm">
@@ -34,24 +40,49 @@ export default function Navbar() {
             Hats
           </Link>
         </div>
-        <div className="flex items-center gap-4">
-          <Link
-            href="/cart"
-            className="relative flex text-neutral-500 hover:scale-105 transition-transform"
-          >
-            <CartIcon classname="w-6 h-6" />
-            {quantity > 0 && (
-              <div className="absolute top-0 right-0 -mr-2 -mt-2 flex items-center justify-center h-4 w-4 rounded-full text-[11px] font-medium text-white bg-blue-500">
-                {quantity}
+        <div className="flex items-center">
+          {user ? (
+            <>
+              <div className="flex items-center gap-4">
+                <Link
+                  href="/cart"
+                  className="relative flex text-neutral-500 hover:scale-105 transition-transform"
+                >
+                  <CartIcon classname="w-6 h-6" />
+                  {quantity > 0 && (
+                    <div className="absolute top-0 right-0 -mr-2 -mt-2 flex items-center justify-center h-4 w-4 rounded-full text-[11px] font-medium text-white bg-blue-500">
+                      {quantity}
+                    </div>
+                  )}
+                </Link>
+                <Link href={`/profile/${usernameURL}`}>
+                  <Image
+                    className="rounded-full"
+                    src={user?.photoURL}
+                    alt={usernameURL}
+                    width={24}
+                    height={24}
+                  />
+                </Link>
+                <button
+                  onClick={async () => {
+                    await googleSignOut();
+                    router.refresh();
+                  }}
+                  className="text-sm border rounded-lg border-neutral-300 hover:border-neutral-400 px-3.5 py-1 transition-colors"
+                >
+                  Sign out
+                </button>
               </div>
-            )}
-          </Link>
-          <Link
-            href="/login"
-            className="border rounded-lg border-neutral-300 hover:border-neutral-400 px-3.5 py-1 transition-colors"
-          >
-            Log in
-          </Link>
+            </>
+          ) : (
+            <Link
+              href="/login"
+              className="border rounded-lg border-neutral-300 hover:border-neutral-400 px-3.5 py-1 transition-colors"
+            >
+              Log in
+            </Link>
+          )}
         </div>
       </div>
     </nav>

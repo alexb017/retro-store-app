@@ -9,6 +9,7 @@ import UserIcon from '@/components/icons/user';
 
 export default function Login() {
   const { user, googleSignIn, googleSignOut } = useContext(AuthContext);
+  console.log(user);
   return (
     <div className="p-5">
       {!user ? (
@@ -27,6 +28,15 @@ export default function Login() {
         </>
       ) : (
         <>
+          {user && (
+            <Image
+              className="rounded-full"
+              src={user?.photoURL}
+              alt={user?.displayName}
+              width={44}
+              height={44}
+            />
+          )}
           <h1 className="text-neutral-500 text-xl">
             Welcome, {user?.displayName}!
           </h1>

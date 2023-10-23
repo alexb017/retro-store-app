@@ -48,8 +48,8 @@ export async function getProductsBanner() {
   return data;
 }
 
-export async function setCart(data: any) {
-  await addDoc(collection(db, 'cart'), data);
+export async function setCartUser(id: string, data: any) {
+  await setDoc(doc(db, 'users-cart', id), data);
 }
 
 export async function getCart() {

@@ -8,9 +8,12 @@ import DeleteItemCart from '@/components/delete-item-cart';
 import Footer from '@/components/footer';
 import useCartData from '@/lib/useCartData';
 import FormattedPrice from '@/components/formatted-price';
+import { useContext } from 'react';
+import { AuthContext } from '../AuthContext';
 
 export default function Cart() {
-  const [cart] = useCartData();
+  const { user, googleSignIn, googleSignOut } = useContext(AuthContext);
+  const [cart] = useCartData(user?.uid);
 
   const totalPrice = cart.reduce(
     (total, current: any) =>
