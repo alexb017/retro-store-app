@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { collection, onSnapshot, doc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
-// Custom hook to read products from cart
+// Custom hook to listen for updates on cart
 export default function useCartData(id: string) {
   const [cart, setCart] = useState([]);
 
@@ -12,8 +12,8 @@ export default function useCartData(id: string) {
     if (id) {
       const q = doc(db, 'users-cart', id);
       unsubsribe = onSnapshot(q, (doc) => {
-        console.log(doc.data()?.cart);
-        setCart(doc.data()?.cart as any);
+        //console.log(doc?.data()?.cart);
+        setCart(doc?.data()?.cart as any);
       });
     }
 

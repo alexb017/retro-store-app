@@ -6,28 +6,41 @@ import Image from 'next/image';
 import { AuthContext } from '../AuthContext';
 import GoogleIcon from '@/components/icons/google';
 import UserIcon from '@/components/icons/user';
+import { useRouter } from 'next/navigation';
 
 export default function Login() {
   const { user, googleSignIn, googleSignOut } = useContext(AuthContext);
-  console.log(user);
+  const router = useRouter();
+
   return (
     <div className="p-5">
       {!user ? (
         <>
           <button
-            onClick={async () => await googleSignIn()}
-            className="flex items-center gap-2 text-sm border rounded-lg border-neutral-300 hover:border-neutral-400 px-3.5 py-1 transition-colors"
+            onClick={async () => {
+              const res = await googleSignIn();
+
+              if (res) {
+                router.push('/');
+              }
+            }}
+            className="flex items-center gap-2 text-base font-semibold text-gray-500 border rounded-lg border-gray-300 hover:border-gray-400 px-6 py-1 transition-colors"
           >
-            <GoogleIcon classname="w-4 h-4" />
+            <GoogleIcon classname="w-5 h-5" />
             Sign in with Google
           </button>
-          <button className="flex items-center gap-2 text-sm text-neutral-500 hover:text-black mt-2 bg-neutral-100 border rounded-lg border-neutral-200 hover:border-neutral-300 px-3.5 py-1 transition-colors">
+          {/* <button className="flex items-center gap-2 text-sm text-gray-500 hover:text-black mt-2 bg-gray-100 border rounded-lg border-gray-200 hover:border-gray-300 px-3.5 py-1 transition-colors">
             <UserIcon classname="w-4 h-4" />
             Sign in Anonymously
-          </button>
+          </button> */}
         </>
-      ) : (
-        <>
+      ) : null}
+    </div>
+  );
+}
+
+/*
+<>
           {user && (
             <Image
               className="rounded-full"
@@ -37,18 +50,16 @@ export default function Login() {
               height={44}
             />
           )}
-          <h1 className="text-neutral-500 text-xl">
+          <h1 className="text-gray-500 text-xl">
             Welcome, {user?.displayName}!
           </h1>
           <p>{user?.uid}</p>
           <button
             onClick={async () => await googleSignOut()}
-            className="text-sm border rounded-lg border-neutral-300 hover:border-neutral-400 px-3.5 py-1 transition-colors"
+            className="text-sm border rounded-lg border-gray-300 hover:border-gray-400 px-3.5 py-1 transition-colors"
           >
             Sign out
           </button>
         </>
-      )}
-    </div>
-  );
-}
+
+*/

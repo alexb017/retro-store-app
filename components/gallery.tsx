@@ -42,7 +42,7 @@ export default function Gallery({
                       className={
                         isActive
                           ? `${classname} border-2 border-blue-500`
-                          : `${classname} border-neutral-200`
+                          : `${classname} border-gray-200`
                       }
                       width={80}
                       height={80}

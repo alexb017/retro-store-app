@@ -10,14 +10,15 @@ import useCartData from '@/lib/useCartData';
 import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
-  const { user, googleSignIn, googleSignOut } = useContext(AuthContext);
+  const { user, googleSignOut } = useContext(AuthContext);
   const [cart] = useCartData(user?.uid);
   const router = useRouter();
   const username: string = user?.displayName;
   const usernameURL = username?.toLowerCase().replace(/\s+/g, '-');
-  console.log(cart);
 
-  const quantity = cart.reduce(
+  //console.log(cart);
+
+  const quantity = cart?.reduce(
     (total, current: any) => total + current.quantity,
     0
   );
@@ -46,7 +47,7 @@ export default function Navbar() {
               <div className="flex items-center gap-4">
                 <Link
                   href="/cart"
-                  className="relative flex text-neutral-500 hover:scale-105 transition-transform"
+                  className="relative flex text-gray-500 hover:scale-105 transition-transform"
                 >
                   <CartIcon classname="w-6 h-6" />
                   {quantity > 0 && (
@@ -69,7 +70,7 @@ export default function Navbar() {
                     await googleSignOut();
                     router.refresh();
                   }}
-                  className="text-sm border rounded-lg border-neutral-300 hover:border-neutral-400 px-3.5 py-1 transition-colors"
+                  className="text-sm border rounded-lg border-gray-300 hover:border-gray-400 px-3.5 py-1 transition-colors"
                 >
                   Sign out
                 </button>
@@ -78,7 +79,7 @@ export default function Navbar() {
           ) : (
             <Link
               href="/login"
-              className="border rounded-lg border-neutral-300 hover:border-neutral-400 px-3.5 py-1 transition-colors"
+              className="border rounded-lg border-gray-300 hover:border-gray-400 px-3.5 py-1 transition-colors"
             >
               Log in
             </Link>

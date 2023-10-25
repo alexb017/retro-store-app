@@ -10,6 +10,9 @@ import {
   addDoc,
   updateDoc,
   deleteDoc,
+  arrayUnion,
+  arrayRemove,
+  increment,
 } from 'firebase/firestore';
 import { db } from './firebase';
 
@@ -52,22 +55,27 @@ export async function setCartUser(id: string, data: any) {
   await setDoc(doc(db, 'users-cart', id), data);
 }
 
-export async function getCart() {
-  const querySnapshot = await getDocs(collection(db, 'cart'));
-  const data = querySnapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
+export async function getUserCart(id: string) {
+  const querySnapshot = await getDoc(doc(db, 'users-cart', id));
+  const data = querySnapshot.data()?.cart;
 
   return data;
 }
 
-export async function updateProductCart(quantity: number, id: string) {
-  await updateDoc(doc(db, 'cart', id), {
-    quantity: quantity,
+export async function addItemCart(id: string, item: any) {
+  await updateDoc(doc(db, 'users-cart', id), {
+    cart: arrayUnion(item),
   });
 }
 
-export async function deleteProductCart(id: string) {
-  await deleteDoc(doc(db, 'cart', id));
+export async function deleteItemCart(id: string, item: any) {
+  await updateDoc(doc(db, 'users-cart', id), {
+    cart: arrayRemove(item),
+  });
+}
+
+export async function updateItemCart(id: string, item: any) {
+  await updateDoc(doc(db, 'users-cart', id), {
+    cart: item,
+  });
 }

@@ -3,7 +3,10 @@
 import { useRouter } from 'next/navigation';
 import PlusIcon from './icons/plus';
 import MinusIcon from './icons/minus';
-import { updateProductCart } from '@/lib/actions';
+import { deleteItemCart, updateItemCart } from '@/lib/actions';
+import { useContext } from 'react';
+import { AuthContext } from '@/app/AuthContext';
+import { getUserCart } from '@/lib/actions';
 
 export default function EditItemQuantity({
   item,
@@ -12,15 +15,39 @@ export default function EditItemQuantity({
   item: any;
   type: 'plus' | 'minus';
 }) {
+  const { user } = useContext(AuthContext);
+
   const router = useRouter();
+  //console.log(item);
 
   async function updateItem() {
+    const userCart = await getUserCart(user?.uid);
+
     const quantity: any =
-      type === 'plus' ? item.quantity + 1 : item.quantity - 1;
+      type === 'plus' ? item?.quantity + 1 : item?.quantity - 1;
 
-    if (item.quantity === 1 && type === 'minus') return;
+    // Check if item exists
+    const existingItem = userCart?.find(
+      (product: any) => product?.handle === item?.handle
+    );
 
-    await updateProductCart(quantity, item?.id);
+    if (item?.quantity <= 1 && type === 'minus') {
+      await deleteItemCart(user?.uid, existingItem);
+      return;
+    }
+
+    if (existingItem) {
+      // Update item with new quantity
+      const updateItem = userCart?.map((product: any) => {
+        if (product?.handle === item?.handle) {
+          return { ...product, quantity: quantity };
+        }
+        return product;
+      });
+
+      // Update db with new value
+      await updateItemCart(user?.uid, updateItem);
+    }
 
     //router.refresh();
   }
@@ -28,12 +55,12 @@ export default function EditItemQuantity({
   return (
     <button
       onClick={updateItem}
-      className="px-4 py-3 hover:scale-105 text-neutral-500 hover:text-black transition-transform ease-in-out"
+      className="px-6 h-11 hover:scale-105 text-gray-500 hover:text-black transition-transform ease-in-out"
     >
       {type === 'plus' ? (
-        <PlusIcon classname="h-4" />
+        <PlusIcon classname="h-5" />
       ) : (
-        <MinusIcon classname="h-4" />
+        <MinusIcon classname="h-5" />
       )}
     </button>
   );

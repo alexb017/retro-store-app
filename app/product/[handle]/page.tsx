@@ -5,12 +5,7 @@ import Gallery from '@/components/gallery';
 import ProductInfo from '@/components/product-info';
 import ArrowLeftIcon from '@/components/icons/arrow-left';
 import Footer from '@/components/footer';
-
-type Product = {
-  id: string;
-  handle: string;
-  price: string;
-};
+import FormattedPrice from '@/components/formatted-price';
 
 export default async function Product({
   params,
@@ -24,13 +19,13 @@ export default async function Product({
       <div className="mx-auto max-w-screen-2xl p-5">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 pb-5 text-neutral-500 group"
+          className="inline-flex items-center gap-2 pb-5 text-gray-500 group hover:text-black transition-all ease-in-out"
         >
-          <ArrowLeftIcon classname="h-5 group-hover:scale-105 transition-all ease-in-out group-hover:text-black" />
+          <ArrowLeftIcon classname="h-5 group-hover:scale-105 transition-all ease-in-out" />
           Go back to the main page
         </Link>
         <div className="flex flex-col lg:flex-row lg:gap-12">
-          <div className="h-full w-full rounded-2xl p-8 bg-neutral-50 basis-full lg:basis-4/6">
+          <div className="h-full w-full rounded-2xl p-8 bg-gray-100 basis-full lg:basis-4/6">
             <Gallery
               images={product?.images?.map((image: string) => ({ src: image }))}
               name={product?.name}
@@ -59,37 +54,33 @@ async function RelatedProducts({ category }: { category: string }) {
       {filteredProducts.length > 0 && (
         <h2 className="mb-4 text-2xl">Related Products</h2>
       )}
-      <ul className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {filteredProducts.map((product) => (
-          <li key={product.handle} className="w-full">
-            <Link
-              href={`/product/${product.handle}`}
-              className="bg-neutral-100 flex flex-col rounded-3xl group"
-            >
-              <div className="w-full h-64 flex items-center justify-center">
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  width={300}
-                  height={300}
-                  className="object-contain transition-all ease-in-out group-hover:scale-110"
-                />
-              </div>
-              <div className="flex flex-col items-center p-5 pt-0">
-                <h1 className="text-2xl font-bold">{product.name}</h1>
-                {product?.category === 'tech' ? (
-                  <p className="text-sm text-neutral-500">
-                    From ${product.price} USD
-                  </p>
-                ) : (
-                  <p className="text-sm text-neutral-500">
-                    ${product.price} USD
-                  </p>
-                )}
-              </div>
-            </Link>
-          </li>
-        ))}
+      <ul className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {filteredProducts.map((product) => {
+          const price = FormattedPrice(product?.price);
+
+          return (
+            <li key={product.handle} className="w-full">
+              <Link
+                href={`/product/${product.handle}`}
+                className="bg-gray-100 flex flex-col rounded-3xl group"
+              >
+                <div className="w-full h-60 flex items-center justify-center overflow-hidden">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    width={240}
+                    height={240}
+                    className="object-contain transition-all ease-in-out group-hover:scale-105"
+                  />
+                </div>
+                <div className="flex flex-col items-start p-5">
+                  <p className="text-sm">{product.name}</p>
+                  <h1 className="text-2xl font-medium">{price}</h1>
+                </div>
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

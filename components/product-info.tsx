@@ -2,36 +2,19 @@
 
 import { useState } from 'react';
 import AddToCart from './add-to-cart';
+import FormattedPrice from './formatted-price';
 
 export default function ProductInfo({ product }: { product: any }) {
   const [colorValue, setColorValue] = useState('');
   const [spaceValue, setSpaceValue] = useState('');
 
-  const price = Number.parseInt(product?.price, 10);
-
-  let formattedPrice = null;
-
-  if (price < 100) {
-    formattedPrice = price.toFixed(2);
-  }
-
-  if (price >= 100 && price < 1000) {
-    formattedPrice = price;
-  }
-
-  if (price >= 1000 && price < 10000) {
-    formattedPrice = (price / 1000).toLocaleString('en-US');
-  }
+  let formattedPrice = FormattedPrice(product?.price);
 
   return (
     <>
-      <div className="mb-5 flex flex-col border-b border-neutral-200 pb-5">
-        <h1 className="mb-2 text-5xl font-bold">{product?.name}</h1>
-        {product?.storage?.length > 1 ? (
-          <p className="text-neutral-500">From ${formattedPrice} USD</p>
-        ) : (
-          <p className="text-neutral-500">${formattedPrice} USD</p>
-        )}
+      <div className="mb-5 flex flex-col border-b border-gray-200 pb-5">
+        <h1 className="mb-2 text-4xl font-medium">{product?.name}</h1>
+        <p className="text-gray-500 text-2xl">{formattedPrice}</p>
       </div>
       {product?.colors?.length > 0 && (
         <>
@@ -49,7 +32,7 @@ export default function ProductInfo({ product }: { product: any }) {
                   className={
                     isActive
                       ? `${classname} border-2 border-blue-500`
-                      : `${classname} border-neutral-200`
+                      : `${classname} border-gray-200`
                   }
                   onClick={() => setColorValue(color)}
                 >
@@ -69,21 +52,7 @@ export default function ProductInfo({ product }: { product: any }) {
               const classname =
                 'text-sm border rounded-2xl aspect-square w-24 h-24 hover:border-blue-500 hover:scale-105 transition-all';
 
-              const price = Number.parseInt(storage?.price, 10);
-
-              let formattedPrice = null;
-
-              if (price < 100) {
-                formattedPrice = price.toFixed(2);
-              }
-
-              if (price >= 100 && price < 1000) {
-                formattedPrice = price;
-              }
-
-              if (price >= 1000) {
-                formattedPrice = (price / 1000).toLocaleString('en-US');
-              }
+              let formattedPrice = FormattedPrice(storage?.price);
 
               return (
                 <button
@@ -92,15 +61,13 @@ export default function ProductInfo({ product }: { product: any }) {
                   className={
                     isActive
                       ? `${classname} border-2 border-blue-500`
-                      : `${classname} border-neutral-200`
+                      : `${classname} border-gray-200`
                   }
                   onClick={() => setSpaceValue(storage?.space)}
                 >
                   <div className="flex flex-col">
                     <h3 className="font-medium">{storage?.space} GB</h3>
-                    <p className="text-xs text-neutral-500">
-                      ${formattedPrice}
-                    </p>
+                    <p className="text-xs text-gray-500">{formattedPrice}</p>
                   </div>
                 </button>
               );

@@ -4,11 +4,13 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import ArrowLeftIcon from './icons/arrow-left';
 import ArrowRightIcon from './icons/arrow-right';
+import FormattedPrice from './formatted-price';
 
 type Item = {
   name: string;
   description: string;
   image: string;
+  price: string;
 };
 
 export default function BannerItem({ item }: { item: Item[] }) {
@@ -16,6 +18,7 @@ export default function BannerItem({ item }: { item: Item[] }) {
   const name = item[index]?.name;
   const description = item[index]?.description;
   const image = item[index]?.image;
+  const price = item[index]?.price;
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -44,12 +47,13 @@ export default function BannerItem({ item }: { item: Item[] }) {
   }
   return (
     <>
-      <div className="relative flex flex-col sm:flex-row w-full h-80 rounded-3xl bg-neutral-100">
+      <div className="relative flex flex-col sm:flex-row w-full h-80 rounded-3xl bg-gray-100">
         {item[index] && (
           <>
             <div className="flex flex-col items-center justify-center sm:w-2/4 p-5">
               <h1 className="text-3xl font-bold">{name}</h1>
               <p>{description}</p>
+              <h3 className="text-xl">{FormattedPrice(price)}</h3>
             </div>
             <div className="sm:w-2/4 h-80 overflow-hidden flex items-center justify-center">
               <Image src={image} alt={name} width={400} height={400} />
@@ -59,7 +63,7 @@ export default function BannerItem({ item }: { item: Item[] }) {
 
         {item.length > 1 ? (
           <div className="absolute bottom-[5%] flex w-full justify-center">
-            <div className="mx-auto flex h-11 items-center rounded-full border border-neutral-200 bg-opacity-30 backdrop-blur text-neutral-500">
+            <div className="mx-auto flex h-11 items-center rounded-full bg-gray-200/50 backdrop-blur text-gray-500">
               <button
                 type="button"
                 className="flex items-center justify-center h-full px-6 transition-all ease-in-out hover:scale-105 hover:text-black"
@@ -67,7 +71,7 @@ export default function BannerItem({ item }: { item: Item[] }) {
               >
                 <ArrowLeftIcon classname="h-5" />
               </button>
-              <div className="mx-1 h-6 w-px bg-neutral-300"></div>
+              <div className="mx-1 h-6 w-px bg-gray-400"></div>
               <button
                 type="button"
                 className="flex items-center justify-center h-full px-6 transition-all ease-in-out hover:scale-105 hover:text-black"
