@@ -7,12 +7,13 @@ import { AuthContext } from '../app/AuthContext';
 import CartIcon from './icons/cart';
 import PackageIcon from './icons/package';
 import useCartData from '@/lib/useCartData';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 export default function Navbar() {
   const { user, googleSignOut } = useContext(AuthContext);
   const [cart] = useCartData(user?.uid);
   const router = useRouter();
+  const pathname = usePathname();
   const username: string = user?.displayName;
   const usernameURL = username?.toLowerCase().replace(/\s+/g, '-');
 
@@ -68,7 +69,10 @@ export default function Navbar() {
                 <button
                   onClick={async () => {
                     await googleSignOut();
-                    router.refresh();
+
+                    if (pathname !== '/') {
+                      router.push('/');
+                    }
                   }}
                   className="text-sm border rounded-lg border-gray-300 hover:border-gray-400 px-3.5 py-1 transition-colors"
                 >
