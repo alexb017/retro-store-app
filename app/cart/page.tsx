@@ -10,6 +10,11 @@ import useCartData from '@/lib/useCartData';
 import FormattedPrice from '@/components/formatted-price';
 import { useContext } from 'react';
 import { AuthContext } from '../AuthContext';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripeLoadedPromise = loadStripe(
+  'pk_test_51NoptQIF5Ewa0z1weAgAPPKYRio4rkIbNTYPuRPlXd3OdWsMaceCjCMNETTJSXp9yVsXpx6whtH8W4r0LGAIZ86L00YKiIUNvJ'
+);
 
 export default function Cart() {
   const { user } = useContext(AuthContext);
@@ -22,6 +27,25 @@ export default function Cart() {
   );
 
   //console.log(cart);
+
+  async function handleCheckout() {
+    const stripe = await stripeLoadedPromise;
+
+    const lineItems = cart.map((item: any) => {
+      return { price: item?.price_id, quantity: item?.quantity };
+    });
+
+    try {
+      await stripe?.redirectToCheckout({
+        lineItems: lineItems,
+        mode: 'payment',
+        successUrl: `https://retro-store-app-alexb017.vercel.app/`,
+        cancelUrl: `https://retro-store-app-alexb017.vercel.app/`,
+      });
+    } catch (error) {
+      throw 'Error wrong api key...';
+    }
+  }
 
   return (
     <>
@@ -99,7 +123,10 @@ export default function Cart() {
                     {FormattedPrice(totalPrice?.toString())}
                   </p>
                 </div>
-                <button className="w-full rounded-full p-3 text-center font-medium text-xl text-white bg-blue-500">
+                <button
+                  onClick={handleCheckout}
+                  className="w-full rounded-full p-3 text-center font-medium text-xl text-white bg-blue-500"
+                >
                   Procceed to Checkout
                 </button>
               </div>

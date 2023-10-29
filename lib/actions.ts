@@ -79,3 +79,7 @@ export async function updateItemCart(id: string, item: any) {
     cart: item,
   });
 }
+
+export async function addOrderItems(id: string, items: any) {
+  await setDoc(doc(db, 'order-items', id), items);
+}
