@@ -11,33 +11,14 @@ import FormattedPrice from '@/components/formatted-price';
 import { useContext, useEffect } from 'react';
 import { AuthContext } from '../AuthContext';
 import { loadStripe } from '@stripe/stripe-js';
-import Stripe from 'stripe';
 
 const stripePromise = loadStripe(
-  'pk_test_51NoptQIF5Ewa0z1weAgAPPKYRio4rkIbNTYPuRPlXd3OdWsMaceCjCMNETTJSXp9yVsXpx6whtH8W4r0LGAIZ86L00YKiIUNvJ'
-);
-
-const stripe = require('stripe')(
   'pk_test_51NoptQIF5Ewa0z1weAgAPPKYRio4rkIbNTYPuRPlXd3OdWsMaceCjCMNETTJSXp9yVsXpx6whtH8W4r0LGAIZ86L00YKiIUNvJ'
 );
 
 export default function Cart() {
   const { user } = useContext(AuthContext);
   const [cart] = useCartData(user?.uid);
-
-  useEffect(() => {
-    // Check to see if this is a redirect back from Checkout
-    const query = new URLSearchParams(window.location.search);
-    if (query.get('success')) {
-      console.log('Order placed! You will receive an email confirmation.');
-    }
-
-    if (query.get('canceled')) {
-      console.log(
-        "Order canceled -- continue to shop around and checkout when you're ready."
-      );
-    }
-  }, []);
 
   const totalPrice = cart?.reduce(
     (total, current: any) =>
@@ -47,19 +28,21 @@ export default function Cart() {
 
   //console.log(cart);
 
-  async function handleCheckout() {
-    //const stripe = await stripePromise;
+  async function handleCheckout(e: any) {
+    e.preventDefault();
+
+    const stripe = await stripePromise;
 
     const lineItems = cart.map((item: any) => {
       return { price: item?.price_id, quantity: item?.quantity };
     });
 
     try {
-      await stripe.checkout.sessions.create({
-        line_items: lineItems,
+      await stripe?.redirectToCheckout({
+        lineItems: lineItems,
         mode: 'payment',
-        success_url: `https://retro-store-app-alexb017.vercel.app/`,
-        cancel_url: `https://retro-store-app-alexb017.vercel.app/`,
+        successUrl: `https://retro-store-app-alexb017.vercel.app/`,
+        cancelUrl: `https://retro-store-app-alexb017.vercel.app/`,
       });
     } catch (error) {
       throw 'Error wrong api key...';
@@ -142,7 +125,7 @@ export default function Cart() {
                     {FormattedPrice(totalPrice?.toString())}
                   </p>
                 </div>
-                <form action="/api/checkout_sessions" method="POST">
+                <form onSubmit={handleCheckout}>
                   <button
                     type="submit"
                     role="link"
