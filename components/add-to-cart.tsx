@@ -53,6 +53,7 @@ export default function AddToCart({
     space,
     image: product?.images[0],
     quantity: 1,
+    price_id: product?.price_id,
   };
 
   return (
