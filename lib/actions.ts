@@ -25,61 +25,97 @@ type Product = {
 };
 
 export async function getProducts() {
-  const querySnapshot = await getDocs(collection(db, 'products'));
-  const data = querySnapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
+  try {
+    const querySnapshot = await getDocs(collection(db, 'products'));
+    const data = querySnapshot.docs.map((doc) => ({
+      id_document: doc.id,
+      ...doc.data(),
+    }));
 
-  return data;
+    return data;
+  } catch (error) {
+    throw new Error('Failed to get products');
+  }
 }
 
 export async function getProduct(params: string) {
-  const querySnapshot = await getDocs(collection(db, 'product-info'));
-  const data: any[] = querySnapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
+  try {
+    const querySnapshot = await getDocs(collection(db, 'product-info'));
+    const data: any[] = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
 
-  return data.find((product) => product.handle === params);
+    return data.find((product) => product.handle === params);
+  } catch (error) {
+    throw new Error('Failed to get product');
+  }
 }
 
 export async function getProductsBanner() {
-  const querySnapshot = await getDocs(collection(db, 'products-banner'));
-  const data = querySnapshot.docs.map((doc) => doc.data().items);
+  try {
+    const querySnapshot = await getDocs(collection(db, 'products-banner'));
+    const data = querySnapshot.docs.map((doc) => doc.data().items);
 
-  return data;
+    return data;
+  } catch (error) {
+    throw new Error('Failed to get products for the banner');
+  }
 }
 
 export async function setCartUser(id: string, data: any) {
-  await setDoc(doc(db, 'users-cart', id), data);
+  try {
+    await setDoc(doc(db, 'users-cart', id), data);
+  } catch (error) {
+    throw new Error('Failed to set cart user');
+  }
 }
 
 export async function getUserCart(id: string) {
-  const querySnapshot = await getDoc(doc(db, 'users-cart', id));
-  const data = querySnapshot.data()?.cart;
+  try {
+    const querySnapshot = await getDoc(doc(db, 'users-cart', id));
+    const data = querySnapshot.data()?.cart;
 
-  return data;
+    return data;
+  } catch (error) {
+    throw new Error('Failed to get user cart');
+  }
 }
 
 export async function addItemCart(id: string, item: any) {
-  await updateDoc(doc(db, 'users-cart', id), {
-    cart: arrayUnion(item),
-  });
+  try {
+    await updateDoc(doc(db, 'users-cart', id), {
+      cart: arrayUnion(item),
+    });
+  } catch (error) {
+    throw new Error('Failed to add item to cart');
+  }
 }
 
 export async function deleteItemCart(id: string, item: any) {
-  await updateDoc(doc(db, 'users-cart', id), {
-    cart: arrayRemove(item),
-  });
+  try {
+    await updateDoc(doc(db, 'users-cart', id), {
+      cart: arrayRemove(item),
+    });
+  } catch (error) {
+    throw new Error('Failed to delete item from cart');
+  }
 }
 
 export async function updateItemCart(id: string, item: any) {
-  await updateDoc(doc(db, 'users-cart', id), {
-    cart: item,
-  });
+  try {
+    await updateDoc(doc(db, 'users-cart', id), {
+      cart: item,
+    });
+  } catch (error) {
+    throw new Error('Failed to update item cart');
+  }
 }
 
-export async function addOrderItems(id: string, items: any) {
-  await setDoc(doc(db, 'order-items', id), items);
+export async function addItemsOrder(id: string, items: any) {
+  try {
+    await setDoc(doc(db, 'users-cart', id), items);
+  } catch (error) {
+    throw new Error('Failded to add order');
+  }
 }

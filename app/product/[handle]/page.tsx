@@ -6,6 +6,7 @@ import ProductInfo from '@/components/product-info';
 import ArrowLeftIcon from '@/components/icons/arrow-left';
 import Footer from '@/components/footer';
 import FormattedPrice from '@/components/formatted-price';
+import ProductGrid from '@/components/product-grid';
 
 export default async function Product({
   params,
@@ -35,7 +36,7 @@ export default async function Product({
             <ProductInfo product={product} />
           </div>
         </div>
-        <RelatedProducts category={product.category} />
+        <RelatedProducts category={product?.category} />
       </div>
       <Footer />
     </>
@@ -55,32 +56,7 @@ async function RelatedProducts({ category }: { category: string }) {
         <h2 className="mb-4 text-2xl">Related Products</h2>
       )}
       <ul className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {filteredProducts.map((product) => {
-          const price = FormattedPrice(product?.price);
-
-          return (
-            <li key={product.handle} className="w-full">
-              <Link
-                href={`/product/${product.handle}`}
-                className="bg-gray-100 flex flex-col rounded-3xl group"
-              >
-                <div className="w-full h-60 flex items-center justify-center overflow-hidden">
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    width={240}
-                    height={240}
-                    className="object-contain transition-all ease-in-out group-hover:scale-105"
-                  />
-                </div>
-                <div className="flex flex-col items-start p-5">
-                  <p className="text-sm">{product.name}</p>
-                  <h1 className="text-2xl font-medium">{price}</h1>
-                </div>
-              </Link>
-            </li>
-          );
-        })}
+        <ProductGrid products={filteredProducts} />
       </ul>
     </div>
   );

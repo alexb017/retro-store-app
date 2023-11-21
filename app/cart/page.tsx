@@ -28,8 +28,8 @@ export default function Cart() {
 
   //console.log(cart);
 
-  async function handleCheckout(e: any) {
-    e.preventDefault();
+  async function handleCheckout(event: any) {
+    event.preventDefault();
 
     const stripe = await stripePromise;
 
@@ -41,8 +41,8 @@ export default function Cart() {
       await stripe?.redirectToCheckout({
         lineItems: lineItems,
         mode: 'payment',
-        successUrl: `https://retro-store-app-alexb017.vercel.app/`,
-        cancelUrl: `https://retro-store-app-alexb017.vercel.app/`,
+        successUrl: `http://localhost:3000/success`,
+        cancelUrl: `http://localhost:3000/`,
       });
     } catch (error) {
       throw 'Error wrong api key...';
@@ -100,7 +100,9 @@ export default function Cart() {
                       <div className="">
                         <div className="flex items-center rounded-full bg-gray-100">
                           <EditItemQuantity item={item} type="minus" />
-                          <p className="text-base">{item?.quantity}</p>
+                          <p className="text-base font-semibold">
+                            {item?.quantity}
+                          </p>
                           <EditItemQuantity item={item} type="plus" />
                         </div>
                         {/* <DeleteItemCart id={item.id} /> */}
@@ -129,7 +131,7 @@ export default function Cart() {
                   <button
                     type="submit"
                     role="link"
-                    className="w-full rounded-full p-3 text-center font-medium text-xl text-white bg-blue-500"
+                    className="w-full rounded-full p-3 text-center font-medium text-base text-white bg-blue-500"
                   >
                     Procceed to Checkout
                   </button>

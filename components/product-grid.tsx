@@ -32,9 +32,12 @@ export default function ProductGrid({ products }: { products: Product[] }) {
                 className="object-contain transition-all ease-in-out group-hover:scale-105"
               />
             </div>
-            <div className="flex flex-col items-start p-5">
-              <p className="text-sm">{product.name}</p>
-              <h1 className="text-2xl font-medium">{price}</h1>
+            <div className="flex flex-col items-center p-5">
+              <p className="text-2xl font-bold">{product.name}</p>
+              <h1 className="text-base">{price}</h1>
+              <div className="font-medium px-6 py-1 mt-2 border-2 rounded-full border-neutral-500 hover:bg-neutral-500 hover:text-white transition-colors">
+                Buy
+              </div>
             </div>
           </Link>
         );

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { AuthContext } from '../app/AuthContext';
 import CartIcon from './icons/cart';
-import PackageIcon from './icons/package';
+import LogoIcon from './icons/logo';
 import useCartData from '@/lib/useCartData';
 import { useRouter, usePathname } from 'next/navigation';
 
@@ -27,18 +27,26 @@ export default function Navbar() {
   return (
     <nav className="fixed w-full top-0 left-0 z-10 bg-white/80 backdrop-blur">
       <div className="mx-auto max-w-6xl flex items-center justify-between p-5 text-sm">
-        <div className="flex items-center gap-6">
-          <Link href="/" className="flex items-center gap-2">
-            <PackageIcon classname="w-8 h-8" />
-            RetroStore
+        <div className="flex items-center gap-5">
+          <Link href="/" className="flex items-center gap-2 text-lg">
+            <LogoIcon classname="w-8 h-8" />
           </Link>
-          <Link href="/search" className="flex">
+          <Link
+            href="/search"
+            className="flex hover:text-neutral-500 transition-colors"
+          >
             All products
           </Link>
-          <Link href="/search/phones" className="flex">
+          <Link
+            href="/search/phones"
+            className="flex hover:text-neutral-500 transition-colors"
+          >
             Phones
           </Link>
-          <Link href="/search/hats" className="flex">
+          <Link
+            href="/search/hats"
+            className="flex hover:text-neutral-500 transition-colors"
+          >
             Hats
           </Link>
         </div>
