@@ -13,6 +13,18 @@ export default function ProfileName({ params }: { params: { name: string } }) {
   const [cart] = useCartData(user?.uid);
 
   //console.log(user);
+
+  const totalItems = cart?.reduce(
+    (total, current: any) => total + current?.quantity,
+    0
+  );
+
+  const totalPrice = cart?.reduce(
+    (total, current: any) =>
+      total + Number.parseInt(current?.price, 10) * current?.quantity,
+    0
+  );
+
   return (
     <div className="p-5">
       <div className="flex flex-col gap-5">
@@ -22,32 +34,34 @@ export default function ProfileName({ params }: { params: { name: string } }) {
               className="rounded-full"
               src={user?.photoURL}
               alt={user?.displayName}
-              width={44}
-              height={44}
+              width={64}
+              height={64}
             />
-            <h1 className="text-4xl font-medium mt-2">
+            <h1 className="text-4xl font-bold mt-2">
               Hello, {user?.displayName}
             </h1>
-            <p className="text-gray-500">{user?.email}</p>
+            <p className="text-lg text-gray-500">{user?.email}</p>
           </div>
           <div className="flex gap-20">
-            <div className="flex flex-col">
-              <h3 className="text-gray-500">Nr. of orders</h3>
-              <h1 className="text-2xl font-medium">23</h1>
+            <div className="flex flex-col items-center">
+              <h3 className="text-gray-500 font-bold">Nr. of items</h3>
+              <h1 className="text-2xl font-medium">{totalItems}</h1>
             </div>
-            <div className="flex flex-col">
-              <h3 className="text-gray-500">Total spend</h3>
-              <h1 className="text-2xl font-medium">$1200 USD</h1>
+            <div className="flex flex-col items-center">
+              <h3 className="text-gray-500 font-bold">Total spended</h3>
+              <h1 className="text-2xl font-medium">
+                {FormattedPrice(totalPrice.toString())}
+              </h1>
             </div>
           </div>
         </div>
         {cart?.length === 0 ? (
           <>
-            <h3>You do not have </h3>
+            <h3 className="text-2xl">You do not have any orders.</h3>
           </>
         ) : (
-          <>
-            <h3 className="text-xl">My orders</h3>
+          <div className="flex flex-col">
+            <h3 className="text-2xl">Your orders.</h3>
             <ul className="flex flex-col">
               {cart?.map((item: any, index) => {
                 const price = FormattedPrice(item?.price);
@@ -68,25 +82,33 @@ export default function ProfileName({ params }: { params: { name: string } }) {
                       </div>
                       <div className="flex flex-col items-start justify-center">
                         <div>
-                          <h1 className="text-xl font-medium">{item?.name}</h1>
+                          <h1 className="text-xl font-bold">{item?.name}</h1>
                           <p className="text-sm text-gray-500">
                             {item?.color && <> {item?.color} </>}{' '}
                             {item?.space && <> / {item?.space} GB </>}
                           </p>
+                          <p className="text-sm">Quantity: {item?.quantity}</p>
                         </div>
                       </div>
                     </div>
-                    <div className="">
-                      <p className="text-base">Price: {price}</p>
-                      <p className="text-sm text-gray-500">
-                        Quantity: {item?.quantity}
+                    <div className="flex flex-col">
+                      <p className="font-medium">Price: {price}</p>
+                      <p className="text-sm">
+                        Status:{' '}
+                        <span className="text-green-500">{item?.status}</span>
                       </p>
                     </div>
                   </li>
                 );
               })}
             </ul>
-          </>
+            <div className="self-end text-xl mt-4">
+              Total price:{' '}
+              <span className="font-bold">
+                {FormattedPrice(totalPrice.toString())}
+              </span>
+            </div>
+          </div>
         )}
       </div>
     </div>

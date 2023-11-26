@@ -28,8 +28,11 @@ export default function Navbar() {
     <nav className="fixed w-full top-0 left-0 z-10 bg-white/80 backdrop-blur">
       <div className="mx-auto max-w-6xl flex items-center justify-between p-5 text-sm">
         <div className="flex items-center gap-5">
-          <Link href="/" className="flex items-center gap-2 text-lg">
-            <LogoIcon classname="w-8 h-8" />
+          <Link
+            href="/"
+            className="flex items-center gap-2 text-lg font-bold uppercase"
+          >
+            store
           </Link>
           <Link
             href="/search"

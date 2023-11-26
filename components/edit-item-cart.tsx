@@ -32,7 +32,7 @@ export default function EditItemQuantity({
     );
 
     if (item?.quantity <= 1 && type === 'minus') {
-      await deleteItemCart(user?.uid, existingItem);
+      //await deleteItemCart(user?.uid, existingItem);
       return;
     }
 
@@ -55,7 +55,11 @@ export default function EditItemQuantity({
   return (
     <button
       onClick={updateItem}
-      className="px-6 h-11 hover:scale-105 text-gray-500 hover:text-black transition-transform ease-in-out"
+      className={`px-6 h-11 hover:scale-105 text-gray-500 hover:text-black transition-all ease-in-out ${
+        item?.quantity === 1 && type === 'minus'
+          ? 'cursor-not-allowed opacity-50 hover:text-gray-500'
+          : ''
+      }`}
     >
       {type === 'plus' ? (
         <PlusIcon classname="h-5" />

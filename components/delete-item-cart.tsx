@@ -2,6 +2,7 @@
 
 import { deleteItemCart } from '@/lib/actions';
 import { useRouter } from 'next/navigation';
+import CloseIcon from './icons/close';
 
 export default function DeleteItemCart({
   id,
@@ -15,9 +16,9 @@ export default function DeleteItemCart({
   return (
     <button
       onClick={async () => await deleteItemCart(id, item)}
-      className="flex items-center text-sm border rounded-full border-neutral-200 px-4 py-2 hover:scale-105 text-neutral-500 hover:text-black transition-transform ease-in-out"
+      className="flex absolute -top-2 -right-2 bg-gray-200 p-1 rounded-full shadow-lg hover:scale-105 text-gray-500 hover:text-black transition-all ease-in-out"
     >
-      Delete Item
+      <CloseIcon classname="h-4" />
     </button>
   );
 }

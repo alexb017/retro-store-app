@@ -1,16 +1,16 @@
 import BannerItem from '@/components/banner';
 import Footer from '@/components/footer';
 import ProductGrid from '@/components/product-grid';
-import { getProducts, getProductsBanner } from '@/lib/actions';
+import { getProducts, getBanner } from '@/lib/actions';
 
 export default async function Home() {
-  const productsBanner = await getProductsBanner();
+  const productsBanner = await getBanner();
   const products: any = await getProducts();
 
   return (
     <>
       <div className="p-5">
-        <BannerItem item={productsBanner[0]?.map((product: any) => product)} />
+        <BannerItem item={productsBanner.map((product: any) => product)} />
         <h1 className="text-4xl my-12 text-center font-bold">
           Shop the deals.
         </h1>

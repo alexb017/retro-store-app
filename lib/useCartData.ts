@@ -12,8 +12,9 @@ export default function useCartData(id: string) {
     if (id) {
       const q = doc(db, 'users-cart', id);
       unsubsribe = onSnapshot(q, (doc) => {
-        //console.log(doc?.data()?.cart);
-        setCart(doc?.data()?.cart as any);
+        // console.log(doc?.data()?.cart);
+        const data = doc.data()?.cart as any;
+        setCart(data);
       });
     }
 

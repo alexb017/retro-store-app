@@ -53,6 +53,7 @@ export default function AddToCart({
     space,
     image: product?.images[0],
     quantity: 1,
+    status: 'pending',
     price_id: product?.price_id,
   };
 
@@ -74,10 +75,8 @@ export default function AddToCart({
         <button
           type="button"
           disabled={defaultVariant}
-          className={`flex items-center justify-center gap-2 w-full p-4 mt-5 rounded-full bg-blue-500 text-white hover:opacity-90 ${
-            defaultVariant
-              ? 'cursor-not-allowed opacity-50'
-              : 'cursor-pointer opacity-100'
+          className={`flex items-center justify-center gap-2 w-full p-4 mt-5 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-colors ${
+            defaultVariant ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
           }`}
           onClick={async () => {
             const userCart = await getUserCart(user?.uid);

@@ -1,3 +1,4 @@
+import { cache } from 'react';
 import {
   collection,
   getDocs,
@@ -52,14 +53,17 @@ export async function getProduct(params: string) {
   }
 }
 
-export async function getProductsBanner() {
+export async function getBanner() {
   try {
-    const querySnapshot = await getDocs(collection(db, 'products-banner'));
-    const data = querySnapshot.docs.map((doc) => doc.data().items);
+    const querySnapshot = await getDocs(collection(db, 'banner'));
+    const data = querySnapshot.docs.map((doc) => ({
+      id_document: doc.id,
+      ...doc.data(),
+    }));
 
     return data;
   } catch (error) {
-    throw new Error('Failed to get products for the banner');
+    throw new Error('Failed to get the banner');
   }
 }
 
@@ -114,7 +118,7 @@ export async function updateItemCart(id: string, item: any) {
 
 export async function addItemsOrder(id: string, items: any) {
   try {
-    await setDoc(doc(db, 'users-cart', id), items);
+    await setDoc(doc(db, 'users-orders', id), items);
   } catch (error) {
     throw new Error('Failded to add order');
   }

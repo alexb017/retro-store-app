@@ -69,7 +69,7 @@ export default function BannerItem({ item }: { item: Item[] }) {
 
         {item.length > 1 ? (
           <div className="absolute bottom-[5%] flex w-full justify-center">
-            <div className="mx-auto flex h-11 items-center border rounded-full bg-gray-200/50 backdrop-blur text-gray-500">
+            <div className="mx-auto flex h-11 items-center rounded-full bg-gray-200/50 backdrop-blur text-gray-500">
               <button
                 type="button"
                 className="flex items-center justify-center h-full px-6 transition-all ease-in-out hover:scale-105 hover:text-black"
