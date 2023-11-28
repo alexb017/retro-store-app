@@ -7,13 +7,14 @@ import FormattedPrice from './formatted-price';
 export default function ProductInfo({ product }: { product: any }) {
   const [colorValue, setColorValue] = useState('');
   const [spaceValue, setSpaceValue] = useState('');
+  const [priceValue, setPriceValue] = useState('');
 
   let formattedPrice = FormattedPrice(product?.price);
 
   return (
     <>
       <div className="mb-5 flex flex-col border-b border-gray-200 pb-5">
-        <h1 className="mb-2 text-4xl font-medium">{product?.name}</h1>
+        <h1 className="mb-2 text-4xl font-bold">{product?.name}</h1>
         <p className="text-gray-500 text-2xl">{formattedPrice}</p>
       </div>
       {product?.colors?.length > 0 && (
@@ -63,7 +64,10 @@ export default function ProductInfo({ product }: { product: any }) {
                       ? `${classname} border-2 border-blue-500`
                       : `${classname} border-gray-200`
                   }
-                  onClick={() => setSpaceValue(storage?.space)}
+                  onClick={() => {
+                    setSpaceValue(storage?.space);
+                    setPriceValue(storage?.price);
+                  }}
                 >
                   <div className="flex flex-col">
                     <h3 className="font-medium">{storage?.space} GB</h3>
@@ -76,7 +80,12 @@ export default function ProductInfo({ product }: { product: any }) {
         </div>
       )}
       <p className="my-5 text-base">{product?.description}</p>
-      <AddToCart product={product} color={colorValue} space={spaceValue} />
+      <AddToCart
+        product={product}
+        color={colorValue}
+        space={spaceValue}
+        price={priceValue}
+      />
     </>
   );
 }

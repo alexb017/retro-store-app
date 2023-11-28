@@ -13,7 +13,7 @@ export default function Login() {
   const router = useRouter();
 
   return (
-    <div className="p-5">
+    <div className="flex justify-center p-5">
       {!user ? (
         <>
           <button
@@ -24,7 +24,7 @@ export default function Login() {
                 router.push('/');
               }
             }}
-            className="flex items-center gap-2 text-base font-semibold text-gray-500 border rounded-lg border-gray-300 hover:border-gray-400 px-6 py-1 transition-colors"
+            className="flex items-center gap-2 font-semibold text-gray-500 border-2 rounded-lg border-gray-200 hover:border-gray-300 px-4 py-2 transition-colors"
           >
             <GoogleIcon classname="w-5 h-5" />
             Sign in with Google
@@ -38,28 +38,3 @@ export default function Login() {
     </div>
   );
 }
-
-/*
-<>
-          {user && (
-            <Image
-              className="rounded-full"
-              src={user?.photoURL}
-              alt={user?.displayName}
-              width={44}
-              height={44}
-            />
-          )}
-          <h1 className="text-gray-500 text-xl">
-            Welcome, {user?.displayName}!
-          </h1>
-          <p>{user?.uid}</p>
-          <button
-            onClick={async () => await googleSignOut()}
-            className="text-sm border rounded-lg border-gray-300 hover:border-gray-400 px-3.5 py-1 transition-colors"
-          >
-            Sign out
-          </button>
-        </>
-
-*/

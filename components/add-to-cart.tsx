@@ -3,17 +3,19 @@ import { getUserCart, setCartUser, addItemCart } from '@/lib/actions';
 import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
 import { AuthContext } from '../app/AuthContext';
-import useCartData from '@/lib/useCartData';
+import useCartData from '@/lib/use-cart-data';
 import Link from 'next/link';
 
 export default function AddToCart({
   product,
   color,
   space,
+  price,
 }: {
   product: any;
   color: string;
   space: string;
+  price: string;
 }) {
   const { user } = useContext(AuthContext);
   const router = useRouter();
@@ -31,20 +33,6 @@ export default function AddToCart({
     defaultVariant = false;
   }
 
-  let price = product?.price;
-
-  if (space === '256') {
-    price = '1059';
-  }
-
-  if (space === '512') {
-    price = '1179';
-  }
-
-  if (space === '1') {
-    price = '1399';
-  }
-
   const data = {
     handle: id,
     name: product?.name,
@@ -53,7 +41,6 @@ export default function AddToCart({
     space,
     image: product?.images[0],
     quantity: 1,
-    status: 'pending',
     price_id: product?.price_id,
   };
 

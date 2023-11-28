@@ -22,7 +22,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
       setUser(user);
     });
     return () => unsubscribe();
-  }, [user]);
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, googleSignIn, googleSignOut }}>

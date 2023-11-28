@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { AuthContext } from '../app/AuthContext';
 import CartIcon from './icons/cart';
 import LogoIcon from './icons/logo';
-import useCartData from '@/lib/useCartData';
+import useCartData from '@/lib/use-cart-data';
 import { useRouter, usePathname } from 'next/navigation';
 
 export default function Navbar() {
@@ -25,30 +25,30 @@ export default function Navbar() {
   );
 
   return (
-    <nav className="fixed w-full top-0 left-0 z-10 bg-white/80 backdrop-blur">
+    <nav className="fixed w-full top-0 left-0 z-10 bg-white/80 backdrop-blur border-b border-gray-200">
       <div className="mx-auto max-w-6xl flex items-center justify-between p-5 text-sm">
         <div className="flex items-center gap-5">
           <Link
             href="/"
-            className="flex items-center gap-2 text-lg font-bold uppercase"
+            className="flex items-center gap-2 text-xl font-bold uppercase"
           >
             store
           </Link>
           <Link
             href="/search"
-            className="flex hover:text-neutral-500 transition-colors"
+            className="flex text-base font-medium hover:text-neutral-500 transition-colors"
           >
-            All products
+            All
           </Link>
           <Link
             href="/search/phones"
-            className="flex hover:text-neutral-500 transition-colors"
+            className="flex text-base font-medium hover:text-neutral-500 transition-colors"
           >
             Phones
           </Link>
           <Link
             href="/search/hats"
-            className="flex hover:text-neutral-500 transition-colors"
+            className="flex text-base font-medium hover:text-neutral-500 transition-colors"
           >
             Hats
           </Link>
@@ -59,7 +59,7 @@ export default function Navbar() {
               <div className="flex items-center gap-4">
                 <Link
                   href="/cart"
-                  className="relative flex text-gray-500 hover:scale-105 transition-transform"
+                  className="relative flex hover:text-gray-500 transition-colors"
                 >
                   <CartIcon classname="w-6 h-6" />
                   {quantity > 0 && (
@@ -70,7 +70,7 @@ export default function Navbar() {
                 </Link>
                 <Link href={`/profile/${usernameURL}`}>
                   <Image
-                    className="rounded-full"
+                    className="rounded-full shadow-lg"
                     src={user?.photoURL}
                     alt={usernameURL}
                     width={24}
@@ -85,7 +85,7 @@ export default function Navbar() {
                       router.push('/');
                     }
                   }}
-                  className="text-sm border rounded-lg border-gray-300 hover:border-gray-400 px-3.5 py-1 transition-colors"
+                  className="font-medium border-2 rounded-lg border-gray-200 hover:border-gray-300 px-3.5 py-1 transition-colors"
                 >
                   Sign out
                 </button>
@@ -94,7 +94,7 @@ export default function Navbar() {
           ) : (
             <Link
               href="/login"
-              className="border rounded-lg border-gray-300 hover:border-gray-400 px-3.5 py-1 transition-colors"
+              className="font-medium border-2 rounded-lg border-gray-200 hover:border-gray-300 px-3.5 py-1 transition-colors"
             >
               Log in
             </Link>

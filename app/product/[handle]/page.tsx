@@ -18,13 +18,13 @@ export default async function Product({
   return (
     <>
       <div className="mx-auto max-w-screen-2xl p-5">
-        <Link
+        {/* <Link
           href="/"
           className="inline-flex items-center gap-2 pb-5 text-gray-500 group hover:text-black transition-all ease-in-out"
         >
           <ArrowLeftIcon classname="h-5 group-hover:scale-105 transition-all ease-in-out" />
           Go back to the main page
-        </Link>
+        </Link> */}
         <div className="flex flex-col lg:flex-row lg:gap-12">
           <div className="h-full w-full rounded-2xl p-8 bg-gray-100 basis-full lg:basis-4/6">
             <Gallery
@@ -32,7 +32,7 @@ export default async function Product({
               name={product?.name}
             />
           </div>
-          <div className="basis-full lg:basis-2/6">
+          <div className="basis-full mt-5 lg:mt-0 lg:basis-2/6">
             <ProductInfo product={product} />
           </div>
         </div>

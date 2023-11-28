@@ -6,12 +6,12 @@ import Image from 'next/image';
 import EditItemQuantity from '@/components/edit-item-cart';
 import DeleteItemCart from '@/components/delete-item-cart';
 import Footer from '@/components/footer';
-import useCartData from '@/lib/useCartData';
+import useCartData from '@/lib/use-cart-data';
 import FormattedPrice from '@/components/formatted-price';
 import { useContext, useEffect } from 'react';
 import { AuthContext } from '../AuthContext';
 import { loadStripe } from '@stripe/stripe-js';
-import { getUserCart } from '@/lib/actions';
+import { getUserCart, addItemsOrder } from '@/lib/actions';
 
 const stripePromise = loadStripe(
   'pk_test_51NoptQIF5Ewa0z1weAgAPPKYRio4rkIbNTYPuRPlXd3OdWsMaceCjCMNETTJSXp9yVsXpx6whtH8W4r0LGAIZ86L00YKiIUNvJ'
@@ -20,18 +20,6 @@ const stripePromise = loadStripe(
 export default function Cart() {
   const { user } = useContext(AuthContext);
   const [cart] = useCartData(user?.uid);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const order = await getUserCart(user?.uid);
-        console.log(order);
-      } catch (error) {
-        console.log(error);
-        throw new Error('error');
-      }
-    })();
-  }, [user]);
 
   const totalPrice = cart?.reduce(
     (total, current: any) =>
@@ -52,7 +40,7 @@ export default function Cart() {
       await stripe?.redirectToCheckout({
         lineItems: lineItems,
         mode: 'payment',
-        successUrl: `http://localhost:3000/cart`,
+        successUrl: `http://localhost:3000/success`,
         cancelUrl: `http://localhost:3000/cart`,
       });
     } catch (error) {
@@ -128,19 +116,19 @@ export default function Cart() {
                   );
                 })}
               </ul>
-              <div className="text-sm p-5 bg-gray-100 rounded-3xl self-start md:w-5/12">
-                <h1 className="text-xl font-medium mb-5">Your order</h1>
-                <div className="flex items-center justify-between border-b border-gray-300 mb-5 pb-0.5">
+              <div className="text-base p-5 bg-gray-100 rounded-3xl self-start md:w-5/12">
+                <h1 className="text-2xl font-bold mb-5">Your order</h1>
+                <div className="flex items-center justify-between border-b border-gray-300 mb-3 pb-0.5">
                   <p className="text-gray-500">Taxes</p>
                   <p className="text-gray-500">$0.00 USD</p>
                 </div>
-                <div className="flex items-center justify-between border-b border-gray-300 mb-5 pb-0.5">
+                <div className="flex items-center justify-between border-b border-gray-300 mb-3 pb-0.5">
                   <p className="text-gray-500">Shipping</p>
                   <p className="text-gray-500">Free</p>
                 </div>
                 <div className="flex items-center justify-between border-b border-gray-300 mb-5 pb-0.5">
-                  <p className="text-xl">Total</p>
-                  <p className="text-xl">
+                  <p className="text-2xl font-medium">Total</p>
+                  <p className="text-2xl font-medium">
                     {FormattedPrice(totalPrice?.toString())}
                   </p>
                 </div>
@@ -150,7 +138,7 @@ export default function Cart() {
                     role="link"
                     className="w-full rounded-full p-3 text-center font-medium text-base text-white bg-blue-500 hover:bg-blue-600 transition-colors"
                   >
-                    Procceed to Checkout
+                    Proceed to Checkout
                   </button>
                 </form>
               </div>

@@ -116,10 +116,31 @@ export async function updateItemCart(id: string, item: any) {
   }
 }
 
+export async function getUserOrder(id: string) {
+  try {
+    const querySnapshot = await getDoc(doc(db, 'users-orders', id));
+    const data = querySnapshot.data()?.order;
+
+    return data;
+  } catch (error) {
+    throw new Error('Failed to get user order');
+  }
+}
+
 export async function addItemsOrder(id: string, items: any) {
   try {
     await setDoc(doc(db, 'users-orders', id), items);
   } catch (error) {
     throw new Error('Failded to add order');
+  }
+}
+
+export async function updateItemsOrder(id: string, item: any) {
+  try {
+    await updateDoc(doc(db, 'users-orders', id), {
+      order: arrayUnion(item),
+    });
+  } catch (error) {
+    throw new Error('Failed to add item to order');
   }
 }
