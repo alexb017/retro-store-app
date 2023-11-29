@@ -33,6 +33,10 @@ export default function AddToCart({
     defaultVariant = false;
   }
 
+  if (price === '') {
+    price = product?.price;
+  }
+
   const data = {
     handle: id,
     name: product?.name,
@@ -47,8 +51,7 @@ export default function AddToCart({
   return (
     <>
       {!user ? (
-        <Link
-          href={`/login`}
+        <button
           className={`flex items-center justify-center gap-2 w-full p-4 mt-5 rounded-full bg-blue-500 text-white hover:opacity-90 ${
             defaultVariant
               ? 'cursor-not-allowed opacity-50'
@@ -57,7 +60,7 @@ export default function AddToCart({
         >
           <PlusIcon classname="w-6 h-6" />
           Add item to cart
-        </Link>
+        </button>
       ) : (
         <button
           type="button"

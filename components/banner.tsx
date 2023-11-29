@@ -57,8 +57,8 @@ export default function BannerItem({ item }: { item: Item[] }) {
             className="flex flex-col sm:flex-row w-full h-96 md:h-80"
           >
             <div className="flex flex-col items-center justify-center sm:w-2/4 p-5">
-              <h1 className="text-4xl font-bold">{name}</h1>
-              <p>{description}</p>
+              <h1 className="text-4xl font-bold text-center">{name}</h1>
+              <p className="text-center">{description}</p>
               <h3 className="text-xl">{FormattedPrice(price)}</h3>
             </div>
             <div className="sm:w-2/4 h-80 overflow-hidden flex items-center justify-center">

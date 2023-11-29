@@ -8,6 +8,9 @@ import CartIcon from './icons/cart';
 import LogoIcon from './icons/logo';
 import useCartData from '@/lib/use-cart-data';
 import { useRouter, usePathname } from 'next/navigation';
+import MenuIcon from './icons/menu';
+import MobileMenu from './mobile-menu';
+import SignIn from './sign-in';
 
 export default function Navbar() {
   const { user, googleSignOut } = useContext(AuthContext);
@@ -17,8 +20,6 @@ export default function Navbar() {
   const username: string = user?.displayName;
   const usernameURL = username?.toLowerCase().replace(/\s+/g, '-');
 
-  //console.log(cart);
-
   const quantity = cart?.reduce(
     (total, current: any) => total + current.quantity,
     0
@@ -27,10 +28,19 @@ export default function Navbar() {
   return (
     <nav className="fixed w-full top-0 left-0 z-10 bg-white/80 backdrop-blur border-b border-gray-200">
       <div className="mx-auto max-w-6xl flex items-center justify-between p-5 text-sm">
-        <div className="flex items-center gap-5">
+        <div className="flex items-center md:hidden">
+          <MobileMenu />
           <Link
             href="/"
-            className="flex items-center gap-2 text-xl font-bold uppercase"
+            className="flex items-center text-xl font-bold uppercase leading-none ml-5"
+          >
+            store
+          </Link>
+        </div>
+        <div className="hidden md:flex items-center gap-5">
+          <Link
+            href="/"
+            className="flex items-center text-xl font-bold uppercase leading-none"
           >
             store
           </Link>
@@ -53,16 +63,17 @@ export default function Navbar() {
             Hats
           </Link>
         </div>
+
         <div className="flex items-center">
           {user ? (
             <>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-5">
                 <Link
                   href="/cart"
                   className="relative flex hover:text-gray-500 transition-colors"
                 >
-                  <CartIcon classname="w-6 h-6" />
-                  {quantity > 0 && (
+                  <CartIcon classname="h-6" />
+                  {cart.length > 0 && (
                     <div className="absolute top-0 right-0 -mr-2 -mt-2 flex items-center justify-center h-4 w-4 rounded-full text-[11px] font-medium text-white bg-blue-500">
                       {quantity}
                     </div>
@@ -77,47 +88,13 @@ export default function Navbar() {
                     height={24}
                   />
                 </Link>
-                <button
-                  onClick={async () => {
-                    await googleSignOut();
-
-                    if (pathname !== '/') {
-                      router.push('/');
-                    }
-                  }}
-                  className="font-medium border-2 rounded-lg border-gray-200 hover:border-gray-300 px-3.5 py-1 transition-colors"
-                >
-                  Sign out
-                </button>
               </div>
             </>
           ) : (
-            <Link
-              href="/login"
-              className="font-medium border-2 rounded-lg border-gray-200 hover:border-gray-300 px-3.5 py-1 transition-colors"
-            >
-              Log in
-            </Link>
+            <SignIn />
           )}
         </div>
       </div>
     </nav>
   );
 }
-/**
- * <h1>Client {user?.displayName}</h1>
-      {user && (
-        <Image
-          className="rounded-full"
-          src={user?.photoURL}
-          alt={user?.displayName}
-          width={44}
-          height={44}
-        />
-      )}
-      {!user ? (
-        <button onClick={async () => await googleSignIn()}>Signin</button>
-      ) : (
-        <button onClick={async () => await googleSignOut()}>Signout</button>
-      )}
- */

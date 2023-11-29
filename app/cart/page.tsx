@@ -116,7 +116,7 @@ export default function Cart() {
                   );
                 })}
               </ul>
-              <div className="text-base p-5 bg-gray-100 rounded-3xl self-start md:w-5/12">
+              <div className="text-base p-5 bg-gray-100 rounded-3xl self-start w-full md:w-5/12">
                 <h1 className="text-2xl font-bold mb-5">Your order</h1>
                 <div className="flex items-center justify-between border-b border-gray-300 mb-3 pb-0.5">
                   <p className="text-gray-500">Taxes</p>

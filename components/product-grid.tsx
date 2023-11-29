@@ -32,7 +32,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
                 className="object-contain transition-all ease-in-out group-hover:scale-105"
               />
             </div>
-            <div className="flex flex-col items-center p-5">
+            <div className="flex flex-col items-center p-5 pt-0">
               <p className="text-2xl font-bold">{product.name}</p>
               <h1 className="text-base">{price}</h1>
               <div className="font-medium px-6 py-1 mt-2 border-2 rounded-full border-neutral-500 hover:bg-neutral-500 hover:text-white transition-colors">
@@ -45,15 +45,3 @@ export default function ProductGrid({ products }: { products: Product[] }) {
     </>
   );
 }
-
-// export default async function ProductGrid() {
-//   const products: any[] = await getProducts();
-
-//   return (
-//     <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-//       {products.map((product, index) => (
-//         <Item key={index} product={product} />
-//       ))}
-//     </div>
-//   );
-// }

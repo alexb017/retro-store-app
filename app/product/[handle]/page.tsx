@@ -25,14 +25,14 @@ export default async function Product({
           <ArrowLeftIcon classname="h-5 group-hover:scale-105 transition-all ease-in-out" />
           Go back to the main page
         </Link> */}
-        <div className="flex flex-col lg:flex-row lg:gap-12">
-          <div className="h-full w-full rounded-2xl p-8 bg-gray-100 basis-full lg:basis-4/6">
+        <div className="flex flex-col sm:flex-row sm:gap-5 lg:gap-12">
+          <div className="h-full w-full rounded-2xl p-8 bg-gray-100 basis-full sm:basis-4/6">
             <Gallery
               images={product?.images?.map((image: string) => ({ src: image }))}
               name={product?.name}
             />
           </div>
-          <div className="basis-full mt-5 lg:mt-0 lg:basis-2/6">
+          <div className="basis-full mt-5 lg:mt-0 sm:basis-2/6">
             <ProductInfo product={product} />
           </div>
         </div>
@@ -53,9 +53,9 @@ async function RelatedProducts({ category }: { category: string }) {
   return (
     <div className="py-8">
       {filteredProducts.length > 0 && (
-        <h2 className="mb-4 text-2xl">Related Products</h2>
+        <h2 className="mb-4 text-2xl font-bold">Related Products</h2>
       )}
-      <ul className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <ul className="grid grid-cols-1 lg:grid-cols-4 gap-5 sm:grid-cols-2 xl:grid-cols-4">
         <ProductGrid products={filteredProducts} />
       </ul>
     </div>
