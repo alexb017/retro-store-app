@@ -1,10 +1,11 @@
 'use client';
 
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import CheckIcon from './icons/check';
 import CaretUpDownIcon from './icons/caret-up-down';
 import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 const collections = [
   { name: 'All', url: '/search' },
@@ -19,6 +20,15 @@ const collections = [
 export default function MobileCollections() {
   const [selected, setSelected] = useState(collections[0]);
   const router = useRouter();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    collections.map((item) => {
+      if (item.url === pathname) {
+        setSelected(item);
+      }
+    });
+  }, [pathname]);
 
   function handleChangeURL(option: any) {
     setSelected(option);
