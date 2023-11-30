@@ -74,7 +74,7 @@ export default function ProfileName({ params }: { params: { name: string } }) {
                     key={index}
                     className="rounded-3xl bg-white px-5 shadow border border-gray-200"
                   >
-                    <div className="flex items-center justify-between py-5">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between py-5">
                       <div className="text-xl font-bold text-gray-500">
                         Order nr: #{item?.order_nr}
                       </div>
@@ -88,7 +88,7 @@ export default function ProfileName({ params }: { params: { name: string } }) {
                       return (
                         <div
                           key={index}
-                          className="w-full py-5 flex flex-row items-center justify-between border-t border-gray-200"
+                          className="w-full py-5 flex flex-col md:flex-row md:items-center justify-between gap-2 border-t border-gray-200"
                         >
                           <div className="flex flex-row gap-5">
                             <div className="flex items-center justify-center p-1 rounded-2xl aspect-square bg-gray-100">
