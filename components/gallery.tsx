@@ -23,6 +23,8 @@ export default function Gallery({
             fill
             className="object-contain"
             sizes="(min-width: 1024px) 66vw, 100vw"
+            quality={80}
+            priority={true}
           />
         )}
 
@@ -32,7 +34,7 @@ export default function Gallery({
               {images.map((image, index) => {
                 const isActive = index === imageIndex;
                 const classname =
-                  'cursor-pointer object-contain py-2 backdrop-blur border rounded-2xl hover:border-blue-500 bg-opacity-30';
+                  'cursor-pointer object-contain py-2 backdrop-blur border rounded-2xl hover:border-blue-500 bg-opacity-30 transition-all';
 
                 return (
                   <li key={index} className="flex w-20 h-20">
@@ -47,6 +49,7 @@ export default function Gallery({
                       width={80}
                       height={80}
                       onClick={() => setImageIndex(index)}
+                      quality={80}
                     />
                   </li>
                 );

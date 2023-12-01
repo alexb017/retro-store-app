@@ -55,7 +55,11 @@ export default function Success() {
               <h3 className="text-2xl">🎉🎉🎉</h3>
               <h1 className="text-4xl mt-2">
                 Thank you,{' '}
-                <span className="font-bold">{user?.displayName}</span>
+                <span className="font-bold">
+                  {user?.displayName
+                    ? user?.displayName
+                    : user?.email.split('@')[0]}
+                </span>
               </h1>
               <h1 className="text-4xl">for your order!</h1>
             </div>
@@ -65,7 +69,10 @@ export default function Success() {
             >
               Continue shopping
             </Link>
-            <Link href={`/profile/${usernameURL}`} className="underline">
+            <Link
+              href={`/profile/${user?.email.split('@')[0]}`}
+              className="underline"
+            >
               View order on your profile
             </Link>
           </>

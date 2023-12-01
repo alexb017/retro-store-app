@@ -51,7 +51,7 @@ export default function Cart() {
   return (
     <>
       <div className="p-5">
-        <h1 className="text-4xl font-bold mb-10">Shopping cart</h1>
+        <h1 className="text-4xl font-bold mb-10 text-center">Shopping cart</h1>
         {/* <Link
           href="/"
           className="inline-flex items-center gap-2 pb-5 text-gray-500 group hover:text-black transition-all ease-in-out"
@@ -60,7 +60,7 @@ export default function Cart() {
           Go back to the main page
         </Link> */}
         {!cart || cart?.length === 0 ? (
-          <>
+          <div className="flex flex-col items-center">
             <h1 className="text-2xl">Your cart is empty.</h1>
             <Link
               href="/"
@@ -68,7 +68,7 @@ export default function Cart() {
             >
               Continue shopping
             </Link>
-          </>
+          </div>
         ) : (
           <>
             <div className="flex flex-col md:flex-row md:justify-between gap-5">

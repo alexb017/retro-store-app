@@ -58,11 +58,18 @@ export default function BannerItem({ item }: { item: Item[] }) {
           >
             <div className="flex flex-col items-center justify-center sm:w-2/4 p-5">
               <h1 className="text-4xl font-bold text-center">{name}</h1>
-              <p className="text-center">{description}</p>
+              <p className="text-center text-gray-500">{description}</p>
               <h3 className="text-xl">{FormattedPrice(price)}</h3>
             </div>
             <div className="sm:w-2/4 h-80 overflow-hidden flex items-center justify-center">
-              <Image src={image} alt={name} width={400} height={400} />
+              <Image
+                src={image}
+                alt={name}
+                width={400}
+                height={400}
+                quality={80}
+                priority={true}
+              />
             </div>
           </Link>
         )}

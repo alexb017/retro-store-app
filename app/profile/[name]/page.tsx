@@ -9,9 +9,10 @@ import useOrderData from '@/lib/use-order-data';
 import FormattedPrice from '@/components/formatted-price';
 import { useRouter, usePathname } from 'next/navigation';
 import SignOutIcon from '@/components/icons/sign-out';
+import UserIcon from '@/components/icons/user';
 
 export default function ProfileName({ params }: { params: { name: string } }) {
-  const { user, googleSignOut } = useContext(AuthContext);
+  const { user, userSignOut } = useContext(AuthContext);
   const [order] = useOrderData(user?.uid);
   const router = useRouter();
   const pathname = usePathname();
@@ -21,23 +22,34 @@ export default function ProfileName({ params }: { params: { name: string } }) {
       <div className="flex flex-col md:flex-row gap-5">
         <div className="flex flex-col w-full md:w-1/3">
           <div className="flex flex-col items-start gap-4">
-            <Image
-              className="rounded-full"
-              src={user?.photoURL}
-              alt={user?.displayName}
-              width={64}
-              height={64}
-            />
+            {user?.photoURL ? (
+              <Image
+                className="rounded-full"
+                src={user?.photoURL}
+                alt={user?.displayName}
+                width={64}
+                height={64}
+              />
+            ) : (
+              <div className="flex items-center justify-center w-16 h-16 bg-gray-200 rounded-full">
+                <UserIcon classname="w-8 h-8" />
+              </div>
+            )}
+
             <div>
               <h1 className="text-4xl font-bold">
-                Hello, {user?.displayName}!
+                Hello,{' '}
+                {user?.displayName
+                  ? user?.displayName
+                  : user?.email.split('@')[0]}
+                !
               </h1>
               <p className="text-lg text-gray-500">{user?.email}</p>
             </div>
             <button
               onClick={async () => {
                 try {
-                  await googleSignOut();
+                  await userSignOut();
                 } catch (error: any) {
                   throw new Error(error);
                 }
@@ -46,7 +58,7 @@ export default function ProfileName({ params }: { params: { name: string } }) {
                   router.push('/');
                 }
               }}
-              className="flex items-center gap-2 rounded-full bg-blue-50 hover:bg-blue-100 px-6 py-2 transition-colors"
+              className="flex items-center gap-2 border-2 rounded border-gray-500 hover:text-white hover:bg-gray-500 px-6 py-2 transition-colors"
             >
               <SignOutIcon classname="h-5" />
               Sign out

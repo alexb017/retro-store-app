@@ -52,7 +52,7 @@ export default function AddToCart({
     <>
       {!user ? (
         <button
-          className={`flex items-center justify-center gap-2 w-full p-4 mt-5 rounded-full bg-blue-500 text-white hover:opacity-90 ${
+          className={`flex items-center justify-center gap-2 w-full p-4 rounded-full bg-blue-500 text-white hover:opacity-90 ${
             defaultVariant
               ? 'cursor-not-allowed opacity-50'
               : 'cursor-pointer opacity-100'

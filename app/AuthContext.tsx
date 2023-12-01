@@ -15,17 +15,27 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState(null);
   const googleProvider = new GoogleAuthProvider();
   const googleSignIn = () => signInWithPopup(auth, googleProvider);
-  const googleSignOut = () => signOut(auth);
+  const userSignOut = () => signOut(auth);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user: any) => {
-      setUser(user);
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
     });
     return () => unsubscribe();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, googleSignIn, googleSignOut }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        googleSignIn,
+        userSignOut,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

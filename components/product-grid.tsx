@@ -27,15 +27,16 @@ export default function ProductGrid({ products }: { products: Product[] }) {
               <Image
                 src={product.image}
                 alt={product.name}
-                width={240}
-                height={240}
+                width={200}
+                height={200}
+                quality={80}
                 className="object-contain transition-all ease-in-out group-hover:scale-105"
               />
             </div>
             <div className="flex flex-col items-center p-5 pt-0">
               <p className="text-2xl font-bold">{product.name}</p>
-              <h1 className="text-base">{price}</h1>
-              <div className="font-medium px-6 py-1 mt-2 border-2 rounded-full border-neutral-500 hover:bg-neutral-500 hover:text-white transition-colors">
+              <h1 className="text-base text-gray-500">{price}</h1>
+              <div className="font-medium px-6 py-1 mt-2 border-2 rounded border-gray-500 hover:bg-gray-500 hover:text-white transition-colors">
                 Buy
               </div>
             </div>
