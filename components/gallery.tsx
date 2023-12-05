@@ -34,7 +34,7 @@ export default function Gallery({
               {images.map((image, index) => {
                 const isActive = index === imageIndex;
                 const classname =
-                  'cursor-pointer object-contain py-2 backdrop-blur border rounded-2xl hover:border-blue-500 bg-opacity-30 transition-all';
+                  'cursor-pointer object-contain py-2 backdrop-blur border-2 rounded-2xl hover:border-blue-500 bg-opacity-30 transition-all';
 
                 return (
                   <li key={index} className="flex w-20 h-20">
@@ -43,7 +43,7 @@ export default function Gallery({
                       alt={name}
                       className={
                         isActive
-                          ? `${classname} border-2 border-blue-500`
+                          ? `${classname} border-blue-500`
                           : `${classname} border-gray-200`
                       }
                       width={80}

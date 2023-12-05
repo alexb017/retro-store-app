@@ -12,7 +12,7 @@ export default async function Home() {
     <>
       <div className="p-5">
         <BannerItem item={productsBanner.map((product: any) => product)} />
-        <h1 className="text-4xl my-12 text-center font-bold">
+        <h1 className="text-4xl my-12 text-center font-semibold">
           Shop the deals.
         </h1>
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-5 sm:grid-cols-2 xl:grid-cols-4">

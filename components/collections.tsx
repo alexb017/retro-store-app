@@ -7,16 +7,14 @@ export default function Collections() {
   const pathname = usePathname();
 
   return (
-    <>
-      <h3 className="text-xs text-gray-500 font-bold">Collections</h3>
-      <ul>
+    <div className="flex flex-col items-center justify-center gap-2">
+      <h3 className="text-sm text-gray-500 font-semibold">Collections</h3>
+      <ul className="flex flex-row gap-2">
         <li>
           <Link
             href="/search"
-            className={`text-sm hover:text-black ${
-              pathname === '/search'
-                ? 'text-black border-b border-black'
-                : 'text-gray-500'
+            className={`text-sm py-1 px-3 border-2 rounded-full bg-gray-100 text-black hover:bg-gray-200 hover:border-gray-200 transition-colors ${
+              pathname === '/search' ? 'border-blue-500' : 'border-gray-100'
             }`}
           >
             All
@@ -25,10 +23,10 @@ export default function Collections() {
         <li>
           <Link
             href="/search/phones"
-            className={`text-sm hover:text-black ${
+            className={`text-sm py-1 px-3 border-2 rounded-full bg-gray-100 text-black hover:bg-gray-200 hover:border-gray-200 transition-colors ${
               pathname === '/search/phones'
-                ? 'text-black border-b border-black'
-                : 'text-gray-500'
+                ? 'border-blue-500'
+                : 'border-gray-100'
             }`}
           >
             Phones
@@ -37,10 +35,10 @@ export default function Collections() {
         <li>
           <Link
             href="/search/sweaters"
-            className={`text-sm hover:text-black ${
+            className={`text-sm py-1 px-3 border-2 rounded-full bg-gray-100 text-black hover:bg-gray-200 hover:border-gray-200 transition-colors ${
               pathname === '/search/sweaters'
-                ? 'text-black border-b border-black'
-                : 'text-gray-500'
+                ? 'border-blue-500'
+                : 'border-gray-100'
             }`}
           >
             Sweaters
@@ -49,10 +47,10 @@ export default function Collections() {
         <li>
           <Link
             href="/search/drinkware"
-            className={`text-sm hover:text-black ${
+            className={`text-sm py-1 px-3 border-2 rounded-full bg-gray-100 text-black hover:bg-gray-200 hover:border-gray-200 transition-colors ${
               pathname === '/search/drinkware'
-                ? 'text-black border-b border-black'
-                : 'text-gray-500'
+                ? 'border-blue-500'
+                : 'border-gray-100'
             }`}
           >
             Drinkware
@@ -61,10 +59,10 @@ export default function Collections() {
         <li>
           <Link
             href="/search/hats"
-            className={`text-sm hover:text-black ${
+            className={`text-sm py-1 px-3 border-2 rounded-full bg-gray-100 text-black hover:bg-gray-200 hover:border-gray-200 transition-colors ${
               pathname === '/search/hats'
-                ? 'text-black border-b border-black'
-                : 'text-gray-500'
+                ? 'border-blue-500'
+                : 'border-gray-100'
             }`}
           >
             Hats
@@ -73,10 +71,10 @@ export default function Collections() {
         <li>
           <Link
             href="/search/drones"
-            className={`text-sm hover:text-black ${
+            className={`text-sm py-1 px-3 border-2 rounded-full bg-gray-100 text-black hover:bg-gray-200 hover:border-gray-200 transition-colors ${
               pathname === '/search/drones'
-                ? 'text-black border-b border-black'
-                : 'text-gray-500'
+                ? 'border-blue-500'
+                : 'border-gray-100'
             }`}
           >
             Drones
@@ -85,16 +83,16 @@ export default function Collections() {
         <li>
           <Link
             href="/search/earbuds"
-            className={`text-sm hover:text-black ${
+            className={`text-sm py-1 px-3 border-2 rounded-full bg-gray-100 text-black hover:bg-gray-200 hover:border-gray-200 transition-colors ${
               pathname === '/search/earbuds'
-                ? 'text-black border-b border-black'
-                : 'text-gray-500'
+                ? 'border-blue-500'
+                : 'border-gray-100'
             }`}
           >
             Earbuds
           </Link>
         </li>
       </ul>
-    </>
+    </div>
   );
 }

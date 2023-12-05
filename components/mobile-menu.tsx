@@ -43,7 +43,7 @@ export default function MobileMenu() {
             leaveTo="translate-x-[-100%]"
           >
             <Dialog.Panel className="fixed bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col bg-white pb-5">
-              <div className="p-5">
+              <div className="p-4">
                 <button
                   className="mb-5 flex items-center justify-center transition-color"
                   onClick={closeMenu}

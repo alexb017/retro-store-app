@@ -11,17 +11,20 @@ export default function AddToCart({
   color,
   space,
   price,
+  size,
 }: {
   product: any;
   color: string;
   space: string;
   price: string;
+  size: string;
 }) {
   const { user } = useContext(AuthContext);
   const router = useRouter();
   const colorId = color ? `-${color.toLowerCase()}` : '';
   const spaceId = space ? `-${space.toLowerCase()}` : '';
-  const id = product?.handle + `${colorId}${spaceId}`;
+  const sizeId = size ? `-${size.toLowerCase()}` : '';
+  const id = product?.handle + `${colorId}${spaceId}${sizeId}`;
 
   let defaultVariant = color === '' || space === '';
 
@@ -30,6 +33,10 @@ export default function AddToCart({
   }
 
   if (color !== '' && product?.storage === undefined) {
+    defaultVariant = false;
+  }
+
+  if (space !== '' && product?.colors === undefined) {
     defaultVariant = false;
   }
 
@@ -43,6 +50,7 @@ export default function AddToCart({
     price,
     color,
     space,
+    size,
     image: product?.images[0],
     quantity: 1,
     price_id: product?.price_id,
@@ -52,7 +60,7 @@ export default function AddToCart({
     <>
       {!user ? (
         <button
-          className={`flex items-center justify-center gap-2 w-full p-4 rounded-full bg-blue-500 text-white hover:opacity-90 ${
+          className={`flex items-center justify-center gap-2 w-full p-4 rounded-full bg-blue-500 text-white font-medium hover:bg-blue-500/80 ${
             defaultVariant
               ? 'cursor-not-allowed opacity-50'
               : 'cursor-pointer opacity-100'
@@ -65,7 +73,7 @@ export default function AddToCart({
         <button
           type="button"
           disabled={defaultVariant}
-          className={`flex items-center justify-center gap-2 w-full p-4 mt-5 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-colors ${
+          className={`flex items-center justify-center gap-2 w-full p-4 rounded-full bg-blue-500 text-white font-medium hover:bg-blue-500/80 transition-colors ${
             defaultVariant ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
           }`}
           onClick={async () => {

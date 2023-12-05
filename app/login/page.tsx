@@ -11,7 +11,7 @@ import Footer from '@/components/footer';
 import { auth } from '@/lib/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
-export default function SignIn() {
+export default function Login() {
   const { user, googleSignIn } = useContext(AuthContext);
   const router = useRouter();
   const [email, setEmail] = useState('');
@@ -19,24 +19,28 @@ export default function SignIn() {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center gap-6 p-5">
+      <div className="flex flex-col items-center gap-6 p-5">
         {!user ? (
-          <div>
-            <div className="flex flex-col gap-6 items-start">
-              <div className="flex flex-col gap-1">
-                <h1 className="text-4xl font-medium">Welcome to Store!</h1>
-                <p>Sign in with your social account.</p>
-              </div>
+          <>
+            <div className="flex flex-col items-center gap-6 w-full max-w-xs">
+              <h1 className="text-3xl font-medium">Log in to Store!</h1>
 
               <button
                 onClick={async () => {
-                  const res = await googleSignIn();
+                  try {
+                    const res = await googleSignIn();
 
-                  if (res) {
-                    router.push('/');
+                    if (res) {
+                      router.push('/');
+                    }
+                  } catch (error: any) {
+                    if (error.code === 'auth/popup-closed-by-user') {
+                      return;
+                    }
+                    throw new Error(error);
                   }
                 }}
-                className="flex items-center gap-2 text-base font-medium text-gray-500 px-4 py-2 border-2 rounded border-gray-200 hover:border-gray-300 transition-colors"
+                className="flex items-center gap-2 w-full text-sm font-medium text-gray-500 p-4 rounded-md bg-gray-100 hover:bg-gray-200 transition-colors"
               >
                 <GoogleIcon classname="w-5 h-5" />
                 Sign in with Google
@@ -72,7 +76,8 @@ export default function SignIn() {
                     type="email"
                     name="email"
                     id="email"
-                    className="border border-gray-200 rounded-lg px-2 py-2"
+                    className="w-full text-base bg-gray-100 rounded-md px-2 py-3"
+                    autoComplete="email"
                   />
                 </label>
                 <label
@@ -85,13 +90,14 @@ export default function SignIn() {
                     type="password"
                     name="password"
                     id="password"
-                    className="border border-gray-200 rounded-lg px-2 py-2"
+                    className="text-base bg-gray-100 rounded-md px-2 py-3"
+                    autoComplete="current-password"
                   />
                 </label>
                 <input
                   type="submit"
                   value="Sign in"
-                  className="bg-blue-500 text-white rounded-lg py-2 cursor-pointer hover:bg-blue-600 transition-colors"
+                  className="bg-blue-500 text-white rounded-md py-3 cursor-pointer hover:bg-blue-600 transition-colors"
                 />
               </form>
 
@@ -102,7 +108,7 @@ export default function SignIn() {
                 </Link>
               </p>
             </div>
-          </div>
+          </>
         ) : null}
       </div>
       <Footer />

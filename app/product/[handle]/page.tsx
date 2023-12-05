@@ -53,7 +53,7 @@ async function RelatedProducts({ category }: { category: string }) {
   return (
     <div className="py-8">
       {filteredProducts.length > 0 && (
-        <h2 className="mb-4 text-2xl font-bold">Related Products</h2>
+        <h2 className="mb-4 text-2xl font-semibold">Related Products</h2>
       )}
       <ul className="grid grid-cols-1 lg:grid-cols-4 gap-5 sm:grid-cols-2 xl:grid-cols-4">
         <ProductGrid products={filteredProducts} />

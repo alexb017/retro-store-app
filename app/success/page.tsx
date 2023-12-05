@@ -17,27 +17,26 @@ export default function Success() {
   const { user } = useContext(AuthContext);
   const [cart] = useCartData(user?.uid);
   const [order] = useOrderData(user?.uid);
-  const username: string = user?.displayName;
-  const usernameURL = username?.toLowerCase().replace(/\s+/g, '-');
+  const usernameFromEmail = user?.email.split('@')[0];
   const randomOrderNr = Math.floor(Math.random() * 100000) + 1;
 
   useEffect(() => {
     (async () => {
       try {
-        if (user && cart.length >= 1 && !order) {
+        if (user && cart.length > 0 && !order) {
           await addItemsOrder(user?.uid, {
             order: [{ item: [...cart], order_nr: randomOrderNr }],
           });
-
-          await updateItemCart(user?.uid, []);
         }
 
-        if (user && cart.length >= 1 && order) {
+        if (user && cart.length > 0 && order) {
           await updateItemsOrder(user?.uid, {
             item: [...cart],
             order_nr: randomOrderNr,
           });
+        }
 
+        if (user && cart.length > 0) {
           await updateItemCart(user?.uid, []);
         }
       } catch (error) {
@@ -56,9 +55,7 @@ export default function Success() {
               <h1 className="text-4xl mt-2">
                 Thank you,{' '}
                 <span className="font-bold">
-                  {user?.displayName
-                    ? user?.displayName
-                    : user?.email.split('@')[0]}
+                  {user?.displayName ? user?.displayName : usernameFromEmail}
                 </span>
               </h1>
               <h1 className="text-4xl">for your order!</h1>
@@ -69,10 +66,7 @@ export default function Success() {
             >
               Continue shopping
             </Link>
-            <Link
-              href={`/profile/${user?.email.split('@')[0]}`}
-              className="underline"
-            >
+            <Link href={`/profile/${usernameFromEmail}`} className="underline">
               View order on your profile
             </Link>
           </>

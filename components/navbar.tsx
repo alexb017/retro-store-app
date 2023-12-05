@@ -2,26 +2,16 @@
 
 import { useContext } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { AuthContext } from '../app/AuthContext';
 import CartIcon from './icons/cart';
-import LogoIcon from './icons/logo';
 import useCartData from '@/lib/use-cart-data';
-import { useRouter, usePathname } from 'next/navigation';
-import MenuIcon from './icons/menu';
 import MobileMenu from './mobile-menu';
-import SignIn from './sign-in';
-import UserIcon from './icons/user';
-import SignInIcon from './icons/sign-in';
+import ProfilePopup from './profile-popup';
+import ArrowRightIcon from './icons/arrow-right';
 
 export default function Navbar() {
   const { user } = useContext(AuthContext);
   const [cart] = useCartData(user?.uid);
-  const router = useRouter();
-  const pathname = usePathname();
-  const username: string = user?.displayName;
-  const usernameURL = username?.toLowerCase().replace(/\s+/g, '-');
-  const usernameFromEmail = user?.email.split('@')[0];
 
   const quantity = cart?.reduce(
     (total, current: any) => total + current.quantity,
@@ -35,7 +25,7 @@ export default function Navbar() {
           <MobileMenu />
           <Link
             href="/"
-            className="flex items-center text-xl font-bold uppercase leading-none ml-5"
+            className="flex items-center text-xl font-bold uppercase leading-none ml-4 md:ml-0"
           >
             store
           </Link>
@@ -49,19 +39,19 @@ export default function Navbar() {
           </Link>
           <Link
             href="/search"
-            className="flex text-sm font-medium hover:text-neutral-500 transition-colors"
+            className="flex text-sm font-medium text-black hover:text-black/80 transition-colors"
           >
             All
           </Link>
           <Link
             href="/search/phones"
-            className="flex text-sm font-medium hover:text-neutral-500 transition-colors"
+            className="flex text-sm font-medium text-black hover:text-black/80 transition-colors"
           >
             Phones
           </Link>
           <Link
             href="/search/hats"
-            className="flex text-sm font-medium hover:text-neutral-500 transition-colors"
+            className="flex text-sm font-medium text-black hover:text-black/80 transition-colors"
           >
             Hats
           </Link>
@@ -82,34 +72,25 @@ export default function Navbar() {
                     </div>
                   )}
                 </Link>
-                {user?.photoURL ? (
-                  <Link href={`/profile/${usernameURL}`}>
-                    <Image
-                      className="rounded-full shadow-lg"
-                      src={user?.photoURL}
-                      alt={usernameURL}
-                      width={24}
-                      height={24}
-                    />
-                  </Link>
-                ) : (
-                  <Link
-                    href={`/profile/${usernameFromEmail}`}
-                    className="flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full"
-                  >
-                    <UserIcon classname="w-4 h-4" />
-                  </Link>
-                )}
+                <ProfilePopup />
               </div>
             </>
           ) : (
-            <Link
-              href="/sign-in"
-              className="flex items-center gap-2 rounded border-2 px-4 py-2 text-sm font-medium hover:text-white hover:border-gray-500 hover:bg-gray-500 transition-colors"
-            >
-              <SignInIcon classname="h-5" />
-              Sign in
-            </Link>
+            <div className="flex items-center gap-4">
+              <Link
+                href="/login"
+                className="flex items-center gap-1 text-sm font-medium hover:text-black/80 transition-colors"
+              >
+                Login
+                <ArrowRightIcon classname="h-4" />
+              </Link>
+              <Link
+                href="/sign-up"
+                className="px-3 py-2 bg-blue-500 rounded-md text-white hover:bg-blue-500/80 transition-all"
+              >
+                Sign up
+              </Link>
+            </div>
           )}
         </div>
       </div>

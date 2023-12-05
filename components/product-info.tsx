@@ -11,23 +11,27 @@ export default function ProductInfo({ product }: { product: any }) {
   const [colorValue, setColorValue] = useState('');
   const [spaceValue, setSpaceValue] = useState('');
   const [priceValue, setPriceValue] = useState('');
+  const [sizeValue, setSizeValue] = useState('');
 
   let formattedPrice = FormattedPrice(product?.price);
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-col border-b border-gray-200 pb-5">
-        <h1 className="mb-2 text-4xl font-bold">{product?.name}</h1>
-        <p className="text-gray-500 text-2xl">{formattedPrice}</p>
+      <div className="flex flex-col">
+        <h1 className="text-4xl font-semibold">{product?.name}</h1>
+        <p className="text-gray-500 text-2xl font-medium">{formattedPrice}</p>
       </div>
+      {product?.colors?.length > 0 || product?.storage?.length > 0 ? (
+        <div className="h-[1px] w-full block bg-gray-200"></div>
+      ) : null}
       {product?.colors?.length > 0 && (
         <div>
-          <h3 className="text-xl mb-2">Choose your color</h3>
+          <h3 className="text-base mb-2">Choose your color</h3>
           <div className="flex items-center gap-2">
             {product?.colors?.map((color: string) => {
               const isActive = color === colorValue;
               const classname =
-                'text-sm font-medium border rounded-full py-1 px-4 hover:border-blue-500 transition-all';
+                'text-sm font-medium border-2 rounded-full py-1 px-4 hover:border-blue-500 transition-all';
 
               return (
                 <button
@@ -35,7 +39,7 @@ export default function ProductInfo({ product }: { product: any }) {
                   type="button"
                   className={
                     isActive
-                      ? `${classname} border-2 border-blue-500`
+                      ? `${classname} border-blue-500 bg-blue-50`
                       : `${classname} border-gray-200`
                   }
                   onClick={() => setColorValue(color)}
@@ -49,12 +53,12 @@ export default function ProductInfo({ product }: { product: any }) {
       )}
       {product?.storage?.length > 0 && (
         <div>
-          <h3 className="text-xl mb-2">Choose your storage space</h3>
+          <h3 className="text-base mb-2">Choose your storage space</h3>
           <div className="flex items-center flex-wrap gap-2">
             {product?.storage?.map((storage: any, index: number) => {
               const isActive = storage?.space === spaceValue;
               const classname =
-                'text-sm border rounded-2xl aspect-square w-24 h-24 hover:border-blue-500 transition-all';
+                'text-sm border-2 rounded-2xl aspect-square w-24 h-24 hover:border-blue-500 transition-all';
 
               let formattedPrice = FormattedPrice(storage?.price);
 
@@ -64,7 +68,7 @@ export default function ProductInfo({ product }: { product: any }) {
                   type="button"
                   className={
                     isActive
-                      ? `${classname} border-2 border-blue-500`
+                      ? `${classname} border-blue-500 bg-blue-50`
                       : `${classname} border-gray-200`
                   }
                   onClick={() => {
@@ -82,17 +86,48 @@ export default function ProductInfo({ product }: { product: any }) {
           </div>
         </div>
       )}
-      <p className="text-base text-gray-500">{product?.description}</p>
+      {product?.size?.length > 0 && (
+        <div>
+          <h3 className="text-base mb-2">Choose your size</h3>
+          <div className="flex items-center gap-2">
+            {product?.size?.map((size: string) => {
+              const isActive = size === sizeValue;
+              const classname =
+                'text-sm font-medium uppercase border-2 rounded-full py-1 px-4 hover:border-blue-500 transition-all';
+
+              return (
+                <button
+                  key={size}
+                  type="button"
+                  className={
+                    isActive
+                      ? `${classname} border-blue-500 bg-blue-50`
+                      : `${classname} border-gray-200`
+                  }
+                  onClick={() => setSizeValue(size)}
+                >
+                  {size}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
       <AddToCart
         product={product}
         color={colorValue}
         space={spaceValue}
         price={priceValue}
+        size={sizeValue}
       />
+      <div>
+        <h3 className="text-sm">Description</h3>
+        <p className="text-base mt-2">{product?.description}</p>
+      </div>
       {!user && (
-        <p className="text-base text-gray-500">
+        <p className="text-sm text-gray-500">
           You must be{' '}
-          <Link href="/sign-in" className="underline">
+          <Link href="/login" className="underline">
             sign in
           </Link>{' '}
           to buy.

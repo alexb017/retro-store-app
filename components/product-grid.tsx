@@ -2,6 +2,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getProducts } from '@/lib/actions';
 import FormattedPrice from './formatted-price';
+import ArrowRightIcon from './icons/arrow-right';
+import TagIcon from './icons/tag';
 
 type Product = {
   id: string;
@@ -21,23 +23,30 @@ export default function ProductGrid({ products }: { products: Product[] }) {
           <Link
             key={product.handle}
             href={`/product/${product.handle}`}
-            className="bg-gray-100 flex flex-col rounded-3xl group"
+            className="group relative"
           >
-            <div className="w-full h-60 flex items-center justify-center overflow-hidden">
+            <div className="w-full h-80 overflow-hidden rounded-3xl bg-gray-100 group-hover:opacity-80 transition-all">
               <Image
                 src={product.image}
                 alt={product.name}
-                width={200}
-                height={200}
+                width={320}
+                height={320}
                 quality={80}
-                className="object-contain transition-all ease-in-out group-hover:scale-105"
+                className="w-full h-full object-contain object-center"
               />
             </div>
-            <div className="flex flex-col items-center p-5 pt-0">
-              <p className="text-2xl font-bold">{product.name}</p>
-              <h1 className="text-base text-gray-500">{price}</h1>
-              <div className="font-medium px-6 py-1 mt-2 border-2 rounded border-gray-500 hover:bg-gray-500 hover:text-white transition-colors">
-                Buy
+            <div className="mt-4 flex flex-col gap-1 items-start">
+              <div className="flex items-center justify-between">
+                <h1 className="text-2xl font-semibold">{product.name}</h1>
+                {/* <div className="text-sm flex items-center gap-1 self-start font-medium text-gray-500">
+                  Buy
+                  <ArrowRightIcon classname="h-4" />
+                </div> */}
+              </div>
+              <h1 className="text-base font-semibold">{price}</h1>
+              <div className="text-sm flex items-center gap-2 py-1 px-2 pr-3 font-medium text-black bg-green-100 rounded-full">
+                <TagIcon classname="h-5" />
+                Add to cart
               </div>
             </div>
           </Link>
