@@ -41,9 +41,6 @@ export default function AddToCart({ product }: { product: any }) {
     <>
       {!user ? (
         <button
-          onClick={() => {
-            console.log(data);
-          }}
           className={`flex items-center justify-center gap-4 w-full p-4 rounded-full bg-blue-500 text-white font-medium hover:bg-blue-500/80 ${
             !defaultVariant
               ? 'cursor-not-allowed opacity-50'

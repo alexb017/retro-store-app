@@ -25,7 +25,7 @@ export default async function Product({
           <ArrowLeftIcon classname="h-5 group-hover:scale-105 transition-all ease-in-out" />
           Go back to the main page
         </Link> */}
-        <div className="flex flex-col gap-4 sm:flex-row md:gap-8 lg:gap-12">
+        <div className="flex flex-col gap-6 sm:flex-row md:gap-8 lg:gap-12">
           <div className="h-full w-full rounded-2xl p-8 bg-gray-100 basis-full sm:basis-3/6 lg:basis-4/6">
             <Gallery
               images={product?.imageUrls?.map((image: any) => ({
@@ -58,7 +58,7 @@ async function RelatedProducts({ category }: { category: string }) {
       {filteredProducts.length > 0 && (
         <h2 className="mb-4 text-2xl font-semibold">Related Products</h2>
       )}
-      <ul className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:grid-cols-2 md:grid-cols-3">
+      <ul className="grid grid-cols-1 lg:grid-cols-4 gap-6 sm:grid-cols-2 md:grid-cols-3">
         <ProductGrid products={filteredProducts} />
       </ul>
     </div>
