@@ -46,7 +46,7 @@ export default function Success() {
   }, [user, cart]);
 
   return (
-    <div className="p-5">
+    <div className="p-4">
       <div className="flex flex-col items-center gap-4">
         {user && (
           <>

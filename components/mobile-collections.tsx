@@ -13,7 +13,8 @@ const collections = [
   { name: 'Sweaters', url: '/search/sweaters' },
   { name: 'Drinkware', url: '/search/drinkware' },
   { name: 'Hats', url: '/search/hats' },
-  { name: 'Drones', url: '/search/drones' },
+  { name: 'T-Shirts', url: '/search/t-shirts' },
+  { name: 'Hoodies', url: '/search/hoodies' },
   { name: 'Earbuds', url: '/search/earbuds' },
 ];
 
@@ -38,7 +39,7 @@ export default function MobileCollections() {
   return (
     <>
       <Listbox value={selected} onChange={handleChangeURL}>
-        <div className="relative mt-1 w-full">
+        <div className="relative z-10 w-full">
           <Listbox.Button className="relative w-full cursor-default rounded-lg bg-blue-50 py-2 pl-3 pr-10 text-left shadow focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-blue-300 sm:text-sm">
             <span className="block truncate">{selected.name}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">

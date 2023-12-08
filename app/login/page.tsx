@@ -19,10 +19,10 @@ export default function Login() {
 
   return (
     <>
-      <div className="flex flex-col items-center gap-6 p-5">
+      <div className="flex flex-col items-center p-4">
         {!user ? (
           <>
-            <div className="flex flex-col items-center gap-6 w-full max-w-xs">
+            <div className="flex flex-col items-center gap-8 w-full max-w-xs">
               <h1 className="text-3xl font-medium">Log in to Store!</h1>
 
               <button

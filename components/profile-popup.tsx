@@ -25,8 +25,8 @@ export default function ProfilePopup() {
                 className="rounded-full"
                 src={user?.photoURL}
                 alt={usernameFromEmail}
-                width={36}
-                height={36}
+                width={24}
+                height={24}
               />
             </Menu.Button>
           ) : (

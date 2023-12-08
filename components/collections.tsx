@@ -70,14 +70,26 @@ export default function Collections() {
         </li>
         <li>
           <Link
-            href="/search/drones"
+            href="/search/t-shirts"
             className={`text-sm py-1 px-3 border-2 rounded-full bg-gray-100 text-black hover:bg-gray-200 hover:border-gray-200 transition-colors ${
-              pathname === '/search/drones'
+              pathname === '/search/t-shirts'
                 ? 'border-blue-500'
                 : 'border-gray-100'
             }`}
           >
-            Drones
+            T-Shirts
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/search/hoodies"
+            className={`text-sm py-1 px-3 border-2 rounded-full bg-gray-100 text-black hover:bg-gray-200 hover:border-gray-200 transition-colors ${
+              pathname === '/search/hoodies'
+                ? 'border-blue-500'
+                : 'border-gray-100'
+            }`}
+          >
+            Hoodies
           </Link>
         </li>
         <li>

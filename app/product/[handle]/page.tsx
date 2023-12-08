@@ -17,7 +17,7 @@ export default async function Product({
 
   return (
     <>
-      <div className="mx-auto max-w-screen-2xl p-5">
+      <div className="mx-auto max-w-screen-2xl p-4">
         {/* <Link
           href="/"
           className="inline-flex items-center gap-2 pb-5 text-gray-500 group hover:text-black transition-all ease-in-out"
@@ -25,14 +25,17 @@ export default async function Product({
           <ArrowLeftIcon classname="h-5 group-hover:scale-105 transition-all ease-in-out" />
           Go back to the main page
         </Link> */}
-        <div className="flex flex-col sm:flex-row sm:gap-5 lg:gap-12">
-          <div className="h-full w-full rounded-2xl p-8 bg-gray-100 basis-full sm:basis-4/6">
+        <div className="flex flex-col gap-4 sm:flex-row md:gap-8 lg:gap-12">
+          <div className="h-full w-full rounded-2xl p-8 bg-gray-100 basis-full sm:basis-3/6 lg:basis-4/6">
             <Gallery
-              images={product?.images?.map((image: string) => ({ src: image }))}
-              name={product?.name}
+              images={product?.imageUrls?.map((image: any) => ({
+                url: image.url,
+                color: image.color,
+              }))}
+              name={product?.handle}
             />
           </div>
-          <div className="basis-full mt-5 lg:mt-0 sm:basis-2/6">
+          <div className="basis-full sm:basis-3/6 lg:basis-2/6">
             <ProductInfo product={product} />
           </div>
         </div>
@@ -55,7 +58,7 @@ async function RelatedProducts({ category }: { category: string }) {
       {filteredProducts.length > 0 && (
         <h2 className="mb-4 text-2xl font-semibold">Related Products</h2>
       )}
-      <ul className="grid grid-cols-1 lg:grid-cols-4 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+      <ul className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:grid-cols-2 md:grid-cols-3">
         <ProductGrid products={filteredProducts} />
       </ul>
     </div>

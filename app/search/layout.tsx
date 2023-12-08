@@ -9,7 +9,7 @@ export default function LayoutSearch({
 }) {
   return (
     <>
-      <div className="mx-auto flex flex-col gap-8 p-5 pb-4 max-w-screen-2xl">
+      <div className="mx-auto flex flex-col gap-8 p-4 pb-4 max-w-screen-2xl">
         <div className="w-full hidden md:block">
           <Collections />
         </div>

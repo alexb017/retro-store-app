@@ -71,10 +71,10 @@ export default function MobileMenu() {
                     Phones
                   </Link>
                   <Link
-                    href="/search/hats"
+                    href="/search/t-shirts"
                     className="flex text-lg font-medium hover:text-neutral-500 transition-colors"
                   >
-                    Hats
+                    T-Shirts
                   </Link>
                 </div>
               </div>

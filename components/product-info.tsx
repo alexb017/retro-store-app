@@ -1,19 +1,38 @@
 'use client';
 
-import { useContext, useState } from 'react';
+import { useContext, useState, useCallback } from 'react';
 import AddToCart from './add-to-cart';
 import FormattedPrice from './formatted-price';
 import { AuthContext } from '@/app/AuthContext';
 import Link from 'next/link';
+import {
+  usePathname,
+  useRouter,
+  useSearchParams,
+  ReadonlyURLSearchParams,
+} from 'next/navigation';
 
 export default function ProductInfo({ product }: { product: any }) {
   const { user } = useContext(AuthContext);
-  const [colorValue, setColorValue] = useState('');
-  const [spaceValue, setSpaceValue] = useState('');
-  const [priceValue, setPriceValue] = useState('');
-  const [sizeValue, setSizeValue] = useState('');
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const selectColor = searchParams.get('color');
+  const selectSpace = searchParams.get('space');
+  const selectPrice = searchParams.get('price');
+  const selectSize = searchParams.get('size');
 
   let formattedPrice = FormattedPrice(product?.price);
+
+  function createUrl(
+    pathname: string,
+    params: URLSearchParams | ReadonlyURLSearchParams
+  ) {
+    const paramsString = params.toString();
+    const queryString = `${paramsString.length ? '?' : ''}${paramsString}`;
+
+    return `${pathname}${queryString}`;
+  }
 
   return (
     <div className="flex flex-col gap-4">
@@ -29,12 +48,23 @@ export default function ProductInfo({ product }: { product: any }) {
           <h3 className="text-base mb-2">Choose your color</h3>
           <div className="flex items-center gap-2">
             {product?.colors?.map((color: string) => {
-              const isActive = color === colorValue;
+              const isActive = color.toLowerCase() === selectColor;
               const classname =
                 'text-sm font-medium border-2 rounded-full py-1 px-4 hover:border-blue-500 transition-all';
 
+              const optionSearchParams = new URLSearchParams(
+                searchParams.toString()
+              );
+
+              optionSearchParams.set('color', color.toLowerCase());
+
+              const optionUrl = createUrl(pathname, optionSearchParams);
+
               return (
                 <button
+                  onClick={() => {
+                    router.replace(optionUrl, { scroll: false });
+                  }}
                   key={color}
                   type="button"
                   className={
@@ -42,7 +72,6 @@ export default function ProductInfo({ product }: { product: any }) {
                       ? `${classname} border-blue-500 bg-blue-50`
                       : `${classname} border-gray-200`
                   }
-                  onClick={() => setColorValue(color)}
                 >
                   {color}
                 </button>
@@ -56,14 +85,26 @@ export default function ProductInfo({ product }: { product: any }) {
           <h3 className="text-base mb-2">Choose your storage space</h3>
           <div className="flex items-center flex-wrap gap-2">
             {product?.storage?.map((storage: any, index: number) => {
-              const isActive = storage?.space === spaceValue;
+              const isActive = storage?.space === selectSpace;
               const classname =
-                'text-sm border-2 rounded-2xl aspect-square w-24 h-24 hover:border-blue-500 transition-all';
+                'flex items-center justify-center text-sm border-2 rounded-2xl aspect-square w-24 h-24 hover:border-blue-500 transition-all';
 
               let formattedPrice = FormattedPrice(storage?.price);
 
+              const optionSearchParams = new URLSearchParams(
+                searchParams.toString()
+              );
+
+              optionSearchParams.set('space', storage?.space);
+              optionSearchParams.set('price', storage?.price);
+
+              const optionUrl = createUrl(pathname, optionSearchParams);
+
               return (
                 <button
+                  onClick={() => {
+                    router.replace(optionUrl, { scroll: false });
+                  }}
                   key={index}
                   type="button"
                   className={
@@ -71,12 +112,8 @@ export default function ProductInfo({ product }: { product: any }) {
                       ? `${classname} border-blue-500 bg-blue-50`
                       : `${classname} border-gray-200`
                   }
-                  onClick={() => {
-                    setSpaceValue(storage?.space);
-                    setPriceValue(storage?.price);
-                  }}
                 >
-                  <div className="flex flex-col">
+                  <div className="flex flex-col items-center">
                     <h3 className="font-medium">{storage?.space} GB</h3>
                     <p className="text-xs text-gray-500">{formattedPrice}</p>
                   </div>
@@ -89,14 +126,25 @@ export default function ProductInfo({ product }: { product: any }) {
       {product?.size?.length > 0 && (
         <div>
           <h3 className="text-base mb-2">Choose your size</h3>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center flex-wrap gap-2">
             {product?.size?.map((size: string) => {
-              const isActive = size === sizeValue;
+              const isActive = size === selectSize;
               const classname =
                 'text-sm font-medium uppercase border-2 rounded-full py-1 px-4 hover:border-blue-500 transition-all';
 
+              const optionSearchParams = new URLSearchParams(
+                searchParams.toString()
+              );
+
+              optionSearchParams.set('size', size);
+
+              const optionUrl = createUrl(pathname, optionSearchParams);
+
               return (
                 <button
+                  onClick={() => {
+                    router.replace(optionUrl, { scroll: false });
+                  }}
                   key={size}
                   type="button"
                   className={
@@ -104,7 +152,6 @@ export default function ProductInfo({ product }: { product: any }) {
                       ? `${classname} border-blue-500 bg-blue-50`
                       : `${classname} border-gray-200`
                   }
-                  onClick={() => setSizeValue(size)}
                 >
                   {size}
                 </button>
@@ -113,13 +160,7 @@ export default function ProductInfo({ product }: { product: any }) {
           </div>
         </div>
       )}
-      <AddToCart
-        product={product}
-        color={colorValue}
-        space={spaceValue}
-        price={priceValue}
-        size={sizeValue}
-      />
+      <AddToCart product={product} />
       <div>
         <h3 className="text-sm">Description</h3>
         <p className="text-base mt-2">{product?.description}</p>

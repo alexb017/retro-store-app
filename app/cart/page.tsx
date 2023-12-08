@@ -48,7 +48,7 @@ export default function Cart() {
 
   return (
     <>
-      <div className="p-5">
+      <div className="p-4">
         <h1 className="text-4xl font-semibold mb-10 text-center">
           Shopping cart
         </h1>
@@ -71,10 +71,11 @@ export default function Cart() {
           </div>
         ) : (
           <>
-            <div className="flex flex-col md:flex-row md:justify-between gap-5">
+            <div className="flex flex-col md:flex-row md:justify-between gap-8 md:gap-12">
               <ul className="flex flex-col md:w-7/12">
                 {cart?.map((item: any, index) => {
                   const price = FormattedPrice(item?.price);
+                  const color = item?.color as string;
 
                   return (
                     <li
@@ -96,8 +97,17 @@ export default function Cart() {
                             {item?.name}
                           </h1>
                           <p className="text-base text-gray-500">
-                            {item?.color && <> {item?.color} </>}{' '}
+                            {item?.color && (
+                              <>
+                                {' '}
+                                {color.charAt(0).toUpperCase() +
+                                  color.slice(1)}{' '}
+                              </>
+                            )}{' '}
                             {item?.space && <> / {item?.space} GB </>}
+                            {item?.size && (
+                              <span className="uppercase"> / {item?.size}</span>
+                            )}
                           </p>
                           <p className="text-lg mt-2 font-medium">{price}</p>
                         </div>
@@ -116,7 +126,7 @@ export default function Cart() {
                   );
                 })}
               </ul>
-              <div className="text-base p-5 bg-gray-100 rounded-3xl self-start w-full md:w-5/12">
+              <div className="text-base p-4 bg-gray-100 rounded-3xl self-start w-full md:w-5/12">
                 <h1 className="text-xl font-semibold mb-5">Your order</h1>
                 <div className="flex items-center justify-between border-b border-gray-300 mb-3 pb-1">
                   <p className="text-sm">Taxes</p>

@@ -50,10 +50,10 @@ export default function Navbar() {
             Phones
           </Link>
           <Link
-            href="/search/hats"
+            href="/search/t-shirts"
             className="flex text-sm font-medium text-black hover:text-black/80 transition-colors"
           >
-            Hats
+            T-Shirts
           </Link>
         </div>
 

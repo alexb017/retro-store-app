@@ -1,57 +1,38 @@
 import PlusIcon from './icons/plus';
 import { getUserCart, setCartUser, addItemCart } from '@/lib/actions';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useContext } from 'react';
 import { AuthContext } from '../app/AuthContext';
 import useCartData from '@/lib/use-cart-data';
 import Link from 'next/link';
 
-export default function AddToCart({
-  product,
-  color,
-  space,
-  price,
-  size,
-}: {
-  product: any;
-  color: string;
-  space: string;
-  price: string;
-  size: string;
-}) {
+export default function AddToCart({ product }: { product: any }) {
   const { user } = useContext(AuthContext);
   const router = useRouter();
-  const colorId = color ? `-${color.toLowerCase()}` : '';
-  const spaceId = space ? `-${space.toLowerCase()}` : '';
-  const sizeId = size ? `-${size.toLowerCase()}` : '';
-  const id = product?.handle + `${colorId}${spaceId}${sizeId}`;
+  const searchParams = useSearchParams();
+  const getColor = searchParams.get('color') || '';
+  const getSpace = searchParams.get('space') || '';
+  const getPrice = searchParams.get('price') || product?.price;
+  const getSize = searchParams.get('size') || '';
+  const imageIndex = getColor
+    ? product?.imageUrls?.findIndex((img: any) => img.color === getColor)
+    : 0;
+  const colorId = getColor ? `-${getColor?.toLowerCase()}` : '';
+  const spaceId = getSpace ? `-${getSpace?.toLowerCase()}` : '';
+  const priceId = getPrice ? `-${getPrice?.toLowerCase()}` : '';
+  const sizeId = getSize ? `-${getSize?.toLowerCase()}` : '';
+  const id = product?.handle + `${colorId}${spaceId}${sizeId}${priceId}`;
 
-  let defaultVariant = color === '' || space === '';
-
-  if (product?.colors === undefined && product?.storage === undefined) {
-    defaultVariant = false;
-  }
-
-  if (color !== '' && product?.storage === undefined) {
-    defaultVariant = false;
-  }
-
-  if (space !== '' && product?.colors === undefined) {
-    defaultVariant = false;
-  }
-
-  if (price === '') {
-    price = product?.price;
-  }
+  let defaultVariant = true;
 
   const data = {
     handle: id,
     name: product?.name,
-    price,
-    color,
-    space,
-    size,
-    image: product?.images[0],
+    price: getPrice,
+    color: getColor,
+    space: getSpace,
+    size: getSize,
+    image: product?.imageUrls[imageIndex]?.url,
     quantity: 1,
     price_id: product?.price_id,
   };
@@ -60,21 +41,24 @@ export default function AddToCart({
     <>
       {!user ? (
         <button
-          className={`flex items-center justify-center gap-2 w-full p-4 rounded-full bg-blue-500 text-white font-medium hover:bg-blue-500/80 ${
-            defaultVariant
+          onClick={() => {
+            console.log(data);
+          }}
+          className={`flex items-center justify-center gap-4 w-full p-4 rounded-full bg-blue-500 text-white font-medium hover:bg-blue-500/80 ${
+            !defaultVariant
               ? 'cursor-not-allowed opacity-50'
               : 'cursor-pointer opacity-100'
           }`}
         >
-          <PlusIcon classname="w-6 h-6" />
+          <PlusIcon classname="w-5 h-5" />
           Add item to cart
         </button>
       ) : (
         <button
           type="button"
-          disabled={defaultVariant}
-          className={`flex items-center justify-center gap-2 w-full p-4 rounded-full bg-blue-500 text-white font-medium hover:bg-blue-500/80 transition-colors ${
-            defaultVariant ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
+          disabled={!defaultVariant}
+          className={`flex items-center justify-center gap-4 w-full p-4 rounded-full bg-blue-500 text-white font-medium hover:bg-blue-500/80 transition-colors ${
+            !defaultVariant ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
           }`}
           onClick={async () => {
             const userCart = await getUserCart(user?.uid);
@@ -98,7 +82,7 @@ export default function AddToCart({
             }
           }}
         >
-          <PlusIcon classname="w-6 h-6" />
+          <PlusIcon classname="w-5 h-5" />
           Add item to cart
         </button>
       )}

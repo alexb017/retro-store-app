@@ -13,7 +13,7 @@ export default function ProfileName({ params }: { params: { name: string } }) {
   const usernameFromEmail = user?.email.split('@')[0];
 
   return (
-    <div className="p-5">
+    <div className="p-4">
       <div className="flex flex-col items-start gap-2 px-4 sm:px-0">
         <div className="block">
           {user?.photoURL ? (
@@ -93,7 +93,7 @@ export default function ProfileName({ params }: { params: { name: string } }) {
                 <div className="flex flex-col gap-4 w-full">
                   <ul
                     role="list"
-                    className="divide-y divide-gray-100 rounded-md border border-gray-200"
+                    className="divide-y divide-gray-200 rounded-md border border-gray-200"
                   >
                     {order?.map((item: any, index) => {
                       const totalPrice = item?.item?.reduce(
@@ -105,12 +105,9 @@ export default function ProfileName({ params }: { params: { name: string } }) {
                       );
 
                       return (
-                        <li
-                          key={index}
-                          className="flex flex-col gap-2 rounded-md bg-white p-4"
-                        >
+                        <li key={index} className="flex flex-col p-4">
                           <div className="flex flex-col md:flex-row md:items-center justify-between">
-                            <h1 className="text-sm font-medium text-blue-900">
+                            <h1 className="text-sm font-medium">
                               Order nr: #{item?.order_nr}
                             </h1>
                             <h3 className="text-sm font-medium">
@@ -118,48 +115,60 @@ export default function ProfileName({ params }: { params: { name: string } }) {
                               {FormattedPrice(totalPrice?.toString())}
                             </h3>
                           </div>
-                          {item?.item?.map((item: any, index: any) => {
-                            const price = FormattedPrice(item?.price);
+                          <div className="flex flex-col divide-y divide-gray-100">
+                            {item?.item?.map((item: any, index: any) => {
+                              const price = FormattedPrice(item?.price);
+                              const color = item?.color;
 
-                            return (
-                              <div
-                                key={index}
-                                className="w-full flex flex-col md:flex-row md:items-center justify-between gap-2"
-                              >
-                                <div className="flex flex-row gap-4">
-                                  <div className="flex items-center justify-center p-1 rounded-2xl aspect-square bg-gray-100">
-                                    <Image
-                                      src={item?.image}
-                                      alt={item?.name}
-                                      width={64}
-                                      height={64}
-                                    />
-                                  </div>
-                                  <div className="flex flex-col items-start justify-center">
-                                    <div>
-                                      <h1 className="text-xl font-semibold">
-                                        {item?.name}
-                                      </h1>
+                              return (
+                                <div key={index} className="w-full">
+                                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
+                                    <div className="flex flex-row gap-2">
+                                      <div className="flex items-center justify-center aspect-square">
+                                        <Image
+                                          src={item?.image}
+                                          alt={item?.name}
+                                          width={64}
+                                          height={64}
+                                        />
+                                      </div>
+                                      <div className="flex flex-col items-start justify-center">
+                                        <div>
+                                          <h1 className="text-sm font-medium">
+                                            {item?.name}
+                                          </h1>
+                                          <p className="text-sm text-gray-500">
+                                            {item?.color && (
+                                              <>
+                                                {' '}
+                                                {color.charAt(0).toUpperCase() +
+                                                  color.slice(1)}{' '}
+                                              </>
+                                            )}{' '}
+                                            {item?.space && (
+                                              <> / {item?.space} GB </>
+                                            )}
+                                            {item?.size && (
+                                              <span className="uppercase">
+                                                {' '}
+                                                / {item?.size}{' '}
+                                              </span>
+                                            )}
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className="flex flex-col">
+                                      <p className="font-sm">Price: {price}</p>
                                       <p className="text-sm text-gray-500">
-                                        {item?.color && <> {item?.color} </>}{' '}
-                                        {item?.space && (
-                                          <> / {item?.space} GB </>
-                                        )}
+                                        Quantity: {item?.quantity}
                                       </p>
                                     </div>
                                   </div>
                                 </div>
-                                <div className="flex flex-col">
-                                  <p className="font-sm text-gray-500">
-                                    Price: {price}
-                                  </p>
-                                  <p className="text-sm text-gray-500">
-                                    Quantity: {item?.quantity}
-                                  </p>
-                                </div>
-                              </div>
-                            );
-                          })}
+                              );
+                            })}
+                          </div>
                         </li>
                       );
                     })}
