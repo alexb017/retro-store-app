@@ -23,7 +23,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
           <Link
             key={index}
             href={`/product/${product?.handle}`}
-            className="group w-fit"
+            className="group"
           >
             <div className="w-full h-80 overflow-hidden rounded-3xl bg-gray-100 group-hover:opacity-80 transition-all">
               <Image

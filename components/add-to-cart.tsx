@@ -25,6 +25,16 @@ export default function AddToCart({ product }: { product: any }) {
 
   let defaultVariant = true;
 
+  console.log(getColor !== 'a' && getSize !== 'a');
+
+  if (getColor !== '' && getSpace !== '') {
+    defaultVariant = false;
+  }
+
+  if (getColor !== '' && getSize !== '') {
+    defaultVariant = false;
+  }
+
   const data = {
     handle: id,
     name: product?.name,
@@ -42,7 +52,7 @@ export default function AddToCart({ product }: { product: any }) {
       {!user ? (
         <button
           className={`flex items-center justify-center gap-4 w-full p-4 rounded-full bg-blue-500 text-white font-medium hover:bg-blue-500/80 ${
-            !defaultVariant
+            defaultVariant
               ? 'cursor-not-allowed opacity-50'
               : 'cursor-pointer opacity-100'
           }`}
@@ -53,9 +63,9 @@ export default function AddToCart({ product }: { product: any }) {
       ) : (
         <button
           type="button"
-          disabled={!defaultVariant}
+          disabled={defaultVariant}
           className={`flex items-center justify-center gap-4 w-full p-4 rounded-full bg-blue-500 text-white font-medium hover:bg-blue-500/80 transition-colors ${
-            !defaultVariant ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
+            defaultVariant ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
           }`}
           onClick={async () => {
             const userCart = await getUserCart(user?.uid);
