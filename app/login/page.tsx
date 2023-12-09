@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { AuthContext } from '../AuthContext';
@@ -47,7 +47,7 @@ export default function Login() {
               </button>
 
               <form
-                onSubmit={async (e) => {
+                onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
                   e.preventDefault();
 
                   try {

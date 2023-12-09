@@ -1,12 +1,25 @@
 import ProductGrid from '@/components/product-grid';
 import { getProducts } from '@/lib/actions';
 
-export default async function Search() {
+export default async function Search({
+  searchParams,
+}: {
+  searchParams: { q: string };
+}) {
   const products: any = await getProducts();
+
+  const searchProduct = products.filter((product: any) =>
+    product?.name.toLowerCase().includes(searchParams.q)
+  );
+
   return (
     <>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 sm:grid-cols-2 md:grid-cols-3">
-        <ProductGrid products={products} />
+        {searchParams.q ? (
+          <ProductGrid products={searchProduct} />
+        ) : (
+          <ProductGrid products={products} />
+        )}
       </div>
     </>
   );

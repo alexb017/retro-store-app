@@ -8,6 +8,7 @@ import useCartData from '@/lib/use-cart-data';
 import MobileMenu from './mobile-menu';
 import ProfilePopup from './profile-popup';
 import ArrowRightIcon from './icons/arrow-right';
+import Search from './search';
 
 export default function Navbar() {
   const { user } = useContext(AuthContext);
@@ -56,7 +57,9 @@ export default function Navbar() {
             T-Shirts
           </Link>
         </div>
-
+        <div className="hidden md:block">
+          <Search />
+        </div>
         <div className="flex items-center">
           {user ? (
             <>

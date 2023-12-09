@@ -19,6 +19,11 @@ export default function Cart() {
   const { user } = useContext(AuthContext);
   const [cart] = useCartData(user?.uid);
 
+  const quantity = cart?.reduce(
+    (total, current: any) => total + current.quantity,
+    0
+  );
+
   const totalPrice = cart?.reduce(
     (total, current: any) =>
       total + Number.parseInt(current?.price, 10) * current?.quantity,
@@ -50,7 +55,10 @@ export default function Cart() {
     <>
       <div className="p-4">
         <h1 className="text-4xl font-semibold mb-10 text-center">
-          Shopping cart
+          Shopping cart{' '}
+          <span>
+            ({quantity === 1 ? `${quantity} item` : `${quantity} items`})
+          </span>
         </h1>
         {/* <Link
           href="/"

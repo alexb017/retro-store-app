@@ -23,16 +23,18 @@ export default function AddToCart({ product }: { product: any }) {
   const sizeId = getSize ? `-${getSize?.toLowerCase()}` : '';
   const id = product?.handle + `${colorId}${spaceId}${sizeId}${priceId}`;
 
-  let defaultVariant = true;
-
-  console.log(getColor !== 'a' && getSize !== 'a');
+  let disableBtn = true;
 
   if (getColor !== '' && getSpace !== '') {
-    defaultVariant = false;
+    disableBtn = false;
   }
 
   if (getColor !== '' && getSize !== '') {
-    defaultVariant = false;
+    disableBtn = false;
+  }
+
+  if (getColor !== '' && !product?.storage && !product?.size) {
+    disableBtn = false;
   }
 
   const data = {
@@ -52,7 +54,7 @@ export default function AddToCart({ product }: { product: any }) {
       {!user ? (
         <button
           className={`flex items-center justify-center gap-4 w-full p-4 rounded-full bg-blue-500 text-white font-medium hover:bg-blue-500/80 ${
-            defaultVariant
+            disableBtn
               ? 'cursor-not-allowed opacity-50'
               : 'cursor-pointer opacity-100'
           }`}
@@ -63,9 +65,9 @@ export default function AddToCart({ product }: { product: any }) {
       ) : (
         <button
           type="button"
-          disabled={defaultVariant}
+          disabled={disableBtn}
           className={`flex items-center justify-center gap-4 w-full p-4 rounded-full bg-blue-500 text-white font-medium hover:bg-blue-500/80 transition-colors ${
-            defaultVariant ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
+            disableBtn ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
           }`}
           onClick={async () => {
             const userCart = await getUserCart(user?.uid);
