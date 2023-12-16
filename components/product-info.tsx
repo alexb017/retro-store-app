@@ -11,16 +11,17 @@ import {
   useSearchParams,
   ReadonlyURLSearchParams,
 } from 'next/navigation';
+import AddToFavorite from './add-to-favorite';
 
 export default function ProductInfo({ product }: { product: any }) {
   const { user } = useContext(AuthContext);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const selectColor = searchParams.get('color');
-  const selectSpace = searchParams.get('space');
-  const selectPrice = searchParams.get('price');
-  const selectSize = searchParams.get('size');
+  const searchParamColor = searchParams.get('color') || '';
+  const searchParamSpace = searchParams.get('space') || '';
+  const searchParamPrice = searchParams.get('price') || '';
+  const searchParamSize = searchParams.get('size') || '';
 
   let formattedPrice = FormattedPrice(product?.price);
 
@@ -34,10 +35,27 @@ export default function ProductInfo({ product }: { product: any }) {
     return `${pathname}${queryString}`;
   }
 
+  let disableBtn = true;
+
+  if (searchParamColor !== '' && searchParamSpace !== '') {
+    disableBtn = false;
+  }
+
+  if (searchParamColor !== '' && searchParamSize !== '') {
+    disableBtn = false;
+  }
+
+  if (searchParamColor !== '' && !product?.storage && !product?.size) {
+    disableBtn = false;
+  }
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col">
-        <h1 className="text-4xl font-semibold">{product?.name}</h1>
+        <div className="flex items-center gap-4">
+          <h1 className="text-4xl font-semibold">{product?.name}</h1>
+          <AddToFavorite product={product} disableBtn={disableBtn} />
+        </div>
         <p className="text-gray-500 text-2xl font-medium">{formattedPrice}</p>
       </div>
       {product?.colors?.length > 0 || product?.storage?.length > 0 ? (
@@ -48,7 +66,7 @@ export default function ProductInfo({ product }: { product: any }) {
           <h3 className="text-base mb-2">Choose your color</h3>
           <div className="flex items-center gap-2">
             {product?.colors?.map((color: string) => {
-              const isActive = color.toLowerCase() === selectColor;
+              const isActive = color.toLowerCase() === searchParamColor;
               const classname =
                 'text-sm font-medium border-2 rounded-full py-1 px-4 hover:border-blue-500 transition-all';
 
@@ -85,7 +103,7 @@ export default function ProductInfo({ product }: { product: any }) {
           <h3 className="text-base mb-2">Choose your storage space</h3>
           <div className="flex items-center flex-wrap gap-2">
             {product?.storage?.map((storage: any, index: number) => {
-              const isActive = storage?.space === selectSpace;
+              const isActive = storage?.space === searchParamSpace;
               const classname =
                 'flex items-center justify-center text-sm border-2 rounded-2xl aspect-square w-24 h-24 hover:border-blue-500 transition-all';
 
@@ -128,7 +146,7 @@ export default function ProductInfo({ product }: { product: any }) {
           <h3 className="text-base mb-2">Choose your size</h3>
           <div className="flex items-center flex-wrap gap-2">
             {product?.size?.map((size: string) => {
-              const isActive = size === selectSize;
+              const isActive = size === searchParamSize;
               const classname =
                 'text-sm font-medium uppercase border-2 rounded-full py-1 px-4 hover:border-blue-500 transition-all';
 
@@ -160,12 +178,12 @@ export default function ProductInfo({ product }: { product: any }) {
           </div>
         </div>
       )}
-      <AddToCart product={product} />
+      <AddToCart product={product} disableBtn={disableBtn} />
       <div>
         <h3 className="text-sm">Description</h3>
         <p className="text-base mt-2">{product?.description}</p>
       </div>
-      {!user && (
+      {/* {!user && (
         <p className="text-sm text-gray-500">
           You must be{' '}
           <Link href="/login" className="underline">
@@ -173,7 +191,7 @@ export default function ProductInfo({ product }: { product: any }) {
           </Link>{' '}
           to buy.
         </p>
-      )}
+      )} */}
     </div>
   );
 }

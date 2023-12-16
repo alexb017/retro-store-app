@@ -9,15 +9,20 @@ import MobileMenu from './mobile-menu';
 import ProfilePopup from './profile-popup';
 import ArrowRightIcon from './icons/arrow-right';
 import Search from './search';
+import HeartIcon from './icons/heart';
+import useFavoriteData from '@/lib/use-favorite-data';
 
 export default function Navbar() {
   const { user } = useContext(AuthContext);
   const [cart] = useCartData(user?.uid);
+  const [favorite] = useFavoriteData(user?.uid);
 
   const quantity = cart?.reduce(
     (total, current: any) => total + current.quantity,
     0
   );
+
+  const countFavorite = favorite?.length;
 
   return (
     <nav className="fixed w-full top-0 left-0 z-10 bg-white/80 backdrop-blur border-b border-gray-200">
@@ -64,6 +69,17 @@ export default function Navbar() {
           {user ? (
             <>
               <div className="flex items-center gap-5">
+                <Link
+                  href="/favorites"
+                  className="relative flex hover:text-gray-500 transition-colors"
+                >
+                  <HeartIcon classname="h-6" />
+                  {favorite?.length > 0 && (
+                    <div className="absolute top-0 right-0 -mr-2 -mt-2 flex items-center justify-center h-4 w-4 rounded-full text-[11px] font-medium text-white bg-blue-500">
+                      {countFavorite}
+                    </div>
+                  )}
+                </Link>
                 <Link
                   href="/cart"
                   className="relative flex hover:text-gray-500 transition-colors"

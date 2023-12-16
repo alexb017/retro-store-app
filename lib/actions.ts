@@ -144,3 +144,52 @@ export async function updateItemsOrder(id: string, item: any) {
     throw new Error('Failed to add item to order');
   }
 }
+
+export async function getUserFavorite(id: string) {
+  try {
+    const querySnapshot = await getDoc(doc(db, 'users-favorite', id));
+    const data = querySnapshot.data()?.favorite;
+
+    return data;
+  } catch (error) {
+    throw new Error('Failed to get user favorite');
+  }
+}
+
+export async function setUserFavorite(id: string, data: any) {
+  try {
+    await setDoc(doc(db, 'users-favorite', id), data);
+  } catch (error) {
+    throw new Error('Failed to set favorite user');
+  }
+}
+
+export async function addItemFavorite(id: string, item: any) {
+  try {
+    await updateDoc(doc(db, 'users-favorite', id), {
+      favorite: arrayUnion(item),
+    });
+  } catch (error) {
+    throw new Error('Failed to add item to favorite');
+  }
+}
+
+export async function updateItemFavorite(id: string, item: any) {
+  try {
+    await updateDoc(doc(db, 'users-favorite', id), {
+      favorite: item,
+    });
+  } catch (error) {
+    throw new Error('Failed to update item favorite');
+  }
+}
+
+export async function deleteItemFavorite(id: string, item: any) {
+  try {
+    await updateDoc(doc(db, 'users-favorite', id), {
+      favorite: arrayRemove(item),
+    });
+  } catch (error) {
+    throw new Error('Failed to delete item from favorite');
+  }
+}

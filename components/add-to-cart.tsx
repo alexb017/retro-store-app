@@ -1,50 +1,45 @@
 import PlusIcon from './icons/plus';
-import { getUserCart, setCartUser, addItemCart } from '@/lib/actions';
-import { useRouter, useSearchParams } from 'next/navigation';
+import {
+  getUserCart,
+  setCartUser,
+  addItemCart,
+  updateItemCart,
+} from '@/lib/actions';
+import { useSearchParams } from 'next/navigation';
 import { useContext } from 'react';
 import { AuthContext } from '../app/AuthContext';
-import useCartData from '@/lib/use-cart-data';
 import Link from 'next/link';
 
-export default function AddToCart({ product }: { product: any }) {
+export default function AddToCart({
+  product,
+  disableBtn,
+}: {
+  product: any;
+  disableBtn: any;
+}) {
   const { user } = useContext(AuthContext);
-  const router = useRouter();
   const searchParams = useSearchParams();
-  const getColor = searchParams.get('color') || '';
-  const getSpace = searchParams.get('space') || '';
-  const getPrice = searchParams.get('price') || product?.price;
-  const getSize = searchParams.get('size') || '';
-  const imageIndex = getColor
-    ? product?.imageUrls?.findIndex((img: any) => img.color === getColor)
-    : 0;
-  const colorId = getColor ? `-${getColor?.toLowerCase()}` : '';
-  const spaceId = getSpace ? `-${getSpace?.toLowerCase()}` : '';
-  const priceId = getPrice ? `-${getPrice?.toLowerCase()}` : '';
-  const sizeId = getSize ? `-${getSize?.toLowerCase()}` : '';
+  const searchParamColor = searchParams.get('color') || '';
+  const searchParamSpace = searchParams.get('space') || '';
+  const searchParamPrice = searchParams.get('price') || product?.price;
+  const searchParamSize = searchParams.get('size') || '';
+  const imageIndex = product?.colors?.findIndex(
+    (color: any) => color?.toLowerCase() === searchParamColor
+  );
+  const colorId = searchParamColor ? `-${searchParamColor?.toLowerCase()}` : '';
+  const spaceId = searchParamSpace ? `-${searchParamSpace?.toLowerCase()}` : '';
+  const priceId = searchParamPrice ? `-${searchParamPrice?.toLowerCase()}` : '';
+  const sizeId = searchParamSize ? `-${searchParamSize?.toLowerCase()}` : '';
   const id = product?.handle + `${colorId}${spaceId}${sizeId}${priceId}`;
-
-  let disableBtn = true;
-
-  if (getColor !== '' && getSpace !== '') {
-    disableBtn = false;
-  }
-
-  if (getColor !== '' && getSize !== '') {
-    disableBtn = false;
-  }
-
-  if (getColor !== '' && !product?.storage && !product?.size) {
-    disableBtn = false;
-  }
 
   const data = {
     handle: id,
     name: product?.name,
-    price: getPrice,
-    color: getColor,
-    space: getSpace,
-    size: getSize,
-    image: product?.imageUrls[imageIndex]?.url,
+    price: searchParamPrice || product?.price || '',
+    color: searchParamColor || product?.color || '',
+    space: searchParamSpace || product?.space || '',
+    size: searchParamSize || product?.size || '',
+    image: product?.images[imageIndex] || product?.image,
     quantity: 1,
     price_id: product?.price_id,
   };
@@ -52,21 +47,17 @@ export default function AddToCart({ product }: { product: any }) {
   return (
     <>
       {!user ? (
-        <button
-          className={`flex items-center justify-center gap-4 w-full p-4 rounded-full bg-blue-500 text-white font-medium hover:bg-blue-500/80 ${
-            disableBtn
-              ? 'cursor-not-allowed opacity-50'
-              : 'cursor-pointer opacity-100'
-          }`}
+        <Link
+          href="/login"
+          className="flex items-center justify-center gap-4 w-full p-4 rounded-full bg-blue-500 text-white font-medium hover:bg-blue-500/80"
         >
-          <PlusIcon classname="w-5 h-5" />
-          Add item to cart
-        </button>
+          Sign in & Check Out
+        </Link>
       ) : (
         <button
           type="button"
           disabled={disableBtn}
-          className={`flex items-center justify-center gap-4 w-full p-4 rounded-full bg-blue-500 text-white font-medium hover:bg-blue-500/80 transition-colors ${
+          className={`flex items-center justify-center gap-2 w-full p-4 rounded-full bg-blue-500 text-sm text-white font-medium hover:bg-blue-500/80 transition-colors ${
             disableBtn ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
           }`}
           onClick={async () => {
@@ -81,17 +72,23 @@ export default function AddToCart({ product }: { product: any }) {
             );
 
             if (existingProduct) {
-              return;
-            }
+              // Update item with new quantity
+              const updateItem = userCart?.map((product: any) => {
+                if (product?.handle === id) {
+                  return { ...product, quantity: product?.quantity + 1 };
+                }
 
-            try {
+                return product;
+              });
+
+              // Update db with new value
+              await updateItemCart(user?.uid, updateItem);
+            } else {
               await addItemCart(user?.uid, data);
-            } catch (error) {
-              return 'Error adding new item to cart';
             }
           }}
         >
-          <PlusIcon classname="w-5 h-5" />
+          <PlusIcon classname="w-6 h-6" />
           Add item to cart
         </button>
       )}

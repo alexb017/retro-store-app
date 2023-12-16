@@ -28,9 +28,8 @@ export default async function Product({
         <div className="flex flex-col gap-6 sm:flex-row md:gap-8 lg:gap-12">
           <div className="h-full w-full rounded-2xl p-8 bg-gray-100 basis-full sm:basis-3/6 lg:basis-4/6">
             <Gallery
-              images={product?.imageUrls?.map((image: any) => ({
-                url: image.url,
-                color: image.color,
+              images={product?.images?.map((image: string) => ({
+                url: image,
               }))}
               name={product?.handle}
             />

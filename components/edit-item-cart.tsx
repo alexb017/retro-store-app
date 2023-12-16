@@ -55,9 +55,9 @@ export default function EditItemQuantity({
   return (
     <button
       onClick={updateItem}
-      className={`px-6 h-11 hover:scale-105 text-gray-500 hover:text-black transition-all ease-in-out ${
+      className={`px-3 py-2 text-gray-500 hover:text-black transition-all ease-in-out ${
         item?.quantity === 1 && type === 'minus'
-          ? 'cursor-not-allowed opacity-50 hover:text-gray-500'
+          ? 'cursor-not-allowed opacity-30 hover:text-gray-500'
           : ''
       }`}
     >

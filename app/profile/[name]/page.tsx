@@ -81,7 +81,7 @@ export default function ProfileName({ params }: { params: { name: string } }) {
             </div>
           </div>
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <div className="text-sm font-medium">Orders</div>
+            <div className="text-sm font-medium">Order history</div>
             <div className="mt-2 text-sm sm:col-span-2 sm:mt-0">
               {!order || order?.length === 0 ? (
                 <div className="flex items-center w-full md:w-2/3 justify-end">
@@ -121,10 +121,10 @@ export default function ProfileName({ params }: { params: { name: string } }) {
                               const color = item?.color;
 
                               return (
-                                <div key={index} className="w-full">
-                                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
-                                    <div className="flex flex-row gap-2">
-                                      <div className="flex items-center justify-center aspect-square">
+                                <div key={index} className="w-full py-2">
+                                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 w-full">
+                                    <div className="flex flex-row items-center gap-2 w-full">
+                                      <div className="flex items-center justify-center aspect-square rounded-md bg-gray-50">
                                         <Image
                                           src={item?.image}
                                           alt={item?.name}
@@ -132,8 +132,8 @@ export default function ProfileName({ params }: { params: { name: string } }) {
                                           height={64}
                                         />
                                       </div>
-                                      <div className="flex flex-col items-start justify-center">
-                                        <div>
+                                      <div className="flex flex-row items-center justify-between w-full">
+                                        <div className="flex flex-col md:flex-row md:items-center md:gap-2">
                                           <h1 className="text-sm font-medium">
                                             {item?.name}
                                           </h1>
@@ -156,13 +156,13 @@ export default function ProfileName({ params }: { params: { name: string } }) {
                                             )}
                                           </p>
                                         </div>
+                                        <div className="flex flex-col">
+                                          <p className="font-sm">{price}</p>
+                                          <p className="text-sm text-gray-500 self-end">
+                                            Qty: {item?.quantity}
+                                          </p>
+                                        </div>
                                       </div>
-                                    </div>
-                                    <div className="flex flex-col">
-                                      <p className="font-sm">Price: {price}</p>
-                                      <p className="text-sm text-gray-500">
-                                        Quantity: {item?.quantity}
-                                      </p>
                                     </div>
                                   </div>
                                 </div>
