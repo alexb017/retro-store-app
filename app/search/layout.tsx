@@ -1,4 +1,5 @@
 import Collections from '@/components/collections';
+import Filters from '@/components/filters';
 import Footer from '@/components/footer';
 import MobileCollections from '@/components/mobile-collections';
 
@@ -13,13 +14,13 @@ export default function LayoutSearch({
         <div className="w-full hidden md:block">
           <Collections />
         </div>
+        <div className="w-full">
+          <Filters />
+        </div>
         <div className="w-full md:hidden block">
           <MobileCollections />
         </div>
         <div className="min-h-screen w-full">{children}</div>
-        {/* <div className="flex-none md:w-[125px]">
-          <FilterItem />
-        </div> */}
       </div>
       <Footer />
     </>

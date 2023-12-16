@@ -13,10 +13,10 @@ export default function Collections() {
         <li>
           <Link
             href="/search"
-            className={`text-sm py-1 px-3 border-2 rounded-full text-black hover:bg-gray-200 hover:border-gray-200 transition-colors ${
+            className={`text-sm py-1 px-3 border-2 rounded-full text-black transition-colors ${
               pathname === '/search'
                 ? 'border-blue-500 bg-blue-50'
-                : 'border-gray-100 bg-gray-100'
+                : 'border-gray-100 bg-gray-100 hover:bg-gray-200'
             }`}
           >
             All
@@ -25,10 +25,10 @@ export default function Collections() {
         <li>
           <Link
             href="/search/phones"
-            className={`text-sm py-1 px-3 border-2 rounded-full text-black hover:bg-gray-200 hover:border-gray-200 transition-colors ${
+            className={`text-sm py-1 px-3 border-2 rounded-full text-black transition-colors ${
               pathname === '/search/phones'
                 ? 'border-blue-500 bg-blue-50'
-                : 'border-gray-100 bg-gray-100'
+                : 'border-gray-100 bg-gray-100 hover:bg-gray-200'
             }`}
           >
             Phones
@@ -37,10 +37,10 @@ export default function Collections() {
         <li>
           <Link
             href="/search/sweaters"
-            className={`text-sm py-1 px-3 border-2 rounded-full text-black hover:bg-gray-200 hover:border-gray-200 transition-colors ${
+            className={`text-sm py-1 px-3 border-2 rounded-full text-black transition-colors ${
               pathname === '/search/sweaters'
                 ? 'border-blue-500 bg-blue-50'
-                : 'border-gray-100 bg-gray-100'
+                : 'border-gray-100 bg-gray-100 hover:bg-gray-200'
             }`}
           >
             Sweaters
@@ -49,10 +49,10 @@ export default function Collections() {
         <li>
           <Link
             href="/search/drinkware"
-            className={`text-sm py-1 px-3 border-2 rounded-full text-black hover:bg-gray-200 hover:border-gray-200 transition-colors ${
+            className={`text-sm py-1 px-3 border-2 rounded-full text-black transition-colors ${
               pathname === '/search/drinkware'
                 ? 'border-blue-500 bg-blue-50'
-                : 'border-gray-100 bg-gray-100'
+                : 'border-gray-100 bg-gray-100 hover:bg-gray-200'
             }`}
           >
             Drinkware
@@ -61,10 +61,10 @@ export default function Collections() {
         <li>
           <Link
             href="/search/hats"
-            className={`text-sm py-1 px-3 border-2 rounded-full text-black hover:bg-gray-200 hover:border-gray-200 transition-colors ${
+            className={`text-sm py-1 px-3 border-2 rounded-full text-black transition-colors ${
               pathname === '/search/hats'
                 ? 'border-blue-500 bg-blue-50'
-                : 'border-gray-100 bg-gray-100'
+                : 'border-gray-100 bg-gray-100 hover:bg-gray-200'
             }`}
           >
             Hats
@@ -73,10 +73,10 @@ export default function Collections() {
         <li>
           <Link
             href="/search/t-shirts"
-            className={`text-sm py-1 px-3 border-2 rounded-full text-black hover:bg-gray-200 hover:border-gray-200 transition-colors ${
+            className={`text-sm py-1 px-3 border-2 rounded-full text-black transition-colors ${
               pathname === '/search/t-shirts'
                 ? 'border-blue-500 bg-blue-50'
-                : 'border-gray-100 bg-gray-100'
+                : 'border-gray-100 bg-gray-100 hover:bg-gray-200'
             }`}
           >
             T-Shirts
@@ -85,10 +85,10 @@ export default function Collections() {
         <li>
           <Link
             href="/search/hoodies"
-            className={`text-sm py-1 px-3 border-2 rounded-full text-black hover:bg-gray-200 hover:border-gray-200 transition-colors ${
+            className={`text-sm py-1 px-3 border-2 rounded-full text-black transition-colors ${
               pathname === '/search/hoodies'
                 ? 'border-blue-500 bg-blue-50'
-                : 'border-gray-100 bg-gray-100'
+                : 'border-gray-100 bg-gray-100 hover:bg-gray-200'
             }`}
           >
             Hoodies
@@ -97,10 +97,10 @@ export default function Collections() {
         <li>
           <Link
             href="/search/earbuds"
-            className={`text-sm py-1 px-3 border-2 rounded-full text-black hover:bg-gray-200 hover:border-gray-200 transition-colors ${
+            className={`text-sm py-1 px-3 border-2 rounded-full text-black transition-colors ${
               pathname === '/search/earbuds'
                 ? 'border-blue-500 bg-blue-50'
-                : 'border-gray-100 bg-gray-100'
+                : 'border-gray-100 bg-gray-100 hover:bg-gray-200'
             }`}
           >
             Earbuds
