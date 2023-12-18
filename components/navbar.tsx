@@ -25,7 +25,7 @@ export default function Navbar() {
   const countFavorite = favorite?.length;
 
   return (
-    <nav className="fixed w-full top-0 left-0 z-10 bg-white/80 backdrop-blur border-b border-gray-200">
+    <nav className="fixed w-full top-0 left-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
       <div className="mx-auto max-w-6xl flex items-center justify-between p-4 text-sm">
         <div className="flex items-center md:hidden">
           <MobileMenu />

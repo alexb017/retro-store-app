@@ -1,47 +1,45 @@
 'use client';
 
-import { Fragment, useState, useEffect } from 'react';
+import { Fragment, useState } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import CheckIcon from './icons/check';
 import CaretUpDownIcon from './icons/caret-up-down';
-import { useRouter } from 'next/navigation';
-import { usePathname } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
-const collections = [
-  { name: 'All', url: '/search' },
-  { name: 'Phones', url: '/search/phones' },
-  { name: 'Sweaters', url: '/search/sweaters' },
-  { name: 'Drinkware', url: '/search/drinkware' },
-  { name: 'Hats', url: '/search/hats' },
-  { name: 'T-Shirts', url: '/search/t-shirts' },
-  { name: 'Hoodies', url: '/search/hoodies' },
-  { name: 'Earbuds', url: '/search/earbuds' },
+const filters = [
+  { name: 'Relevance', sort: 'rel' },
+  { name: 'Price: Low to high', sort: 'asc' },
+  { name: 'Price: High to low', sort: 'des' },
 ];
 
-export default function MobileCollections() {
-  const [selected, setSelected] = useState(collections[0]);
+export default function MobileFilters() {
+  const [selected, setSelected] = useState(filters[0]);
   const router = useRouter();
   const pathname = usePathname();
 
-  useEffect(() => {
-    collections.map((item) => {
-      if (item.url === pathname) {
-        setSelected(item);
-      }
-    });
-  }, [pathname]);
-
   function handleChangeURL(option: any) {
-    setSelected(option);
-    router.push(option.url);
+    if (option.sort === 'rel') {
+      setSelected(option);
+      router.push(pathname);
+    }
+
+    if (option.sort === 'asc') {
+      setSelected(option);
+      router.push(`${pathname}?sort=${option.sort}`);
+    }
+
+    if (option.sort === 'des') {
+      setSelected(option);
+      router.push(`${pathname}?sort=${option.sort}`);
+    }
   }
 
   return (
     <>
       <Listbox value={selected} onChange={handleChangeURL}>
-        <div className="relative z-20 w-full">
+        <div className="relative z-10 w-full">
           <Listbox.Label className="text-sm text-gray-500 font-medium leading-7">
-            Collections:
+            Sort by:
           </Listbox.Label>
           <Listbox.Button className="relative w-full cursor-default rounded-lg bg-blue-50 py-2 pl-3 pr-10 text-left shadow focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-blue-300 sm:text-sm">
             <span className="block truncate">{selected.name}</span>
@@ -59,7 +57,7 @@ export default function MobileCollections() {
             leaveTo="opacity-0"
           >
             <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-lg bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
-              {collections.map((item, index) => (
+              {filters.map((item, index) => (
                 <Listbox.Option
                   key={index}
                   className={({ active }) =>

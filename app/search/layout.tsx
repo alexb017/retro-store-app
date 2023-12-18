@@ -2,6 +2,7 @@ import Collections from '@/components/collections';
 import Filters from '@/components/filters';
 import Footer from '@/components/footer';
 import MobileCollections from '@/components/mobile-collections';
+import MobileFilters from '@/components/mobile-filters';
 
 export default function LayoutSearch({
   children,
@@ -14,11 +15,14 @@ export default function LayoutSearch({
         <div className="w-full hidden md:block">
           <Collections />
         </div>
-        <div className="w-full">
+        <div className="w-full hidden md:block">
           <Filters />
         </div>
         <div className="w-full md:hidden block">
           <MobileCollections />
+        </div>
+        <div className="w-full md:hidden block">
+          <MobileFilters />
         </div>
         <div className="min-h-screen w-full">{children}</div>
       </div>
