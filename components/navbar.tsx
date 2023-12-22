@@ -75,7 +75,7 @@ export default function Navbar() {
                 >
                   <HeartIcon classname="h-6" />
                   {favorite?.length > 0 && (
-                    <div className="absolute top-0 right-0 -mr-2 -mt-2 flex items-center justify-center h-4 w-4 rounded-full text-[11px] font-medium text-white bg-blue-500">
+                    <div className="absolute top-0 right-0 -mr-1 -mt-1 flex items-center justify-center h-4 w-4 rounded-full text-[11px] font-medium text-white bg-blue-500">
                       {countFavorite}
                     </div>
                   )}
@@ -86,7 +86,7 @@ export default function Navbar() {
                 >
                   <CartIcon classname="h-6" />
                   {cart?.length > 0 && (
-                    <div className="absolute top-0 right-0 -mr-2 -mt-2 flex items-center justify-center h-4 w-4 rounded-full text-[11px] font-medium text-white bg-blue-500">
+                    <div className="absolute top-0 right-0 -mr-1 -mt-1 flex items-center justify-center h-4 w-4 rounded-full text-[11px] font-medium text-white bg-blue-500">
                       {quantity}
                     </div>
                   )}

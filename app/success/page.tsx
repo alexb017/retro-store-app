@@ -51,23 +51,26 @@ export default function Success() {
         {user && (
           <>
             <div className="flex flex-col items-center">
-              <h3 className="text-2xl">🎉🎉🎉</h3>
-              <h1 className="text-4xl mt-2">
+              <h3 className="text-xl">🎉🎉🎉</h3>
+              <h1 className="text-2xl mt-2">
                 Thank you,{' '}
-                <span className="font-bold">
+                <span className="font-semibold">
                   {user?.displayName ? user?.displayName : usernameFromEmail}
                 </span>
               </h1>
-              <h1 className="text-4xl">for your order!</h1>
+              <h1 className="text-2xl">for your order!</h1>
             </div>
             <Link
               href="/"
-              className="text-base text-white font-medium px-6 py-2 bg-blue-500 rounded-full hover:bg-blue-600 transition-colors"
+              className="text-sm text-white font-medium px-6 py-2 bg-blue-500 rounded-full hover:bg-blue-600 transition-colors"
             >
               Continue shopping
             </Link>
-            <Link href={`/profile/${usernameFromEmail}`} className="underline">
-              View order on your profile
+            <Link
+              href={`/orders/${usernameFromEmail}`}
+              className="text-sm underline"
+            >
+              View orders
             </Link>
           </>
         )}

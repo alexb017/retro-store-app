@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
 import UserIcon from './icons/user';
 import SignOutIcon from './icons/sign-out';
+import ShoppingBagIcon from './icons/shopping-bag';
 
 export default function ProfilePopup() {
   const { user, userSignOut } = useContext(AuthContext);
@@ -45,7 +46,7 @@ export default function ProfilePopup() {
           leaveTo="transform opacity-0 scale-95"
         >
           <Menu.Items className="absolute right-0 z-10 mt-9 w-screen max-w-[280px] px-4 sm:px-0">
-            <div className="overflow-hidden bg-white px-4 rounded-md shadow-2xl ring-1 ring-black/5">
+            <div className="overflow-hidden bg-white px-6 rounded-md shadow-2xl ring-1 ring-black/5">
               <div className="py-4 pt-9">
                 <Menu.Item>
                   <Link
@@ -79,9 +80,21 @@ export default function ProfilePopup() {
                 <Menu.Item>
                   <Link
                     href={`/profile/${usernameFromEmail}`}
-                    className="flex items-center text-sm font-medium text-black hover:text-black/80 transition-colors"
+                    className="flex items-center gap-2 text-sm font-medium text-black hover:text-black/80 transition-colors"
                   >
-                    Your Store Account
+                    <UserIcon classname="w-5 h-5" />
+                    My Profile
+                  </Link>
+                </Menu.Item>
+              </div>
+              <div className="py-4 border-t border-gray-200">
+                <Menu.Item>
+                  <Link
+                    href={`/orders/${usernameFromEmail}`}
+                    className="flex items-center gap-2 text-sm font-medium text-black hover:text-black/80 transition-colors"
+                  >
+                    <ShoppingBagIcon classname="w-5 h-5" />
+                    Orders
                   </Link>
                 </Menu.Item>
               </div>
@@ -102,7 +115,7 @@ export default function ProfilePopup() {
                     className="flex items-center gap-2 text-sm font-medium text-black hover:text-black/80 transition-colors"
                   >
                     <SignOutIcon classname="w-5 h-5" />
-                    Sign out of your account
+                    Sign out
                   </button>
                 </Menu.Item>
               </div>

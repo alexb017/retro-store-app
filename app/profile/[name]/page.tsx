@@ -7,8 +7,8 @@ import useOrderData from '@/lib/use-order-data';
 import FormattedPrice from '@/components/formatted-price';
 import UserIcon from '@/components/icons/user';
 
-export default function ProfileName({ params }: { params: { name: string } }) {
-  const { user, userSignOut } = useContext(AuthContext);
+export default function ProfilePage({ params }: { params: { name: string } }) {
+  const { user } = useContext(AuthContext);
   const [order] = useOrderData(user?.uid);
   const usernameFromEmail = user?.email.split('@')[0];
 
@@ -32,29 +32,12 @@ export default function ProfileName({ params }: { params: { name: string } }) {
         </div>
         <div>
           <h1 className="text-4xl font-semibold">
-            Hi, {user?.displayName ? user?.displayName : usernameFromEmail}! 👋
+            Hi, {user?.displayName ? user?.displayName : params.name}! 👋
           </h1>
           <p className="mt-1 text-sm text-gray-500">
             Personal details and order history.
           </p>
         </div>
-        {/* <button
-          onClick={async () => {
-            try {
-              await userSignOut();
-            } catch (error: any) {
-              throw new Error(error);
-            }
-
-            if (pathname !== '/') {
-              router.push('/');
-            }
-          }}
-          className="flex items-center gap-2 text-sm font-medium px-3 py-2 border-2 rounded-md border-gray-200 hover:bg-gray-200 transition-colors"
-        >
-          
-          Sign out
-        </button> */}
       </div>
       <div className="mt-6 border-t border-gray-100">
         <div className="divide-y divide-gray-100">
@@ -80,7 +63,7 @@ export default function ProfileName({ params }: { params: { name: string } }) {
               )}
             </div>
           </div>
-          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          {/* <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <div className="text-sm font-medium">Order history</div>
             <div className="mt-2 text-sm sm:col-span-2 sm:mt-0">
               {!order || order?.length === 0 ? (
@@ -176,7 +159,7 @@ export default function ProfileName({ params }: { params: { name: string } }) {
                 </div>
               )}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

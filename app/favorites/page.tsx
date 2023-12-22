@@ -14,7 +14,7 @@ export default function Favorite() {
   const { user } = useContext(AuthContext);
   const [favorite] = useFavoriteData(user?.uid);
 
-  const countFavorite = favorite?.length;
+  const countFavorite = favorite?.length || 0;
 
   return (
     <>
@@ -59,22 +59,31 @@ export default function Favorite() {
                           height={64}
                         />
                       </div>
-                      <h1>{fav?.name}</h1>
-                      <p className="text-sm text-gray-500">{`${
-                        fav?.color.charAt(0).toUpperCase() + fav?.color.slice(1)
-                      }/${fav?.size.toUpperCase()}${
-                        fav?.space ? `${fav?.space}GB` : ''
-                      }`}</p>
-                      <p className="text-sm">{FormattedPrice(fav?.price)}</p>
+                      <div className="flex flex-col">
+                        <div className="flex flex-row items-center gap-4">
+                          <h1>{fav?.name}</h1>
+                          <p className="text-sm text-gray-500">{`${
+                            fav?.color.charAt(0).toUpperCase() +
+                            fav?.color.slice(1)
+                          } / ${fav?.size.toUpperCase()}${
+                            fav?.space ? `${fav?.space}GB` : ''
+                          }`}</p>
+                          <p className="text-sm">
+                            {FormattedPrice(fav?.price)}
+                          </p>
+                          <DeleteItemFavorite id={user?.uid} item={fav} />
+                        </div>
+                        <p className="text-sm">
+                          <Link
+                            href={fav?.pathUrl}
+                            className="text-blue-500 border-b border-gray-500 hover:text-black"
+                          >
+                            See Item
+                          </Link>
+                        </p>
+                      </div>
                     </div>
                     <div className="flex flex-row items-center gap-4">
-                      <Link
-                        href={fav?.pathUrl}
-                        className="text-sm text-blue-700 underline w-28"
-                      >
-                        Link Item
-                      </Link>
-                      <DeleteItemFavorite id={user?.uid} item={fav} />
                       <AddToCart product={fav} disableBtn={null} />
                     </div>
                   </li>
