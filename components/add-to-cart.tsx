@@ -13,9 +13,11 @@ import Link from 'next/link';
 export default function AddToCart({
   product,
   disableBtn,
+  classname,
 }: {
   product: any;
   disableBtn: any;
+  classname: string;
 }) {
   const { user } = useContext(AuthContext);
   const searchParams = useSearchParams();
@@ -44,6 +46,10 @@ export default function AddToCart({
     price_id: product?.price_id,
   };
 
+  const classDefault =
+    'flex items-center justify-center gap-2 w-full p-4 rounded-full bg-blue-500 text-sm text-white font-medium hover:bg-blue-500/80 transition-colors';
+  const classFavorite = 'flex items-center gap-2 text-sm text-gray-500';
+
   return (
     <>
       {!user ? (
@@ -57,9 +63,9 @@ export default function AddToCart({
         <button
           type="button"
           disabled={disableBtn}
-          className={`flex items-center justify-center gap-2 w-full p-4 rounded-full bg-blue-500 text-sm text-white font-medium hover:bg-blue-500/80 transition-colors ${
-            disableBtn ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
-          }`}
+          className={`${
+            classname === 'default' ? classDefault : classFavorite
+          } ${disableBtn ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
           onClick={async () => {
             const userCart = await getUserCart(user?.uid);
 
@@ -88,7 +94,7 @@ export default function AddToCart({
             }
           }}
         >
-          <PlusIcon classname="w-6 h-6" />
+          <PlusIcon classname="w-5 h-5" />
           Add item to cart
         </button>
       )}

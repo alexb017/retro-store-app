@@ -53,10 +53,14 @@ export default function ProductInfo({ product }: { product: any }) {
     <div className="flex flex-col gap-4">
       <div className="flex flex-col">
         <div className="flex items-center gap-4">
-          <h1 className="text-4xl font-semibold">{product?.name}</h1>
+          <h1 className="text-2xl md:text-3xl font-semibold">
+            {product?.name}
+          </h1>
           <AddToFavorite product={product} disableBtn={disableBtn} />
         </div>
-        <p className="text-gray-500 text-2xl font-medium">{formattedPrice}</p>
+        <p className="text-gray-500 text-xl md:text-2xl font-medium">
+          {formattedPrice}
+        </p>
       </div>
       {product?.colors?.length > 0 || product?.storage?.length > 0 ? (
         <div className="h-[1px] w-full block bg-gray-200"></div>
@@ -143,7 +147,7 @@ export default function ProductInfo({ product }: { product: any }) {
       )}
       {product?.size?.length > 0 && (
         <div>
-          <h3 className="text-base mb-2">Choose your size</h3>
+          <h3 className="text-base mt-2">Choose your size</h3>
           <div className="flex items-center flex-wrap gap-2">
             {product?.size?.map((size: string) => {
               const isActive = size === searchParamSize;
@@ -178,10 +182,14 @@ export default function ProductInfo({ product }: { product: any }) {
           </div>
         </div>
       )}
-      <AddToCart product={product} disableBtn={disableBtn} />
+      <AddToCart
+        product={product}
+        disableBtn={disableBtn}
+        classname="default"
+      />
       <div>
-        <h3 className="text-sm">Description</h3>
-        <p className="text-base mt-2">{product?.description}</p>
+        <h3 className="text-base mb-1">Description</h3>
+        <p className="text-sm">{product?.description}</p>
       </div>
       {/* {!user && (
         <p className="text-sm text-gray-500">

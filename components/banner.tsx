@@ -50,16 +50,22 @@ export default function BannerItem({ item }: { item: Item[] }) {
   }
   return (
     <>
-      <div className="relative flex flex-col sm:flex-row w-full h-[500px] md:h-96 rounded-3xl bg-gray-100">
+      <div className="relative flex flex-col sm:flex-row w-full h-[440px] md:h-96 rounded-3xl bg-gray-100">
         {item[index] && (
           <Link
             href={`/product/${handle}`}
             className="flex flex-col sm:flex-row w-full h-full"
           >
             <div className="flex flex-col items-center justify-center h-2/6 sm:h-96 sm:w-2/4">
-              <h1 className="text-4xl font-semibold text-center">{name}</h1>
-              <p className="text-center text-gray-500">{description}</p>
-              <h3 className="text-xl font-medium">{FormattedPrice(price)}</h3>
+              <h1 className="text-2xl sm:text-4xl font-semibold text-center">
+                {name}
+              </h1>
+              <p className="text-sm sm:text-base text-center text-gray-500">
+                {description}
+              </p>
+              <h3 className="text-md sm:text-xl font-medium">
+                {FormattedPrice(price)}
+              </h3>
             </div>
             <div className="sm:w-2/4 h-4/6 sm:h-96 overflow-hidden flex items-center justify-center">
               <Image

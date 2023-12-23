@@ -17,7 +17,7 @@ export default function OrdersPage({ params }: { params: { name: string } }) {
 
   return (
     <>
-      <div className="w-full md:max-w-2xl mx-auto">
+      <div className="w-full md:max-w-3xl mx-auto">
         <div className="p-4">
           <h1 className="text-xl font-semibold mb-10 text-center">
             Order history{' '}
@@ -55,7 +55,7 @@ export default function OrdersPage({ params }: { params: { name: string } }) {
                       key={index}
                       className="flex flex-col border-b mb-4 py-2"
                     >
-                      <div className="flex flex-col md:flex-row md:items-center justify-between">
+                      <div className="flex flex-row justify-between">
                         <h1 className="text-sm font-medium">
                           Order #{item?.order_nr}
                         </h1>

@@ -16,7 +16,7 @@ export default function Carousel({ products }: { products: any[] }) {
                 href={`/product/${item?.handle}`}
                 className="group relative"
               >
-                <div className="w-full h-80 overflow-hidden rounded-3xl bg-gray-100 group-hover:opacity-80 transition-all">
+                <div className="w-44 sm:w-full h-52 sm:h-64 md:h-72 xl:h-80 overflow-hidden rounded-3xl bg-gray-100 group-hover:opacity-80 transition-all">
                   <Image
                     src={item?.image}
                     alt={item?.name}
@@ -28,9 +28,13 @@ export default function Carousel({ products }: { products: any[] }) {
                 </div>
                 <div className="mt-4 flex flex-col gap-1 items-start">
                   <div className="flex items-center justify-between">
-                    <h1 className="text-2xl font-semibold">{item?.name}</h1>
+                    <h1 className="text-xl sm:text-2xl font-semibold">
+                      {item?.name}
+                    </h1>
                   </div>
-                  <h1 className="text-base font-semibold">{price}</h1>
+                  <h1 className="text-sm sm:text-base font-semibold">
+                    {price}
+                  </h1>
                   <div className="text-sm flex items-center gap-2 py-1 px-2 pr-3 font-medium text-black bg-green-100 rounded-full">
                     <TagIcon classname="h-5" />
                     Add to cart

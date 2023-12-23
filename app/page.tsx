@@ -12,7 +12,7 @@ export default async function Home() {
     <>
       <div className="p-4">
         <BannerItem item={productsBanner.map((product: any) => product)} />
-        <h1 className="text-4xl my-12 text-center font-semibold">
+        <h1 className="text-2xl md:text-4xl my-12 text-center font-semibold">
           Shop the deals
         </h1>
         <Carousel products={products} />
