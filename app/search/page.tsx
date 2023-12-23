@@ -20,11 +20,11 @@ export default async function Search({
   }
 
   if (searchParams.sort === 'asc') {
-    productsFilter = products.toSorted((a: any, b: any) => a.price - b.price);
+    productsFilter = products.sort((a: any, b: any) => a.price - b.price);
   }
 
   if (searchParams.sort === 'des') {
-    productsFilter = products.toSorted((a: any, b: any) => b.price - a.price);
+    productsFilter = products.sort((a: any, b: any) => b.price - a.price);
   }
 
   return (
