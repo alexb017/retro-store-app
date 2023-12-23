@@ -24,11 +24,11 @@ export default async function CategoryPage({
   }
 
   if (searchParams.sort === 'asc') {
-    productsFilter = filtered.toSorted((a: any, b: any) => a.price - b.price);
+    productsFilter = filtered.sort((a: any, b: any) => a.price - b.price);
   }
 
   if (searchParams.sort === 'des') {
-    productsFilter = filtered.toSorted((a: any, b: any) => b.price - a.price);
+    productsFilter = filtered.sort((a: any, b: any) => b.price - a.price);
   }
 
   return (
