@@ -25,7 +25,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
             href={`/product/${product?.handle}`}
             className="group"
           >
-            <div className="w-full h-52 sm:h-64 md:h-72 xl:h-80 overflow-hidden rounded-3xl bg-gray-100 group-hover:opacity-80 transition-all">
+            <div className="w-full h-52 sm:h-64 md:h-72 xl:h-80 overflow-hidden rounded-3xl bg-neutral-100 group-hover:opacity-80 transition-all dark:bg-neutral-950">
               <Image
                 src={product?.image}
                 alt={product?.name}
@@ -42,7 +42,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
                 </h1>
               </div>
               <h1 className="text-sm sm:text-base font-semibold">{price}</h1>
-              <div className="text-sm flex items-center gap-2 py-1 px-2 pr-3 font-medium text-black bg-green-100 rounded-full">
+              <div className="text-sm flex items-center gap-2 py-1 px-2 pr-3 font-medium bg-green-100 rounded-full dark:bg-green-800 dark:text-white">
                 <TagIcon classname="h-5" />
                 Add to cart
               </div>

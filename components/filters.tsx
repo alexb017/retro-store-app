@@ -26,14 +26,16 @@ export default function Filters() {
 
   return (
     <div className="flex flex-col items-center justify-center gap-4">
-      <h3 className="text-sm text-gray-500 font-medium">Sort by</h3>
+      <h3 className="text-sm text-neutral-500 font-medium dark:text-neutral-400">
+        Sort by
+      </h3>
       <ul className="flex flex-row gap-2">
         <li>
           <button
-            className={`text-sm py-1 px-3 border-2 rounded-full text-black transition-colors ${
+            className={`text-sm py-1 px-3 border-2 rounded-full transition-colors ${
               pathQuery.toString() === ''
-                ? 'border-blue-500 bg-blue-50'
-                : 'border-gray-100 bg-gray-100 hover:bg-gray-200'
+                ? 'border-blue-500 bg-blue-50 dark:bg-neutral-900'
+                : 'border-neutral-100 bg-neutral-100 hover:bg-neutral-200 hover:border-neutral-200 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-700'
             }`}
             onClick={() => {
               router.replace(pathname, { scroll: false });
@@ -44,10 +46,10 @@ export default function Filters() {
         </li>
         <li>
           <button
-            className={`text-sm py-1 px-3 border-2 rounded-full text-black transition-colors ${
+            className={`text-sm py-1 px-3 border-2 rounded-full transition-colors ${
               pathQuery.toString() === 'sort=asc'
-                ? 'border-blue-500 bg-blue-50'
-                : 'border-gray-100 bg-gray-100 hover:bg-gray-200'
+                ? 'border-blue-500 bg-blue-50 dark:bg-neutral-900'
+                : 'border-neutral-100 bg-neutral-100 hover:bg-neutral-200 hover:border-neutral-200 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-700'
             }`}
             onClick={() => {
               const optionSearchParams = new URLSearchParams(
@@ -66,10 +68,10 @@ export default function Filters() {
         </li>
         <li>
           <button
-            className={`text-sm py-1 px-3 border-2 rounded-full text-black transition-colors ${
+            className={`text-sm py-1 px-3 border-2 rounded-full transition-colors ${
               pathQuery.toString() === 'sort=des'
-                ? 'border-blue-500 bg-blue-50'
-                : 'border-gray-100 bg-gray-100 hover:bg-gray-200'
+                ? 'border-blue-500 bg-blue-50 dark:bg-neutral-900'
+                : 'border-neutral-100 bg-neutral-100 hover:bg-neutral-200 hover:border-neutral-200 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-700'
             }`}
             onClick={() => {
               const optionSearchParams = new URLSearchParams(

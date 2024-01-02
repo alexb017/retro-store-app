@@ -18,7 +18,9 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body
+        className={`${inter.className} text-black dark:text-white dark:bg-neutral-900`}
+      >
         <AuthProvider>
           <Navbar />
           <main className="mt-20 mx-auto max-w-6xl">{children}</main>

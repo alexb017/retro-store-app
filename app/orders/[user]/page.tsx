@@ -53,7 +53,7 @@ export default function OrdersPage({ params }: { params: { name: string } }) {
                   return (
                     <li
                       key={index}
-                      className="flex flex-col border-b mb-4 py-2"
+                      className="flex flex-col border-b border-neutral-300 mb-6 py-2 dark:border-neutral-600"
                     >
                       <div className="flex flex-row justify-between">
                         <h1 className="text-sm font-medium">
@@ -64,7 +64,7 @@ export default function OrdersPage({ params }: { params: { name: string } }) {
                           {/* Total price: {FormattedPrice(totalPrice?.toString())} */}
                         </h3>
                       </div>
-                      <div className="flex flex-col divide-y divide-gray-100">
+                      <div className="flex flex-col divide-y divide-neutral-100 dark:divide-neutral-700">
                         {item?.item?.map((item: any, index: any) => {
                           const price = FormattedPrice(item?.price);
                           const color = item?.color;
@@ -73,7 +73,7 @@ export default function OrdersPage({ params }: { params: { name: string } }) {
                             <div key={index} className="w-full py-2">
                               <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 w-full">
                                 <div className="flex flex-row items-center gap-2 w-full">
-                                  <div className="flex items-center justify-center aspect-square rounded-md bg-gray-50">
+                                  <div className="flex items-center justify-center aspect-square rounded-md bg-neutral-100 dark:bg-neutral-950">
                                     <Image
                                       src={item?.image}
                                       alt={item?.name}
@@ -86,7 +86,7 @@ export default function OrdersPage({ params }: { params: { name: string } }) {
                                       <h1 className="text-sm font-medium">
                                         {item?.name}
                                       </h1>
-                                      <p className="text-sm text-gray-500">
+                                      <p className="text-sm text-neutral-500 dark:text-neutral-400">
                                         {item?.color && (
                                           <>
                                             {' '}
@@ -107,7 +107,7 @@ export default function OrdersPage({ params }: { params: { name: string } }) {
                                     </div>
                                     <div className="flex flex-col">
                                       <p className="text-sm">{price}</p>
-                                      <p className="text-sm text-gray-500 self-end">
+                                      <p className="text-sm text-neutral-500 self-end dark:text-neutral-400">
                                         Qty: {item?.quantity}
                                       </p>
                                     </div>

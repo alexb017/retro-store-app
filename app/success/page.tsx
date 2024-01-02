@@ -52,13 +52,13 @@ export default function Success() {
           <>
             <div className="flex flex-col items-center">
               <h3 className="text-xl">🎉🎉🎉</h3>
-              <h1 className="text-2xl mt-2">
+              <h1 className="text-3xl mt-2">
                 Thank you,{' '}
                 <span className="font-semibold">
                   {user?.displayName ? user?.displayName : usernameFromEmail}
                 </span>
               </h1>
-              <h1 className="text-2xl">for your order!</h1>
+              <h1 className="text-3xl">for your order!</h1>
             </div>
             <Link
               href="/"

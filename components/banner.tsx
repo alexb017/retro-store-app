@@ -50,7 +50,7 @@ export default function BannerItem({ item }: { item: Item[] }) {
   }
   return (
     <>
-      <div className="relative flex flex-col sm:flex-row w-full h-[440px] md:h-96 rounded-3xl bg-gray-100">
+      <div className="relative flex flex-col sm:flex-row w-full h-[440px] md:h-96 rounded-3xl bg-neutral-100 dark:bg-neutral-950">
         {item[index] && (
           <Link
             href={`/product/${handle}`}
@@ -60,7 +60,7 @@ export default function BannerItem({ item }: { item: Item[] }) {
               <h1 className="text-2xl sm:text-4xl font-semibold text-center">
                 {name}
               </h1>
-              <p className="text-sm sm:text-base text-center text-gray-500">
+              <p className="text-sm sm:text-base text-center text-neutral-500 dark:text-neutral-400">
                 {description}
               </p>
               <h3 className="text-md sm:text-xl font-medium">
@@ -82,18 +82,18 @@ export default function BannerItem({ item }: { item: Item[] }) {
 
         {item.length > 1 ? (
           <div className="absolute bottom-[5%] flex w-full justify-center">
-            <div className="mx-auto flex h-11 items-center rounded-full bg-gray-500/10 backdrop-blur text-gray-500">
+            <div className="mx-auto flex h-11 items-center rounded-full bg-neutral-500/10 backdrop-blur text-neutral-500">
               <button
                 type="button"
-                className="flex items-center justify-center h-full px-6 transition-all ease-in-out hover:scale-105 hover:text-black"
+                className="flex items-center justify-center h-full px-6 transition-all ease-in-out hover:scale-105 hover:text-black dark:hover:text-white"
                 onClick={prevBanner}
               >
                 <ArrowLeftIcon classname="h-5" />
               </button>
-              <div className="mx-1 h-6 w-px bg-gray-400"></div>
+              <div className="mx-1 h-6 w-px bg-neutral-400 dark:bg-neutral-700"></div>
               <button
                 type="button"
-                className="flex items-center justify-center h-full px-6 transition-all ease-in-out hover:scale-105 hover:text-black"
+                className="flex items-center justify-center h-full px-6 transition-all ease-in-out hover:scale-105 hover:text-black dark:hover:text-white"
                 onClick={nextBanner}
               >
                 <ArrowRightIcon classname="h-5" />

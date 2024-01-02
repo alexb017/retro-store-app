@@ -5,6 +5,7 @@ import Link from 'next/link';
 import MenuIcon from './icons/menu';
 import CloseIcon from './icons/close';
 import Search from './search';
+import DarkTheme from './dark-theme';
 
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,7 +34,10 @@ export default function MobileMenu() {
             leaveFrom="opacity-100 backdrop-blur-[.5px]"
             leaveTo="opacity-0 backdrop-blur-none"
           >
-            <div className="fixed inset-0 bg-white/30" aria-hidden="true" />
+            <div
+              className="fixed inset-0 bg-white/30 dark:bg-black/30"
+              aria-hidden="true"
+            />
           </Transition.Child>
           <Transition.Child
             as={Fragment}
@@ -44,7 +48,7 @@ export default function MobileMenu() {
             leaveFrom="translate-x-0"
             leaveTo="translate-x-[-100%]"
           >
-            <Dialog.Panel className="fixed bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col bg-white pb-5">
+            <Dialog.Panel className="fixed bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col bg-white dark:bg-neutral-950 pb-5">
               <div className="flex flex-col items-start gap-4 p-4">
                 <button
                   className="flex items-center justify-center transition-color focus:outline-none"
@@ -80,6 +84,7 @@ export default function MobileMenu() {
                   </Link>
                 </div>
                 <Search />
+                <DarkTheme />
               </div>
             </Dialog.Panel>
           </Transition.Child>

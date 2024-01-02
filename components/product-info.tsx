@@ -58,12 +58,12 @@ export default function ProductInfo({ product }: { product: any }) {
           </h1>
           <AddToFavorite product={product} disableBtn={disableBtn} />
         </div>
-        <p className="text-gray-500 text-xl md:text-2xl font-medium">
+        <p className="text-neutral-500 text-xl md:text-2xl font-medium dark:text-neutral-400">
           {formattedPrice}
         </p>
       </div>
       {product?.colors?.length > 0 || product?.storage?.length > 0 ? (
-        <div className="h-[1px] w-full block bg-gray-200"></div>
+        <div className="h-[1px] w-full block bg-neutral-200 dark:bg-neutral-700"></div>
       ) : null}
       {product?.colors?.length > 0 && (
         <div>
@@ -72,7 +72,7 @@ export default function ProductInfo({ product }: { product: any }) {
             {product?.colors?.map((color: string) => {
               const isActive = color.toLowerCase() === searchParamColor;
               const classname =
-                'text-sm font-medium border-2 rounded-full py-1 px-4 hover:border-blue-500 transition-all';
+                'text-sm font-medium border-2 rounded-full py-1 px-4 hover:border-blue-500 transition-all dark:hover:border-blue-500';
 
               const optionSearchParams = new URLSearchParams(
                 searchParams.toString()
@@ -91,8 +91,8 @@ export default function ProductInfo({ product }: { product: any }) {
                   type="button"
                   className={
                     isActive
-                      ? `${classname} border-blue-500 bg-blue-50`
-                      : `${classname} border-gray-200`
+                      ? `${classname} border-blue-500 bg-blue-50 dark:bg-neutral-900`
+                      : `${classname} border-neutral-200 dark:border-neutral-700`
                   }
                 >
                   {color}
@@ -109,7 +109,7 @@ export default function ProductInfo({ product }: { product: any }) {
             {product?.storage?.map((storage: any, index: number) => {
               const isActive = storage?.space === searchParamSpace;
               const classname =
-                'flex items-center justify-center text-sm border-2 rounded-2xl aspect-square w-24 h-24 hover:border-blue-500 transition-all';
+                'flex items-center justify-center text-sm border-2 rounded-2xl aspect-square w-24 h-24 hover:border-blue-500 transition-all dark:hover:border-blue-500';
 
               let formattedPrice = FormattedPrice(storage?.price);
 
@@ -131,13 +131,15 @@ export default function ProductInfo({ product }: { product: any }) {
                   type="button"
                   className={
                     isActive
-                      ? `${classname} border-blue-500 bg-blue-50`
-                      : `${classname} border-gray-200`
+                      ? `${classname} border-blue-500 bg-blue-50 dark:bg-neutral-900`
+                      : `${classname} border-neutral-200 dark:border-neutral-700`
                   }
                 >
                   <div className="flex flex-col items-center">
                     <h3 className="font-medium">{storage?.space} GB</h3>
-                    <p className="text-xs text-gray-500">{formattedPrice}</p>
+                    <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                      {formattedPrice}
+                    </p>
                   </div>
                 </button>
               );
@@ -147,12 +149,12 @@ export default function ProductInfo({ product }: { product: any }) {
       )}
       {product?.size?.length > 0 && (
         <div>
-          <h3 className="text-base mt-2">Choose your size</h3>
+          <h3 className="text-base mb-2">Choose your size</h3>
           <div className="flex items-center flex-wrap gap-2">
             {product?.size?.map((size: string) => {
               const isActive = size === searchParamSize;
               const classname =
-                'text-sm font-medium uppercase border-2 rounded-full py-1 px-4 hover:border-blue-500 transition-all';
+                'text-sm font-medium uppercase border-2 rounded-full py-1 px-4 hover:border-blue-500 transition-all dark:hover:border-blue-500';
 
               const optionSearchParams = new URLSearchParams(
                 searchParams.toString()
@@ -171,8 +173,8 @@ export default function ProductInfo({ product }: { product: any }) {
                   type="button"
                   className={
                     isActive
-                      ? `${classname} border-blue-500 bg-blue-50`
-                      : `${classname} border-gray-200`
+                      ? `${classname} border-blue-500 bg-blue-50 dark:bg-neutral-900`
+                      : `${classname} border-neutral-200 dark:border-neutral-700`
                   }
                 >
                   {size}

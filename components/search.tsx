@@ -45,9 +45,9 @@ export default function Search() {
         type="text"
         name="search"
         placeholder="Search for products..."
-        className="w-full rounded-md border bg-white px-4 py-2 text-sm text-black placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full rounded-md border bg-white px-4 py-2 text-sm text-black placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:placeholder:text-neutral-400 dark:bg-neutral-950 dark:border-neutral-700"
       />
-      <MagnifyingIcon classname="w-5 absolute top-0 right-0 mr-3 flex h-full items-center text-gray-500" />
+      <MagnifyingIcon classname="w-5 absolute top-0 right-0 mr-3 flex h-full items-center text-neutral-500" />
     </form>
   );
 }

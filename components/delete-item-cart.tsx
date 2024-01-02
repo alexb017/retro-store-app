@@ -12,7 +12,7 @@ export default function DeleteItemCart({
   return (
     <button
       onClick={async () => await deleteItemCart(id, item)}
-      className="flex items-center text-sm text-blue-500 border-b border-gray-500 hover:text-black transition-all ease-in-out"
+      className="flex items-center text-sm text-blue-500 border-b border-neutral-500 hover:text-black transition-all ease-in-out dark:text-blue-400 dark:hover:border-neutral-400"
     >
       Remove
     </button>

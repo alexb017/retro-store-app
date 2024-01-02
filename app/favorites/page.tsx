@@ -49,10 +49,10 @@ export default function Favorite() {
                   return (
                     <li
                       key={index}
-                      className="w-full flex flex-row items-center justify-between py-6 border-b border-gray-200"
+                      className="w-full flex flex-row items-center justify-between py-6 border-b border-neutral-200 dark:border-neutral-700"
                     >
                       <div className="flex flex-row items-center gap-4">
-                        <div className="flex items-center justify-center relative rounded-md aspect-square bg-gray-50">
+                        <div className="flex items-center justify-center relative rounded-md aspect-square bg-neutral-100 dark:bg-neutral-950">
                           <Image
                             src={fav?.image}
                             alt={fav?.name}
@@ -63,7 +63,7 @@ export default function Favorite() {
                         <div className="flex flex-col">
                           <div className="flex flex-col items-start md:flex-row md:items-center md:gap-4">
                             <h1>{fav?.name}</h1>
-                            <p className="text-sm text-gray-500">{`${
+                            <p className="text-sm text-neutral-500 dark:text-neutral-400">{`${
                               fav?.color.charAt(0).toUpperCase() +
                               fav?.color.slice(1)
                             } / ${fav?.size.toUpperCase()}${
@@ -77,7 +77,7 @@ export default function Favorite() {
                           <p className="text-sm">
                             <Link
                               href={fav?.pathUrl}
-                              className="text-blue-500 border-b border-gray-500 hover:text-black"
+                              className="text-blue-500 border-b border-neutral-500 hover:border-neutral-900 dark:text-blue-400 dark:hover:border-neutral-400"
                             >
                               See Item
                             </Link>

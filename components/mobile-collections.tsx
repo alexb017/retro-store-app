@@ -40,14 +40,14 @@ export default function MobileCollections() {
     <>
       <Listbox value={selected} onChange={handleChangeURL}>
         <div className="relative z-20 w-full">
-          <Listbox.Label className="text-sm text-gray-500 font-medium leading-7">
+          <Listbox.Label className="text-sm text-neutral-500 font-medium leading-7 dark:text-neutral-400">
             Collections:
           </Listbox.Label>
-          <Listbox.Button className="relative w-full cursor-default rounded-lg bg-blue-50 py-2 pl-3 pr-10 text-left shadow focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-blue-300 sm:text-sm">
+          <Listbox.Button className="relative w-full cursor-default rounded-lg bg-neutral-100 dark:bg-neutral-950 py-2 pl-3 pr-10 text-left shadow focus:outline-none focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-blue-300 sm:text-sm">
             <span className="block truncate">{selected.name}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <CaretUpDownIcon
-                classname="h-5 w-5 text-gray-500"
+                classname="h-5 w-5 text-neutral-500"
                 aria-hidden="true"
               />
             </span>
@@ -58,13 +58,15 @@ export default function MobileCollections() {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-lg bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+            <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-lg bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm dark:bg-neutral-950">
               {collections.map((item, index) => (
                 <Listbox.Option
                   key={index}
                   className={({ active }) =>
                     `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                      active ? 'bg-blue-100 text-blue-900' : 'text-gray-950'
+                      active
+                        ? 'bg-blue-100 text-blue-900 dark:bg-blue-950 dark:text-blue-500'
+                        : 'text-neutral-950 dark:text-white'
                     }`
                   }
                   value={item}
@@ -79,7 +81,7 @@ export default function MobileCollections() {
                         {item.name}
                       </span>
                       {selected ? (
-                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-blue-600">
+                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-blue-600 dark:text-blue-500">
                           <CheckIcon classname="h-5 w-5" aria-hidden="true" />
                         </span>
                       ) : null}

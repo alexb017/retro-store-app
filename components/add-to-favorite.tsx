@@ -62,7 +62,7 @@ export default function AddToFavorite({
           <>
             <button
               disabled={disableBtn}
-              className={`flex text-gray-500 hover:text-blue-500 transition-all ${
+              className={`flex text-neutral-500 hover:text-blue-500 transition-all dark:text-neutral-400 dark:hover:text-blue-500 ${
                 disableBtn ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
               }`}
               onClick={async () => {

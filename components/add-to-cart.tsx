@@ -48,7 +48,8 @@ export default function AddToCart({
 
   const classDefault =
     'flex items-center justify-center gap-2 w-full p-4 rounded-full bg-blue-500 text-sm text-white font-medium hover:bg-blue-500/80 transition-colors';
-  const classFavorite = 'flex items-center gap-2 text-sm text-gray-500';
+  const classFavorite =
+    'flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400';
 
   return (
     <>

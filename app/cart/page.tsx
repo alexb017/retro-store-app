@@ -93,10 +93,10 @@ export default function Cart() {
                     return (
                       <li
                         key={index}
-                        className="w-full flex flex-row items-center justify-between py-6 border-b border-gray-200"
+                        className="w-full flex flex-row items-center justify-between py-6 border-b border-neutral-200 dark:border-neutral-700"
                       >
                         <div className="flex flex-row gap-4">
-                          <div className="flex items-center justify-center relative rounded-3xl aspect-square bg-gray-50">
+                          <div className="flex items-center justify-center relative rounded-3xl aspect-square bg-neutral-100 dark:bg-neutral-950">
                             {/* <DeleteItemCart id={user?.uid} item={item} /> */}
                             <Image
                               src={item?.image}
@@ -109,7 +109,7 @@ export default function Cart() {
                             <h1 className="text-base font-semibold">
                               {item?.name}
                             </h1>
-                            <p className="text-sm text-gray-500">
+                            <p className="text-sm text-neutral-500 dark:text-neutral-400">
                               {item?.color && (
                                 <>
                                   {' '}
@@ -136,7 +136,7 @@ export default function Cart() {
                           </div>
                         </div>
                         <div className="flex flex-col items-end">
-                          <div className="flex items-center border rounded-full mb-4">
+                          <div className="flex items-center border border-neutral-200 rounded-full mb-4 dark:border-neutral-700">
                             <EditItemQuantity item={item} type="minus" />
                             <p className="text-sm font-semibold">
                               {item?.quantity}
@@ -150,23 +150,23 @@ export default function Cart() {
                     );
                   })}
                 </ul>
-                <div className="text-base p-6 bg-gray-50 rounded-3xl self-start w-full md:w-5/12">
+                <div className="text-base p-6 bg-neutral-100 rounded-3xl self-start w-full md:w-5/12 dark:bg-neutral-950">
                   <h1 className="text-xl font-semibold mb-6">Order summary</h1>
-                  <div className="flex items-center justify-between border-b border-gray-300 mb-3 pb-1">
+                  <div className="flex items-center justify-between border-b border-neutral-300 mb-3 pb-1 dark:border-neutral-700">
                     <p className="text-sm">Subtotal</p>
                     <p className="text-sm">
                       {FormattedPrice(totalPrice?.toString())}
                     </p>
                   </div>
-                  <div className="flex items-center justify-between border-b border-gray-300 mb-3 pb-1">
+                  <div className="flex items-center justify-between border-b border-neutral-300 mb-3 pb-1 dark:border-neutral-700">
                     <p className="text-sm">Total savings</p>
                     <p className="text-sm">$0.00 USD</p>
                   </div>
-                  <div className="flex items-center justify-between border-b border-gray-300 mb-3 pb-1">
+                  <div className="flex items-center justify-between border-b border-neutral-300 mb-3 pb-1 dark:border-neutral-700">
                     <p className="text-sm">Shipping</p>
                     <p className="text-sm">Free</p>
                   </div>
-                  <div className="flex items-center justify-between border-b border-gray-300 mb-3 pb-1">
+                  <div className="flex items-center justify-between border-b border-neutral-300 mb-3 pb-1 dark:border-neutral-700">
                     <p className="text-sm">Tax</p>
                     <p className="text-sm">Calculated at checkout</p>
                   </div>

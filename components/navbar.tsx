@@ -11,6 +11,7 @@ import ArrowRightIcon from './icons/arrow-right';
 import Search from './search';
 import HeartIcon from './icons/heart';
 import useFavoriteData from '@/lib/use-favorite-data';
+import DarkTheme from './dark-theme';
 
 export default function Navbar() {
   const { user } = useContext(AuthContext);
@@ -25,7 +26,7 @@ export default function Navbar() {
   const countFavorite = favorite?.length;
 
   return (
-    <nav className="fixed w-full top-0 left-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
+    <nav className="fixed w-full top-0 left-0 z-50 bg-white/80 backdrop-blur border-b border-neutral-200 dark:bg-black/80 dark:border-neutral-800">
       <div className="mx-auto max-w-6xl flex items-center justify-between p-4 text-sm">
         <div className="flex items-center md:hidden">
           <MobileMenu />
@@ -45,19 +46,19 @@ export default function Navbar() {
           </Link>
           <Link
             href="/search"
-            className="flex text-sm font-medium text-black hover:text-black/80 transition-colors"
+            className="flex text-sm font-medium hover:opacity-80 transition-opacity"
           >
             All
           </Link>
           <Link
             href="/search/phones"
-            className="flex text-sm font-medium text-black hover:text-black/80 transition-colors"
+            className="flex text-sm font-medium hover:opacity-80 transition-opacity"
           >
             Phones
           </Link>
           <Link
             href="/search/t-shirts"
-            className="flex text-sm font-medium text-black hover:text-black/80 transition-colors"
+            className="flex text-sm font-medium hover:opacity-80 transition-opacity"
           >
             T-Shirts
           </Link>
@@ -65,13 +66,13 @@ export default function Navbar() {
         <div className="hidden md:block">
           <Search />
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center gap-4">
           {user ? (
             <>
               <div className="flex items-center gap-5">
                 <Link
                   href="/favorites"
-                  className="relative flex hover:text-gray-500 transition-colors"
+                  className="relative flex text-neutral-500 hover:opacity-80 transition-opacity dark:text-neutral-400"
                 >
                   <HeartIcon classname="h-6" />
                   {favorite?.length > 0 && (
@@ -82,7 +83,7 @@ export default function Navbar() {
                 </Link>
                 <Link
                   href="/cart"
-                  className="relative flex hover:text-gray-500 transition-colors"
+                  className="relative flex text-neutral-500 hover:opacity-80 transition-opacity dark:text-neutral-400"
                 >
                   <CartIcon classname="h-6" />
                   {cart?.length > 0 && (
@@ -98,7 +99,7 @@ export default function Navbar() {
             <div className="flex items-center gap-4">
               <Link
                 href="/login"
-                className="flex items-center gap-1 text-sm font-medium hover:text-black/80 transition-colors"
+                className="flex items-center gap-1 text-sm font-medium hover:opacity-80 transition-opacity"
               >
                 Login
                 <ArrowRightIcon classname="h-4" />
@@ -111,6 +112,9 @@ export default function Navbar() {
               </Link>
             </div>
           )}
+          <div className="hidden md:block">
+            <DarkTheme />
+          </div>
         </div>
       </div>
     </nav>

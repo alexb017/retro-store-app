@@ -26,7 +26,7 @@ export default async function Product({
           Go back to the main page
         </Link> */}
         <div className="flex flex-col gap-6 sm:flex-row md:gap-8 lg:gap-12">
-          <div className="h-full w-full rounded-2xl p-8 bg-gray-100 basis-full sm:basis-3/6 lg:basis-4/6">
+          <div className="h-full w-full rounded-2xl p-8 bg-neutral-100 basis-full sm:basis-3/6 lg:basis-4/6 dark:bg-neutral-950">
             <Gallery
               images={product?.images?.map((image: string) => ({
                 url: image,

@@ -40,7 +40,7 @@ export default function SignUp() {
                     throw new Error(error);
                   }
                 }}
-                className="flex items-center gap-2 w-full text-sm font-medium text-gray-500 p-4 rounded-md bg-gray-100 hover:bg-gray-200 transition-colors"
+                className="flex items-center justify-center gap-2 w-full text-sm font-medium text-neutral-500 p-4 rounded-md bg-neutral-200 dark:text-white dark:bg-neutral-700"
               >
                 <GoogleIcon classname="w-5 h-5" />
                 Sign up with Google
@@ -76,7 +76,7 @@ export default function SignUp() {
                     type="email"
                     name="email"
                     id="email"
-                    className="text-base bg-gray-100 rounded-md px-2 py-3"
+                    className="text-base bg-neutral-100 rounded-md px-2 py-3 focus:outline-none focus:ring focus:ring-blue-300 dark:bg-neutral-800 dark:focus:ring-blue-800"
                     autoComplete="email"
                   />
                 </label>
@@ -90,10 +90,10 @@ export default function SignUp() {
                     type="password"
                     name="password"
                     id="password"
-                    className="text-base bg-gray-100 rounded-md px-2 py-3"
+                    className="text-base bg-neutral-100 rounded-md px-2 py-3 focus:outline-none focus:ring focus:ring-blue-300 dark:bg-neutral-800 dark:focus:ring-blue-800"
                     autoComplete="current-password"
                   />
-                  <p className="text-gray-500">
+                  <p className="text-neutral-500">
                     Password should be 6 or more characters.
                   </p>
                 </label>
@@ -104,7 +104,7 @@ export default function SignUp() {
                 />
               </form>
 
-              <p className="text-sm font-medium text-gray-500">
+              <p className="text-sm font-medium text-neutral-500">
                 Already have an account?{' '}
                 <Link href="/login" className="underline">
                   Log in
