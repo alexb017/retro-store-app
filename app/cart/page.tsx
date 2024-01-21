@@ -150,7 +150,7 @@ export default function Cart() {
                     );
                   })}
                 </ul>
-                <div className="text-base p-6 bg-neutral-100 rounded-3xl self-start w-full md:w-5/12 dark:bg-neutral-950">
+                <div className="text-base p-6 mt-6 bg-neutral-100 rounded-3xl self-start w-full md:w-5/12 dark:bg-neutral-950">
                   <h1 className="text-xl font-semibold mb-6">Order summary</h1>
                   <div className="flex items-center justify-between border-b border-neutral-300 mb-3 pb-1 dark:border-neutral-700">
                     <p className="text-sm">Subtotal</p>

@@ -73,7 +73,7 @@ export default function OrdersPage({ params }: { params: { name: string } }) {
                             <div key={index} className="w-full py-2">
                               <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 w-full">
                                 <div className="flex flex-row items-center gap-2 w-full">
-                                  <div className="flex items-center justify-center aspect-square rounded-md bg-neutral-100 dark:bg-neutral-950">
+                                  <div className="flex items-center justify-center aspect-square rounded-xl bg-neutral-100 dark:bg-neutral-950">
                                     <Image
                                       src={item?.image}
                                       alt={item?.name}

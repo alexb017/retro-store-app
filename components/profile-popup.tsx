@@ -45,8 +45,8 @@ export default function ProfilePopup() {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute right-0 z-10 mt-9 w-screen max-w-[280px] px-4 sm:px-0">
-            <div className="overflow-hidden bg-white px-6 rounded-md shadow-2xl ring-1 ring-black/5 dark:bg-neutral-800">
+          <Menu.Items className="absolute right-0 z-10 mt-10 w-screen max-w-[280px] px-4 sm:px-0">
+            <div className="overflow-hidden bg-white px-6 rounded-3xl shadow-2xl ring-1 ring-black/5 dark:bg-neutral-800">
               <div className="py-4 pt-9">
                 <Menu.Item>
                   <Link
@@ -76,48 +76,50 @@ export default function ProfilePopup() {
                   </Link>
                 </Menu.Item>
               </div>
-              <div className="py-4">
-                <Menu.Item>
-                  <Link
-                    href={`/profile/${usernameFromEmail}`}
-                    className="flex items-center gap-2 text-sm font-medium hover:opacity-80 transition-opacity"
-                  >
-                    <UserIcon classname="w-5 h-5" />
-                    My Profile
-                  </Link>
-                </Menu.Item>
-              </div>
-              <div className="py-4 border-t border-neutral-200 dark:border-neutral-700">
-                <Menu.Item>
-                  <Link
-                    href={`/orders/${usernameFromEmail}`}
-                    className="flex items-center gap-2 text-sm font-medium hover:opacity-80 transition-opacity"
-                  >
-                    <ShoppingBagIcon classname="w-5 h-5" />
-                    Orders
-                  </Link>
-                </Menu.Item>
-              </div>
-              <div className="py-4 border-t border-neutral-200 dark:border-neutral-700">
-                <Menu.Item>
-                  <button
-                    onClick={async () => {
-                      try {
-                        await userSignOut();
-                      } catch (error: any) {
-                        throw new Error(error);
-                      }
+              <div className="pb-4">
+                <div className="py-4">
+                  <Menu.Item>
+                    <Link
+                      href={`/profile/${usernameFromEmail}`}
+                      className="flex items-center gap-2 text-sm font-medium hover:opacity-80 transition-opacity"
+                    >
+                      <UserIcon classname="w-5 h-5" />
+                      My Profile
+                    </Link>
+                  </Menu.Item>
+                </div>
+                <div className="py-4 border-t border-neutral-200 dark:border-neutral-700">
+                  <Menu.Item>
+                    <Link
+                      href={`/orders/${usernameFromEmail}`}
+                      className="flex items-center gap-2 text-sm font-medium hover:opacity-80 transition-opacity"
+                    >
+                      <ShoppingBagIcon classname="w-5 h-5" />
+                      Orders
+                    </Link>
+                  </Menu.Item>
+                </div>
+                <div className="py-4 border-t border-neutral-200 dark:border-neutral-700">
+                  <Menu.Item>
+                    <button
+                      onClick={async () => {
+                        try {
+                          await userSignOut();
+                        } catch (error: any) {
+                          throw new Error(error);
+                        }
 
-                      if (pathname !== '/') {
-                        router.push('/');
-                      }
-                    }}
-                    className="flex items-center gap-2 text-sm font-medium hover:opacity-80 transition-opacity"
-                  >
-                    <SignOutIcon classname="w-5 h-5" />
-                    Sign out
-                  </button>
-                </Menu.Item>
+                        if (pathname !== '/') {
+                          router.push('/');
+                        }
+                      }}
+                      className="flex items-center gap-2 text-sm font-medium hover:opacity-80 transition-opacity"
+                    >
+                      <SignOutIcon classname="w-5 h-5" />
+                      Sign out
+                    </button>
+                  </Menu.Item>
+                </div>
               </div>
             </div>
           </Menu.Items>

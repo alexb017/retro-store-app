@@ -52,7 +52,7 @@ export default function Favorite() {
                       className="w-full flex flex-row items-center justify-between py-6 border-b border-neutral-200 dark:border-neutral-700"
                     >
                       <div className="flex flex-row items-center gap-4">
-                        <div className="flex items-center justify-center relative rounded-md aspect-square bg-neutral-100 dark:bg-neutral-950">
+                        <div className="flex items-center justify-center relative rounded-xl aspect-square bg-neutral-100 dark:bg-neutral-950">
                           <Image
                             src={fav?.image}
                             alt={fav?.name}
