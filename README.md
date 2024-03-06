@@ -1,23 +1,21 @@
-# Retro Store App
+# Build a Fullstack E-commerce Clone inspired by [Next.js Commerce](https://vercel.com/templates/next.js/nextjs-commerce): React, Next.js, Firebase, Tailwind, Stripe.
 
-An ecommerce store inspired by [Next.js Commerce](https://vercel.com/templates/next.js/nextjs-commerce). Users can browse items, view profile and orders, make purchases with Stripe, and many more.
+![Alt text](/public/Retro-Store-App-Homepage.jpg)
+![Alt text](/public/Retro-Store-App-Homepage-Dark.jpg)
+![Alt text](/public/Retro-Store-App-4-elements.jpg)
 
-![Alt text](/public/Retro-Store-App-Home.jpg)
-![Alt text](/public/Retro-Store-App-Products.jpg)
-![Alt text](/public/Retro-Store-App-Product.jpg)
-![Alt text](/public/Retro-Store-App-Home-Mobile-Dark.jpg)
-![Alt text](/public/Retro-Store-App-Product-Mobile-Dark.jpg)
+For demo, use [Stripe Testing Cards](https://docs.stripe.com/testing)
 
 #### Features
 
-- Display list items
-- Auth with Firebase (Google and email/password)
-- View user profile
-- Checkout with Stripe
+- Real-time database
+- Authentication with email/password
+- Authentication with Google
+- Light and Dark mode
+- Stripe checkout
 - Build with TypeScript
-- Show user orders
-- Show wishlist products
-- Show related products
-- Styling with TailwindCSS
-- Responsive UI built with TailwindCSS
-- Dark mode
+- Collections and sorted items
+- Search items
+- View wishlist and orders
+- Styling with Tailwind
+- Responsive UI design
