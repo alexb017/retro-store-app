@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from './AuthContext';
 import Navbar from '@/components/navbar';
+import { cn } from '@/lib/utils';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,7 +20,10 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} text-black dark:text-white dark:bg-neutral-900`}
+        className={cn(
+          'text-black dark:text-white dark:bg-neutral-900 antialiased',
+          inter.className
+        )}
       >
         <AuthProvider>
           <Navbar />
