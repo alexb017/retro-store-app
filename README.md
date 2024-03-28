@@ -1,4 +1,4 @@
-# Build a Fullstack E-commerce Clone inspired by [Next.js Commerce](https://vercel.com/templates/next.js/nextjs-commerce): React, Next.js, Firebase, Tailwind, Stripe.
+# Build a full-stack e-commerce store inspired by [Next.js Commerce](https://vercel.com/templates/next.js/nextjs-commerce): React, Next.js, Firebase, Tailwind, Stripe.
 
 ![Alt text](/public/Retro-Store-App-Homepage.jpg)
 ![Alt text](/public/Retro-Store-App-Homepage-Dark.jpg)
