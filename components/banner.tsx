@@ -6,14 +6,9 @@ import ArrowLeftIcon from './icons/arrow-left';
 import ArrowRightIcon from './icons/arrow-right';
 import FormattedPrice from './formatted-price';
 import Link from 'next/link';
-
-type Item = {
-  name: string;
-  description: string;
-  image: string;
-  price: string;
-  handle: string;
-};
+import { Item } from '@/lib/types';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 
 export default function BannerItem({ item }: { item: Item[] }) {
   const [index, setIndex] = useState(0);
@@ -23,81 +18,104 @@ export default function BannerItem({ item }: { item: Item[] }) {
   const price = item[index]?.price;
   const handle = item[index]?.handle;
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (index < 2) {
-        setIndex(index + 1);
-      } else {
-        setIndex(0);
-      }
-    }, 3500);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     if (index < 2) {
+  //       setIndex(index + 1);
+  //     } else {
+  //       setIndex(0);
+  //     }
+  //   }, 3500);
 
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [index]);
+  //   return () => {
+  //     clearTimeout(timer);
+  //   };
+  // }, [index]);
 
   function nextBanner() {
     if (index < 2) {
       setIndex(index + 1);
+    } else {
+      setIndex(0);
     }
   }
 
   function prevBanner() {
     if (index > 0) {
       setIndex(index - 1);
+    } else {
+      setIndex(2);
     }
   }
+
   return (
     <>
-      <div className="relative flex flex-col sm:flex-row w-full h-[440px] md:h-96 rounded-3xl bg-neutral-100 dark:bg-neutral-950">
+      <div className="relative flex flex-col sm:flex-row w-full h-[480px] rounded-3xl overflow-hidden bg-zinc-100 dark:bg-zinc-950">
         {item[index] && (
-          <Link
-            href={`/product/${handle}`}
-            className="flex flex-col sm:flex-row w-full h-full"
-          >
-            <div className="flex flex-col items-center justify-center h-2/6 sm:h-96 sm:w-2/4">
-              <h1 className="text-2xl sm:text-4xl font-semibold text-center">
-                {name}
-              </h1>
-              <p className="text-sm sm:text-base text-center text-neutral-500 dark:text-neutral-400">
-                {description}
-              </p>
-              <h3 className="text-md sm:text-xl font-medium">
-                {FormattedPrice(price)}
-              </h3>
+          <div className="flex flex-col sm:flex-row w-full h-full">
+            <div className="flex flex-col items-start justify-between p-12 sm:pb-6 sm:p-20 h-full sm:w-2/4">
+              <div className="flex flex-col items-start gap-4">
+                <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+                  {name}
+                </h1>
+                <div>
+                  <p className="text-base">{description}</p>
+                  <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+                    {FormattedPrice(price)}
+                  </h3>
+                </div>
+                <Button
+                  asChild
+                  className="bg-blue-500 shadow text-base hover:bg-blue-600 dark:text-white"
+                >
+                  <Link href={`/product/${handle}`}>Buy</Link>
+                </Button>
+              </div>
+              <div className="flex items-center gap-4 mt-6 sm:mt-0">
+                {item[index]?.colors?.map((color, index) => {
+                  return (
+                    <Badge
+                      key={index}
+                      style={{ backgroundColor: color }}
+                      className={`w-3 h-3 p-0 border border-zinc-300 dark:border-zinc-500`}
+                    />
+                  );
+                })}
+              </div>
             </div>
-            <div className="sm:w-2/4 h-4/6 sm:h-96 overflow-hidden flex items-center justify-center">
+            <div className="sm:w-2/4 h-full flex items-center justify-center scale-150 sm:translate-y-16">
               <Image
                 src={image}
                 alt={name}
-                width={400}
-                height={400}
+                width={800}
+                height={800}
                 quality={80}
                 priority={true}
               />
             </div>
-          </Link>
+          </div>
         )}
 
-        {item.length > 1 ? (
-          <div className="absolute bottom-[5%] flex w-full justify-center">
-            <div className="mx-auto flex h-11 items-center rounded-full bg-neutral-500/10 backdrop-blur text-neutral-500">
-              <button
-                type="button"
-                className="flex items-center justify-center h-full px-6 transition-all ease-in-out hover:scale-105 hover:text-black dark:hover:text-white"
+        {item?.length > 0 ? (
+          <div className="absolute right-[5%] bottom-[5%]">
+            <div className="flex h-11 items-center justify-between gap-1 rounded-full p-1 bg-white text-zinc-700 dark:text-white dark:bg-zinc-900">
+              <Button
+                size="icon"
+                className="flex items-center justify-center text-zinc-700 w-[36px] h-full p-0 bg-transparent rounded-full hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-800"
                 onClick={prevBanner}
               >
                 <ArrowLeftIcon classname="h-5" />
-              </button>
-              <div className="mx-1 h-6 w-px bg-neutral-400 dark:bg-neutral-700"></div>
-              <button
-                type="button"
-                className="flex items-center justify-center h-full px-6 transition-all ease-in-out hover:scale-105 hover:text-black dark:hover:text-white"
+              </Button>
+              <div className="text-sm w-[31px] text-center font-medium">
+                {index + 1} / {item?.length}
+              </div>
+              <Button
+                size="icon"
+                className="flex items-center justify-center text-zinc-700 w-[36px] h-full p-0 bg-transparent rounded-full hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-800"
                 onClick={nextBanner}
               >
                 <ArrowRightIcon classname="h-5" />
-              </button>
+              </Button>
             </div>
           </div>
         ) : null}

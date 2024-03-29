@@ -17,14 +17,6 @@ import {
 } from 'firebase/firestore';
 import { db } from './firebase';
 
-type Product = {
-  id: string;
-  name: string;
-  price: string;
-  image: string;
-  handle: string;
-};
-
 export async function getProducts() {
   try {
     const querySnapshot = await getDocs(collection(db, 'products'));

@@ -4,15 +4,7 @@ import { getProducts } from '@/lib/actions';
 import FormattedPrice from './formatted-price';
 import ArrowRightIcon from './icons/arrow-right';
 import TagIcon from './icons/tag';
-
-type Product = {
-  id: string;
-  name: string;
-  price: string;
-  image: string;
-  handle: string;
-  category: string;
-};
+import { Product } from '@/lib/types';
 
 export default function ProductGrid({ products }: { products: Product[] }) {
   return (
