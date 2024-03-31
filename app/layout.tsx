@@ -21,7 +21,7 @@ export default async function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          'text-black dark:text-white dark:bg-neutral-900 antialiased',
+          'text-black dark:text-white dark:bg-zinc-900 antialiased',
           inter.className
         )}
       >

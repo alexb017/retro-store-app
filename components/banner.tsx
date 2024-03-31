@@ -50,7 +50,7 @@ export default function BannerItem({ item }: { item: Item[] }) {
 
   return (
     <>
-      <div className="relative flex flex-col sm:flex-row w-full h-[480px] rounded-3xl overflow-hidden bg-zinc-100 dark:bg-zinc-950">
+      <div className="relative flex flex-col sm:flex-row w-full h-[480px] rounded-3xl overflow-hidden bg-red-50 dark:bg-zinc-950">
         {item[index] && (
           <div className="flex flex-col sm:flex-row w-full h-full">
             <div className="flex flex-col items-start justify-between p-12 sm:pb-6 sm:p-20 h-full sm:w-2/4">
@@ -77,7 +77,7 @@ export default function BannerItem({ item }: { item: Item[] }) {
                     <Badge
                       key={index}
                       style={{ backgroundColor: color }}
-                      className={`w-3 h-3 p-0 border border-zinc-300 dark:border-zinc-500`}
+                      className={`w-4 h-4 p-0 shadow-[0_0_0_3px_rgba(255,255,255,0.8)] border border-zinc-200 dark:border-zinc-500 dark:shadow-[0_0_0_3px_rgba(66,66,66,0.8)]`}
                     />
                   );
                 })}

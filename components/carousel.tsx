@@ -13,23 +13,21 @@ import { Card, CardContent, CardFooter, CardHeader } from './ui/card';
 import { Button } from './ui/button';
 
 export default function CarouselItems({ products }: { products: any[] }) {
-  const firstEightElements = products?.slice(0, 8);
-
   return (
     <Carousel opts={{ align: 'start' }} className="w-full">
       <CarouselContent>
-        {firstEightElements?.map((item, index) => (
+        {products?.map((item, index) => (
           <CarouselItem
             key={index}
             className="sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
           >
             <div className="p-1">
-              <Card className="flex flex-col items-start gap-4 border-none shadow-none">
+              <Card className="flex flex-col items-start gap-4 bg-transparent border-none shadow-none">
                 <Link
                   href={`/product/${item?.handle}`}
                   className="flex flex-col gap-4 group"
                 >
-                  <CardHeader className="justify-center p-0 aspect-[3/4] overflow-hidden rounded-2xl bg-zinc-100">
+                  <CardHeader className="justify-center p-0 aspect-[3/4] overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-950">
                     <Image
                       src={item?.image}
                       alt={item?.name}
@@ -66,47 +64,3 @@ export default function CarouselItems({ products }: { products: any[] }) {
     </Carousel>
   );
 }
-
-/**
- * <div className="w-full overflow-x-auto scrollbar cursor-pointer">
-      <ul className="flex gap-6 mb-6">
-        {products.map((item, index) => {
-          const price = FormattedPrice(item?.price);
-
-          return (
-            <li key={index} className="flex-none max-w-[262px]">
-              <Link
-                href={`/product/${item?.handle}`}
-                className="group relative"
-              >
-                <div className="w-44 sm:w-full h-52 sm:h-64 md:h-72 xl:h-80 overflow-hidden rounded-3xl bg-neutral-100 group-hover:opacity-80 transition-all dark:bg-neutral-950">
-                  <Image
-                    src={item?.image}
-                    alt={item?.name}
-                    width={320}
-                    height={320}
-                    quality={80}
-                    className="w-full h-full object-contain object-center"
-                  />
-                </div>
-                <div className="mt-4 flex flex-col gap-1 items-start">
-                  <div className="flex items-center justify-between">
-                    <h1 className="text-xl sm:text-2xl font-semibold">
-                      {item?.name}
-                    </h1>
-                  </div>
-                  <h1 className="text-sm sm:text-base font-semibold">
-                    {price}
-                  </h1>
-                  <div className="text-sm flex items-center gap-2 py-1 px-2 pr-3 font-medium bg-green-100 rounded-full dark:bg-green-800 dark:text-white">
-                    <TagIcon classname="h-5" />
-                    Add to cart
-                  </div>
-                </div>
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
- */
