@@ -1,4 +1,5 @@
 import BannerItem from '@/components/banner';
+import CarouselItems from '@/components/carousel';
 import Carousel from '@/components/carousel';
 import Footer from '@/components/footer';
 import ProductGrid from '@/components/product-grid';
@@ -10,12 +11,14 @@ export default async function Home() {
 
   return (
     <>
-      <div className="p-4">
+      <div className="flex flex-col gap-12 p-4">
         <BannerItem item={productsBanner.map((product: any) => product)} />
-        <h1 className="text-2xl md:text-4xl my-12 text-center font-semibold">
+        <h1 className="text-3xl font-semibold text-center tracking-tight">
           Shop the deals
         </h1>
-        <Carousel products={products} />
+        <div className="mx-16">
+          <CarouselItems products={products} />
+        </div>
       </div>
       <Footer />
     </>
