@@ -12,6 +12,7 @@ import Search from './search';
 import HeartIcon from './icons/heart';
 import useFavoriteData from '@/lib/use-favorite-data';
 import DarkTheme from './dark-theme';
+import { Button } from './ui/button';
 
 export default function Navbar() {
   const { user } = useContext(AuthContext);
@@ -25,54 +26,69 @@ export default function Navbar() {
 
   const countFavorite = favorite?.length;
 
+  const links = [
+    { name: 'All', href: '/search' },
+    { name: 'Phones', href: '/search/phones' },
+    { name: 'Watches', href: '/search/watches' },
+    { name: 'T-Shirts', href: '/search/t-shirts' },
+  ];
+
   return (
-    <nav className="fixed w-full top-0 left-0 z-50 bg-white/80 backdrop-blur border-b border-neutral-200 dark:bg-black/80 dark:border-neutral-800">
+    <nav className="fixed w-full top-0 left-0 z-50 bg-white/80 backdrop-blur-lg dark:bg-zinc-950/80">
       <div className="mx-auto max-w-6xl flex items-center justify-between p-4 text-sm">
-        <div className="flex items-center md:hidden">
+        <div className="flex items-center lg:hidden">
           <MobileMenu />
           <Link
             href="/"
-            className="flex items-center text-xl font-bold uppercase leading-none ml-4 md:ml-0"
+            className="flex items-center text-xl font-bold uppercase leading-none tracking-tighter ml-4 lg:ml-0"
           >
             store
           </Link>
         </div>
-        <div className="hidden md:flex items-center gap-5">
+        <div className="hidden lg:flex items-center gap-5">
           <Link
             href="/"
-            className="flex items-center text-xl font-bold uppercase leading-none"
+            className="flex items-center text-xl font-bold uppercase leading-none tracking-tighter"
           >
             store
           </Link>
-          <Link
-            href="/search"
-            className="flex text-sm font-medium hover:opacity-80 transition-opacity"
-          >
-            All
-          </Link>
-          <Link
-            href="/search/phones"
-            className="flex text-sm font-medium hover:opacity-80 transition-opacity"
-          >
-            Phones
-          </Link>
-          <Link
-            href="/search/t-shirts"
-            className="flex text-sm font-medium hover:opacity-80 transition-opacity"
-          >
-            T-Shirts
-          </Link>
+          {links.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              className="flex text-sm hover:text-blue-500 transition-color ease-in-out duration-200"
+            >
+              {link.name}
+            </Link>
+          ))}
         </div>
-        <div className="hidden md:block">
+        <div className="hidden lg:block max-w-sm w-full">
           <Search />
         </div>
         <div className="flex items-center gap-4">
-          {user ? (
+          {!user ? (
+            <>
+              <div className="flex items-center gap-4">
+                <Link
+                  href="/login"
+                  className="flex items-center gap-1 text-sm font-medium hover:opacity-80 transition-opacity"
+                >
+                  Login
+                </Link>
+                <Button
+                  asChild
+                  className="bg-blue-500 hover:bg-blue-600 dark:text-white"
+                >
+                  <Link href="/sign-up">Sign up</Link>
+                </Button>
+              </div>
+            </>
+          ) : (
             <>
               <div className="flex items-center gap-5">
                 <Link
                   href="/favorites"
-                  className="relative flex text-neutral-500 hover:opacity-80 transition-opacity dark:text-neutral-400"
+                  className="relative flex text-zinc-500 hover:opacity-80 transition-opacity dark:text-zinc-400"
                 >
                   <HeartIcon classname="h-6" />
                   {favorite?.length > 0 && (
@@ -83,7 +99,7 @@ export default function Navbar() {
                 </Link>
                 <Link
                   href="/cart"
-                  className="relative flex text-neutral-500 hover:opacity-80 transition-opacity dark:text-neutral-400"
+                  className="relative flex text-zinc-500 hover:opacity-80 transition-opacity dark:text-zinc-400"
                 >
                   <CartIcon classname="h-6" />
                   {cart?.length > 0 && (
@@ -95,24 +111,8 @@ export default function Navbar() {
                 <ProfilePopup />
               </div>
             </>
-          ) : (
-            <div className="flex items-center gap-4">
-              <Link
-                href="/login"
-                className="flex items-center gap-1 text-sm font-medium hover:opacity-80 transition-opacity"
-              >
-                Login
-                <ArrowRightIcon classname="h-4" />
-              </Link>
-              <Link
-                href="/sign-up"
-                className="px-3 py-2 bg-blue-500 rounded-md text-white hover:bg-blue-500/80 transition-all"
-              >
-                Sign up
-              </Link>
-            </div>
           )}
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             <DarkTheme />
           </div>
         </div>

@@ -1,53 +1,48 @@
 import {
   ReadonlyURLSearchParams,
+  usePathname,
   useRouter,
   useSearchParams,
 } from 'next/navigation';
 import React from 'react';
 import MagnifyingIcon from './icons/magnifying';
+import { Input } from './ui/input';
+import { useDebouncedCallback } from 'use-debounce';
 
 export default function Search() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const pathname = usePathname();
 
-  function createUrl(
-    pathname: string,
-    params: URLSearchParams | ReadonlyURLSearchParams
-  ) {
-    const paramsString = params.toString();
-    const queryString = `${paramsString.length ? '?' : ''}${paramsString}`;
+  // It creates a new URLSearchParams object with the input value
+  // It uses the useDebouncedCallback hook to debounce the search function
+  // This prevents the search function from being called too frequently
+  const handleSearch = useDebouncedCallback((value: string) => {
+    // console.log(`Searching for: ${value}`);
+    const params = new URLSearchParams(searchParams);
 
-    return `${pathname}${queryString}`;
-  }
-
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
-    const inputValue = e.target as HTMLFormElement;
-    const searchValue = inputValue.search as HTMLInputElement;
-    const newParams = new URLSearchParams(searchParams.toString());
-
-    if (searchValue.value) {
-      newParams.set('q', searchValue.value);
+    if (value) {
+      params.set('q', value);
     } else {
-      newParams.delete('q');
+      params.delete('q');
     }
 
-    router.push(createUrl('/search', newParams));
-  }
+    router.replace(`/search?${params.toString()}`);
+  }, 300);
 
   return (
-    <form
-      onSubmit={onSubmit}
-      className="w-max-[500px] relative w-full lg:w-80 xl:w-full"
-    >
-      <input
+    <div className="relative">
+      <Input
         type="text"
         name="search"
         placeholder="Search for products..."
-        className="w-full rounded-md border bg-white px-4 py-2 text-sm text-black placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:placeholder:text-neutral-400 dark:bg-neutral-950 dark:border-neutral-700"
+        className="block w-full rounded-md bg-zinc-100 border-none py-[9px] pl-10 text-sm placeholder:text-zinc-500 focus-visible:ring-offset-0 focus-visible:ring-0 dark:placeholder:text-zinc-400 dark:bg-zinc-900"
+        onChange={(e) => {
+          handleSearch(e.target.value);
+        }}
+        defaultValue={searchParams.get('q')?.toString()}
       />
-      <MagnifyingIcon classname="w-5 absolute top-0 right-0 mr-3 flex h-full items-center text-neutral-500" />
-    </form>
+      <MagnifyingIcon classname="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-zinc-500" />
+    </div>
   );
 }

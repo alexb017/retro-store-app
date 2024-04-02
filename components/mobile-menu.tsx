@@ -18,6 +18,19 @@ export default function MobileMenu() {
     setIsOpen(false);
   }, [pathname, searchParams]);
 
+  const links = [
+    { name: 'Home', href: '/' },
+    { name: 'All', href: '/search' },
+    { name: 'Phones', href: '/search/phones' },
+    { name: 'Watches', href: '/search/watches' },
+    { name: 'Earbuds', href: '/search/earbuds' },
+    { name: 'T-Shirts', href: '/search/t-shirts' },
+    { name: 'Sweaters', href: '/search/sweaters' },
+    { name: 'Hats', href: '/search/hats' },
+    { name: 'Hoodies', href: '/search/hoodies' },
+    { name: 'Drinkware', href: '/search/drinkware' },
+  ];
+
   return (
     <>
       <button onClick={openMenu} className="focus:outline-none">
@@ -48,8 +61,8 @@ export default function MobileMenu() {
             leaveFrom="translate-x-0"
             leaveTo="translate-x-[-100%]"
           >
-            <Dialog.Panel className="fixed bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col bg-white dark:bg-neutral-950 pb-5">
-              <div className="flex flex-col items-start gap-4 p-4">
+            <Dialog.Panel className="fixed bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col bg-white dark:bg-zinc-900 pb-5">
+              <div className="flex flex-col items-start gap-6 p-4">
                 <button
                   className="flex items-center justify-center transition-color focus:outline-none"
                   onClick={closeMenu}
@@ -57,31 +70,24 @@ export default function MobileMenu() {
                 >
                   <CloseIcon classname="h-6" />
                 </button>
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-6">
                   <Link
                     href="/"
-                    className="flex items-center text-xl font-bold uppercase leading-none"
+                    className="flex items-center text-xl font-bold uppercase leading-none tracking-tight"
                   >
                     store
                   </Link>
-                  <Link
-                    href="/search"
-                    className="flex text-lg font-medium hover:text-neutral-500 transition-colors"
-                  >
-                    All
-                  </Link>
-                  <Link
-                    href="/search/phones"
-                    className="flex text-lg font-medium hover:text-neutral-500 transition-colors"
-                  >
-                    Phones
-                  </Link>
-                  <Link
-                    href="/search/t-shirts"
-                    className="flex text-lg font-medium hover:text-neutral-500 transition-colors"
-                  >
-                    T-Shirts
-                  </Link>
+                  <div className="flex flex-wrap gap-4">
+                    {links.map((link) => (
+                      <Link
+                        key={link.name}
+                        href={link.href}
+                        className="inline-flex text-base py-1 px-3 rounded-full bg-zinc-100 dark:bg-zinc-950"
+                      >
+                        {link.name}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
                 <Search />
                 <DarkTheme />

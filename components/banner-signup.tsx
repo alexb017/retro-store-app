@@ -11,7 +11,7 @@ export default function BannerSignup() {
       </h1>
       <Button
         asChild
-        className="text-base font-normal bg-transparent border text-zinc-700 border-zinc-500 hover:text-white hover:bg-zinc-500 dark:text-white dark:border-zinc-700 dark:hover:bg-zinc-700"
+        className="text-base bg-transparent border text-zinc-950 border-zinc-500 hover:text-white hover:bg-zinc-500 dark:text-white dark:border-zinc-700 dark:hover:bg-zinc-700"
       >
         <Link href="/sign-up">Sign up</Link>
       </Button>

@@ -56,10 +56,10 @@ export default function BannerItem({ item }: { item: Item[] }) {
             <div className="flex flex-col items-start justify-between p-12 sm:pb-6 sm:p-20 h-full sm:w-2/4">
               <div className="flex flex-col items-start gap-4">
                 <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-                  {name}
+                  {description}
                 </h1>
                 <div>
-                  <p className="text-base">{description}</p>
+                  <p className="text-base">{name}</p>
                   <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
                     {FormattedPrice(price)}
                   </h3>
