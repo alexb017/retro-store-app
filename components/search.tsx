@@ -31,12 +31,12 @@ export default function Search() {
   }, 300);
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <Input
         type="text"
         name="search"
         placeholder="Search for products..."
-        className="block w-full rounded-md bg-zinc-100 border-none py-[9px] pl-10 text-sm placeholder:text-zinc-500 focus-visible:ring-offset-0 focus-visible:ring-0 dark:placeholder:text-zinc-400 dark:bg-zinc-900"
+        className="block w-full rounded-full bg-zinc-100 hover:bg-zinc-200 focus-visible:bg-zinc-200 border-none py-[9px] pl-10 text-sm placeholder:text-zinc-500 focus-visible:ring-offset-0 focus-visible:ring-0 dark:placeholder:text-zinc-400 dark:bg-zinc-900 dark:hover:bg-zinc-800 transition-colors dark:focus-visible:bg-zinc-800"
         onChange={(e) => {
           handleSearch(e.target.value);
         }}

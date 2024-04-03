@@ -5,7 +5,6 @@ import Link from 'next/link';
 import MenuIcon from './icons/menu';
 import CloseIcon from './icons/close';
 import Search from './search';
-import DarkTheme from './dark-theme';
 
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -61,7 +60,7 @@ export default function MobileMenu() {
             leaveFrom="translate-x-0"
             leaveTo="translate-x-[-100%]"
           >
-            <Dialog.Panel className="fixed bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col bg-white dark:bg-zinc-900 pb-5">
+            <Dialog.Panel className="fixed bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col bg-white dark:bg-zinc-950 pb-5">
               <div className="flex flex-col items-start gap-6 p-4">
                 <button
                   className="flex items-center justify-center transition-color focus:outline-none"
@@ -70,27 +69,24 @@ export default function MobileMenu() {
                 >
                   <CloseIcon classname="h-6" />
                 </button>
-                <div className="flex flex-col gap-6">
-                  <Link
-                    href="/"
-                    className="flex items-center text-xl font-bold uppercase leading-none tracking-tight"
-                  >
-                    store
-                  </Link>
-                  <div className="flex flex-wrap gap-4">
-                    {links.map((link) => (
-                      <Link
-                        key={link.name}
-                        href={link.href}
-                        className="inline-flex text-base py-1 px-3 rounded-full bg-zinc-100 dark:bg-zinc-950"
-                      >
-                        {link.name}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
+                <Link
+                  href="/"
+                  className="flex items-center text-xl font-bold uppercase leading-none tracking-tight"
+                >
+                  store
+                </Link>
                 <Search />
-                <DarkTheme />
+                <div className="flex flex-wrap gap-4">
+                  {links.map((link) => (
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      className="inline-flex text-base py-1 px-3 rounded-full bg-zinc-100 dark:bg-zinc-900"
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </Dialog.Panel>
           </Transition.Child>

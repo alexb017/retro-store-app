@@ -13,7 +13,7 @@ export default function ThreeItems({ products }: { products: any[] }) {
             key={index}
             className="sm:basis-1/2 lg:basis-1/3"
           >
-            <Card className="flex flex-col justify-between border-none rounded-3xl shadow-none bg-blue-100 dark:bg-zinc-950">
+            <Card className="flex flex-col justify-between border-none rounded-3xl shadow-none bg-blue-100 dark:bg-zinc-900">
               <CardContent className="flex flex-col items-center gap-4 p-12">
                 <p>{product?.name}</p>
                 <h2 className="text-3xl font-semibold tracking-tight text-center">

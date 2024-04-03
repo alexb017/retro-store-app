@@ -27,7 +27,7 @@ export default function CarouselItems({ products }: { products: any[] }) {
                   href={`/product/${item?.handle}`}
                   className="flex flex-col gap-4 group"
                 >
-                  <CardHeader className="justify-center p-0 aspect-[3/4] overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-950">
+                  <CardHeader className="justify-center p-0 aspect-[3/4] overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-900">
                     <Image
                       src={item?.image}
                       alt={item?.name}

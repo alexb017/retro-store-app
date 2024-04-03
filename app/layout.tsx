@@ -4,6 +4,7 @@ import './globals.css';
 import { AuthProvider } from './AuthContext';
 import Navbar from '@/components/navbar';
 import { cn } from '@/lib/utils';
+import { ThemeProvider } from '@/components/theme-provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,14 +22,21 @@ export default async function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          'text-black dark:text-white dark:bg-zinc-900 antialiased',
+          'text-black dark:text-white dark:bg-zinc-950 antialiased',
           inter.className
         )}
       >
-        <AuthProvider>
-          <Navbar />
-          <main className="mt-20 mx-auto max-w-6xl">{children}</main>
-        </AuthProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <AuthProvider>
+            <Navbar />
+            <main className="mt-20 mx-auto max-w-6xl">{children}</main>
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

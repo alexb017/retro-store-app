@@ -50,7 +50,7 @@ export default function BannerItem({ item }: { item: Item[] }) {
 
   return (
     <>
-      <div className="relative flex flex-col sm:flex-row w-full h-[480px] rounded-3xl overflow-hidden bg-red-50 dark:bg-zinc-950">
+      <div className="relative flex flex-col sm:flex-row w-full h-[600px] lg:h-[512px] rounded-3xl overflow-hidden bg-red-50 dark:bg-zinc-900">
         {item[index] && (
           <div className="flex flex-col sm:flex-row w-full h-full">
             <div className="flex flex-col items-start justify-between p-12 sm:pb-6 sm:p-20 h-full sm:w-2/4">
@@ -98,7 +98,7 @@ export default function BannerItem({ item }: { item: Item[] }) {
 
         {item?.length > 0 ? (
           <div className="absolute right-[5%] bottom-[5%]">
-            <div className="flex h-11 items-center justify-between gap-1 rounded-full p-1 bg-white text-zinc-700 dark:text-white dark:bg-zinc-900">
+            <div className="flex h-11 items-center justify-between gap-1 rounded-full p-1 bg-white text-zinc-700 dark:text-white dark:bg-zinc-950">
               <Button
                 size="icon"
                 className="flex items-center justify-center text-zinc-700 w-[36px] h-full p-0 bg-transparent rounded-full hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-800"

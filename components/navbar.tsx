@@ -11,8 +11,10 @@ import ArrowRightIcon from './icons/arrow-right';
 import Search from './search';
 import HeartIcon from './icons/heart';
 import useFavoriteData from '@/lib/use-favorite-data';
-import DarkTheme from './dark-theme';
+import { ModeToggle } from './dark-theme';
 import { Button } from './ui/button';
+import { Github, LogIn } from 'lucide-react';
+import GithubIcon from './icons/github';
 
 export default function Navbar() {
   const { user } = useContext(AuthContext);
@@ -56,7 +58,7 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="flex text-sm hover:text-blue-500 transition-color ease-in-out duration-200"
+              className="flex text-sm hover:text-blue-600 dark:text-zinc-400 dark:hover:text-white transition-color ease-in-out duration-200"
             >
               {link.name}
             </Link>
@@ -68,24 +70,26 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           {!user ? (
             <>
-              <div className="flex items-center gap-4">
-                <Link
+              <div className="flex items-center">
+                {/* <Link
                   href="/login"
                   className="flex items-center gap-1 text-sm font-medium hover:opacity-80 transition-opacity"
                 >
+                  <LogIn className="h-4 w-4" />
                   Login
-                </Link>
+                </Link> */}
                 <Button
                   asChild
-                  className="bg-blue-500 hover:bg-blue-600 dark:text-white"
+                  variant="default"
+                  className="flex items-center gap-2 rounded-full bg-blue-500 hover:bg-blue-600 dark:text-white"
                 >
-                  <Link href="/sign-up">Sign up</Link>
+                  <Link href="/login">Login</Link>
                 </Button>
               </div>
             </>
           ) : (
             <>
-              <div className="flex items-center gap-5">
+              <div className="flex items-center gap-4">
                 <Link
                   href="/favorites"
                   className="relative flex text-zinc-500 hover:opacity-80 transition-opacity dark:text-zinc-400"
@@ -112,9 +116,19 @@ export default function Navbar() {
               </div>
             </>
           )}
-          <div className="hidden lg:block">
-            <DarkTheme />
-          </div>
+          <ModeToggle />
+          <Button
+            asChild
+            size="icon"
+            className="bg-transparent text-black w-auto hover:text-blue-600 hover:bg-transparent dark:text-zinc-400 dark:hover:text-white"
+          >
+            <Link
+              href="https://github.com/alexb017/retro-store-app"
+              target="_blank"
+            >
+              <GithubIcon classname="h-5" />
+            </Link>
+          </Button>
         </div>
       </div>
     </nav>
