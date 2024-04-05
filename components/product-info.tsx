@@ -2,7 +2,7 @@
 
 import { useContext, useState, useCallback } from 'react';
 import AddToCart from './add-to-cart';
-import FormattedPrice from './formatted-price';
+import { FormattedPrice } from '../lib/utils';
 import { AuthContext } from '@/app/AuthContext';
 import Link from 'next/link';
 import {

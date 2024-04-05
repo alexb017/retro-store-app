@@ -5,6 +5,7 @@ export type Product = {
   image: string;
   handle: string;
   category: string;
+  info: string;
 };
 
 export type Item = {

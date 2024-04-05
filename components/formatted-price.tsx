@@ -1,18 +1,10 @@
 export default function FormattedPrice(price: string) {
-  const convertedPrice = Number.parseInt(price, 10);
-  let formattedPrice;
+  const amount = parseFloat(price);
 
-  if (convertedPrice < 100) {
-    formattedPrice = convertedPrice.toFixed(2);
-  }
+  const formattedPrice = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(amount);
 
-  if (convertedPrice >= 100 && convertedPrice < 1000) {
-    formattedPrice = price;
-  }
-
-  if (convertedPrice >= 1000 && convertedPrice < 10000) {
-    formattedPrice = (convertedPrice / 1000).toLocaleString('en-US');
-  }
-
-  return <>${formattedPrice} USD</>;
+  return <>{formattedPrice}</>;
 }

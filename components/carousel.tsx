@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import TagIcon from './icons/tag';
-import FormattedPrice from './formatted-price';
+import { FormattedPrice } from '../lib/utils';
 import {
   Carousel,
   CarouselContent,

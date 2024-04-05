@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import ArrowLeftIcon from './icons/arrow-left';
 import ArrowRightIcon from './icons/arrow-right';
-import FormattedPrice from './formatted-price';
+import { FormattedPrice } from '../lib/utils';
 import Link from 'next/link';
 import { Item } from '@/lib/types';
 import { Button } from '@/components/ui/button';

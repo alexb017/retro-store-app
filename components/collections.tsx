@@ -1,113 +1,46 @@
 'use client';
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { Button } from './ui/button';
+
+const links = [
+  { name: 'All', href: '/search' },
+  { name: 'Phones', href: '/search/phones' },
+  { name: 'Watches', href: '/search/watches' },
+  { name: 'Sweaters', href: '/search/sweaters' },
+  { name: 'Drinkware', href: '/search/drinkware' },
+  { name: 'Hats', href: '/search/hats' },
+  { name: 'T-Shirts', href: '/search/t-shirts' },
+  { name: 'Hoodies', href: '/search/hoodies' },
+  { name: 'Earbuds', href: '/search/earbuds' },
+];
 
 export default function Collections() {
   const pathname = usePathname();
+  const router = useRouter();
 
   return (
     <div className="flex flex-col items-center justify-center gap-4">
-      <h3 className="text-sm text-neutral-500 font-medium dark:text-neutral-400">
+      <p className="text-sm text-zinc-500 font-medium dark:text-zinc-400">
         Collections
-      </h3>
+      </p>
       <ul className="flex flex-row gap-2">
-        <li>
-          <Link
-            href="/search"
-            className={`text-sm py-1 px-3 border-2 rounded-full transition-colors ${
-              pathname === '/search'
-                ? 'border-blue-500 bg-blue-50 dark:bg-neutral-900'
-                : 'border-neutral-100 bg-neutral-100 hover:bg-neutral-200 hover:border-neutral-200 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-700'
-            }`}
-          >
-            All
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/search/phones"
-            className={`text-sm py-1 px-3 border-2 rounded-full transition-colors ${
-              pathname === '/search/phones'
-                ? 'border-blue-500 bg-blue-50 dark:bg-neutral-900'
-                : 'border-neutral-100 bg-neutral-100 hover:bg-neutral-200 hover:border-neutral-200 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-700'
-            }`}
-          >
-            Phones
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/search/sweaters"
-            className={`text-sm py-1 px-3 border-2 rounded-full transition-colors ${
-              pathname === '/search/sweaters'
-                ? 'border-blue-500 bg-blue-50 dark:bg-neutral-900'
-                : 'border-neutral-100 bg-neutral-100 hover:bg-neutral-200 hover:border-neutral-200 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-700'
-            }`}
-          >
-            Sweaters
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/search/drinkware"
-            className={`text-sm py-1 px-3 border-2 rounded-full transition-colors ${
-              pathname === '/search/drinkware'
-                ? 'border-blue-500 bg-blue-50 dark:bg-neutral-900'
-                : 'border-neutral-100 bg-neutral-100 hover:bg-neutral-200 hover:border-neutral-200 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-700'
-            }`}
-          >
-            Drinkware
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/search/hats"
-            className={`text-sm py-1 px-3 border-2 rounded-full transition-colors ${
-              pathname === '/search/hats'
-                ? 'border-blue-500 bg-blue-50 dark:bg-neutral-900'
-                : 'border-neutral-100 bg-neutral-100 hover:bg-neutral-200 hover:border-neutral-200 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-700'
-            }`}
-          >
-            Hats
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/search/t-shirts"
-            className={`text-sm py-1 px-3 border-2 rounded-full transition-colors ${
-              pathname === '/search/t-shirts'
-                ? 'border-blue-500 bg-blue-50 dark:bg-neutral-900'
-                : 'border-neutral-100 bg-neutral-100 hover:bg-neutral-200 hover:border-neutral-200 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-700'
-            }`}
-          >
-            T-Shirts
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/search/hoodies"
-            className={`text-sm py-1 px-3 border-2 rounded-full transition-colors ${
-              pathname === '/search/hoodies'
-                ? 'border-blue-500 bg-blue-50 dark:bg-neutral-900'
-                : 'border-neutral-100 bg-neutral-100 hover:bg-neutral-200 hover:border-neutral-200 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-700'
-            }`}
-          >
-            Hoodies
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/search/earbuds"
-            className={`text-sm py-1 px-3 border-2 rounded-full transition-colors ${
-              pathname === '/search/earbuds'
-                ? 'border-blue-500 bg-blue-50 dark:bg-neutral-900'
-                : 'border-neutral-100 bg-neutral-100 hover:bg-neutral-200 hover:border-neutral-200 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-700'
-            }`}
-          >
-            Earbuds
-          </Link>
-        </li>
+        {links.map((link, index) => (
+          <li key={index}>
+            <Button
+              className={`text-sm text-black py-1 px-3 h-auto border-2 rounded-full transition-all dark:text-zinc-400 ${
+                pathname === link.href
+                  ? 'border-blue-500 bg-blue-50 hover:bg-blue-50 dark:bg-blue-950 dark:text-white'
+                  : 'border-zinc-100 bg-zinc-100 hover:bg-zinc-200 hover:border-zinc-200 dark:hover:text-white dark:border-zinc-900 dark:hover:border-zinc-800 dark:bg-zinc-900 dark:hover:bg-zinc-800'
+              }`}
+              onClick={() => {
+                router.push(link.href, { scroll: false });
+              }}
+            >
+              {link.name}
+            </Button>
+          </li>
+        ))}
       </ul>
     </div>
   );
