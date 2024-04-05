@@ -42,7 +42,7 @@ export default function MobileFilters() {
       <p className="text-sm text-zinc-500 font-medium mb-2 dark:text-zinc-400">
         Sort by
       </p>
-      <Select onValueChange={handleChangeURL}>
+      <Select value={selected?.sort} onValueChange={handleChangeURL}>
         <SelectTrigger className="focus:ring-0 focus:ring-offset-0">
           <SelectValue placeholder={selected?.name} />
         </SelectTrigger>

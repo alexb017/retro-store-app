@@ -15,7 +15,7 @@ export default function Gallery({
 
   return (
     <>
-      <div className="relative aspect-square h-full max-h-[500px] w-full overflow-hidden">
+      <div className="relative aspect-square h-full max-h-[500px] w-full">
         {images[imageIndex] && (
           <Image
             src={imageURL}
@@ -30,7 +30,7 @@ export default function Gallery({
 
         <div className="absolute bottom-0 w-full flex justify-center">
           {images.length > 1 ? (
-            <ul className="flex items-center justify-center gap-2 overflow-auto py-1 lg:mb-0">
+            <ul className="flex items-center justify-center flex-wrap gap-2 py-1 lg:mb-0">
               {images.map((image: any, index) => {
                 const isActive = index === imageIndex;
                 const classname =
@@ -44,7 +44,7 @@ export default function Gallery({
                       className={
                         isActive
                           ? `${classname} border-blue-500`
-                          : `${classname} border-neutral-200 dark:border-neutral-700`
+                          : `${classname} border-zinc-200 dark:border-zinc-700`
                       }
                       width={80}
                       height={80}

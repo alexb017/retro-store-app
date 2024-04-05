@@ -17,7 +17,7 @@ export default async function Home() {
     <>
       <div className="flex flex-col gap-20 p-4">
         <BannerItem item={productsBanner.map((product: any) => product)} />
-        <h1 className="text-3xl font-semibold text-center tracking-tight">
+        <h1 className="text-3xl font-extrabold tracking-tight lg:text-4xl text-center">
           Shop the deals
         </h1>
         <div className="mx-16">

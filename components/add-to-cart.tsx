@@ -56,7 +56,7 @@ export default function AddToCart({
       {!user ? (
         <Link
           href="/login"
-          className="flex items-center justify-center gap-4 w-full p-4 rounded-full bg-blue-500 text-white font-medium hover:bg-blue-500/80"
+          className="flex items-center justify-center gap-4 w-full p-4 rounded-full bg-blue-500 text-white font-semibold tracking-tight transition-colors hover:bg-blue-600"
         >
           Sign in & Check Out
         </Link>

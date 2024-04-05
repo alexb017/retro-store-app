@@ -12,6 +12,7 @@ import {
   ReadonlyURLSearchParams,
 } from 'next/navigation';
 import AddToFavorite from './add-to-favorite';
+import { createUrl } from '@/lib/utils';
 
 export default function ProductInfo({ product }: { product: any }) {
   const { user } = useContext(AuthContext);
@@ -24,16 +25,6 @@ export default function ProductInfo({ product }: { product: any }) {
   const searchParamSize = searchParams.get('size') || '';
 
   let formattedPrice = FormattedPrice(product?.price);
-
-  function createUrl(
-    pathname: string,
-    params: URLSearchParams | ReadonlyURLSearchParams
-  ) {
-    const paramsString = params.toString();
-    const queryString = `${paramsString.length ? '?' : ''}${paramsString}`;
-
-    return `${pathname}${queryString}`;
-  }
 
   let disableBtn = true;
 
@@ -53,21 +44,23 @@ export default function ProductInfo({ product }: { product: any }) {
     <div className="flex flex-col gap-4">
       <div className="flex flex-col">
         <div className="flex items-center gap-4">
-          <h1 className="text-2xl md:text-3xl font-semibold">
+          <h1 className="text-4xl font-extrabold tracking-tight">
             {product?.name}
           </h1>
           <AddToFavorite product={product} disableBtn={disableBtn} />
         </div>
-        <p className="text-neutral-500 text-xl md:text-2xl font-medium dark:text-neutral-400">
+        <p className="text-zinc-500 text-2xl font-semibold tracking-tight dark:text-zinc-400">
           {formattedPrice}
         </p>
       </div>
       {product?.colors?.length > 0 || product?.storage?.length > 0 ? (
-        <div className="h-[1px] w-full block bg-neutral-200 dark:bg-neutral-700"></div>
+        <div className="h-[1px] w-full block bg-zinc-200 dark:bg-zinc-700"></div>
       ) : null}
       {product?.colors?.length > 0 && (
         <div>
-          <h3 className="text-base mb-2">Choose your color</h3>
+          <h3 className="text-xl font-semibold tracking-tight mb-2">
+            Choose your color
+          </h3>
           <div className="flex items-center gap-2">
             {product?.colors?.map((color: string) => {
               const isActive = color.toLowerCase() === searchParamColor;
@@ -91,8 +84,8 @@ export default function ProductInfo({ product }: { product: any }) {
                   type="button"
                   className={
                     isActive
-                      ? `${classname} border-blue-500 bg-blue-50 dark:bg-neutral-900`
-                      : `${classname} border-neutral-200 dark:border-neutral-700`
+                      ? `${classname} border-blue-500 bg-blue-50 dark:bg-zinc-900`
+                      : `${classname} border-zinc-200 dark:border-zinc-700`
                   }
                 >
                   {color}
@@ -104,7 +97,9 @@ export default function ProductInfo({ product }: { product: any }) {
       )}
       {product?.storage?.length > 0 && (
         <div>
-          <h3 className="text-base mb-2">Choose your storage space</h3>
+          <h3 className="text-xl font-semibold tracking-tight mb-2">
+            Choose your storage space
+          </h3>
           <div className="flex items-center flex-wrap gap-2">
             {product?.storage?.map((storage: any, index: number) => {
               const isActive = storage?.space === searchParamSpace;
@@ -131,13 +126,13 @@ export default function ProductInfo({ product }: { product: any }) {
                   type="button"
                   className={
                     isActive
-                      ? `${classname} border-blue-500 bg-blue-50 dark:bg-neutral-900`
-                      : `${classname} border-neutral-200 dark:border-neutral-700`
+                      ? `${classname} border-blue-500 bg-blue-50 dark:bg-zinc-900`
+                      : `${classname} border-zinc-200 dark:border-zinc-700`
                   }
                 >
                   <div className="flex flex-col items-center">
                     <h3 className="font-medium">{storage?.space} GB</h3>
-                    <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400">
                       {formattedPrice}
                     </p>
                   </div>
@@ -149,7 +144,9 @@ export default function ProductInfo({ product }: { product: any }) {
       )}
       {product?.size?.length > 0 && (
         <div>
-          <h3 className="text-base mb-2">Choose your size</h3>
+          <h3 className="text-xl font-semibold tracking-tight mb-2">
+            Choose your size
+          </h3>
           <div className="flex items-center flex-wrap gap-2">
             {product?.size?.map((size: string) => {
               const isActive = size === searchParamSize;
@@ -173,8 +170,8 @@ export default function ProductInfo({ product }: { product: any }) {
                   type="button"
                   className={
                     isActive
-                      ? `${classname} border-blue-500 bg-blue-50 dark:bg-neutral-900`
-                      : `${classname} border-neutral-200 dark:border-neutral-700`
+                      ? `${classname} border-blue-500 bg-blue-50 dark:bg-zinc-900`
+                      : `${classname} border-zinc-200 dark:border-zinc-700`
                   }
                 >
                   {size}
@@ -190,7 +187,9 @@ export default function ProductInfo({ product }: { product: any }) {
         classname="default"
       />
       <div>
-        <h3 className="text-base mb-1">Description</h3>
+        <h3 className="text-xl font-semibold tracking-tight mb-1">
+          Description
+        </h3>
         <p className="text-sm">{product?.description}</p>
       </div>
       {/* {!user && (
