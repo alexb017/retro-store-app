@@ -13,6 +13,7 @@ import {
 } from 'next/navigation';
 import AddToFavorite from './add-to-favorite';
 import { createUrl } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 
 export default function ProductInfo({ product }: { product: any }) {
   const { user } = useContext(AuthContext);
@@ -65,7 +66,7 @@ export default function ProductInfo({ product }: { product: any }) {
             {product?.colors?.map((color: string) => {
               const isActive = color.toLowerCase() === searchParamColor;
               const classname =
-                'text-sm font-medium border-2 rounded-full py-1 px-4 hover:border-blue-500 transition-all dark:hover:border-blue-500';
+                'text-sm font-medium border-2 text-black dark:text-white rounded-full hover:border-blue-500 transition-all dark:hover:border-blue-500';
 
               const optionSearchParams = new URLSearchParams(
                 searchParams.toString()
@@ -76,20 +77,19 @@ export default function ProductInfo({ product }: { product: any }) {
               const optionUrl = createUrl(pathname, optionSearchParams);
 
               return (
-                <button
+                <Button
                   onClick={() => {
                     router.replace(optionUrl, { scroll: false });
                   }}
                   key={color}
-                  type="button"
                   className={
                     isActive
-                      ? `${classname} border-blue-500 bg-blue-50 dark:bg-zinc-900`
-                      : `${classname} border-zinc-200 dark:border-zinc-700`
+                      ? `${classname} border-blue-500 bg-blue-50 hover:bg-blue-50 dark:bg-blue-950`
+                      : `${classname} border-zinc-200 bg-transparent hover:bg-transparent dark:border-zinc-700`
                   }
                 >
                   {color}
-                </button>
+                </Button>
               );
             })}
           </div>
@@ -104,7 +104,7 @@ export default function ProductInfo({ product }: { product: any }) {
             {product?.storage?.map((storage: any, index: number) => {
               const isActive = storage?.space === searchParamSpace;
               const classname =
-                'flex items-center justify-center text-sm border-2 rounded-2xl aspect-square w-24 h-24 hover:border-blue-500 transition-all dark:hover:border-blue-500';
+                'flex items-center justify-center text-sm border-2 text-black dark:text-white rounded-xl aspect-square w-24 h-24 hover:border-blue-500 transition-all dark:hover:border-blue-500';
 
               let formattedPrice = FormattedPrice(storage?.price);
 
@@ -118,16 +118,15 @@ export default function ProductInfo({ product }: { product: any }) {
               const optionUrl = createUrl(pathname, optionSearchParams);
 
               return (
-                <button
+                <Button
                   onClick={() => {
                     router.replace(optionUrl, { scroll: false });
                   }}
                   key={index}
-                  type="button"
                   className={
                     isActive
-                      ? `${classname} border-blue-500 bg-blue-50 dark:bg-zinc-900`
-                      : `${classname} border-zinc-200 dark:border-zinc-700`
+                      ? `${classname} border-blue-500 bg-blue-50 hover:bg-blue-50 dark:bg-blue-950`
+                      : `${classname} border-zinc-200 bg-transparent hover:bg-transparent dark:border-zinc-700`
                   }
                 >
                   <div className="flex flex-col items-center">
@@ -136,7 +135,7 @@ export default function ProductInfo({ product }: { product: any }) {
                       {formattedPrice}
                     </p>
                   </div>
-                </button>
+                </Button>
               );
             })}
           </div>
@@ -151,7 +150,7 @@ export default function ProductInfo({ product }: { product: any }) {
             {product?.size?.map((size: string) => {
               const isActive = size === searchParamSize;
               const classname =
-                'text-sm font-medium uppercase border-2 rounded-full py-1 px-4 hover:border-blue-500 transition-all dark:hover:border-blue-500';
+                'text-sm font-medium uppercase border-2 text-black dark:text-white rounded-full py-1 px-4 hover:border-blue-500 transition-all dark:hover:border-blue-500';
 
               const optionSearchParams = new URLSearchParams(
                 searchParams.toString()
@@ -162,20 +161,19 @@ export default function ProductInfo({ product }: { product: any }) {
               const optionUrl = createUrl(pathname, optionSearchParams);
 
               return (
-                <button
+                <Button
                   onClick={() => {
                     router.replace(optionUrl, { scroll: false });
                   }}
                   key={size}
-                  type="button"
                   className={
                     isActive
-                      ? `${classname} border-blue-500 bg-blue-50 dark:bg-zinc-900`
-                      : `${classname} border-zinc-200 dark:border-zinc-700`
+                      ? `${classname} border-blue-500 bg-blue-50 hover:bg-blue-50 dark:bg-blue-950`
+                      : `${classname} border-zinc-200 bg-transparent hover:bg-transparent dark:border-zinc-700`
                   }
                 >
                   {size}
-                </button>
+                </Button>
               );
             })}
           </div>
