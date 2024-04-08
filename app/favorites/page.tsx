@@ -56,11 +56,8 @@ export default function Favorite() {
                   const space = fav?.space ? ` / ${fav?.space}GB` : '';
 
                   return (
-                    <>
-                      <li
-                        key={index}
-                        className="w-full flex flex-row items-center justify-between"
-                      >
+                    <div key={index}>
+                      <li className="w-full flex flex-row items-center justify-between">
                         <div className="flex flex-row items-center gap-4">
                           <div className="flex items-center justify-center relative rounded-xl aspect-square bg-zinc-100 dark:bg-zinc-900">
                             <Image
@@ -99,7 +96,7 @@ export default function Favorite() {
                         </div>
                       </li>
                       <Separator className="my-4" />
-                    </>
+                    </div>
                   );
                 })}
               </ul>

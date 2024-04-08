@@ -5,13 +5,14 @@ import { AuthContext } from '../../AuthContext';
 import useOrderData from '@/lib/use-order-data';
 import Image from 'next/image';
 import Link from 'next/link';
-import FormattedPrice from '@/components/formatted-price';
+import { FormattedPrice } from '@/lib/utils';
 import Footer from '@/components/footer';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 
 export default function OrdersPage({ params }: { params: { name: string } }) {
   const { user } = useContext(AuthContext);
   const [order] = useOrderData(user?.uid);
-  const usernameFromEmail = user?.email.split('@')[0];
 
   const countOrders = order?.length || 0;
 
@@ -19,7 +20,7 @@ export default function OrdersPage({ params }: { params: { name: string } }) {
     <>
       <div className="w-full md:max-w-3xl mx-auto">
         <div className="p-4">
-          <h1 className="text-xl font-semibold mb-10 text-center">
+          <h1 className="text-3xl font-semibold tracking-tight mb-10 text-center">
             Order history{' '}
             <span className="font-normal">
               (
@@ -31,13 +32,15 @@ export default function OrdersPage({ params }: { params: { name: string } }) {
           </h1>
           {!order || order?.length === 0 ? (
             <div className="flex items-center flex-col">
-              <h3 className="text-xl">Your orders is empty.</h3>
-              <Link
-                href="/"
-                className="inline-flex text-sm text-white font-medium px-6 py-2 bg-blue-500 rounded-full mt-2 hover:bg-blue-600 transition-colors"
+              <h4 className="text-xl font-semibold tracking-tight">
+                Your orders is empty.
+              </h4>
+              <Button
+                asChild
+                className="text-white bg-blue-500 rounded-full mt-2 hover:bg-blue-600 transition-colors shadow-md"
               >
-                Continue shopping
-              </Link>
+                <Link href="/">Continue shopping</Link>
+              </Button>
             </div>
           ) : (
             <div className="flex flex-col gap-4 w-full">
@@ -51,79 +54,72 @@ export default function OrdersPage({ params }: { params: { name: string } }) {
                   );
 
                   return (
-                    <li
-                      key={index}
-                      className="flex flex-col border-b border-neutral-300 mb-6 py-2 dark:border-neutral-600"
-                    >
-                      <div className="flex flex-row justify-between">
-                        <h1 className="text-sm font-medium">
-                          Order #{item?.order_nr}
-                        </h1>
-                        <h3 className="text-sm">
-                          Amount
-                          {/* Total price: {FormattedPrice(totalPrice?.toString())} */}
-                        </h3>
-                      </div>
-                      <div className="flex flex-col divide-y divide-neutral-100 dark:divide-neutral-700">
-                        {item?.item?.map((item: any, index: any) => {
-                          const price = FormattedPrice(item?.price);
-                          const color = item?.color;
+                    <div key={index}>
+                      <li className="flex flex-col">
+                        <div className="flex flex-row justify-between">
+                          <h1 className="text-sm font-medium">
+                            Order #{item?.order_nr}
+                          </h1>
+                          <h3 className="text-sm">
+                            Amount
+                            {/* Total price: {FormattedPrice(totalPrice?.toString())} */}
+                          </h3>
+                        </div>
+                        <div className="flex flex-col">
+                          {item?.item?.map((item: any, index: any) => {
+                            const price = FormattedPrice(item?.price);
+                            const color =
+                              item?.color.charAt(0).toUpperCase() +
+                              item?.color.slice(1);
+                            const size = item?.size
+                              ? ` / ${item?.size.toUpperCase()}`
+                              : '';
+                            const space = item?.space
+                              ? ` / ${item?.space}GB`
+                              : '';
 
-                          return (
-                            <div key={index} className="w-full py-2">
-                              <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 w-full">
-                                <div className="flex flex-row items-center gap-2 w-full">
-                                  <div className="flex items-center justify-center aspect-square rounded-xl bg-neutral-100 dark:bg-neutral-950">
-                                    <Image
-                                      src={item?.image}
-                                      alt={item?.name}
-                                      width={64}
-                                      height={64}
-                                    />
-                                  </div>
-                                  <div className="flex flex-row items-center justify-between w-full">
-                                    <div className="flex flex-col md:flex-row md:items-center md:gap-2">
-                                      <h1 className="text-sm font-medium">
-                                        {item?.name}
-                                      </h1>
-                                      <p className="text-sm text-neutral-500 dark:text-neutral-400">
-                                        {item?.color && (
-                                          <>
-                                            {' '}
-                                            {color.charAt(0).toUpperCase() +
-                                              color.slice(1)}{' '}
-                                          </>
-                                        )}{' '}
-                                        {item?.space && (
-                                          <> / {item?.space} GB </>
-                                        )}
-                                        {item?.size && (
-                                          <span className="uppercase">
-                                            {' '}
-                                            / {item?.size}{' '}
-                                          </span>
-                                        )}
-                                      </p>
+                            return (
+                              <div key={index} className="w-full py-2">
+                                <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 w-full">
+                                  <div className="flex flex-row items-center gap-2 w-full">
+                                    <div className="flex items-center justify-center aspect-square rounded-xl bg-zinc-100 dark:bg-zinc-900">
+                                      <Image
+                                        src={item?.image}
+                                        alt={item?.name}
+                                        width={80}
+                                        height={80}
+                                      />
                                     </div>
-                                    <div className="flex flex-col">
-                                      <p className="text-sm">{price}</p>
-                                      <p className="text-sm text-neutral-500 self-end dark:text-neutral-400">
-                                        Qty: {item?.quantity}
-                                      </p>
+                                    <div className="flex flex-row items-center justify-between w-full">
+                                      <div className="flex flex-col md:flex-row md:items-center md:gap-2">
+                                        <h4 className="text-xl font-semibold tracking-tight">
+                                          {item?.name}
+                                        </h4>
+                                        <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                                          {`${color}${size}${space}`}
+                                        </p>
+                                      </div>
+                                      <div className="flex flex-col">
+                                        <p className="">{price}</p>
+                                        <p className="text-sm text-zinc-500 self-end dark:text-zinc-400">
+                                          Qty: {item?.quantity}
+                                        </p>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                      <div className="self-end">
-                        <h3 className="text-sm font-medium">
-                          Total: {FormattedPrice(totalPrice?.toString())}
-                        </h3>
-                      </div>
-                    </li>
+                            );
+                          })}
+                        </div>
+                        <div className="self-end">
+                          <p className="font-medium">
+                            Total: {FormattedPrice(totalPrice?.toString())}
+                          </p>
+                        </div>
+                      </li>
+                      <Separator className="my-4" />
+                    </div>
                   );
                 })}
               </ul>
