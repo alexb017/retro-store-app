@@ -50,7 +50,7 @@ export default function AddToCart({
   const classDefault =
     'flex items-center justify-center gap-2 w-full text-base p-4 h-auto rounded-full bg-blue-500 font-semibold tracking-tight text-white hover:bg-blue-600 transition-colors';
   const classFavorite =
-    'flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400';
+    'flex items-center gap-2 text-sm rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-500 dark:text-zinc-400 dark:bg-zinc-900 dark:hover:bg-zinc-800';
 
   return (
     <>

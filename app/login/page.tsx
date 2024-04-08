@@ -29,7 +29,7 @@ const formSchema = z.object({
     .min(6, { message: 'Password must be at least 6 characters.' }),
 });
 
-function Login() {
+export default function Login() {
   const { googleSignIn } = useContext(AuthContext);
   const router = useRouter();
   const [error, setError] = useState('');
@@ -161,13 +161,5 @@ function Login() {
         </div>
       </div>
     </>
-  );
-}
-
-export default function Page() {
-  return (
-    <Suspense>
-      <Login />
-    </Suspense>
   );
 }
