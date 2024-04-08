@@ -10,6 +10,7 @@ import AddToCart from '@/components/add-to-cart';
 import { FormattedPrice } from '@/lib/utils';
 import DeleteItemFavorite from '@/components/delete-item-favorite';
 import { Separator } from '@/components/ui/separator';
+import { Button } from '@/components/ui/button';
 
 export default function Favorite() {
   const { user } = useContext(AuthContext);
@@ -21,7 +22,7 @@ export default function Favorite() {
     <>
       <div className="w-full md:max-w-3xl mx-auto">
         <div className="p-4">
-          <h1 className="text-xl font-semibold mb-10 text-center">
+          <h1 className="text-3xl font-semibold tracking-tight mb-10 text-center">
             Favorites{' '}
             <span className="font-normal">
               (
@@ -34,13 +35,15 @@ export default function Favorite() {
           {!favorite || favorite?.length === 0 ? (
             <>
               <div className="flex flex-col items-center">
-                <h1 className="text-xl">Your favorites is empty.</h1>
-                <Link
-                  href="/"
-                  className="inline-flex text-sm text-white font-medium px-6 py-2 bg-blue-500 rounded-full mt-2 hover:bg-blue-600 transition-colors"
+                <h3 className="text-xl font-semibold tracking-tight">
+                  Your favorites is empty.
+                </h3>
+                <Button
+                  asChild
+                  className="text-white bg-blue-500 rounded-full mt-2 hover:bg-blue-600 transition-colors shadow-md"
                 >
-                  Continue shopping
-                </Link>
+                  <Link href="/">Continue shopping</Link>
+                </Button>
               </div>
             </>
           ) : (
