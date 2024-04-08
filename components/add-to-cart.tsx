@@ -9,6 +9,7 @@ import { useSearchParams } from 'next/navigation';
 import { useContext } from 'react';
 import { AuthContext } from '../app/AuthContext';
 import Link from 'next/link';
+import { Button } from './ui/button';
 
 export default function AddToCart({
   product,
@@ -47,9 +48,9 @@ export default function AddToCart({
   };
 
   const classDefault =
-    'flex items-center justify-center gap-2 w-full p-4 rounded-full bg-blue-500 text-sm text-white font-medium hover:bg-blue-500/80 transition-colors';
+    'flex items-center justify-center gap-2 w-full text-base p-4 h-auto rounded-full bg-blue-500 font-semibold tracking-tight text-white hover:bg-blue-600 transition-colors';
   const classFavorite =
-    'flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400';
+    'flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400';
 
   return (
     <>
@@ -61,12 +62,15 @@ export default function AddToCart({
           Sign in & Check Out
         </Link>
       ) : (
-        <button
-          type="button"
+        <Button
           disabled={disableBtn}
           className={`${
             classname === 'default' ? classDefault : classFavorite
-          } ${disableBtn ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
+          } ${
+            disableBtn
+              ? 'cursor-not-allowed opacity-50 disabled:cursor-not-allowed disabled:pointer-events-auto'
+              : 'cursor-pointer'
+          }`}
           onClick={async () => {
             const userCart = await getUserCart(user?.uid);
 
@@ -97,7 +101,7 @@ export default function AddToCart({
         >
           <PlusIcon classname="w-5 h-5" />
           Add item to cart
-        </button>
+        </Button>
       )}
     </>
   );

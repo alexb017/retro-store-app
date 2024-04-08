@@ -1,13 +1,10 @@
 'use client';
 
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { AuthContext } from '../AuthContext';
 import GoogleIcon from '@/components/icons/google';
-import UserIcon from '@/components/icons/user';
 import { useRouter } from 'next/navigation';
-import Footer from '@/components/footer';
 import { auth } from '@/lib/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Button } from '@/components/ui/button';
@@ -23,6 +20,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import { Suspense } from 'react';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Invalid email address!' }),
@@ -31,7 +29,7 @@ const formSchema = z.object({
     .min(6, { message: 'Password must be at least 6 characters.' }),
 });
 
-export default function Login() {
+function Login() {
   const { googleSignIn } = useContext(AuthContext);
   const router = useRouter();
   const [error, setError] = useState('');
@@ -163,5 +161,13 @@ export default function Login() {
         </div>
       </div>
     </>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense>
+      <Login />
+    </Suspense>
   );
 }

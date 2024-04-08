@@ -9,6 +9,7 @@ import {
 import { usePathname, useSearchParams } from 'next/navigation';
 import useFavoriteData from '@/lib/use-favorite-data';
 import DeleteItemFavorite from './delete-item-favorite';
+import { Button } from './ui/button';
 
 export default function AddToFavorite({
   product,
@@ -60,10 +61,13 @@ export default function AddToFavorite({
       {user ? (
         !removeItem ? (
           <>
-            <button
+            <Button
+              size="icon"
               disabled={disableBtn}
-              className={`flex text-neutral-500 hover:text-blue-500 transition-all dark:text-neutral-400 dark:hover:text-blue-500 ${
-                disableBtn ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
+              className={`flex bg-transparent h-auto w-auto hover:bg-transparent text-zinc-500 hover:text-blue-500 transition-all dark:text-zinc-400 dark:hover:text-blue-500 ${
+                disableBtn
+                  ? 'cursor-not-allowed opacity-50 disabled:pointer-events-auto'
+                  : 'cursor-pointer'
               }`}
               onClick={async () => {
                 const userFavorite = await getUserFavorite(user?.uid);
@@ -84,7 +88,7 @@ export default function AddToFavorite({
               }}
             >
               <HeartIcon classname="w-6 h-6" />
-            </button>
+            </Button>
           </>
         ) : (
           <>
