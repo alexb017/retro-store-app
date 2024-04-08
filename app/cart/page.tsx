@@ -6,10 +6,12 @@ import EditItemQuantity from '@/components/edit-item-cart';
 import DeleteItemCart from '@/components/delete-item-cart';
 import Footer from '@/components/footer';
 import useCartData from '@/lib/use-cart-data';
-import FormattedPrice from '@/components/formatted-price';
+import { FormattedPrice } from '@/lib/utils';
 import { useContext } from 'react';
 import { AuthContext } from '../AuthContext';
 import { loadStripe } from '@stripe/stripe-js';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 
 const stripePromise = loadStripe(
   'pk_test_51NoptQIF5Ewa0z1weAgAPPKYRio4rkIbNTYPuRPlXd3OdWsMaceCjCMNETTJSXp9yVsXpx6whtH8W4r0LGAIZ86L00YKiIUNvJ'
@@ -55,7 +57,7 @@ export default function Cart() {
     <>
       <div className="w-full md:max-w-3xl mx-auto">
         <div className="p-4">
-          <h1 className="text-xl font-semibold mb-10 text-center">
+          <h1 className="text-3xl font-semibold tracking-tight mb-10 text-center">
             Cart{' '}
             <span className="font-normal">
               (
@@ -67,20 +69,22 @@ export default function Cart() {
           </h1>
           {/* <Link
           href="/"
-          className="inline-flex items-center gap-2 pb-5 text-gray-500 group hover:text-black transition-all ease-in-out"
+          className="inline-flex items-center gap-2 pb-5 text-zinc-500 group hover:text-black transition-all ease-in-out"
         >
           <ArrowLeftIcon classname="h-5 group-hover:scale-105 transition-all ease-in-out" />
           Go back to the main page
         </Link> */}
           {!cart || cart?.length === 0 ? (
             <div className="flex flex-col items-center">
-              <h1 className="text-xl">Your cart is empty.</h1>
-              <Link
-                href="/"
-                className="inline-flex text-sm text-white font-medium px-6 py-2 bg-blue-500 rounded-full mt-2 hover:bg-blue-600 transition-colors"
+              <h4 className="text-xl font-semibold tracking-tight">
+                Your cart is empty.
+              </h4>
+              <Button
+                asChild
+                className="text-white bg-blue-500 rounded-full mt-2 hover:bg-blue-600 transition-colors shadow-md"
               >
-                Continue shopping
-              </Link>
+                <Link href="/">Continue shopping</Link>
+              </Button>
             </div>
           ) : (
             <>
@@ -88,102 +92,102 @@ export default function Cart() {
                 <ul className="flex flex-col md:w-7/12">
                   {cart?.map((item: any, index) => {
                     const price = FormattedPrice(item?.price);
-                    const color = item?.color as string;
+                    const color =
+                      item?.color.charAt(0).toUpperCase() +
+                      item?.color.slice(1);
+                    const size = item?.size
+                      ? ` / ${item?.size.toUpperCase()}`
+                      : '';
+                    const space = item?.space ? ` / ${item?.space}GB` : '';
 
                     return (
-                      <li
-                        key={index}
-                        className="w-full flex flex-row items-center justify-between py-6 border-b border-neutral-200 dark:border-neutral-700"
-                      >
-                        <div className="flex flex-row gap-4">
-                          <div className="flex items-center justify-center relative rounded-3xl aspect-square bg-neutral-100 dark:bg-neutral-950">
-                            {/* <DeleteItemCart id={user?.uid} item={item} /> */}
-                            <Image
-                              src={item?.image}
-                              alt={item?.name}
-                              width={96}
-                              height={96}
-                            />
-                          </div>
-                          <div className="flex flex-col items-start justify-center">
-                            <h1 className="text-base font-semibold">
-                              {item?.name}
-                            </h1>
-                            <p className="text-sm text-neutral-500 dark:text-neutral-400">
-                              {item?.color && (
-                                <>
-                                  {' '}
-                                  {color.charAt(0).toUpperCase() +
-                                    color.slice(1)}{' '}
-                                </>
-                              )}{' '}
-                              {item?.space && <> / {item?.space} GB </>}
-                              {item?.size && (
-                                <span className="uppercase">
-                                  {' '}
-                                  / {item?.size}
-                                </span>
-                              )}
-                            </p>
-                            {/* <div className="flex items-center border rounded-full mt-2">
+                      <div key={index}>
+                        <li className="w-full flex flex-row justify-between">
+                          <div className="flex flex-row gap-4">
+                            <div className="flex items-center justify-center relative rounded-xl aspect-square bg-zinc-100 dark:bg-zinc-900">
+                              {/* <DeleteItemCart id={user?.uid} item={item} /> */}
+                              <Image
+                                src={item?.image}
+                                alt={item?.name}
+                                width={96}
+                                height={96}
+                              />
+                            </div>
+                            <div className="flex flex-col items-start justify-between">
+                              <div>
+                                <h4 className="text-xl font-semibold tracking-tight">
+                                  {item?.name}
+                                </h4>
+                                <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                                  {`${color}${size}${space}`}
+                                </p>
+                              </div>
+                              {/* <div className="flex items-center border rounded-full mt-2">
                             <EditItemQuantity item={item} type="minus" />
                             <p className="text-sm font-semibold">
                               {item?.quantity}
                             </p>
                             <EditItemQuantity item={item} type="plus" />
                           </div> */}
-                            <p className="text-sm mt-4 font-medium">{price}</p>
+                              <p className="text-sm font-medium">{price}</p>
+                            </div>
                           </div>
-                        </div>
-                        <div className="flex flex-col items-end">
-                          <div className="flex items-center border border-neutral-200 rounded-full mb-4 dark:border-neutral-700">
-                            <EditItemQuantity item={item} type="minus" />
-                            <p className="text-sm font-semibold">
-                              {item?.quantity}
-                            </p>
-                            <EditItemQuantity item={item} type="plus" />
+                          <div className="flex flex-col items-end justify-between">
+                            <div className="flex items-center border border-zinc-200 rounded-full dark:border-zinc-700">
+                              <EditItemQuantity item={item} type="minus" />
+                              <p className="text-sm font-semibold">
+                                {item?.quantity}
+                              </p>
+                              <EditItemQuantity item={item} type="plus" />
+                            </div>
+                            {/* <p className="text-sm font-medium">{price}</p> */}
+                            <DeleteItemCart id={user?.uid} item={item} />
                           </div>
-                          {/* <p className="text-sm font-medium">{price}</p> */}
-                          <DeleteItemCart id={user?.uid} item={item} />
-                        </div>
-                      </li>
+                        </li>
+                        <Separator className="my-4" />
+                      </div>
                     );
                   })}
                 </ul>
-                <div className="text-base p-6 mt-6 bg-neutral-100 rounded-3xl self-start w-full md:w-5/12 dark:bg-neutral-950">
-                  <h1 className="text-xl font-semibold mb-6">Order summary</h1>
-                  <div className="flex items-center justify-between border-b border-neutral-300 mb-3 pb-1 dark:border-neutral-700">
+                <div className="text-base p-6 mt-6 md:mt-0 bg-zinc-100 rounded-3xl self-start w-full md:w-5/12 dark:bg-zinc-900">
+                  <h4 className="text-xl font-semibold tracking-tight mb-6">
+                    Order summary
+                  </h4>
+                  <div className="flex items-center justify-between">
                     <p className="text-sm">Subtotal</p>
                     <p className="text-sm">
                       {FormattedPrice(totalPrice?.toString())}
                     </p>
                   </div>
-                  <div className="flex items-center justify-between border-b border-neutral-300 mb-3 pb-1 dark:border-neutral-700">
+                  <Separator className="my-2" />
+                  <div className="flex items-center justify-between">
                     <p className="text-sm">Total savings</p>
                     <p className="text-sm">$0.00 USD</p>
                   </div>
-                  <div className="flex items-center justify-between border-b border-neutral-300 mb-3 pb-1 dark:border-neutral-700">
+                  <Separator className="my-2" />
+                  <div className="flex items-center justify-between">
                     <p className="text-sm">Shipping</p>
                     <p className="text-sm">Free</p>
                   </div>
-                  <div className="flex items-center justify-between border-b border-neutral-300 mb-3 pb-1 dark:border-neutral-700">
+                  <Separator className="my-2" />
+                  <div className="flex items-center justify-between">
                     <p className="text-sm">Tax</p>
                     <p className="text-sm">Calculated at checkout</p>
                   </div>
+                  <Separator className="my-2" />
                   <div className="flex items-center justify-between mb-5">
-                    <p className="text-sm font-semibold">Estimated total</p>
-                    <p className="text-sm font-semibold">
+                    <p className="font-semibold">Estimated total</p>
+                    <p className="font-semibold">
                       {FormattedPrice(totalPrice?.toString())}
                     </p>
                   </div>
                   <form onSubmit={handleCheckout}>
-                    <button
+                    <Button
                       type="submit"
-                      role="link"
-                      className="w-full rounded-full p-3 text-center font-medium text-sm text-white bg-blue-500 hover:bg-blue-600 transition-colors"
+                      className="w-full rounded-full text-center text-white bg-blue-500 hover:bg-blue-600 transition-colors"
                     >
                       Proceed to Checkout
-                    </button>
+                    </Button>
                   </form>
                 </div>
               </div>

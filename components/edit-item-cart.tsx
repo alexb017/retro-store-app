@@ -7,6 +7,7 @@ import { deleteItemCart, updateItemCart } from '@/lib/actions';
 import { useContext } from 'react';
 import { AuthContext } from '@/app/AuthContext';
 import { getUserCart } from '@/lib/actions';
+import { Button } from './ui/button';
 
 export default function EditItemQuantity({
   item,
@@ -53,11 +54,12 @@ export default function EditItemQuantity({
   }
 
   return (
-    <button
+    <Button
+      size="icon"
       onClick={updateItem}
-      className={`px-3 py-2 text-neutral-500 hover:text-black transition-all ease-in-out dark:text-neutral-400 dark:hover:text-white ${
+      className={`px-3 py-2 bg-transparent hover:bg-transparent text-zinc-500 hover:text-black transition-all ease-in-out dark:text-zinc-400 dark:hover:text-white ${
         item?.quantity === 1 && type === 'minus'
-          ? 'cursor-not-allowed opacity-30 hover:text-neutral-500 dark:hover:text-neutral-400'
+          ? 'cursor-not-allowed opacity-30 hover:text-zinc-500 dark:hover:text-zinc-400'
           : ''
       }`}
     >
@@ -66,6 +68,6 @@ export default function EditItemQuantity({
       ) : (
         <MinusIcon classname="h-5" />
       )}
-    </button>
+    </Button>
   );
 }
