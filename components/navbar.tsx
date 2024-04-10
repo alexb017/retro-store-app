@@ -58,7 +58,7 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="flex text-sm hover:text-blue-600 dark:text-zinc-400 dark:hover:text-white transition-color ease-in-out duration-200"
+              className="flex text-sm hover:text-blue-500 dark:text-zinc-400 dark:hover:text-white transition-color ease-in-out duration-200"
             >
               {link.name}
             </Link>
@@ -92,7 +92,7 @@ export default function Navbar() {
               <div className="flex items-center gap-4">
                 <Link
                   href="/favorites"
-                  className="relative flex text-zinc-500 hover:opacity-80 transition-opacity dark:text-zinc-400"
+                  className="relative flex text-zinc-500 hover:text-blue-500 dark:text-zinc-400 dark:hover:text-white transition-color ease-in-out duration-200"
                 >
                   <HeartIcon classname="h-6" />
                   {favorite?.length > 0 && (
@@ -103,7 +103,7 @@ export default function Navbar() {
                 </Link>
                 <Link
                   href="/cart"
-                  className="relative flex text-zinc-500 hover:opacity-80 transition-opacity dark:text-zinc-400"
+                  className="relative flex text-zinc-500 hover:text-blue-500 dark:text-zinc-400 dark:hover:text-white transition-color ease-in-out duration-200"
                 >
                   <CartIcon classname="h-6" />
                   {cart?.length > 0 && (
@@ -120,7 +120,7 @@ export default function Navbar() {
           <Button
             asChild
             size="icon"
-            className="bg-transparent text-black w-auto hover:text-blue-600 hover:bg-transparent dark:text-zinc-400 dark:hover:text-white"
+            className="bg-transparent text-black w-auto hover:text-blue-500 hover:bg-transparent dark:text-zinc-400 dark:hover:text-white transition-color ease-in-out duration-200"
           >
             <Link
               href="https://github.com/alexb017/retro-store-app"

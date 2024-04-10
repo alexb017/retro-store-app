@@ -12,6 +12,7 @@ import {
 } from '@/lib/actions';
 import useCartData from '@/lib/use-cart-data';
 import useOrderData from '@/lib/use-order-data';
+import { Button } from '@/components/ui/button';
 
 export default function Success() {
   const { user } = useContext(AuthContext);
@@ -51,8 +52,8 @@ export default function Success() {
         {user && (
           <>
             <div className="flex flex-col items-center">
-              <h3 className="text-xl">🎉🎉🎉</h3>
-              <h1 className="text-3xl mt-2">
+              <h4 className="text-xl">🎉🎉🎉</h4>
+              <h1 className="text-3xl tracking-tight mt-2">
                 Thank you,{' '}
                 <span className="font-semibold">
                   {user?.displayName ? user?.displayName : usernameFromEmail}
@@ -60,12 +61,12 @@ export default function Success() {
               </h1>
               <h1 className="text-3xl">for your order!</h1>
             </div>
-            <Link
-              href="/"
-              className="text-sm text-white font-medium px-6 py-2 bg-blue-500 rounded-full hover:bg-blue-600 transition-colors"
+            <Button
+              asChild
+              className="text-white bg-blue-500 rounded-full mt-2 hover:bg-blue-600 transition-colors shadow-md"
             >
-              Continue shopping
-            </Link>
+              <Link href="/">Continue shopping</Link>
+            </Button>
             <Link
               href={`/orders/${usernameFromEmail}`}
               className="text-sm underline"

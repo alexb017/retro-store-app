@@ -65,7 +65,7 @@ export default function OrdersPage({ params }: { params: { name: string } }) {
                             {/* Total price: {FormattedPrice(totalPrice?.toString())} */}
                           </h3>
                         </div>
-                        <div className="flex flex-col">
+                        <div className="flex flex-col gap-1 my-4">
                           {item?.item?.map((item: any, index: any) => {
                             const price = FormattedPrice(item?.price);
                             const color =
@@ -79,15 +79,18 @@ export default function OrdersPage({ params }: { params: { name: string } }) {
                               : '';
 
                             return (
-                              <div key={index} className="w-full py-2">
+                              <div
+                                key={index}
+                                className="w-full p-2 pr-4 rounded-xl bg-zinc-50 dark:bg-zinc-900"
+                              >
                                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 w-full">
                                   <div className="flex flex-row items-center gap-2 w-full">
-                                    <div className="flex items-center justify-center aspect-square rounded-xl bg-zinc-100 dark:bg-zinc-900">
+                                    <div className="flex items-center justify-center aspect-square">
                                       <Image
                                         src={item?.image}
                                         alt={item?.name}
-                                        width={80}
-                                        height={80}
+                                        width={64}
+                                        height={64}
                                       />
                                     </div>
                                     <div className="flex flex-row items-center justify-between w-full">
