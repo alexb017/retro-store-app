@@ -69,28 +69,28 @@ export default function ProfilePopup() {
             className="cursor-pointer rounded-md"
             onClick={() => router.push(`/profile/${usernameFromEmail}`)}
           >
-            <UserIcon classname="w-5 h-5 mr-2" />
+            <UserIcon classname="w-4 h-4 mr-2" />
             <span>Profile</span>
           </DropdownMenuItem>
           <DropdownMenuItem
             className="cursor-pointer rounded-md"
             onClick={() => router.push(`/favorites`)}
           >
-            <HeartIcon classname="w-5 h-5 mr-2" />
+            <HeartIcon classname="w-4 h-4 mr-2" />
             <span>Favorites</span>
           </DropdownMenuItem>
           <DropdownMenuItem
             className="cursor-pointer rounded-md"
             onClick={() => router.push(`/orders/${usernameFromEmail}`)}
           >
-            <ShoppingBagIcon classname="w-5 h-5 mr-2" />
+            <ShoppingBagIcon classname="w-4 h-4 mr-2" />
             <span>Orders</span>
           </DropdownMenuItem>
           <DropdownMenuItem
             className="cursor-pointer rounded-md"
             onClick={() => router.push(`/cart`)}
           >
-            <CartIcon classname="w-5 h-5 mr-2" />
+            <CartIcon classname="w-4 h-4 mr-2" />
             <span>Cart</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
@@ -110,7 +110,7 @@ export default function ProfilePopup() {
               }
             }}
           >
-            <SignOutIcon classname="w-5 h-5 mr-2" />
+            <SignOutIcon classname="w-4 h-4 mr-2" />
             <span>Sign out</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>

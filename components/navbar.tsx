@@ -120,13 +120,13 @@ export default function Navbar() {
           <Button
             asChild
             size="icon"
-            className="bg-transparent text-black w-auto hover:text-blue-500 hover:bg-transparent dark:text-zinc-400 dark:hover:text-white transition-color ease-in-out duration-200"
+            className="flex bg-transparent text-black w-5 h-5 hover:text-blue-500 hover:bg-transparent dark:text-zinc-400 dark:hover:text-white transition-color ease-in-out duration-200"
           >
             <Link
               href="https://github.com/alexb017/retro-store-app"
               target="_blank"
             >
-              <GithubIcon classname="h-5" />
+              <GithubIcon classname="h-5 w-5" />
             </Link>
           </Button>
         </div>

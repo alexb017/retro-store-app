@@ -12,7 +12,7 @@ export function ModeToggle() {
   return (
     <Button
       size="icon"
-      className="w-auto bg-transparent text-black hover:text-blue-600 hover:bg-transparent dark:text-zinc-400 dark:hover:text-white"
+      className="w-5 h-5 bg-transparent text-black hover:text-blue-600 hover:bg-transparent dark:text-zinc-400 dark:hover:text-white"
       onClick={() => {
         if (theme === 'dark') {
           setTheme('light');
