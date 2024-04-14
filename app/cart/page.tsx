@@ -45,8 +45,8 @@ export default function Cart() {
       await stripe?.redirectToCheckout({
         lineItems: lineItems,
         mode: 'payment',
-        successUrl: `https://retro-store-app-alexb017.vercel.app/success`,
-        cancelUrl: `https://retro-store-app-alexb017.vercel.app/cart`,
+        successUrl: `https://retro-store-app-alexb017s-projects.vercel.app/success`,
+        cancelUrl: `https://retro-store-app-alexb017s-projects.vercel.app/cart`,
       });
     } catch (error) {
       throw 'Error wrong api key...';

@@ -25,6 +25,7 @@
     "dotenv": "^16.3.1",
     "embla-carousel-react": "^8.0.0",
     "firebase": "^10.5.0",
+    "firebase-admin": "^12.0.0",
     "lucide-react": "^0.363.0",
     "next": "^14.1.4",
     "next-themes": "^0.3.0",
