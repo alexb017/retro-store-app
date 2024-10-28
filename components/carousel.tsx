@@ -11,12 +11,17 @@ import {
 } from './ui/carousel';
 import { Card, CardContent, CardFooter, CardHeader } from './ui/card';
 import { Button } from './ui/button';
+import { getProducts } from '@/lib/actions';
+import { Products } from '@/lib/types';
 
-export default function CarouselItems({ products }: { products: any[] }) {
+export default async function CarouselItems() {
+  const products = (await getProducts()) as Products[];
+  const firstEightElements = products?.slice(0, 8);
+
   return (
     <Carousel opts={{ align: 'start' }} className="w-full">
       <CarouselContent>
-        {products?.map((item, index) => (
+        {firstEightElements?.map((item, index) => (
           <CarouselItem
             key={index}
             className="sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"

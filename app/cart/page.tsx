@@ -12,9 +12,10 @@ import { AuthContext } from '../AuthContext';
 import { loadStripe } from '@stripe/stripe-js';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import { CartItems } from '@/lib/types';
 
 const stripePromise = loadStripe(
-  'pk_test_51NoptQIF5Ewa0z1weAgAPPKYRio4rkIbNTYPuRPlXd3OdWsMaceCjCMNETTJSXp9yVsXpx6whtH8W4r0LGAIZ86L00YKiIUNvJ'
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 );
 
 export default function Cart() {
@@ -22,26 +23,26 @@ export default function Cart() {
   const [cart] = useCartData(user?.uid);
 
   const quantity = cart?.reduce(
-    (total, current: any) => total + current.quantity,
+    (total, current: CartItems) => total + current.quantity,
     0
   );
 
   const totalPrice = cart?.reduce(
-    (total, current: any) =>
+    (total, current: CartItems) =>
       total + Number.parseInt(current?.price, 10) * current?.quantity,
     0
   );
 
-  async function handleCheckout(event: any) {
+  async function handleCheckout(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const stripe = await stripePromise;
-
-    const lineItems = cart.map((item: any) => {
+    const lineItems = cart.map((item: CartItems) => {
       return { price: item?.price_id, quantity: item?.quantity };
     });
 
     try {
+      const stripe = await stripePromise;
+
       await stripe?.redirectToCheckout({
         lineItems: lineItems,
         mode: 'payment',

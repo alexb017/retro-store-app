@@ -2,11 +2,16 @@ import { Card, CardContent, CardFooter } from './ui/card';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from './ui/button';
+import { getProducts } from '@/lib/actions';
+import { Products } from '@/lib/types';
 
-export default function ThreeItems({ products }: { products: any[] }) {
+export default async function ThreeItems() {
+  const products = (await getProducts()) as Products[];
+  const threeElements = products?.slice(5, 8);
+
   return (
     <div className="flex flex-row flex-wrap justify-center lg:flex-nowrap gap-6 w-full">
-      {products.map((product, index) => {
+      {threeElements.map((product, index) => {
         return (
           <Link
             href={`/product/${product?.handle}`}
