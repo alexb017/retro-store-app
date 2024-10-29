@@ -36,21 +36,35 @@ export default function Cart() {
   async function handleCheckout(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const lineItems = cart.map((item: CartItems) => {
+    const items = cart.map((item: CartItems) => {
       return { price: item?.price_id, quantity: item?.quantity };
     });
 
     try {
+      const response = await fetch('/api/checkout_sessions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ items }),
+      });
+
+      const { sessionId } = await response.json();
+
+      // Redirect to Checkout
       const stripe = await stripePromise;
 
-      await stripe?.redirectToCheckout({
-        lineItems: lineItems,
-        mode: 'payment',
-        successUrl: `https://retro-store-app-alexb017s-projects.vercel.app/success`,
-        cancelUrl: `https://retro-store-app-alexb017s-projects.vercel.app/cart`,
-      });
+      if (stripe) {
+        const { error } = await stripe.redirectToCheckout({ sessionId });
+
+        if (error) {
+          // console.error('Redirect to checkout error:', error);
+          throw new Error('Error during checkout process');
+        }
+      }
     } catch (error) {
-      throw 'Error wrong api key...';
+      // console.error('Checkout error:', error);
+      throw new Error('Error during checkout process');
     }
   }
 
