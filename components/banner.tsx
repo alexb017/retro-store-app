@@ -17,6 +17,17 @@ export default function BannerItem({ item }: { item: Item[] }) {
   const image = item[index]?.image;
   const price = item[index]?.price;
   const handle = item[index]?.handle;
+  const [animate, setAnimate] = useState(false);
+
+  useEffect(() => {
+    setAnimate(true);
+    const timer = setTimeout(() => {
+      setAnimate(false);
+    }, 500);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [index]);
 
   // useEffect(() => {
   //   const timer = setTimeout(() => {
@@ -53,7 +64,11 @@ export default function BannerItem({ item }: { item: Item[] }) {
       <div className="relative flex flex-col sm:flex-row w-full h-[600px] lg:h-[512px] rounded-3xl overflow-hidden bg-red-50 dark:bg-zinc-900">
         {item[index] && (
           <div className="flex flex-col sm:flex-row w-full h-full">
-            <div className="flex flex-col items-start justify-between p-12 sm:pb-6 sm:p-20 h-full sm:w-2/4">
+            <div
+              className={`flex flex-col items-start justify-between p-12 sm:pb-6 sm:p-20 h-full sm:w-2/4 ${
+                animate ? 'animate-slide-in-text' : ''
+              }`}
+            >
               <div className="flex flex-col items-start gap-4">
                 <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
                   {description}
@@ -91,6 +106,7 @@ export default function BannerItem({ item }: { item: Item[] }) {
                 height={800}
                 quality={80}
                 priority={true}
+                className={animate ? 'animate-slide-in-image' : ''}
               />
             </div>
           </div>
