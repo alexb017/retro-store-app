@@ -9,10 +9,11 @@ import { FormattedPrice } from '@/lib/utils';
 import Footer from '@/components/footer';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import { User } from 'firebase/auth';
 
 export default function OrdersPage({ params }: { params: { name: string } }) {
-  const { user } = useContext(AuthContext);
-  const [order] = useOrderData(user?.uid);
+  const { user } = useContext(AuthContext) as { user: User | null };
+  const [order] = useOrderData(user?.uid ?? '');
 
   const countOrders = order?.length || 0;
 

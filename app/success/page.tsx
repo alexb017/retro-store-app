@@ -13,12 +13,13 @@ import {
 import useCartData from '@/lib/use-cart-data';
 import useOrderData from '@/lib/use-order-data';
 import { Button } from '@/components/ui/button';
+import { User } from 'firebase/auth';
 
 export default function Success() {
-  const { user } = useContext(AuthContext);
-  const [cart] = useCartData(user?.uid);
-  const [order] = useOrderData(user?.uid);
-  const usernameFromEmail = user?.email.split('@')[0];
+  const { user } = useContext(AuthContext) as { user: User | null };
+  const [cart] = useCartData(user?.uid ?? '');
+  const [order] = useOrderData(user?.uid ?? '');
+  const usernameFromEmail = user?.email ? user?.email.split('@')[0] : '';
   const randomOrderNr = Math.floor(Math.random() * 100000) + 1;
 
   useEffect(() => {

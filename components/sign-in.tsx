@@ -13,7 +13,7 @@ import SignInIcon from './icons/sign-in';
 import UserIcon from './icons/user';
 
 export default function SignIn() {
-  const { googleSignIn } = useContext(AuthContext);
+  const { googleSignIn } = useContext(AuthContext) as any;
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

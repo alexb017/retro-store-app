@@ -5,9 +5,10 @@ import TagIcon from './icons/tag';
 import { Button } from './ui/button';
 import Link from 'next/link';
 import { AuthContext } from '@/app/AuthContext';
+import { User } from 'firebase/auth';
 
 export default function BannerSignup() {
-  const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext) as { user: User | null };
 
   return (
     <>

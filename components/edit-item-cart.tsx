@@ -8,6 +8,7 @@ import { useContext } from 'react';
 import { AuthContext } from '@/app/AuthContext';
 import { getUserCart } from '@/lib/actions';
 import { Button } from './ui/button';
+import { User } from 'firebase/auth';
 
 export default function EditItemQuantity({
   item,
@@ -16,13 +17,13 @@ export default function EditItemQuantity({
   item: any;
   type: 'plus' | 'minus';
 }) {
-  const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext) as { user: User | null };
 
   const router = useRouter();
   //console.log(item);
 
   async function updateItem() {
-    const userCart = await getUserCart(user?.uid);
+    const userCart = await getUserCart(user?.uid ?? '');
 
     const quantity: any =
       type === 'plus' ? item?.quantity + 1 : item?.quantity - 1;
@@ -47,7 +48,7 @@ export default function EditItemQuantity({
       });
 
       // Update db with new value
-      await updateItemCart(user?.uid, updateItem);
+      await updateItemCart(user?.uid ?? '', updateItem);
     }
 
     //router.refresh();

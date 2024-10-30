@@ -10,6 +10,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../app/AuthContext';
 import Link from 'next/link';
 import { Button } from './ui/button';
+import { User } from 'firebase/auth';
 
 export default function AddToCart({
   product,
@@ -20,7 +21,7 @@ export default function AddToCart({
   disableBtn: any;
   classname: string;
 }) {
-  const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext) as { user: User | null };
   const searchParams = useSearchParams();
   const searchParamColor = searchParams.get('color') || '';
   const searchParamSpace = searchParams.get('space') || '';

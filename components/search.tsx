@@ -19,7 +19,7 @@ export default function Search() {
   // This prevents the search function from being called too frequently
   const handleSearch = useDebouncedCallback((value: string) => {
     // console.log(`Searching for: ${value}`);
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams.toString());
 
     if (value) {
       params.set('q', value);

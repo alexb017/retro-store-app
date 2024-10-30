@@ -21,12 +21,16 @@ import {
 } from './ui/dropdown-menu';
 import CartIcon from './icons/cart';
 import HeartIcon from './icons/heart';
+import { User } from 'firebase/auth';
 
 export default function ProfilePopup() {
-  const { user, userSignOut } = useContext(AuthContext);
+  const { user, userSignOut } = useContext(AuthContext) as {
+    user: User | null;
+    userSignOut: () => void;
+  };
   const router = useRouter();
   const pathname = usePathname();
-  const usernameFromEmail = user?.email.split('@')[0];
+  const usernameFromEmail = user?.email ? user.email.split('@')[0] : '';
 
   return (
     <DropdownMenu modal={false}>

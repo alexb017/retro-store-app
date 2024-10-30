@@ -7,23 +7,26 @@ import {
   signInWithPopup,
   signOut,
   GoogleAuthProvider,
+  User,
 } from 'firebase/auth';
 
-const AuthContext = createContext<any>(null);
+interface AuthContextType {
+  user: User | null;
+  googleSignIn: () => void;
+  userSignOut: () => void;
+}
+
+const AuthContext = createContext<AuthContextType | null>(null);
 
 function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
   const googleProvider = new GoogleAuthProvider();
   const googleSignIn = () => signInWithPopup(auth, googleProvider);
   const userSignOut = () => signOut(auth);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user: any) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(null);
-      }
+    const unsubscribe = onAuthStateChanged(auth, (user: User | null) => {
+      setUser(user);
     });
     return () => unsubscribe();
   }, []);

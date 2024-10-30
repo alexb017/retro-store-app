@@ -1,5 +1,6 @@
 import ProductGrid from '@/components/product-grid';
 import { getProducts } from '@/lib/actions';
+import { type Products } from '@/lib/types';
 
 export default async function CategoryPage({
   params: { category },
@@ -8,27 +9,33 @@ export default async function CategoryPage({
   params: { category: string };
   searchParams: { q: string; sort: string };
 }) {
-  const products: any[] = await getProducts();
+  const products = (await getProducts()) as Products[];
 
   let filtered = products?.filter((product) => product?.category === category);
-  let productsFilter: any;
+  let productsFilter: Products[] = [];
 
   if (!searchParams.q) {
     productsFilter = filtered;
   }
 
   if (searchParams.q) {
-    productsFilter = filtered.filter((product: any) =>
+    productsFilter = filtered.filter((product: Products) =>
       product?.name.toLowerCase().includes(searchParams.q?.toLowerCase())
     );
   }
 
   if (searchParams.sort === 'asc') {
-    productsFilter = filtered.sort((a: any, b: any) => a.price - b.price);
+    productsFilter = filtered.sort(
+      (a: Products, b: Products) =>
+        Number.parseInt(a.price, 10) - Number.parseInt(b.price, 10)
+    );
   }
 
   if (searchParams.sort === 'des') {
-    productsFilter = filtered.sort((a: any, b: any) => b.price - a.price);
+    productsFilter = filtered.sort(
+      (a: Products, b: Products) =>
+        Number.parseInt(b.price, 10) - Number.parseInt(a.price, 10)
+    );
   }
 
   return (

@@ -16,6 +16,7 @@ import {
   increment,
 } from 'firebase/firestore';
 import { db } from './firebase';
+import { type ProductInfoType } from './types';
 
 export async function getProducts() {
   try {
@@ -34,10 +35,10 @@ export async function getProducts() {
 export async function getProduct(params: string) {
   try {
     const querySnapshot = await getDocs(collection(db, 'product-info'));
-    const data: any[] = querySnapshot.docs.map((doc) => ({
+    const data = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
-    }));
+    })) as ProductInfoType[];
 
     return data.find((product) => product.handle === params);
   } catch (error) {

@@ -6,9 +6,10 @@ import { AuthContext } from '@/app/AuthContext';
 import Link from 'next/link';
 import UserIcon from '@/components/icons/user';
 import { Separator } from '@/components/ui/separator';
+import { User } from 'firebase/auth';
 
 export default function ProfilePage({ params }: { params: { name: string } }) {
-  const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext) as { user: User | null };
 
   return (
     <div className="w-full md:max-w-3xl mx-auto">
@@ -19,7 +20,7 @@ export default function ProfilePage({ params }: { params: { name: string } }) {
               <Image
                 className="rounded-full"
                 src={user?.photoURL}
-                alt={user?.displayName}
+                alt={user?.displayName ? user?.displayName : params.name}
                 width={64}
                 height={64}
               />

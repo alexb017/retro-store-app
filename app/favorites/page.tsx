@@ -11,10 +11,11 @@ import { FormattedPrice } from '@/lib/utils';
 import DeleteItemFavorite from '@/components/delete-item-favorite';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
+import { User } from 'firebase/auth';
 
 export default function Favorite() {
-  const { user } = useContext(AuthContext);
-  const [favorite] = useFavoriteData(user?.uid);
+  const { user } = useContext(AuthContext) as { user: User | null };
+  const [favorite] = useFavoriteData(user?.uid ?? '');
 
   const countFavorite = favorite?.length || 0;
 
@@ -49,7 +50,7 @@ export default function Favorite() {
           ) : (
             <>
               <ul>
-                {favorite?.map((fav: any, index) => {
+                {favorite?.map((fav, index) => {
                   const color =
                     fav?.color.charAt(0).toUpperCase() + fav?.color.slice(1);
                   const size = fav?.size ? ` / ${fav?.size.toUpperCase()}` : '';
@@ -87,7 +88,7 @@ export default function Favorite() {
                           </div>
                         </div>
                         <div className="flex flex-col items-end gap-2 md:flex-row md:items-center md:gap-4">
-                          <DeleteItemFavorite id={user?.uid} item={fav} />
+                          <DeleteItemFavorite id={user?.uid ?? ''} item={fav} />
                           <AddToCart
                             product={fav}
                             disableBtn={null}

@@ -15,11 +15,12 @@ import { ModeToggle } from './dark-theme';
 import { Button } from './ui/button';
 import { Github, LogIn } from 'lucide-react';
 import GithubIcon from './icons/github';
+import { User } from 'firebase/auth';
 
 export default function Navbar() {
-  const { user } = useContext(AuthContext);
-  const [cart] = useCartData(user?.uid);
-  const [favorite] = useFavoriteData(user?.uid);
+  const { user } = useContext(AuthContext) as { user: User | null };
+  const [cart] = useCartData(user?.uid ?? '');
+  const [favorite] = useFavoriteData(user?.uid ?? '');
 
   const quantity = cart?.reduce(
     (total, current: any) => total + current.quantity,

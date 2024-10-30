@@ -10,6 +10,7 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import useFavoriteData from '@/lib/use-favorite-data';
 import DeleteItemFavorite from './delete-item-favorite';
 import { Button } from './ui/button';
+import { User } from 'firebase/auth';
 
 export default function AddToFavorite({
   product,
@@ -18,8 +19,8 @@ export default function AddToFavorite({
   product: any;
   disableBtn: any;
 }) {
-  const { user } = useContext(AuthContext);
-  const [favorite] = useFavoriteData(user?.uid);
+  const { user } = useContext(AuthContext) as { user: User | null };
+  const [favorite] = useFavoriteData(user?.uid ?? '');
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const searchParamColor = searchParams.get('color') || '';

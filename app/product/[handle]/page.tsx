@@ -7,13 +7,14 @@ import ArrowLeftIcon from '@/components/icons/arrow-left';
 import Footer from '@/components/footer';
 import FormattedPrice from '@/components/formatted-price';
 import ProductGrid from '@/components/product-grid';
+import { type Products, type ProductInfoType } from '@/lib/types';
 
 export default async function Product({
   params,
 }: {
   params: { handle: string };
 }) {
-  const product = await getProduct(params.handle);
+  const product = (await getProduct(params.handle)) as ProductInfoType;
 
   return (
     <>
@@ -46,7 +47,7 @@ export default async function Product({
 }
 
 async function RelatedProducts({ category }: { category: string }) {
-  const products: any[] = await getProducts();
+  const products = (await getProducts()) as Products[];
 
   const filteredProducts = products.filter(
     (product) => product?.category === category

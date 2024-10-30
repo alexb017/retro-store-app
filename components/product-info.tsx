@@ -14,9 +14,9 @@ import {
 import AddToFavorite from './add-to-favorite';
 import { createUrl } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { User } from 'firebase/auth';
 
 export default function ProductInfo({ product }: { product: any }) {
-  const { user } = useContext(AuthContext);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();

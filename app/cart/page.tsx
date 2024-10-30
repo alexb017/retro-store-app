@@ -13,14 +13,15 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { CartItems } from '@/lib/types';
+import { User } from 'firebase/auth';
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 );
 
 export default function Cart() {
-  const { user } = useContext(AuthContext);
-  const [cart] = useCartData(user?.uid);
+  const { user } = useContext(AuthContext) as { user: User | null };
+  const [cart] = useCartData(user?.uid ?? '');
 
   const quantity = cart?.reduce(
     (total, current: CartItems) => total + current.quantity,
@@ -105,7 +106,7 @@ export default function Cart() {
             <>
               <div className="flex flex-col md:flex-row md:justify-between gap-8 md:gap-12">
                 <ul className="flex flex-col md:w-7/12">
-                  {cart?.map((item: any, index) => {
+                  {cart?.map((item, index) => {
                     const price = FormattedPrice(item?.price);
                     const color =
                       item?.color.charAt(0).toUpperCase() +
@@ -156,7 +157,7 @@ export default function Cart() {
                               <EditItemQuantity item={item} type="plus" />
                             </div>
                             {/* <p className="text-sm font-medium">{price}</p> */}
-                            <DeleteItemCart id={user?.uid} item={item} />
+                            <DeleteItemCart id={user?.uid ?? ''} item={item} />
                           </div>
                         </li>
                         <Separator className="my-4" />
