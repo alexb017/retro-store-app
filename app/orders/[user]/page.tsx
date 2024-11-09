@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext } from 'react';
+import { useContext, use } from 'react';
 import { AuthContext } from '../../AuthContext';
 import useOrderData from '@/lib/use-order-data';
 import Image from 'next/image';
@@ -11,11 +11,17 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { User } from 'firebase/auth';
 
-export default function OrdersPage({ params }: { params: { name: string } }) {
+export default function OrdersPage({
+  params,
+}: {
+  params: Promise<{ name: string }>;
+}) {
   const { user } = useContext(AuthContext) as { user: User | null };
   const [order] = useOrderData(user?.uid ?? '');
 
   const countOrders = order?.length || 0;
+
+  const paramsName = use(params);
 
   return (
     <>
