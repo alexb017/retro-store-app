@@ -3,6 +3,7 @@ import Filters from '@/components/filters';
 import Footer from '@/components/footer';
 import MobileCollections from '@/components/mobile-collections';
 import MobileFilters from '@/components/mobile-filters';
+import { Suspense } from 'react';
 
 export default function LayoutSearch({
   children,
@@ -16,10 +17,14 @@ export default function LayoutSearch({
           <Collections />
         </div>
         <div className="w-full hidden md:block">
-          <Filters />
+          <Suspense fallback={null}>
+            <Filters />
+          </Suspense>
         </div>
         <div className="w-full md:hidden block">
-          <MobileCollections />
+          <Suspense fallback={null}>
+            <MobileCollections />
+          </Suspense>
         </div>
         <div className="w-full md:hidden block">
           <MobileFilters />

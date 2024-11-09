@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext } from 'react';
+import { useContext, Suspense } from 'react';
 import Link from 'next/link';
 import { AuthContext } from '../app/AuthContext';
 import CartIcon from './icons/cart';
@@ -40,7 +40,9 @@ export default function Navbar() {
     <nav className="fixed w-full top-0 left-0 z-50 bg-white/80 backdrop-blur-lg dark:bg-zinc-950/80">
       <div className="mx-auto max-w-6xl flex items-center justify-between p-4 text-sm">
         <div className="flex items-center lg:hidden">
-          <MobileMenu />
+          <Suspense fallback={null}>
+            <MobileMenu />
+          </Suspense>
           <Link
             href="/"
             className="flex items-center text-xl font-bold uppercase leading-none tracking-tighter ml-4 lg:ml-0"
@@ -66,7 +68,9 @@ export default function Navbar() {
           ))}
         </div>
         <div className="hidden lg:block max-w-sm w-full">
-          <Search />
+          <Suspense fallback={null}>
+            <Search />
+          </Suspense>
         </div>
         <div className="flex items-center gap-4">
           {!user ? (

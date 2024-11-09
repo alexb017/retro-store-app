@@ -8,6 +8,7 @@ import Footer from '@/components/footer';
 import FormattedPrice from '@/components/formatted-price';
 import ProductGrid from '@/components/product-grid';
 import { type Products, type ProductInfoType } from '@/lib/types';
+import { Suspense } from 'react';
 
 export default async function Product({
   params,
@@ -38,7 +39,9 @@ export default async function Product({
             />
           </div>
           <div className="basis-full sm:basis-3/6 lg:basis-2/6">
-            <ProductInfo product={product} />
+            <Suspense fallback={null}>
+              <ProductInfo product={product} />
+            </Suspense>
           </div>
         </div>
         <RelatedProducts category={product?.category} />
