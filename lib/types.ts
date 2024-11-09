@@ -33,9 +33,8 @@ export type Item = {
 
 export type Products = {
   id_document: string;
-  id: string;
   name: string;
-  price: string;
+  price: number;
   image: string;
   handle: string;
   category: string;

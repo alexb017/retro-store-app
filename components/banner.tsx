@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { type Banner } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { FormattedPrice } from '@/lib/utils';
 
 export default function BannerItem({ item }: { item: Banner[] }) {
   const [index, setIndex] = useState(0);
@@ -75,7 +76,7 @@ export default function BannerItem({ item }: { item: Banner[] }) {
                 <div>
                   <p className="text-base">{name}</p>
                   <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-                    ${(price / 100).toFixed(2)}
+                    {FormattedPrice(price)}
                   </h3>
                 </div>
                 <Button

@@ -19,18 +19,10 @@ export function createUrl(
   return `${pathname}${queryString}`;
 }
 
-export function FormattedPrice(price: string) {
-  // Check if the last two characters are "00"
-  if (price.slice(-2) === '00') {
-    // Remove the last two characters and add a dollar sign
-    return `$${price.slice(0, -2)}`;
-  } else {
-    const amount = parseFloat(price) / 100;
-    const formatted = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    }).format(amount);
-
-    return formatted;
-  }
+export function FormattedPrice(price: number) {
+  const priceInDollars = price / 100;
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(priceInDollars);
 }
