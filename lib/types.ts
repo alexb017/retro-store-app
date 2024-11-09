@@ -44,7 +44,7 @@ export type Products = {
 
 export type Banner = {
   name: string;
-  price: string;
+  price: number;
   handle: string;
   image: string;
   description: string;

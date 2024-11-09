@@ -4,13 +4,12 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import ArrowLeftIcon from './icons/arrow-left';
 import ArrowRightIcon from './icons/arrow-right';
-import { FormattedPrice } from '../lib/utils';
 import Link from 'next/link';
-import { Item } from '@/lib/types';
+import { type Banner } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
-export default function BannerItem({ item }: { item: Item[] }) {
+export default function BannerItem({ item }: { item: Banner[] }) {
   const [index, setIndex] = useState(0);
   const name = item[index]?.name;
   const description = item[index]?.description;
@@ -76,7 +75,7 @@ export default function BannerItem({ item }: { item: Item[] }) {
                 <div>
                   <p className="text-base">{name}</p>
                   <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-                    {FormattedPrice(price)}
+                    ${(price / 100).toFixed(2)}
                   </h3>
                 </div>
                 <Button
