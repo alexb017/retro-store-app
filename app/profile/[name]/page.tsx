@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext } from 'react';
+import { useContext, use } from 'react';
 import Image from 'next/image';
 import { AuthContext } from '@/app/AuthContext';
 import Link from 'next/link';
@@ -8,8 +8,14 @@ import UserIcon from '@/components/icons/user';
 import { Separator } from '@/components/ui/separator';
 import { User } from 'firebase/auth';
 
-export default function ProfilePage({ params }: { params: { name: string } }) {
+export default function ProfilePage({
+  params,
+}: {
+  params: Promise<{ name: string }>;
+}) {
   const { user } = useContext(AuthContext) as { user: User | null };
+
+  const param = use(params);
 
   return (
     <div className="w-full md:max-w-3xl mx-auto">
@@ -20,7 +26,7 @@ export default function ProfilePage({ params }: { params: { name: string } }) {
               <Image
                 className="rounded-full"
                 src={user?.photoURL}
-                alt={user?.displayName ? user?.displayName : params.name}
+                alt={user?.displayName ? user?.displayName : param.name}
                 width={64}
                 height={64}
               />
@@ -32,7 +38,7 @@ export default function ProfilePage({ params }: { params: { name: string } }) {
           </div>
           <div>
             <h1 className="text-3xl font-semibold tracking-tight">
-              Hi, {user?.displayName ? user?.displayName : params.name}! 👋
+              Hi, {user?.displayName ? user?.displayName : param.name}! 👋
             </h1>
             <p className="text-zinc-500 dark:text-zinc-400">
               Personal details and order history.
@@ -70,7 +76,7 @@ export default function ProfilePage({ params }: { params: { name: string } }) {
               <div className="text-sm font-medium">Order history</div>
               <div className="mt-2 text-sm sm:col-span-2 sm:mt-0">
                 <Link
-                  href={`/orders/${params.name}`}
+                  href={`/orders/${param.name}`}
                   className="text-blue-500 border-b border-zinc-500 dark:text-blue-400 dark:hover:border-zinc-400"
                 >
                   See Orders

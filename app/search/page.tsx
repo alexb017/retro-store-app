@@ -2,42 +2,42 @@ import ProductGrid from '@/components/product-grid';
 import { getProducts } from '@/lib/actions';
 import { type Products } from '@/lib/types';
 
-export default async function Search({
+export const metadata = {
+  title: 'Search',
+  description: 'Search for products in the store.',
+};
+
+export default async function SearchPage({
   searchParams,
 }: {
-  searchParams: { q: string; sort: string };
+  searchParams: Promise<{ q: string; sort: string }>;
 }) {
   const products = (await getProducts()) as Products[];
-  let productsFilter: Products[] = [];
 
-  if (!searchParams.q) {
-    productsFilter = products;
-  }
+  const params = await searchParams;
 
-  if (searchParams.q) {
-    productsFilter = products.filter((product: Products) =>
-      product?.name.toLowerCase().includes(searchParams.q?.toLowerCase())
+  const productsFiltered = products.filter((product) =>
+    params.q
+      ? product.name.toLowerCase().includes(params.q.toLowerCase())
+      : true
+  );
+
+  if (params.sort === 'asc') {
+    productsFiltered.sort(
+      (a, b) => Number.parseInt(a.price, 10) - Number.parseInt(b.price, 10)
     );
   }
 
-  if (searchParams.sort === 'asc') {
-    productsFilter = products.sort(
-      (a: Products, b: Products) =>
-        Number.parseInt(a.price, 10) - Number.parseInt(b.price, 10)
-    );
-  }
-
-  if (searchParams.sort === 'des') {
-    productsFilter = products.sort(
-      (a: any, b: any) =>
-        Number.parseInt(b.price, 10) - Number.parseInt(a.price, 10)
+  if (params.sort === 'des') {
+    productsFiltered.sort(
+      (a, b) => Number.parseInt(b.price, 10) - Number.parseInt(a.price, 10)
     );
   }
 
   return (
     <>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:grid-cols-3">
-        <ProductGrid products={productsFilter} />
+        <ProductGrid products={productsFiltered} />
       </div>
     </>
   );

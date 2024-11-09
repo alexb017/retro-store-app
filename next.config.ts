@@ -1,8 +1,4 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  experimental: {
-    missingSuspenseWithCSRBailout: false,
-  },
+const config = {
   images: {
     remotePatterns: [
       {
@@ -17,4 +13,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+export default config;

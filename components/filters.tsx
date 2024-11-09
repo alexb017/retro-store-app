@@ -14,7 +14,6 @@ export default function Filters() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const newParams = new URLSearchParams(searchParams.toString());
 
   return (
     <div className="flex flex-col items-center justify-center gap-4">
@@ -32,16 +31,21 @@ export default function Filters() {
                   : 'border-zinc-100 bg-zinc-100 hover:bg-zinc-200 hover:border-zinc-200 dark:hover:text-white dark:border-zinc-900 dark:hover:border-zinc-800 dark:bg-zinc-900 dark:hover:bg-zinc-800'
               }`}
               onClick={() => {
+                const newParams = new URLSearchParams(searchParams.toString());
+
+                newParams.set('sort', filter?.sort);
+
                 if (filter?.sort === 'rel') {
-                  router.replace(pathname);
+                  newParams.delete('sort');
+                  router.replace(createUrl(pathname, newParams));
                 }
 
                 if (filter?.sort === 'asc') {
-                  router.replace(`${pathname}?sort=${filter?.sort}`);
+                  router.replace(createUrl(pathname, newParams));
                 }
 
                 if (filter?.sort === 'des') {
-                  router.replace(`${pathname}?sort=${filter?.sort}`);
+                  router.replace(createUrl(pathname, newParams));
                 }
               }}
             >

@@ -3,45 +3,42 @@ import { getProducts } from '@/lib/actions';
 import { type Products } from '@/lib/types';
 
 export default async function CategoryPage({
-  params: { category },
+  params,
   searchParams,
 }: {
-  params: { category: string };
-  searchParams: { q: string; sort: string };
+  params: Promise<{ category: string }>;
+  searchParams: Promise<{ q: string; sort: string }>;
 }) {
   const products = (await getProducts()) as Products[];
+  const paramsCategory = await params;
+  const searchParamsQSort = await searchParams;
 
-  let filtered = products?.filter((product) => product?.category === category);
-  let productsFilter: Products[] = [];
+  const productsFiltered = products?.filter(
+    (product) =>
+      product?.category === paramsCategory?.category &&
+      (searchParamsQSort.q
+        ? product?.name
+            .toLowerCase()
+            .includes(searchParamsQSort.q?.toLowerCase())
+        : true)
+  );
 
-  if (!searchParams.q) {
-    productsFilter = filtered;
-  }
-
-  if (searchParams.q) {
-    productsFilter = filtered.filter((product: Products) =>
-      product?.name.toLowerCase().includes(searchParams.q?.toLowerCase())
+  if (searchParamsQSort.sort === 'asc') {
+    productsFiltered.sort(
+      (a, b) => Number.parseInt(a.price, 10) - Number.parseInt(b.price, 10)
     );
   }
 
-  if (searchParams.sort === 'asc') {
-    productsFilter = filtered.sort(
-      (a: Products, b: Products) =>
-        Number.parseInt(a.price, 10) - Number.parseInt(b.price, 10)
-    );
-  }
-
-  if (searchParams.sort === 'des') {
-    productsFilter = filtered.sort(
-      (a: Products, b: Products) =>
-        Number.parseInt(b.price, 10) - Number.parseInt(a.price, 10)
+  if (searchParamsQSort.sort === 'des') {
+    productsFiltered.sort(
+      (a, b) => Number.parseInt(b.price, 10) - Number.parseInt(a.price, 10)
     );
   }
 
   return (
     <>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:grid-cols-3">
-        <ProductGrid products={productsFilter} />
+        <ProductGrid products={productsFiltered} />
       </div>
     </>
   );

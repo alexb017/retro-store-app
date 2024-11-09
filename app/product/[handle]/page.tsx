@@ -12,9 +12,11 @@ import { type Products, type ProductInfoType } from '@/lib/types';
 export default async function Product({
   params,
 }: {
-  params: { handle: string };
+  params: Promise<{ handle: string }>;
 }) {
-  const product = (await getProduct(params.handle)) as ProductInfoType;
+  const param = await params;
+
+  const product = (await getProduct(param.handle)) as ProductInfoType;
 
   return (
     <>
