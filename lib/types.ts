@@ -1,34 +1,26 @@
-export type Product = {
-  id: string;
-  name: string;
-  price: string;
-  image: string;
-  handle: string;
-  category: string;
-  info: string;
+export type ImageUrls = {
+  url: string;
+  color: string;
+};
+
+export type StorageType = {
+  price: number;
+  space: string;
 };
 
 export type ProductInfoType = {
-  id: string;
+  id_document: string;
   category: string;
-  colors: string[];
+  colors?: string[];
   description: string;
   handle: string;
   imageUrls: string[];
   images: string[];
   name: string;
-  price: string;
+  price: number;
   price_id: string;
-  size: string[];
-};
-
-export type Item = {
-  name: string;
-  description: string;
-  image: string;
-  price: string;
-  handle: string;
-  colors: string[];
+  size?: string[];
+  storage?: StorageType[];
 };
 
 export type Products = {

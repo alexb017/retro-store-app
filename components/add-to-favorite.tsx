@@ -11,14 +11,16 @@ import useFavoriteData from '@/lib/use-favorite-data';
 import DeleteItemFavorite from './delete-item-favorite';
 import { Button } from './ui/button';
 import { User } from 'firebase/auth';
+import { type ProductInfoType } from '@/lib/types';
 
 export default function AddToFavorite({
   product,
   disableBtn,
 }: {
-  product: any;
-  disableBtn: any;
+  product: ProductInfoType;
+  disableBtn: boolean;
 }) {
+  console.log('favorite', product);
   const { user } = useContext(AuthContext) as { user: User | null };
   const [favorite] = useFavoriteData(user?.uid ?? '');
   const pathname = usePathname();
@@ -27,12 +29,15 @@ export default function AddToFavorite({
   const searchParamSpace = searchParams.get('space') || '';
   const searchParamPrice = searchParams.get('price') || product?.price;
   const searchParamSize = searchParams.get('size') || '';
-  const imageIndex = product?.colors?.findIndex(
-    (color: any) => color?.toLowerCase() === searchParamColor
-  );
+  const imageIndex: number =
+    product?.colors?.findIndex(
+      (color) => color?.toLowerCase() === searchParamColor
+    ) ?? 0;
   const colorId = searchParamColor ? `-${searchParamColor?.toLowerCase()}` : '';
   const spaceId = searchParamSpace ? `-${searchParamSpace?.toLowerCase()}` : '';
-  const priceId = searchParamPrice ? `-${searchParamPrice?.toLowerCase()}` : '';
+  const priceId = searchParamPrice
+    ? `-${searchParamPrice?.toString().toLowerCase()}`
+    : '';
   const sizeId = searchParamSize ? `-${searchParamSize?.toLowerCase()}` : '';
   const id = product?.handle + `${colorId}${spaceId}${sizeId}${priceId}`;
 

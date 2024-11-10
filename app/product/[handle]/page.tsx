@@ -1,11 +1,7 @@
-import Link from 'next/link';
-import Image from 'next/image';
 import { getProduct, getProducts } from '@/lib/actions';
 import Gallery from '@/components/gallery';
 import ProductInfo from '@/components/product-info';
-import ArrowLeftIcon from '@/components/icons/arrow-left';
 import Footer from '@/components/footer';
-import FormattedPrice from '@/components/formatted-price';
 import ProductGrid from '@/components/product-grid';
 import { type Products, type ProductInfoType } from '@/lib/types';
 import { Suspense } from 'react';

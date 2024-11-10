@@ -11,28 +11,33 @@ import { AuthContext } from '../app/AuthContext';
 import Link from 'next/link';
 import { Button } from './ui/button';
 import { User } from 'firebase/auth';
+import { type ProductInfoType } from '@/lib/types';
 
 export default function AddToCart({
   product,
   disableBtn,
   classname,
 }: {
-  product: any;
-  disableBtn: any;
+  product: ProductInfoType;
+  disableBtn: boolean;
   classname: string;
 }) {
+  console.log('cart', product);
   const { user } = useContext(AuthContext) as { user: User | null };
   const searchParams = useSearchParams();
   const searchParamColor = searchParams.get('color') || '';
   const searchParamSpace = searchParams.get('space') || '';
   const searchParamPrice = searchParams.get('price') || product?.price;
   const searchParamSize = searchParams.get('size') || '';
-  const imageIndex = product?.colors?.findIndex(
-    (color: any) => color?.toLowerCase() === searchParamColor
-  );
+  const imageIndex: number =
+    product?.colors?.findIndex(
+      (color) => color?.toLowerCase() === searchParamColor
+    ) ?? 0;
   const colorId = searchParamColor ? `-${searchParamColor?.toLowerCase()}` : '';
   const spaceId = searchParamSpace ? `-${searchParamSpace?.toLowerCase()}` : '';
-  const priceId = searchParamPrice ? `-${searchParamPrice?.toLowerCase()}` : '';
+  const priceId = searchParamPrice
+    ? `-${searchParamPrice?.toString().toLowerCase()}`
+    : '';
   const sizeId = searchParamSize ? `-${searchParamSize?.toLowerCase()}` : '';
   const id = product?.handle + `${colorId}${spaceId}${sizeId}${priceId}`;
 
@@ -40,10 +45,10 @@ export default function AddToCart({
     handle: id,
     name: product?.name,
     price: searchParamPrice || product?.price || '',
-    color: searchParamColor || product?.color || '',
-    space: searchParamSpace || product?.space || '',
+    color: searchParamColor || product?.colors || '',
+    space: searchParamSpace || product?.storage || '',
     size: searchParamSize || product?.size || '',
-    image: product?.images[imageIndex] || product?.image,
+    image: product?.images[imageIndex] || product?.images,
     quantity: 1,
     price_id: product?.price_id,
   };

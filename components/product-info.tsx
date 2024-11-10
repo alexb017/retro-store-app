@@ -1,31 +1,21 @@
 'use client';
 
-import { useContext, useState, useCallback } from 'react';
 import AddToCart from './add-to-cart';
 import { FormattedPrice } from '../lib/utils';
-import { AuthContext } from '@/app/AuthContext';
-import Link from 'next/link';
-import {
-  usePathname,
-  useRouter,
-  useSearchParams,
-  ReadonlyURLSearchParams,
-} from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import AddToFavorite from './add-to-favorite';
 import { createUrl } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { User } from 'firebase/auth';
+import { type ProductInfoType } from '@/lib/types';
 
-export default function ProductInfo({ product }: { product: any }) {
+export default function ProductInfo({ product }: { product: ProductInfoType }) {
+  console.log('product', product);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const searchParamColor = searchParams.get('color') || '';
   const searchParamSpace = searchParams.get('space') || '';
-  const searchParamPrice = searchParams.get('price') || '';
   const searchParamSize = searchParams.get('size') || '';
-
-  let formattedPrice = FormattedPrice(product?.price);
 
   let disableBtn = true;
 
@@ -51,19 +41,20 @@ export default function ProductInfo({ product }: { product: any }) {
           <AddToFavorite product={product} disableBtn={disableBtn} />
         </div>
         <p className="text-zinc-500 text-2xl font-semibold tracking-tight dark:text-zinc-400">
-          {formattedPrice}
+          {FormattedPrice(product?.price)}
         </p>
       </div>
-      {product?.colors?.length > 0 || product?.storage?.length > 0 ? (
+      {(product?.colors?.length ?? 0) > 0 ||
+      (product?.storage?.length ?? 0) > 0 ? (
         <div className="h-[1px] w-full block bg-zinc-200 dark:bg-zinc-700"></div>
       ) : null}
-      {product?.colors?.length > 0 && (
+      {(product?.colors?.length ?? 0) > 0 && (
         <div>
           <h3 className="text-xl font-semibold tracking-tight mb-2">
             Choose your color
           </h3>
           <div className="flex items-center gap-2">
-            {product?.colors?.map((color: string) => {
+            {product?.colors?.map((color) => {
               const isActive = color.toLowerCase() === searchParamColor;
               const classname =
                 'text-sm font-medium border-2 text-black dark:text-white rounded-full hover:border-blue-500 transition-all dark:hover:border-blue-500';
@@ -95,25 +86,23 @@ export default function ProductInfo({ product }: { product: any }) {
           </div>
         </div>
       )}
-      {product?.storage?.length > 0 && (
+      {(product?.storage?.length ?? 0) > 0 && (
         <div>
           <h3 className="text-xl font-semibold tracking-tight mb-2">
             Choose your storage space
           </h3>
           <div className="flex items-center flex-wrap gap-2">
-            {product?.storage?.map((storage: any, index: number) => {
+            {product?.storage?.map((storage, index) => {
               const isActive = storage?.space === searchParamSpace;
               const classname =
                 'flex items-center justify-center text-sm border-2 text-black dark:text-white rounded-xl aspect-square w-24 h-24 hover:border-blue-500 transition-all dark:hover:border-blue-500';
-
-              let formattedPrice = FormattedPrice(storage?.price);
 
               const optionSearchParams = new URLSearchParams(
                 searchParams.toString()
               );
 
               optionSearchParams.set('space', storage?.space);
-              optionSearchParams.set('price', storage?.price);
+              optionSearchParams.set('price', storage?.price.toString());
 
               const optionUrl = createUrl(pathname, optionSearchParams);
 
@@ -132,7 +121,7 @@ export default function ProductInfo({ product }: { product: any }) {
                   <div className="flex flex-col items-center">
                     <h3 className="font-medium">{storage?.space} GB</h3>
                     <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                      {formattedPrice}
+                      {FormattedPrice(storage?.price)}
                     </p>
                   </div>
                 </Button>
@@ -141,7 +130,7 @@ export default function ProductInfo({ product }: { product: any }) {
           </div>
         </div>
       )}
-      {product?.size?.length > 0 && (
+      {(product?.size?.length ?? 0) > 0 && (
         <div>
           <h3 className="text-xl font-semibold tracking-tight mb-2">
             Choose your size

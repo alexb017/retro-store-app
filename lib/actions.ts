@@ -36,7 +36,7 @@ export async function getProduct(params: string) {
   try {
     const querySnapshot = await getDocs(collection(db, 'product-info'));
     const data = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
+      id_document: doc.id,
       ...doc.data(),
     })) as ProductInfoType[];
 
