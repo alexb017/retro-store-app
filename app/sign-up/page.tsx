@@ -23,6 +23,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import { createUser, checkUserExists } from '@/lib/actions';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Invalid email address!' }),
@@ -46,7 +47,9 @@ export default function SignUp() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // console.log(values);
+    const displayName = values.email.split('@')[0];
+    const photoURL =
+      'https://firebasestorage.googleapis.com/v0/b/task-app-771ec.appspot.com/o/blank-avatar.png?alt=media&token=8be38932-3735-418d-9038-472720cc01e7';
 
     try {
       const res = await createUserWithEmailAndPassword(
@@ -54,6 +57,11 @@ export default function SignUp() {
         values.email,
         values.password
       );
+
+      await createUser(res.user, {
+        displayName,
+        photoURL,
+      }); // Create user in Firestore
 
       if (res) {
         router.push('/');
@@ -135,6 +143,12 @@ export default function SignUp() {
               onClick={async () => {
                 try {
                   const res = await googleSignIn();
+
+                  // Check if user exists in Firestore
+                  // If not, create user
+                  if (!checkUserExists(res.user.uid)) {
+                    await createUser(res.user, {}); // Create user in Firestore
+                  }
 
                   if (res) {
                     router.push('/');

@@ -20,7 +20,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { Suspense } from 'react';
+import { createUser, checkUserExists } from '@/lib/actions';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Invalid email address!' }),
@@ -44,8 +44,6 @@ export default function Login() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // console.log(values);
-
     try {
       const res = await signInWithEmailAndPassword(
         auth,
@@ -131,6 +129,12 @@ export default function Login() {
               onClick={async () => {
                 try {
                   const res = await googleSignIn();
+
+                  // Check if user exists in Firestore
+                  // If not, create user
+                  if (!checkUserExists(res.user.uid)) {
+                    await createUser(res.user, {}); // Create user in Firestore
+                  }
 
                   if (res) {
                     router.push('/');

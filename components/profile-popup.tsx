@@ -22,19 +22,23 @@ import {
 import CartIcon from './icons/cart';
 import HeartIcon from './icons/heart';
 import { User } from 'firebase/auth';
+import useUserData from '@/lib/use-user-data';
 
-export default function ProfilePopup() {
-  const { user, userSignOut } = useContext(AuthContext) as {
-    user: User | null;
-    userSignOut: () => void;
-  };
+export default function ProfilePopup({
+  uid,
+  userSignOut,
+}: {
+  uid?: string;
+  userSignOut: () => void;
+}) {
+  const [userProfile] = useUserData(uid ?? '');
   const router = useRouter();
   const pathname = usePathname();
-  const usernameFromEmail = user?.email ? user.email.split('@')[0] : '';
+  const usernameFromEmail = userProfile?.email?.split('@')[0];
 
   return (
     <DropdownMenu modal={false}>
-      {user?.photoURL ? (
+      {userProfile?.photoURL ? (
         <>
           <DropdownMenuTrigger asChild>
             <Button
@@ -43,8 +47,8 @@ export default function ProfilePopup() {
             >
               <Image
                 className="rounded-full"
-                src={user?.photoURL}
-                alt={usernameFromEmail}
+                src={userProfile?.photoURL}
+                alt={userProfile?.displayName || 'User profile picture'}
                 width={32}
                 height={32}
               />
@@ -64,9 +68,7 @@ export default function ProfilePopup() {
         </>
       )}
       <DropdownMenuContent className="w-56 rounded-xl" align="end">
-        <DropdownMenuLabel>
-          Hi, {user?.displayName ? user?.displayName : usernameFromEmail}!
-        </DropdownMenuLabel>
+        <DropdownMenuLabel>Hi, {userProfile?.displayName}!</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem
@@ -102,9 +104,9 @@ export default function ProfilePopup() {
         <DropdownMenuGroup>
           <DropdownMenuItem
             className="cursor-pointer rounded-md"
-            onClick={async () => {
+            onClick={() => {
               try {
-                await userSignOut();
+                userSignOut();
               } catch (error: any) {
                 throw new Error(error);
               }

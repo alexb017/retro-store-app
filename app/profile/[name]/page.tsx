@@ -48,7 +48,7 @@ export default function ProfilePage({
         <div className="mt-6">
           <div className="flex flex-col">
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-              <div className="text-sm font-medium">Full name</div>
+              <div className="text-sm font-medium">Display name</div>
               <div className="mt-1 text-sm text-zinc-500 sm:col-span-2 sm:mt-0 dark:text-zinc-400">
                 {user?.displayName}
               </div>
@@ -58,17 +58,6 @@ export default function ProfilePage({
               <div className="text-sm font-medium">Email address</div>
               <div className="mt-1 text-sm text-zinc-500 sm:col-span-2 sm:mt-0 dark:text-zinc-400">
                 {user?.email}
-              </div>
-            </div>
-            <Separator className="my-4" />
-            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-              <div className="text-sm font-medium">Email verified</div>
-              <div className="mt-1 text-sm sm:col-span-2 sm:mt-0">
-                {user?.emailVerified ? (
-                  <p className="text-green-500">Verified</p>
-                ) : (
-                  <p className="text-red-500">Not verified</p>
-                )}
               </div>
             </div>
             <Separator className="my-4" />

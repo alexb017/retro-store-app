@@ -8,19 +8,19 @@ export default function useOrderData(id: string) {
   const [order, setOrder] = useState<OrderType[]>([]);
 
   useEffect(() => {
-    let unsubsribe: Unsubscribe | undefined;
+    let unsubscribe: Unsubscribe | undefined;
 
     if (id) {
       const q = doc(db, 'users-orders', id);
-      unsubsribe = onSnapshot(q, (doc) => {
+      unsubscribe = onSnapshot(q, (doc) => {
         const data = doc.data()?.order;
         setOrder(data);
       });
     }
 
     return () => {
-      if (unsubsribe) {
-        unsubsribe();
+      if (unsubscribe) {
+        unsubscribe();
       }
     };
   }, [id]);

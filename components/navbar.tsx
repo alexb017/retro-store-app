@@ -7,18 +7,19 @@ import CartIcon from './icons/cart';
 import useCartData from '@/lib/use-cart-data';
 import MobileMenu from './mobile-menu';
 import ProfilePopup from './profile-popup';
-import ArrowRightIcon from './icons/arrow-right';
 import Search from './search';
 import HeartIcon from './icons/heart';
 import useFavoriteData from '@/lib/use-favorite-data';
 import { ModeToggle } from './dark-theme';
 import { Button } from './ui/button';
-import { Github, LogIn } from 'lucide-react';
 import GithubIcon from './icons/github';
 import { User } from 'firebase/auth';
 
 export default function Navbar() {
-  const { user } = useContext(AuthContext) as { user: User | null };
+  const { user, userSignOut } = useContext(AuthContext) as {
+    user: User | null;
+    userSignOut: () => void;
+  };
   const [cart] = useCartData(user?.uid ?? '');
   const [favorite] = useFavoriteData(user?.uid ?? '');
 
@@ -117,7 +118,7 @@ export default function Navbar() {
                     </div>
                   )}
                 </Link>
-                <ProfilePopup />
+                <ProfilePopup uid={user?.uid} userSignOut={userSignOut} />
               </div>
             </>
           )}

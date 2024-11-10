@@ -16,7 +16,40 @@ import {
   increment,
 } from 'firebase/firestore';
 import { db } from './firebase';
-import { type ProductInfoType } from './types';
+import { type ProductInfoType, type UserProfile } from './types';
+
+export async function createUser(user: UserProfile, data: object) {
+  const { uid, email, displayName, photoURL } = user;
+  const userRef = doc(db, 'users', uid);
+  const userSnapshot = await getDoc(userRef);
+
+  console.log('user', user);
+
+  const userId = uid;
+
+  if (!userSnapshot.exists()) {
+    try {
+      await setDoc(userRef, {
+        userId,
+        email,
+        displayName,
+        photoURL,
+        ...data,
+      });
+    } catch (error) {
+      throw new Error('Failed to create user');
+    }
+  }
+
+  return userRef;
+}
+
+export async function checkUserExists(uid: string) {
+  const userRef = doc(db, 'users', uid);
+  const userSnapshot = await getDoc(userRef);
+
+  return userSnapshot.exists();
+}
 
 export async function getProducts() {
   try {
