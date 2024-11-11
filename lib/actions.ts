@@ -14,9 +14,10 @@ import {
   arrayUnion,
   arrayRemove,
   increment,
+  Timestamp,
 } from 'firebase/firestore';
 import { db } from './firebase';
-import { type ProductInfoType, type UserProfile } from './types';
+import { type ProductInfoType, type UserProfile, type CartItem } from './types';
 
 export async function createUser(user: UserProfile, data: object) {
   const { uid, email, displayName, photoURL } = user;
@@ -55,7 +56,7 @@ export async function getProducts() {
   try {
     const querySnapshot = await getDocs(collection(db, 'products'));
     const data = querySnapshot.docs.map((doc) => ({
-      id_document: doc.id,
+      id: doc.id,
       ...doc.data(),
     }));
 
@@ -69,7 +70,7 @@ export async function getProduct(params: string) {
   try {
     const querySnapshot = await getDocs(collection(db, 'product-info'));
     const data = querySnapshot.docs.map((doc) => ({
-      id_document: doc.id,
+      id: doc.id,
       ...doc.data(),
     })) as ProductInfoType[];
 
@@ -83,7 +84,7 @@ export async function getBanner() {
   try {
     const querySnapshot = await getDocs(collection(db, 'banner'));
     const data = querySnapshot.docs.map((doc) => ({
-      id_document: doc.id,
+      id: doc.id,
       ...doc.data(),
     }));
 
@@ -93,18 +94,27 @@ export async function getBanner() {
   }
 }
 
-export async function setCartUser(id: string, data: any) {
+export async function createCart(uid: string, cart: any) {
   try {
-    await setDoc(doc(db, 'users-cart', id), data);
+    // Add a new document in subcollection 'cart'
+    const docRef = await addDoc(collection(db, 'users', uid, 'cart'), cart);
+
+    // Update the document with the ID
+    await updateDoc(docRef, {
+      id: docRef.id,
+    });
   } catch (error) {
-    throw new Error('Failed to set cart user');
+    throw new Error('Failed to create the cart');
   }
 }
 
-export async function getUserCart(id: string) {
+export async function getCart(uid: string) {
   try {
-    const querySnapshot = await getDoc(doc(db, 'users-cart', id));
-    const data = querySnapshot.data()?.cart;
+    // Get all documents in subcollection 'cart'
+    const querySnapshot = await getDocs(collection(db, 'users', uid, 'cart'));
+    const data = querySnapshot.docs.map((doc) => ({
+      ...doc.data(),
+    }));
 
     return data;
   } catch (error) {
@@ -112,30 +122,31 @@ export async function getUserCart(id: string) {
   }
 }
 
-export async function addItemCart(id: string, item: any) {
+export async function incrementQuantity(uid: string, item: CartItem) {
   try {
-    await updateDoc(doc(db, 'users-cart', id), {
-      cart: arrayUnion(item),
+    // Increment the quantity of the item
+    const docRef = doc(db, 'users', uid, 'cart', item.id);
+    await updateDoc(docRef, {
+      quantity: increment(1),
     });
   } catch (error) {
     throw new Error('Failed to add item to cart');
   }
 }
 
-export async function deleteItemCart(id: string, item: any) {
+export async function deleteItemCart(uid: string, id: string) {
   try {
-    await updateDoc(doc(db, 'users-cart', id), {
-      cart: arrayRemove(item),
-    });
+    await deleteDoc(doc(db, 'users', uid, 'cart', id));
   } catch (error) {
     throw new Error('Failed to delete item from cart');
   }
 }
 
-export async function updateItemCart(id: string, item: any) {
+export async function decrementQuantity(uid: string, item: CartItem) {
   try {
-    await updateDoc(doc(db, 'users-cart', id), {
-      cart: item,
+    const docRef = doc(db, 'users', uid, 'cart', item.id);
+    await updateDoc(docRef, {
+      quantity: increment(-1),
     });
   } catch (error) {
     throw new Error('Failed to update item cart');

@@ -7,9 +7,13 @@ import AddToFavorite from './add-to-favorite';
 import { createUrl } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { type ProductInfoType } from '@/lib/types';
+import { useContext } from 'react';
+import { AuthContext } from '@/app/AuthContext';
+import { User } from 'firebase/auth';
+import Link from 'next/link';
 
 export default function ProductInfo({ product }: { product: ProductInfoType }) {
-  console.log('product', product);
+  const { user } = useContext(AuthContext) as { user: User | null };
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -38,7 +42,13 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
           <h1 className="text-4xl font-extrabold tracking-tight">
             {product?.name}
           </h1>
-          <AddToFavorite product={product} disableBtn={disableBtn} />
+          {user && (
+            <AddToFavorite
+              product={product}
+              disableBtn={disableBtn}
+              uid={user?.uid}
+            />
+          )}
         </div>
         <p className="text-zinc-500 text-2xl font-semibold tracking-tight dark:text-zinc-400">
           {FormattedPrice(product?.price)}
@@ -168,11 +178,21 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
           </div>
         </div>
       )}
-      <AddToCart
-        product={product}
-        disableBtn={disableBtn}
-        classname="default"
-      />
+      {!user ? (
+        <Link
+          href="/login"
+          className="flex items-center justify-center gap-4 w-full p-4 rounded-full bg-blue-500 text-white font-semibold tracking-tight transition-colors hover:bg-blue-600"
+        >
+          Sign in & Check Out
+        </Link>
+      ) : (
+        <AddToCart
+          product={product}
+          disableBtn={disableBtn}
+          classname="default"
+          uid={user?.uid}
+        />
+      )}
       <div>
         <h3 className="text-xl font-semibold tracking-tight mb-1">
           Description

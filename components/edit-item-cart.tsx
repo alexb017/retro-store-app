@@ -1,57 +1,35 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import PlusIcon from './icons/plus';
 import MinusIcon from './icons/minus';
-import { deleteItemCart, updateItemCart } from '@/lib/actions';
+import { decrementQuantity, incrementQuantity } from '@/lib/actions';
 import { useContext } from 'react';
 import { AuthContext } from '@/app/AuthContext';
-import { getUserCart } from '@/lib/actions';
 import { Button } from './ui/button';
 import { User } from 'firebase/auth';
+import { type CartItem } from '@/lib/types';
 
 export default function EditItemQuantity({
   item,
   type,
+  uid,
 }: {
-  item: any;
+  item: CartItem;
   type: 'plus' | 'minus';
+  uid: string;
 }) {
-  const { user } = useContext(AuthContext) as { user: User | null };
-
-  const router = useRouter();
-  //console.log(item);
-
   async function updateItem() {
-    const userCart = await getUserCart(user?.uid ?? '');
-
-    const quantity: any =
-      type === 'plus' ? item?.quantity + 1 : item?.quantity - 1;
-
-    // Check if item exists
-    const existingItem = userCart?.find(
-      (product: any) => product?.handle === item?.handle
-    );
-
     if (item?.quantity <= 1 && type === 'minus') {
-      //await deleteItemCart(user?.uid, existingItem);
       return;
     }
 
-    if (existingItem) {
-      // Update item with new quantity
-      const updateItem = userCart?.map((product: any) => {
-        if (product?.handle === item?.handle) {
-          return { ...product, quantity: quantity };
-        }
-        return product;
-      });
-
-      // Update db with new value
-      await updateItemCart(user?.uid ?? '', updateItem);
+    if (type === 'plus') {
+      await incrementQuantity(uid, item);
     }
 
-    //router.refresh();
+    if (type === 'minus') {
+      await decrementQuantity(uid, item);
+    }
   }
 
   return (

@@ -1,5 +1,3 @@
-import { AuthContext } from '@/app/AuthContext';
-import { useContext } from 'react';
 import HeartIcon from './icons/heart';
 import {
   addItemFavorite,
@@ -10,19 +8,18 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import useFavoriteData from '@/lib/use-favorite-data';
 import DeleteItemFavorite from './delete-item-favorite';
 import { Button } from './ui/button';
-import { User } from 'firebase/auth';
 import { type ProductInfoType } from '@/lib/types';
 
 export default function AddToFavorite({
   product,
   disableBtn,
+  uid,
 }: {
   product: ProductInfoType;
   disableBtn: boolean;
+  uid: string;
 }) {
-  console.log('favorite', product);
-  const { user } = useContext(AuthContext) as { user: User | null };
-  const [favorite] = useFavoriteData(user?.uid ?? '');
+  const [favorite] = useFavoriteData(uid ?? '');
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const searchParamColor = searchParams.get('color') || '';
@@ -64,44 +61,42 @@ export default function AddToFavorite({
 
   return (
     <>
-      {user ? (
-        !removeItem ? (
-          <>
-            <Button
-              size="icon"
-              disabled={disableBtn}
-              className={`flex bg-transparent h-auto w-auto hover:bg-transparent text-zinc-500 hover:text-blue-500 transition-all dark:text-zinc-400 dark:hover:text-blue-500 ${
-                disableBtn
-                  ? 'cursor-not-allowed opacity-50 disabled:pointer-events-auto'
-                  : 'cursor-pointer'
-              }`}
-              onClick={async () => {
-                const userFavorite = await getUserFavorite(user?.uid);
+      {!removeItem ? (
+        <>
+          <Button
+            size="icon"
+            disabled={disableBtn}
+            className={`flex bg-transparent h-auto w-auto hover:bg-transparent text-zinc-500 hover:text-blue-500 transition-all dark:text-zinc-400 dark:hover:text-blue-500 ${
+              disableBtn
+                ? 'cursor-not-allowed opacity-50 disabled:pointer-events-auto'
+                : 'cursor-pointer'
+            }`}
+            onClick={async () => {
+              const userFavorite = await getUserFavorite(uid);
 
-                if (!userFavorite) {
-                  await setUserFavorite(user?.uid, { favorite: [data] });
-                }
+              if (!userFavorite) {
+                await setUserFavorite(uid, { favorite: [data] });
+              }
 
-                const existingProduct = userFavorite?.find(
-                  (item: any) => item?.handle === id
-                );
+              const existingProduct = userFavorite?.find(
+                (item: any) => item?.handle === id
+              );
 
-                if (existingProduct) {
-                  return;
-                } else {
-                  await addItemFavorite(user?.uid, data);
-                }
-              }}
-            >
-              <HeartIcon classname="w-6 h-6" />
-            </Button>
-          </>
-        ) : (
-          <>
-            <DeleteItemFavorite id={user?.uid} item={data} />
-          </>
-        )
-      ) : null}
+              if (existingProduct) {
+                return;
+              } else {
+                await addItemFavorite(uid, data);
+              }
+            }}
+          >
+            <HeartIcon classname="w-6 h-6" />
+          </Button>
+        </>
+      ) : (
+        <>
+          <DeleteItemFavorite id={uid} item={data} />
+        </>
+      )}
     </>
   );
 }

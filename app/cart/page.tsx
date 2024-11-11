@@ -12,7 +12,7 @@ import { AuthContext } from '../AuthContext';
 import { loadStripe } from '@stripe/stripe-js';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { CartItems } from '@/lib/types';
+import { CartItem } from '@/lib/types';
 import { User } from 'firebase/auth';
 
 const stripePromise = loadStripe(
@@ -23,21 +23,22 @@ export default function Cart() {
   const { user } = useContext(AuthContext) as { user: User | null };
   const [cart] = useCartData(user?.uid ?? '');
 
+  // Calculate total quantity
   const quantity = cart?.reduce(
-    (total, current: CartItems) => total + current.quantity,
+    (total, current: CartItem) => total + current.quantity,
     0
   );
 
+  // Calculate total price
   const totalPrice = cart?.reduce(
-    (total, current: CartItems) =>
-      total + Number.parseInt(current?.price, 10) * current?.quantity,
+    (total, current: CartItem) => total + current?.price * current?.quantity,
     0
   );
 
   async function handleCheckout(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const items = cart.map((item: CartItems) => {
+    const items = cart.map((item: CartItem) => {
       return { price: item?.price_id, quantity: item?.quantity };
     });
 
@@ -59,12 +60,10 @@ export default function Cart() {
         const { error } = await stripe.redirectToCheckout({ sessionId });
 
         if (error) {
-          // console.error('Redirect to checkout error:', error);
           throw new Error('Error during checkout process');
         }
       }
     } catch (error) {
-      // console.error('Checkout error:', error);
       throw new Error('Error during checkout process');
     }
   }
@@ -106,7 +105,7 @@ export default function Cart() {
             <>
               <div className="flex flex-col md:flex-row md:justify-between gap-8 md:gap-12">
                 <ul className="flex flex-col md:w-7/12">
-                  {cart?.map((item, index) => {
+                  {cart?.map((item: CartItem, index) => {
                     const price = FormattedPrice(item?.price);
                     const color =
                       item?.color.charAt(0).toUpperCase() +
@@ -150,14 +149,25 @@ export default function Cart() {
                           </div>
                           <div className="flex flex-col items-end justify-between">
                             <div className="flex items-center border border-zinc-200 rounded-full dark:border-zinc-700">
-                              <EditItemQuantity item={item} type="minus" />
+                              <EditItemQuantity
+                                item={item}
+                                type="minus"
+                                uid={user?.uid ?? ''}
+                              />
                               <p className="text-sm font-semibold">
                                 {item?.quantity}
                               </p>
-                              <EditItemQuantity item={item} type="plus" />
+                              <EditItemQuantity
+                                item={item}
+                                type="plus"
+                                uid={user?.uid ?? ''}
+                              />
                             </div>
                             {/* <p className="text-sm font-medium">{price}</p> */}
-                            <DeleteItemCart id={user?.uid ?? ''} item={item} />
+                            <DeleteItemCart
+                              uid={user?.uid ?? ''}
+                              id={item?.id}
+                            />
                           </div>
                         </li>
                         <Separator className="my-4" />
@@ -171,9 +181,7 @@ export default function Cart() {
                   </h4>
                   <div className="flex items-center justify-between">
                     <p className="text-sm">Subtotal</p>
-                    <p className="text-sm">
-                      {FormattedPrice(totalPrice?.toString())}
-                    </p>
+                    <p className="text-sm">{FormattedPrice(totalPrice)}</p>
                   </div>
                   <Separator className="my-2" />
                   <div className="flex items-center justify-between">
@@ -194,7 +202,7 @@ export default function Cart() {
                   <div className="flex items-center justify-between mb-5">
                     <p className="font-semibold">Estimated total</p>
                     <p className="font-semibold">
-                      {FormattedPrice(totalPrice?.toString())}
+                      {FormattedPrice(totalPrice)}
                     </p>
                   </div>
                   <form onSubmit={handleCheckout}>

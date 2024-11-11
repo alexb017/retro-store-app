@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 import { collection, onSnapshot, doc, Unsubscribe } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
-import { type FavoriteType } from './types';
 
 // Custom hook to listen for updates on favorite
 export default function useFavoriteData(id: string) {
-  const [favorite, setFavorite] = useState<FavoriteType[]>([]);
+  const [favorite, setFavorite] = useState<any>([]);
 
   useEffect(() => {
     let unsubsribe: Unsubscribe | undefined;

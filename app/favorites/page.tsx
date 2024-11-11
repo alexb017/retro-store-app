@@ -50,7 +50,7 @@ export default function Favorite() {
           ) : (
             <>
               <ul>
-                {favorite?.map((fav, index) => {
+                {favorite?.map((fav: any, index: number) => {
                   const color =
                     fav?.color.charAt(0).toUpperCase() + fav?.color.slice(1);
                   const size = fav?.size ? ` / ${fav?.size.toUpperCase()}` : '';
@@ -91,8 +91,9 @@ export default function Favorite() {
                           <DeleteItemFavorite id={user?.uid ?? ''} item={fav} />
                           <AddToCart
                             product={fav}
-                            disableBtn={null}
+                            disableBtn={false}
                             classname="favorite"
+                            uid={user?.uid ?? ''}
                           />
                         </div>
                       </li>

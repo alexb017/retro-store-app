@@ -1,19 +1,23 @@
 import { useState, useEffect } from 'react';
 import { collection, onSnapshot, doc, Unsubscribe } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
-import { type CartItems } from './types';
+import { type CartItem } from './types';
 
 // Custom hook to listen for updates on cart
-export default function useCartData(id: string) {
-  const [cart, setCart] = useState<CartItems[]>([]);
+export default function useCartData(uid: string) {
+  const [cart, setCart] = useState<CartItem[]>([]);
 
   useEffect(() => {
     let unsubsribe: Unsubscribe | undefined;
 
-    if (id) {
-      const q = doc(db, 'users-cart', id);
-      unsubsribe = onSnapshot(q, (doc) => {
-        const data = doc.data()?.cart;
+    if (uid) {
+      const q = collection(db, 'users', uid, 'cart');
+      unsubsribe = onSnapshot(q, (querySnapshot) => {
+        const data: CartItem[] = [];
+        querySnapshot.forEach((doc) => {
+          data.push(doc.data() as CartItem);
+        });
+
         setCart(data);
       });
     }
@@ -23,7 +27,7 @@ export default function useCartData(id: string) {
         unsubsribe();
       }
     };
-  }, [id]);
+  }, [uid]);
 
   return [cart];
 }
