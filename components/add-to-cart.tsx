@@ -1,25 +1,27 @@
 import PlusIcon from './icons/plus';
-import { createCart } from '@/lib/actions';
+import { createCart, incrementQuantity } from '@/lib/actions';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from './ui/button';
 import { type ProductInfoType, type CartItem } from '@/lib/types';
+import useCartData from '@/lib/use-cart-data';
 
 export default function AddToCart({
-  product,
+  item,
   disableBtn,
   classname,
   uid,
 }: {
-  product: ProductInfoType;
+  item: ProductInfoType;
   disableBtn: boolean;
   classname: string;
   uid: string;
 }) {
+  const [cart] = useCartData(uid ?? '');
   const searchParams = useSearchParams();
   const searchParamColor = searchParams.get('color') || '';
   const searchParamSpace = searchParams.get('space') || undefined;
-  const searchParamPrice = Number(searchParams.get('price')) || product?.price;
+  const searchParamPrice = Number(searchParams.get('price')) || item?.price;
   const searchParamSize = searchParams.get('size') || undefined;
   const colorId = searchParamColor ? `-${searchParamColor?.toLowerCase()}` : '';
   const spaceId = searchParamSpace ? `-${searchParamSpace?.toLowerCase()}` : '';
@@ -27,12 +29,12 @@ export default function AddToCart({
     ? `-${searchParamPrice?.toString().toLowerCase()}`
     : '';
   const sizeId = searchParamSize ? `-${searchParamSize?.toLowerCase()}` : '';
-  const id = product?.handle + `${colorId}${spaceId}${sizeId}${priceId}`;
+  const id = item?.handle + `${colorId}${spaceId}${sizeId}${priceId}`;
 
   // Get the index of the color to match the image
   // If the color is not found, return 0
   const imageIndex: number =
-    product?.colors?.findIndex(
+    item?.colors?.findIndex(
       (color) => color?.toLowerCase() === searchParamColor
     ) ?? 0;
 
@@ -41,23 +43,26 @@ export default function AddToCart({
   const classFavorite =
     'flex items-center gap-2 text-sm rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-500 dark:text-zinc-400 dark:bg-zinc-900 dark:hover:bg-zinc-800';
 
-  const cart: CartItem = {
-    id: '',
+  const cartItems: CartItem = {
+    id_cart: '',
     handle: id,
-    name: product?.name,
+    name: item?.name,
     price: searchParamPrice,
     color: searchParamColor,
     space: searchParamSpace,
     size: searchParamSize,
-    image: product?.images[imageIndex],
+    image: item?.images[imageIndex],
     quantity: 1,
-    price_id: product?.price_id,
+    price_id: item?.price_id,
   };
 
   // Remove undefined values from the object
   const itemToAdd = Object.fromEntries(
-    Object.entries(cart).filter(([_, value]) => value !== undefined)
+    Object.entries(cartItems).filter(([_, value]) => value !== undefined)
   );
+
+  // Check if the item is already in the cart
+  const itemAlreadyExist = cart?.find((item: CartItem) => item?.handle === id);
 
   return (
     <>
@@ -69,6 +74,11 @@ export default function AddToCart({
             : 'cursor-pointer'
         }`}
         onClick={async () => {
+          if (itemAlreadyExist) {
+            await incrementQuantity(uid, itemAlreadyExist);
+            return;
+          }
+
           // Add item to cart
           await createCart(uid, itemToAdd);
         }}

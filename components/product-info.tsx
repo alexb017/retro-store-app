@@ -187,7 +187,7 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
         </Link>
       ) : (
         <AddToCart
-          product={product}
+          item={product}
           disableBtn={disableBtn}
           classname="default"
           uid={user?.uid}

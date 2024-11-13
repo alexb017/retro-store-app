@@ -101,7 +101,7 @@ export async function createCart(uid: string, cart: any) {
 
     // Update the document with the ID
     await updateDoc(docRef, {
-      id: docRef.id,
+      id_cart: docRef.id,
     });
   } catch (error) {
     throw new Error('Failed to create the cart');
@@ -125,7 +125,7 @@ export async function getCart(uid: string) {
 export async function incrementQuantity(uid: string, item: CartItem) {
   try {
     // Increment the quantity of the item
-    const docRef = doc(db, 'users', uid, 'cart', item.id);
+    const docRef = doc(db, 'users', uid, 'cart', item.id_cart);
     await updateDoc(docRef, {
       quantity: increment(1),
     });
@@ -144,7 +144,7 @@ export async function deleteItemCart(uid: string, id: string) {
 
 export async function decrementQuantity(uid: string, item: CartItem) {
   try {
-    const docRef = doc(db, 'users', uid, 'cart', item.id);
+    const docRef = doc(db, 'users', uid, 'cart', item.id_cart);
     await updateDoc(docRef, {
       quantity: increment(-1),
     });
@@ -153,14 +153,28 @@ export async function decrementQuantity(uid: string, item: CartItem) {
   }
 }
 
-export async function getUserOrder(id: string) {
+export async function createFavorites(uid: string, item: object) {
   try {
-    const querySnapshot = await getDoc(doc(db, 'users-orders', id));
-    const data = querySnapshot.data()?.order;
+    // Add a new document in subcollection 'favorites'
+    const docRef = await addDoc(
+      collection(db, 'users', uid, 'favorites'),
+      item
+    );
 
-    return data;
+    // Update the document with the ID
+    await updateDoc(docRef, {
+      id_favorite: docRef.id,
+    });
   } catch (error) {
-    throw new Error('Failed to get user order');
+    throw new Error('Failed to create the favorites');
+  }
+}
+
+export async function deleteItemFavorite(uid: string, id: string) {
+  try {
+    await deleteDoc(doc(db, 'users', uid, 'favorites', id));
+  } catch (error) {
+    throw new Error('Failed to delete item from favorite');
   }
 }
 
@@ -218,15 +232,5 @@ export async function updateItemFavorite(id: string, item: any) {
     });
   } catch (error) {
     throw new Error('Failed to update item favorite');
-  }
-}
-
-export async function deleteItemFavorite(id: string, item: any) {
-  try {
-    await updateDoc(doc(db, 'users-favorite', id), {
-      favorite: arrayRemove(item),
-    });
-  } catch (error) {
-    throw new Error('Failed to delete item from favorite');
   }
 }

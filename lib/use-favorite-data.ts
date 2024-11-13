@@ -1,19 +1,24 @@
 import { useState, useEffect } from 'react';
 import { collection, onSnapshot, doc, Unsubscribe } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { type FavoriteItem } from './types';
 
 // Custom hook to listen for updates on favorite
-export default function useFavoriteData(id: string) {
-  const [favorite, setFavorite] = useState<any>([]);
+export default function useFavoriteData(uid: string) {
+  const [favorites, setFavorites] = useState<FavoriteItem[]>([]);
 
   useEffect(() => {
     let unsubsribe: Unsubscribe | undefined;
 
-    if (id) {
-      const q = doc(db, 'users-favorite', id);
-      unsubsribe = onSnapshot(q, (doc) => {
-        const data = doc.data()?.favorite;
-        setFavorite(data);
+    if (uid) {
+      const q = collection(db, 'users', uid, 'favorites');
+      unsubsribe = onSnapshot(q, (querySnapshot) => {
+        const data: FavoriteItem[] = [];
+        querySnapshot.forEach((doc) => {
+          data.push(doc.data() as FavoriteItem);
+        });
+
+        setFavorites(data);
       });
     }
 
@@ -22,7 +27,7 @@ export default function useFavoriteData(id: string) {
         unsubsribe();
       }
     };
-  }, [id]);
+  }, [uid]);
 
-  return [favorite];
+  return [favorites];
 }

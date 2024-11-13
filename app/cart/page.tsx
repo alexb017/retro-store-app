@@ -166,7 +166,7 @@ export default function Cart() {
                             {/* <p className="text-sm font-medium">{price}</p> */}
                             <DeleteItemCart
                               uid={user?.uid ?? ''}
-                              id={item?.id}
+                              id={item?.id_cart}
                             />
                           </div>
                         </li>

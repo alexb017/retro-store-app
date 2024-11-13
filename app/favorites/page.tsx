@@ -12,12 +12,18 @@ import DeleteItemFavorite from '@/components/delete-item-favorite';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { User } from 'firebase/auth';
+import { type FavoriteItem } from '@/lib/types';
+import PlusIcon from '@/components/icons/plus';
+import { createCart } from '@/lib/actions';
+import useCartData from '@/lib/use-cart-data';
+import { incrementQuantity } from '@/lib/actions';
 
 export default function Favorite() {
   const { user } = useContext(AuthContext) as { user: User | null };
-  const [favorite] = useFavoriteData(user?.uid ?? '');
+  const [favorites] = useFavoriteData(user?.uid ?? '');
+  const [cart] = useCartData(user?.uid ?? '');
 
-  const countFavorite = favorite?.length || 0;
+  const countFavorite = favorites?.length || 0;
 
   return (
     <>
@@ -33,7 +39,7 @@ export default function Favorite() {
               )
             </span>
           </h1>
-          {!favorite || favorite?.length === 0 ? (
+          {!favorites || favorites?.length === 0 ? (
             <>
               <div className="flex flex-col items-center">
                 <h3 className="text-xl font-semibold tracking-tight">
@@ -50,7 +56,7 @@ export default function Favorite() {
           ) : (
             <>
               <ul>
-                {favorite?.map((fav: any, index: number) => {
+                {favorites?.map((fav: FavoriteItem, index: number) => {
                   const color =
                     fav?.color.charAt(0).toUpperCase() + fav?.color.slice(1);
                   const size = fav?.size ? ` / ${fav?.size.toUpperCase()}` : '';
@@ -80,7 +86,7 @@ export default function Favorite() {
                               {/* <DeleteItemFavorite id={user?.uid} item={fav} /> */}
                             </div>
                             <Link
-                              href={fav?.pathUrl}
+                              href={fav?.path_url ?? '/'}
                               className="text-sm text-blue-500 border-b border-zinc-500 hover:border-zinc-900 dark:text-blue-400 dark:hover:border-zinc-400"
                             >
                               See Item
@@ -88,13 +94,32 @@ export default function Favorite() {
                           </div>
                         </div>
                         <div className="flex flex-col items-end gap-2 md:flex-row md:items-center md:gap-4">
-                          <DeleteItemFavorite id={user?.uid ?? ''} item={fav} />
-                          <AddToCart
-                            product={fav}
-                            disableBtn={false}
-                            classname="favorite"
+                          <DeleteItemFavorite
                             uid={user?.uid ?? ''}
+                            id={fav?.id_favorite}
                           />
+                          <Button
+                            className="text-white bg-zinc-900 rounded-full hover:bg-blue-600 transition-colors shadow-md"
+                            onClick={async () => {
+                              const itemAlreadyExist = cart?.find(
+                                (item) => item?.id_favorite === fav?.id_favorite
+                              );
+
+                              if (itemAlreadyExist) {
+                                await incrementQuantity(
+                                  user?.uid ?? '',
+                                  itemAlreadyExist
+                                );
+                                return;
+                              }
+
+                              // Add item to cart
+                              await createCart(user?.uid ?? '', fav);
+                            }}
+                          >
+                            <PlusIcon classname="h-4 w-4" />
+                            Add to Cart
+                          </Button>
                         </div>
                       </li>
                       <Separator className="my-4" />

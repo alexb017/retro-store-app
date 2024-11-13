@@ -21,14 +21,14 @@ export default function Navbar() {
     userSignOut: () => void;
   };
   const [cart] = useCartData(user?.uid ?? '');
-  const [favorite] = useFavoriteData(user?.uid ?? '');
+  const [favorites] = useFavoriteData(user?.uid ?? '');
 
   const quantity = cart?.reduce(
     (total, current: any) => total + current.quantity,
     0
   );
 
-  const countFavorite = favorite?.length;
+  const countFavorite = favorites?.length;
 
   const links = [
     { name: 'All', href: '/search' },
@@ -101,7 +101,7 @@ export default function Navbar() {
                   className="relative flex text-zinc-500 hover:text-blue-500 dark:text-zinc-400 dark:hover:text-white transition-color ease-in-out duration-200"
                 >
                   <HeartIcon classname="h-6" />
-                  {favorite?.length > 0 && (
+                  {favorites?.length > 0 && (
                     <div className="absolute top-0 right-0 -mr-1 -mt-1 flex items-center justify-center h-4 w-4 rounded-full text-[11px] font-medium text-white bg-blue-500">
                       {countFavorite}
                     </div>

@@ -51,7 +51,7 @@ export type Banner = {
 };
 
 export type CartItem = {
-  id: string;
+  id_cart: string;
   name: string;
   price: number;
   image: string;
@@ -61,4 +61,20 @@ export type CartItem = {
   space?: string;
   quantity: number;
   price_id: string;
+  id_favorite?: string;
+};
+
+export type FavoriteItem = {
+  id_favorite: string;
+  name: string;
+  price: number;
+  image: string;
+  handle: string;
+  color: string;
+  size?: string;
+  space?: string;
+  price_id: string;
+  path_url?: string;
+  favorite?: boolean;
+  quantity: number;
 };
