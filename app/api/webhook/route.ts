@@ -76,6 +76,12 @@ export async function POST(req: NextRequest) {
       // Fulfill the purchase...
       await fullFillCheckout(session.id);
       break;
+    case 'checkout.session.async_payment_succeeded':
+      const asyncSession = event.data.object as Stripe.Checkout.Session;
+      // console.log('Async payment succeeded!', asyncSession);
+      // Fulfill the purchase...
+      await fullFillCheckout(asyncSession.id);
+      break;
     default:
       console.log(`Unhandled event type ${event.type}`);
   }
