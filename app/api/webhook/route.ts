@@ -68,22 +68,14 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Handle the event
-  switch (event.type) {
-    case 'checkout.session.completed':
-      const session = event.data.object as Stripe.Checkout.Session;
-      // console.log('Checkout session completed!', session);
-      // Fulfill the purchase...
-      await fullFillCheckout(session.id);
-      break;
-    case 'checkout.session.async_payment_succeeded':
-      const asyncSession = event.data.object as Stripe.Checkout.Session;
-      // console.log('Async payment succeeded!', asyncSession);
-      // Fulfill the purchase...
-      await fullFillCheckout(asyncSession.id);
-      break;
-    default:
-      console.log(`Unhandled event type ${event.type}`);
+  if (event.type === 'checkout.session.completed') {
+    const session = event.data.object as Stripe.Checkout.Session;
+    // console.log('Checkout session completed!', session);
+
+    // Fulfill the purchase...
+    await fullFillCheckout(session.id);
+  } else {
+    console.warn(`Unhandled event type: ${event.type}`);
   }
 
   return NextResponse.json({ received: true });
