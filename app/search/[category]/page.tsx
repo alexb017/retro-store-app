@@ -24,15 +24,11 @@ export default async function CategoryPage({
   );
 
   if (searchParamsQSort.sort === 'asc') {
-    productsFiltered.sort(
-      (a, b) => Number.parseInt(a.price, 10) - Number.parseInt(b.price, 10)
-    );
+    productsFiltered.sort((a, b) => a.price - b.price);
   }
 
   if (searchParamsQSort.sort === 'des') {
-    productsFiltered.sort(
-      (a, b) => Number.parseInt(b.price, 10) - Number.parseInt(a.price, 10)
-    );
+    productsFiltered.sort((a, b) => b.price - a.price);
   }
 
   return (

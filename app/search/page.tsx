@@ -23,15 +23,11 @@ export default async function SearchPage({
   );
 
   if (params.sort === 'asc') {
-    productsFiltered.sort(
-      (a, b) => Number.parseInt(a.price, 10) - Number.parseInt(b.price, 10)
-    );
+    productsFiltered.sort((a, b) => a.price - b.price);
   }
 
   if (params.sort === 'des') {
-    productsFiltered.sort(
-      (a, b) => Number.parseInt(b.price, 10) - Number.parseInt(a.price, 10)
-    );
+    productsFiltered.sort((a, b) => b.price - a.price);
   }
 
   return (

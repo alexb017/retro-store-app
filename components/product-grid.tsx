@@ -1,14 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { getProducts } from '@/lib/actions';
 import { FormattedPrice } from '../lib/utils';
-import ArrowRightIcon from './icons/arrow-right';
-import TagIcon from './icons/tag';
-import { Product } from '@/lib/types';
+import { Products } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardFooter } from './ui/card';
 import { Button } from './ui/button';
 
-export default function ProductGrid({ products }: { products: Product[] }) {
+export default function ProductGrid({ products }: { products: Products[] }) {
   return (
     <>
       {products?.map((product, index) => {

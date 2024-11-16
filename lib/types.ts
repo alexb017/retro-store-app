@@ -78,3 +78,12 @@ export type FavoriteItem = {
   favorite?: boolean;
   quantity: number;
 };
+
+export type OrderItems = {
+  items: CartItem[];
+  amount_total: number;
+  name: string;
+  status: string;
+  created_at: number;
+  order_id: string;
+};

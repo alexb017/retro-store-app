@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
 if (!process.env.STRIPE_SECRET_KEY) {
@@ -7,7 +7,7 @@ if (!process.env.STRIPE_SECRET_KEY) {
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   if (req.method !== 'POST') {
     return NextResponse.json({ error: 'Method not allowed' }, { status: 405 });
   }
@@ -22,7 +22,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const { items } = body;
+    const { userId, items } = body;
 
     const lineItems = items.map((item: any) => {
       if (!item?.price || !item?.quantity) {
@@ -31,13 +31,19 @@ export async function POST(req: Request) {
       return { price: item?.price, quantity: item?.quantity };
     });
 
+    // Unique id for the Order
+    const orderId = Math.floor(
+      1000000000 + Math.random() * 9000000000
+    ).toString();
+
     // Create Checkout Session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
-      success_url: `https://retro-store-app-alexb017s-projects.vercel.app/success`,
-      cancel_url: `https://retro-store-app-alexb017s-projects.vercel.app/cart`,
+      success_url: `${req.headers.get('origin')}/success?orderId=${orderId}`,
+      cancel_url: `${req.headers.get('origin')}/cart`,
+      metadata: { userId, orderId },
     });
 
     // https://retro-store-app-alexb017s-projects.vercel.app/success

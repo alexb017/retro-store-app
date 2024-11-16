@@ -1,19 +1,22 @@
 import { useState, useEffect } from 'react';
 import { collection, onSnapshot, doc, Unsubscribe } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
-import { type OrderType } from './types';
+import { type OrderItems } from './types';
 
 // Custom hook to listen for updates on order
-export default function useOrderData(id: string) {
-  const [order, setOrder] = useState<OrderType[]>([]);
+export default function useOrderData(uid: string) {
+  const [order, setOrder] = useState<OrderItems[] | null>(null);
 
   useEffect(() => {
     let unsubscribe: Unsubscribe | undefined;
 
-    if (id) {
-      const q = doc(db, 'users-orders', id);
-      unsubscribe = onSnapshot(q, (doc) => {
-        const data = doc.data()?.order;
+    if (uid) {
+      const q = collection(db, 'users', uid, 'orders');
+      unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const data: OrderItems[] = [];
+        querySnapshot.forEach((doc) => {
+          data.push(doc.data() as OrderItems);
+        });
         setOrder(data);
       });
     }
@@ -23,7 +26,7 @@ export default function useOrderData(id: string) {
         unsubscribe();
       }
     };
-  }, [id]);
+  }, [uid]);
 
   return [order];
 }

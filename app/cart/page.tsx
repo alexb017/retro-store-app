@@ -7,13 +7,14 @@ import DeleteItemCart from '@/components/delete-item-cart';
 import Footer from '@/components/footer';
 import useCartData from '@/lib/use-cart-data';
 import { FormattedPrice } from '@/lib/utils';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { AuthContext } from '../AuthContext';
 import { loadStripe } from '@stripe/stripe-js';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { CartItem } from '@/lib/types';
 import { User } from 'firebase/auth';
+import { getCart } from '@/lib/actions';
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
@@ -38,6 +39,7 @@ export default function Cart() {
   async function handleCheckout(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    const userId = user?.uid;
     const items = cart.map((item: CartItem) => {
       return { price: item?.price_id, quantity: item?.quantity };
     });
@@ -48,7 +50,7 @@ export default function Cart() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ items }),
+        body: JSON.stringify({ userId, items }),
       });
 
       const { sessionId } = await response.json();
