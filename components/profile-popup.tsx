@@ -87,7 +87,7 @@ export default function ProfilePopup({
           </DropdownMenuItem>
           <DropdownMenuItem
             className="cursor-pointer rounded-md"
-            onClick={() => router.push(`/orders/${usernameFromEmail}`)}
+            onClick={() => router.push(`/orders`)}
           >
             <ShoppingBagIcon classname="w-4 h-4 mr-2" />
             <span>Orders</span>

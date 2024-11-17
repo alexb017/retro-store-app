@@ -177,3 +177,16 @@ export async function deleteItemFavorite(uid: string, id: string) {
     throw new Error('Failed to delete item from favorite');
   }
 }
+
+export async function getOrders(uid: string) {
+  try {
+    const querySnapshot = await getDocs(collection(db, 'users', uid, 'orders'));
+    const data = querySnapshot.docs.map((doc) => ({
+      ...doc.data(),
+    }));
+
+    return data;
+  } catch (error) {
+    throw new Error('Failed to get user order');
+  }
+}
