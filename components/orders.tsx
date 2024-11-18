@@ -112,7 +112,7 @@ export default function Orders() {
                       </h4>
                       <Link
                         href={`/profile/order/${item?.order_id}`}
-                        className="text-xs text-blue-500 underline dark:text-blue-400"
+                        className="text-xs text-blue-500 border-b border-neutral-500 hover:bg-neutral-100 dark:text-blue-400 dark:hover:bg-neutral-800 transition-all duration-200 ease-in"
                       >
                         View order details
                       </Link>

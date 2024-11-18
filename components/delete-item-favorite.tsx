@@ -1,7 +1,8 @@
 'use client';
 
+import { Button } from './ui/button';
 import { deleteItemFavorite } from '@/lib/actions';
-import HeartFillIcon from './icons/heart-fill';
+import { Trash2 } from 'lucide-react';
 
 export default function DeleteItemFavorite({
   uid,
@@ -11,11 +12,13 @@ export default function DeleteItemFavorite({
   id: string;
 }) {
   return (
-    <button
+    <Button
+      variant="ghost"
       onClick={async () => await deleteItemFavorite(uid, id)}
-      className="flex text-blue-500 transition-all"
+      className="text-xs rounded-full transition-all duration-200 ease-in"
     >
-      <HeartFillIcon classname="w-6 h-6" />
-    </button>
+      <Trash2 className="w-4 h-4" />
+      Delete
+    </Button>
   );
 }
