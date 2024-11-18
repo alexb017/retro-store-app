@@ -73,7 +73,7 @@ export default function ProfilePopup({
         <DropdownMenuGroup>
           <DropdownMenuItem
             className="cursor-pointer rounded-md"
-            onClick={() => router.push(`/profile/${usernameFromEmail}`)}
+            onClick={() => router.push(`/profile`)}
           >
             <UserIcon classname="w-4 h-4 mr-2" />
             <span>Profile</span>

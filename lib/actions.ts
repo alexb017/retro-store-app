@@ -46,10 +46,25 @@ export async function createUser(user: UserProfile, data: object) {
 }
 
 export async function checkUserExists(uid: string) {
-  const userRef = doc(db, 'users', uid);
-  const userSnapshot = await getDoc(userRef);
+  try {
+    const userRef = doc(db, 'users', uid);
+    const userSnapshot = await getDoc(userRef);
 
-  return userSnapshot.exists();
+    return userSnapshot.exists();
+  } catch (error) {
+    throw new Error('Failed to check user exists');
+  }
+}
+
+export async function getUser(uid: string) {
+  try {
+    const userRef = doc(db, 'users', uid);
+    const userSnapshot = await getDoc(userRef);
+
+    return userSnapshot.data();
+  } catch (error) {
+    throw new Error('Failed to get user');
+  }
 }
 
 export async function getProducts() {
