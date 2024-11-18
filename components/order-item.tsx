@@ -54,7 +54,7 @@ export default function OrderItem({ id }: { id: string }) {
           </span>
         </p>
       </div>
-      <div className="flex flex-col gap-4 bg-white p-4 rounded-3xl dark:bg-neutral-900">
+      <div className="flex flex-col gap-4 bg-white p-4 rounded-xl dark:bg-neutral-900">
         {order?.items.map((item: CartItem) => {
           const color =
             item?.color.charAt(0).toUpperCase() + item?.color.slice(1);
@@ -66,8 +66,8 @@ export default function OrderItem({ id }: { id: string }) {
               key={item?.id_cart}
               className="flex flex-row items-center justify-between"
             >
-              <div className="flex flex-row gap-4 items-center">
-                <div className="flex items-center justify-center p-1 w-16 h-16 bg-neutral-100 rounded-3xl dark:bg-neutral-800">
+              <div className="flex items-center gap-4">
+                <div className="flex items-center justify-center aspect-square">
                   <Image
                     src={item?.image}
                     alt={item?.name}

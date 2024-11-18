@@ -59,7 +59,7 @@ export default function Orders() {
               return (
                 <div
                   key={item?.order_id}
-                  className="flex flex-col gap-1 bg-white p-4 rounded-3xl dark:bg-neutral-900"
+                  className="flex flex-col gap-1 bg-white p-4 rounded-xl dark:bg-neutral-900"
                 >
                   <div className="flex flex-row justify-between">
                     <p className="text-xs text-neutral-500 dark:text-neutral-400">
@@ -87,11 +87,9 @@ export default function Orders() {
                         return (
                           <div
                             key={item?.id_cart}
-                            className={`flex flex-row ${
-                              index !== 0 ? '-ml-2' : ''
-                            }`}
+                            className="flex items-center"
                           >
-                            <div className="flex items-center justify-center w-16 h-16 p-1 border-2 border-white bg-neutral-100 rounded-3xl dark:border-neutral-900 dark:bg-neutral-800">
+                            <div className="flex items-center justify-center aspect-square">
                               <Image
                                 src={item?.image}
                                 alt={item?.handle}

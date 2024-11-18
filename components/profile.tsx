@@ -27,7 +27,7 @@ export default function Profile() {
   const nameFromEmail = userProfile?.email?.split('@')[0];
 
   return (
-    <div className="flex flex-col gap-4 w-full p-4 bg-white rounded-3xl dark:bg-neutral-900">
+    <div className="flex flex-col gap-4 w-full p-4 bg-white rounded-xl dark:bg-neutral-900">
       <div className="flex flex-col items-start gap-4 px-4 sm:px-0">
         <div className="w-16 h-16 block">
           <Image

@@ -64,10 +64,10 @@ export default function Favorites() {
               return (
                 <li
                   key={index}
-                  className="w-full flex flex-row items-center justify-between bg-white p-4 rounded-3xl dark:bg-neutral-900"
+                  className="w-full flex flex-row items-center justify-between bg-white p-4 rounded-xl dark:bg-neutral-900"
                 >
                   <div className="flex flex-row items-center gap-4">
-                    <div className="flex items-center justify-center relative rounded-3xl aspect-square bg-neutral-100 dark:bg-neutral-800">
+                    <div className="flex items-center justify-center aspect-square">
                       <Image
                         src={fav?.image}
                         alt={fav?.name}
