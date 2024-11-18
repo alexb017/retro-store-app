@@ -22,7 +22,7 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          'text-black dark:text-white dark:bg-zinc-950 antialiased',
+          'text-black bg-neutral-50 dark:text-white dark:bg-neutral-950 antialiased',
           inter.className
         )}
       >

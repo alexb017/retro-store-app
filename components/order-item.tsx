@@ -20,6 +20,8 @@ export default function OrderItem({ id }: { id: string }) {
         const order = orders.find(
           (item: OrderItems) => item?.order_id === id
         ) as OrderItems;
+
+        // console.log('order', order);
         setOrder(order);
       };
 
@@ -27,17 +29,37 @@ export default function OrderItem({ id }: { id: string }) {
     }
   }, [user, id]);
 
+  if (!order) {
+    return null;
+  }
+
+  const totalPrice = order?.items.reduce(
+    (total, current) => total + current?.price * current?.quantity,
+    0
+  );
+
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-base font-semibold text-center">
-        <span className="text-zinc-500">ID</span> {order?.order_id}
-      </h1>
-      <div className="flex flex-col gap-4">
+      <div className="flex justify-between px-4">
+        <h1 className="text-base">
+          <span className="text-neutral-500 dark:text-neutral-400">
+            Order ID
+          </span>{' '}
+          <span className="font-semibold">{order?.order_id}</span> 📦
+        </h1>
+        <p className="text-sm text-neutral-500 dark:text-neutral-400">
+          Status:{' '}
+          <span className="text-green-500 uppercase font-semibold">
+            {order?.status}
+          </span>
+        </p>
+      </div>
+      <div className="flex flex-col gap-4 bg-white p-4 rounded-3xl dark:bg-neutral-900">
         {order?.items.map((item: CartItem) => {
           const color =
             item?.color.charAt(0).toUpperCase() + item?.color.slice(1);
-          const size = item?.size ? ` / ${item?.size.toUpperCase()}` : '';
-          const space = item?.space ? ` / ${item?.space}GB` : '';
+          const size = item?.size ? `${item?.size.toUpperCase()}` : '';
+          const space = item?.space ? `${item?.space}GB` : '';
 
           return (
             <div
@@ -45,7 +67,7 @@ export default function OrderItem({ id }: { id: string }) {
               className="flex flex-row items-center justify-between"
             >
               <div className="flex flex-row gap-4 items-center">
-                <div className="w-16 h-16 bg-zinc-50 rounded-xl">
+                <div className="flex items-center justify-center p-1 w-16 h-16 bg-neutral-100 rounded-3xl dark:bg-neutral-800">
                   <Image
                     src={item?.image}
                     alt={item?.name}
@@ -57,58 +79,63 @@ export default function OrderItem({ id }: { id: string }) {
                   <h4 className="text-xl font-semibold tracking-tight">
                     {item?.name}
                   </h4>
-                  <p className="text-xs">
-                    {color}
-                    {size}
-                    {space}
+                  <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                    {color ? `Color: ${color}` : ''}
+                  </p>
+                  <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                    {size ? `Size: ${size}` : ''}
+                  </p>
+                  <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                    {space ? `Space: ${space}` : ''}
                   </p>
                 </div>
               </div>
-              <div className="flex flex-row gap-20">
-                <p className="text-xs">Quantity {item?.quantity}</p>
+              <div className="flex flex-row gap-8">
                 <div className="flex flex-col text-right">
-                  <p className="text-xs">Price</p>
-                  <p className="font-semibold">{FormattedPrice(item?.price)}</p>
+                  <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                    Price
+                  </p>
+                  <h4 className="text-xl font-semibold tracking-tight">
+                    {FormattedPrice(item?.price)}
+                  </h4>
+                  <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                    Quantity {item?.quantity}
+                  </p>
                 </div>
               </div>
             </div>
           );
         })}
       </div>
-      <Separator />
-      <div className="flex flex-row justify-between">
+      <div className="flex flex-row justify-between px-4">
         <div>
-          <p className="text-xs text-zinc-500">Order date</p>
+          <p className="text-xs text-neutral-500 dark:text-neutral-400">
+            Order date
+          </p>
           <p className="text-sm">
-            {new Date(order?.created_at ?? 0 * 1000).toLocaleDateString(
-              'en-US',
-              {
+            <span>
+              {new Date(order?.created_at * 1000).toLocaleDateString('en-US', {
                 year: 'numeric',
-                month: 'long',
+                month: 'short',
                 day: 'numeric',
-              }
-            )}
-            <br></br>
-            {new Date(order?.created_at ?? 0 * 1000).toLocaleTimeString(
-              'en-US',
-              {
+              })}
+            </span>{' '}
+            at{' '}
+            <span>
+              {new Date(order?.created_at * 1000).toLocaleTimeString('en-US', {
                 hour: '2-digit',
                 minute: '2-digit',
-              }
-            )}
+              })}
+            </span>
           </p>
         </div>
         <div className="text-right">
-          <p className="text-xs">Total amount</p>
-          <h3 className="text-3xl font-semibold tracking-tight">
-            {FormattedPrice(order?.amount_total ?? 0)}
-          </h3>
-          <p className="text-xs">
-            Status:{' '}
-            <span className="text-green-500 uppercase font-semibold">
-              {order?.status}
-            </span>
+          <p className="text-xs text-neutral-500 dark:text-neutral-400">
+            Total amount
           </p>
+          <h3 className="text-3xl font-semibold tracking-tight">
+            {FormattedPrice(totalPrice ?? 0)}
+          </h3>
         </div>
       </div>
     </div>

@@ -13,7 +13,7 @@ export default function ProfileLayout({
 }) {
   return (
     <div className="w-full md:max-w-3xl mx-auto">
-      <div className="flex gap-8 p-4">
+      <div className="flex gap-4 p-4">
         <div className="w-1/3">
           <Profile />
         </div>

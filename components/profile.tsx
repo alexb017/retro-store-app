@@ -27,7 +27,7 @@ export default function Profile() {
   const nameFromEmail = userProfile?.email?.split('@')[0];
 
   return (
-    <div className="flex flex-col gap-4 w-full">
+    <div className="flex flex-col gap-4 w-full p-4 bg-white rounded-3xl dark:bg-neutral-900">
       <div className="flex flex-col items-start gap-4 px-4 sm:px-0">
         <div className="w-16 h-16 block">
           <Image
@@ -43,25 +43,25 @@ export default function Profile() {
         </div>
         <div>
           <h2 className="text-3xl font-semibold tracking-tight">
-            Hi, {userProfile?.displayName}! 👋
+            Hi, {userProfile?.displayName} 👋
           </h2>
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">
+          <p className="text-sm text-neutral-500 dark:text-neutral-400">
             Personal details and order history.
           </p>
         </div>
       </div>
       <div className="flex flex-col">
-        <div className="text-xs text-zinc-500">Display name</div>
+        <div className="text-xs text-neutral-500">Display name</div>
         <div className="text-base">{userProfile?.displayName}</div>
       </div>
       <Separator />
       <div className="flex flex-col">
-        <div className="text-xs text-zinc-500">Email address</div>
+        <div className="text-xs text-neutral-500">Email address</div>
         <div className="text-base">{userProfile?.email}</div>
       </div>
       <Separator />
       <div className="flex flex-col gap-2">
-        <div className="text-xs text-zinc-500">Delete account</div>
+        <div className="text-xs text-neutral-500">Delete account</div>
         <Button className="w-fit text-white bg-red-500 rounded-full hover:bg-red-600 transition-colors shadow-md">
           Delete account
         </Button>
