@@ -8,10 +8,10 @@ import MobileMenu from './mobile-menu';
 import ProfilePopup from './profile-popup';
 import { HeartIcon, ShoppingBagIcon } from '@heroicons/react/24/outline';
 import useFavoriteData from '@/lib/use-favorite-data';
-import { ModeToggle } from './dark-theme';
-import { Button } from './ui/button';
 import { User } from 'firebase/auth';
 import SearchNavbar from './search';
+import LogoIcon from './icons/logo';
+import MenuPopup from './menu-popup';
 
 export default function Navbar() {
   const { user, userSignOut } = useContext(AuthContext) as {
@@ -36,7 +36,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed w-full top-0 left-0 z-50 h-16 bg-white/80 backdrop-blur-lg dark:bg-neutral-950/80">
+    <nav className="fixed w-full top-0 left-0 z-50 h-16 bg-white dark:bg-neutral-950">
       <div className="mx-auto max-w-7xl flex items-center justify-between h-full px-4 text-sm">
         <div className="flex items-center lg:hidden">
           <Suspense fallback={null}>
@@ -52,8 +52,9 @@ export default function Navbar() {
         <div className="hidden lg:flex items-center gap-5">
           <Link
             href="/"
-            className="flex items-center text-xl font-bold uppercase leading-none tracking-tighter"
+            className="flex items-center gap-1 text-xl font-bold leading-none tracking-tighter"
           >
+            <LogoIcon classname="w-8 h-8" />
             store
           </Link>
           {links.map((link) => (
@@ -74,15 +75,7 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           {!user ? (
             <>
-              <div className="flex items-center">
-                <Button
-                  asChild
-                  variant="default"
-                  className="flex items-center gap-2 rounded-full"
-                >
-                  <Link href="/login">Sign in</Link>
-                </Button>
-              </div>
+              <MenuPopup />
             </>
           ) : (
             <>
@@ -113,7 +106,6 @@ export default function Navbar() {
               </div>
             </>
           )}
-          <ModeToggle />
         </div>
       </div>
     </nav>
