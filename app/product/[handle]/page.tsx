@@ -5,8 +5,14 @@ import Footer from '@/components/footer';
 import ProductGrid from '@/components/product-grid';
 import { type Products, type ProductInfoType } from '@/lib/types';
 import { Suspense } from 'react';
+import { Metadata } from 'next';
 
-export default async function Product({
+export const metadata: Metadata = {
+  title: 'Product',
+  description: 'Product page',
+};
+
+export default async function ProductPage({
   params,
 }: {
   params: Promise<{ handle: string }>;

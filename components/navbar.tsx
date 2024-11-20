@@ -2,18 +2,16 @@
 
 import { useContext, Suspense } from 'react';
 import Link from 'next/link';
-import { AuthContext } from '../app/AuthContext';
-import CartIcon from './icons/cart';
+import { AuthContext } from '@/app/AuthContext';
 import useCartData from '@/lib/use-cart-data';
 import MobileMenu from './mobile-menu';
 import ProfilePopup from './profile-popup';
-import Search from './search';
-import HeartIcon from './icons/heart';
+import { HeartIcon, ShoppingBagIcon } from '@heroicons/react/24/outline';
 import useFavoriteData from '@/lib/use-favorite-data';
 import { ModeToggle } from './dark-theme';
 import { Button } from './ui/button';
-import GithubIcon from './icons/github';
 import { User } from 'firebase/auth';
+import SearchNavbar from './search';
 
 export default function Navbar() {
   const { user, userSignOut } = useContext(AuthContext) as {
@@ -31,15 +29,15 @@ export default function Navbar() {
   const countFavorite = favorites?.length;
 
   const links = [
-    { name: 'All', href: '/search' },
-    { name: 'Phones', href: '/search/phones' },
-    { name: 'Watches', href: '/search/watches' },
-    { name: 'T-Shirts', href: '/search/t-shirts' },
+    { name: 'All products', href: '/products' },
+    { name: 'About us', href: '/about' },
+    { name: 'FAQ', href: '/faq' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   return (
-    <nav className="fixed w-full top-0 left-0 z-50 bg-white/80 backdrop-blur-lg dark:bg-zinc-950/80">
-      <div className="mx-auto max-w-6xl flex items-center justify-between p-4 text-sm">
+    <nav className="fixed w-full top-0 left-0 z-50 h-16 bg-white/80 backdrop-blur-lg dark:bg-neutral-950/80">
+      <div className="mx-auto max-w-7xl flex items-center justify-between h-full px-4 text-sm">
         <div className="flex items-center lg:hidden">
           <Suspense fallback={null}>
             <MobileMenu />
@@ -62,7 +60,7 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="flex text-sm hover:text-blue-500 dark:text-zinc-400 dark:hover:text-white transition-color ease-in-out duration-200"
+              className="flex text-sm hover:text-blue-600 dark:text-neutral-400 dark:hover:text-white transition-colors duration-200 ease-in"
             >
               {link.name}
             </Link>
@@ -70,26 +68,19 @@ export default function Navbar() {
         </div>
         <div className="hidden lg:block max-w-sm w-full">
           <Suspense fallback={null}>
-            <Search />
+            <SearchNavbar />
           </Suspense>
         </div>
         <div className="flex items-center gap-4">
           {!user ? (
             <>
               <div className="flex items-center">
-                {/* <Link
-                  href="/login"
-                  className="flex items-center gap-1 text-sm font-medium hover:opacity-80 transition-opacity"
-                >
-                  <LogIn className="h-4 w-4" />
-                  Login
-                </Link> */}
                 <Button
                   asChild
                   variant="default"
-                  className="flex items-center gap-2 rounded-full bg-blue-500 hover:bg-blue-600 dark:text-white"
+                  className="flex items-center gap-2 rounded-full"
                 >
-                  <Link href="/login">Login</Link>
+                  <Link href="/login">Sign in</Link>
                 </Button>
               </div>
             </>
@@ -98,22 +89,22 @@ export default function Navbar() {
               <div className="flex items-center gap-4">
                 <Link
                   href="/favorites"
-                  className="relative flex text-zinc-500 hover:text-blue-500 dark:text-zinc-400 dark:hover:text-white transition-color ease-in-out duration-200"
+                  className="relative flex text-neutral-500 hover:text-blue-600 dark:text-neutral-400 dark:hover:text-white transition-colors ease-in duration-200"
                 >
-                  <HeartIcon classname="h-6" />
+                  <HeartIcon className="w-5 h-5" />
                   {favorites?.length > 0 && (
-                    <div className="absolute top-0 right-0 -mr-1 -mt-1 flex items-center justify-center h-4 w-4 rounded-full text-[11px] font-medium text-white bg-blue-500">
+                    <div className="absolute top-0 right-0 -mr-1 -mt-1 flex items-center justify-center h-4 w-4 rounded-full text-[10px] font-medium text-white bg-black">
                       {countFavorite}
                     </div>
                   )}
                 </Link>
                 <Link
                   href="/cart"
-                  className="relative flex text-zinc-500 hover:text-blue-500 dark:text-zinc-400 dark:hover:text-white transition-color ease-in-out duration-200"
+                  className="relative flex text-neutral-500 hover:text-blue-600 dark:text-neutral-400 dark:hover:text-white transition-colors ease-in duration-200"
                 >
-                  <CartIcon classname="h-6" />
+                  <ShoppingBagIcon className="w-5 h-5" />
                   {cart?.length > 0 && (
-                    <div className="absolute top-0 right-0 -mr-1 -mt-1 flex items-center justify-center h-4 w-4 rounded-full text-[11px] font-medium text-white bg-blue-500">
+                    <div className="absolute top-0 right-0 -mr-1 -mt-1 flex items-center justify-center h-4 w-4 rounded-full text-[10px] font-medium text-white bg-black">
                       {quantity}
                     </div>
                   )}
@@ -123,18 +114,6 @@ export default function Navbar() {
             </>
           )}
           <ModeToggle />
-          <Button
-            asChild
-            size="icon"
-            className="flex bg-transparent text-black w-5 h-5 hover:text-blue-500 hover:bg-transparent dark:text-zinc-400 dark:hover:text-white transition-color ease-in-out duration-200"
-          >
-            <Link
-              href="https://github.com/alexb017/retro-store-app"
-              target="_blank"
-            >
-              <GithubIcon classname="h-5 w-5" />
-            </Link>
-          </Button>
         </div>
       </div>
     </nav>

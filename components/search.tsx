@@ -5,12 +5,12 @@ import {
   useSearchParams,
 } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import MagnifyingIcon from './icons/magnifying';
+import { Search } from 'lucide-react';
 import { Input } from './ui/input';
 import { useDebouncedCallback } from 'use-debounce';
 import { createUrl } from '@/lib/utils';
 
-export default function Search() {
+export default function SearchNavbar() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -43,11 +43,14 @@ export default function Search() {
         type="text"
         name="search"
         placeholder="Search for products..."
-        className="block w-full rounded-full bg-zinc-100 hover:bg-zinc-200 focus-visible:bg-zinc-200 border-none py-[9px] pl-10 text-sm placeholder:text-zinc-500 focus-visible:ring-offset-0 focus-visible:ring-0 dark:placeholder:text-zinc-400 dark:bg-zinc-900 dark:hover:bg-zinc-800 transition-colors dark:focus-visible:bg-zinc-800"
+        className="block w-full rounded-full bg-neutral-100 hover:bg-neutral-200 focus-visible:bg-zinc-200 border-none py-[9px] pl-10 text-sm placeholder:text-neutral-500 focus-visible:ring-offset-0 focus-visible:ring-0 dark:placeholder:text-neutral-400 dark:bg-neutral-900 dark:hover:bg-neutral-800 transition-colors dark:focus-visible:bg-neutral-800"
         onChange={(e) => {
-          // If the pathname is not "/search" or "/search/[...slug]" redirect to "/search"
-          if (pathname !== '/search' && !/^\/search\/[^/]+$/.test(pathname)) {
-            router.push('/search');
+          // If the pathname is not "/products" or "/products/[...slug]" redirect to "/products"
+          if (
+            pathname !== '/products' &&
+            !/^\/products\/[^/]+$/.test(pathname)
+          ) {
+            router.push('/products');
           }
 
           // setSearchValue(e.target.value);
@@ -55,7 +58,7 @@ export default function Search() {
         }}
         defaultValue={searchParams.get('q')?.toString()}
       />
-      <MagnifyingIcon classname="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-zinc-500" />
+      <Search className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-neutral-500" />
     </div>
   );
 }

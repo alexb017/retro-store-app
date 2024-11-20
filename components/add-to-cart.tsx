@@ -1,4 +1,4 @@
-import PlusIcon from './icons/plus';
+import { Plus } from 'lucide-react';
 import { createCart, incrementQuantity } from '@/lib/actions';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
@@ -83,7 +83,7 @@ export default function AddToCart({
           await createCart(uid, itemToAdd);
         }}
       >
-        <PlusIcon classname="w-5 h-5" />
+        <Plus className="w-5 h-5" />
         Add item to cart
       </Button>
     </>

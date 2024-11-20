@@ -2,8 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import ArrowLeftIcon from './icons/arrow-left';
-import ArrowRightIcon from './icons/arrow-right';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { type Banner } from '@/lib/types';
 import { Button } from '@/components/ui/button';
@@ -120,7 +119,7 @@ export default function BannerItem({ item }: { item: Banner[] }) {
                 className="flex items-center justify-center text-zinc-700 w-[36px] h-full p-0 bg-transparent rounded-full hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-800"
                 onClick={prevBanner}
               >
-                <ArrowLeftIcon classname="h-5" />
+                <ChevronLeft className="w-5 h-5" />
               </Button>
               <div className="text-sm w-[31px] text-center font-medium">
                 {index + 1} / {item?.length}
@@ -130,7 +129,7 @@ export default function BannerItem({ item }: { item: Banner[] }) {
                 className="flex items-center justify-center text-zinc-700 w-[36px] h-full p-0 bg-transparent rounded-full hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-800"
                 onClick={nextBanner}
               >
-                <ArrowRightIcon classname="h-5" />
+                <ChevronRight className="w-5 h-5" />
               </Button>
             </div>
           </div>

@@ -22,7 +22,7 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          'text-black bg-neutral-50 dark:text-white dark:bg-neutral-950 antialiased',
+          'text-black bg-white dark:text-white dark:bg-neutral-950 antialiased',
           inter.className
         )}
       >
@@ -34,7 +34,7 @@ export default async function RootLayout({
         >
           <AuthProvider>
             <Navbar />
-            <main className="mt-20 mx-auto max-w-6xl">{children}</main>
+            <main className="mt-16 mx-auto max-w-7xl">{children}</main>
           </AuthProvider>
         </ThemeProvider>
       </body>

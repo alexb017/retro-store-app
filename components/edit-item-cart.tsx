@@ -1,12 +1,8 @@
 'use client';
 
-import PlusIcon from './icons/plus';
-import MinusIcon from './icons/minus';
+import { Plus, Minus } from 'lucide-react';
 import { decrementQuantity, incrementQuantity } from '@/lib/actions';
-import { useContext } from 'react';
-import { AuthContext } from '@/app/AuthContext';
 import { Button } from './ui/button';
-import { User } from 'firebase/auth';
 import { type CartItem } from '@/lib/types';
 
 export default function EditItemQuantity({
@@ -43,9 +39,9 @@ export default function EditItemQuantity({
       }`}
     >
       {type === 'plus' ? (
-        <PlusIcon classname="h-5" />
+        <Plus className="w-5 h-5" />
       ) : (
-        <MinusIcon classname="h-5" />
+        <Minus className="w-5 h-5" />
       )}
     </Button>
   );

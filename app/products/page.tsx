@@ -2,11 +2,6 @@ import ProductGrid from '@/components/product-grid';
 import { getProducts } from '@/lib/actions';
 import { type Products } from '@/lib/types';
 
-export const metadata = {
-  title: 'Search',
-  description: 'Search for products in the store.',
-};
-
 export default async function SearchPage({
   searchParams,
 }: {

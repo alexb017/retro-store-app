@@ -1,4 +1,4 @@
-import HeartIcon from './icons/heart';
+import { Heart } from 'lucide-react';
 import { createFavorites } from '@/lib/actions';
 import { usePathname, useSearchParams } from 'next/navigation';
 import useFavoriteData from '@/lib/use-favorite-data';
@@ -79,14 +79,10 @@ export default function AddToFavorite({
               await createFavorites(uid, addToFavorite);
             }}
           >
-            <HeartIcon classname="w-6 h-6" />
+            <Heart size={24} />
           </Button>
         </>
-      ) : (
-        <>
-          <DeleteItemFavorite uid={uid} id={removeItemFavorite?.id_favorite} />
-        </>
-      )}
+      ) : null}
     </>
   );
 }

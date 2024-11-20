@@ -1,5 +1,3 @@
-import OrderItem from '@/components/order-item';
-
 export default async function OrderPage({
   params,
 }: {
@@ -9,7 +7,7 @@ export default async function OrderPage({
 
   return (
     <>
-      <OrderItem id={param.id} />
+      <h1>Order {param.id}</h1>
     </>
   );
 }

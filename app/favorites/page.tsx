@@ -5,14 +5,10 @@ export const metadata: Metadata = {
   description: 'Favorites page',
 };
 
-import Favorites from '@/components/favorites';
-
 export default function FavoritesPage() {
   return (
-    <div className="w-full md:max-w-3xl mx-auto">
-      <div className="p-4">
-        <Favorites />
-      </div>
-    </div>
+    <>
+      <h1>Favorites page</h1>
+    </>
   );
 }

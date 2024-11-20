@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import TagIcon from './icons/tag';
+import { Tag } from 'lucide-react';
 import { FormattedPrice } from '../lib/utils';
 import {
   Carousel,
@@ -54,7 +54,7 @@ export default async function CarouselItems() {
                       variant="link"
                       className="gap-2 p-0 h-auto text-base text-blue-500"
                     >
-                      <TagIcon classname="h-5" />
+                      <Tag className="w-5 h-5" />
                       Buy
                     </Button>
                   </Link>

@@ -2,9 +2,9 @@ import { useState, Fragment, useEffect } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import MenuIcon from './icons/menu';
-import CloseIcon from './icons/close';
+import { Menu, X } from 'lucide-react';
 import Search from './search';
+import { Button } from './ui/button';
 
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,7 +33,7 @@ export default function MobileMenu() {
   return (
     <>
       <button onClick={openMenu} className="focus:outline-none">
-        <MenuIcon classname="h-6" />
+        <Menu className="w-6 h-6" />
       </button>
       <Transition show={isOpen}>
         <Dialog onClose={closeMenu} className="relative z-50">
@@ -62,13 +62,13 @@ export default function MobileMenu() {
           >
             <Dialog.Panel className="fixed bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col bg-white dark:bg-zinc-950 pb-5">
               <div className="flex flex-col items-start gap-6 p-4">
-                <button
+                <Button
                   className="flex items-center justify-center transition-color focus:outline-none"
                   onClick={closeMenu}
                   aria-label="close mobile menu"
                 >
-                  <CloseIcon classname="h-6" />
-                </button>
+                  <X />
+                </Button>
                 <Link
                   href="/"
                   className="flex items-center text-xl font-bold uppercase leading-none tracking-tight"

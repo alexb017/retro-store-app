@@ -1,14 +1,8 @@
 'use client';
 
-import { Fragment, useContext } from 'react';
-import { Transition, Menu } from '@headlessui/react';
-import { AuthContext } from '@/app/AuthContext';
-import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
-import UserIcon from './icons/user';
-import SignOutIcon from './icons/sign-out';
-import ShoppingBagIcon from './icons/shopping-bag';
+import { ShoppingCart, Heart, UserRound, LogOut } from 'lucide-react';
 import { Button } from './ui/button';
 import {
   DropdownMenu,
@@ -19,9 +13,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './ui/dropdown-menu';
-import CartIcon from './icons/cart';
-import HeartIcon from './icons/heart';
-import { User } from 'firebase/auth';
 import useUserData from '@/lib/use-user-data';
 
 export default function ProfilePopup({
@@ -62,7 +53,7 @@ export default function ProfilePopup({
               size="icon"
               className="w-8 h-8 p-0 rounded-full text-black bg-zinc-200 hover:bg-zinc-200 dark:text-zinc-400 dark:bg-zinc-800 focus-visible:ring-0 focus-visible:ring-offset-0"
             >
-              <UserIcon classname="w-5 h-5" />
+              <UserRound className="w-5 h-5" />
             </Button>
           </DropdownMenuTrigger>
         </>
@@ -75,28 +66,21 @@ export default function ProfilePopup({
             className="cursor-pointer rounded-md"
             onClick={() => router.push(`/profile`)}
           >
-            <UserIcon classname="w-4 h-4 mr-2" />
+            <UserRound className="w-4 h-4 mr-2" />
             <span>Profile</span>
           </DropdownMenuItem>
           <DropdownMenuItem
             className="cursor-pointer rounded-md"
             onClick={() => router.push(`/favorites`)}
           >
-            <HeartIcon classname="w-4 h-4 mr-2" />
+            <Heart className="w-4 h-4 mr-2" />
             <span>Favorites</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            className="cursor-pointer rounded-md"
-            onClick={() => router.push(`/orders`)}
-          >
-            <ShoppingBagIcon classname="w-4 h-4 mr-2" />
-            <span>Orders</span>
           </DropdownMenuItem>
           <DropdownMenuItem
             className="cursor-pointer rounded-md"
             onClick={() => router.push(`/cart`)}
           >
-            <CartIcon classname="w-4 h-4 mr-2" />
+            <ShoppingCart className="w-4 h-4 mr-2" />
             <span>Cart</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
@@ -116,7 +100,7 @@ export default function ProfilePopup({
               }
             }}
           >
-            <SignOutIcon classname="w-4 h-4 mr-2" />
+            <LogOut className="w-4 h-4 mr-2" />
             <span>Sign out</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>

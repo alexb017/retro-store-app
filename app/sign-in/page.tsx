@@ -1,15 +1,15 @@
-import SignUp from '@/components/sign-up';
+import SignIn from '@/components/sign-in';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Sign Up',
-  description: 'Sign up for an account',
+  title: 'Sign In',
+  description: 'Sign in page',
 };
 
-export default function SignUpPage() {
+export default function SignInPage() {
   return (
     <div className="flex flex-col items-center justify-center h-[calc(100vh-64px)]">
-      <SignUp />
+      <SignIn />
     </div>
   );
 }

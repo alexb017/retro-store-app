@@ -1,5 +1,3 @@
-'use client';
-
 import { deleteItemCart } from '@/lib/actions';
 
 export default function DeleteItemCart({

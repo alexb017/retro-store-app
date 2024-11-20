@@ -4,6 +4,12 @@ import Footer from '@/components/footer';
 import MobileCollections from '@/components/mobile-collections';
 import MobileFilters from '@/components/mobile-filters';
 import { Suspense } from 'react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Products',
+  description: 'Find the best products for you.',
+};
 
 export default function LayoutSearch({
   children,

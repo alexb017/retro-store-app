@@ -1,7 +1,7 @@
 'use client';
 
 import { useContext } from 'react';
-import TagIcon from './icons/tag';
+import { Tag } from 'lucide-react';
 import { Button } from './ui/button';
 import Link from 'next/link';
 import { AuthContext } from '@/app/AuthContext';
@@ -14,7 +14,7 @@ export default function BannerSignup() {
     <>
       {!user && (
         <div className="flex flex-col items-center justify-center gap-4 bg-zinc-100 rounded-3xl p-16 dark:bg-zinc-900">
-          <TagIcon classname="h-12 text-blue-500" />
+          <Tag className="w-12 h-12 text-blue-500" />
           <h1 className="text-4xl font-semibold text-center tracking-tight sm:w-96">
             In order to buy, view cart and checkout, please sign up.
           </h1>

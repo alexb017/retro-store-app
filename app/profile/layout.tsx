@@ -1,4 +1,3 @@
-import Profile from '@/components/profile';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -15,7 +14,7 @@ export default function ProfileLayout({
     <div className="w-full md:max-w-3xl mx-auto">
       <div className="flex gap-4 p-4">
         <div className="w-1/3">
-          <Profile />
+          <h1>Profile</h1>
         </div>
         <div className="w-2/3">{children}</div>
       </div>
