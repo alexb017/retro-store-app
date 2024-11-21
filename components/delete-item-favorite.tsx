@@ -14,7 +14,7 @@ export default function DeleteItemFavorite({
       onClick={async () => await deleteItemFavorite(uid, id)}
       className="h-4 p-0 text-blue-600 dark:text-blue-400"
     >
-      Delete
+      Remove
     </Button>
   );
 }

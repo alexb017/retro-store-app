@@ -88,7 +88,7 @@ export default function Favorite() {
                           href={fav?.path_url ?? '/'}
                           className="text-sm text-blue-600 hover:underline dark:text-blue-400"
                         >
-                          See Item Details
+                          Show product details
                         </Link>
                       </div>
                     </div>

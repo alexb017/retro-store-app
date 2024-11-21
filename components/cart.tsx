@@ -142,7 +142,7 @@ export default function Cart() {
                       </div>
                       <div className="flex flex-col items-end gap-2 pt-4">
                         <div className="flex flex-col items-end">
-                          <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                          <p className="text-xs text-neutral-500 dark:text-neutral-400">
                             Price
                           </p>
                           <h3 className="text-2xl font-semibold tracking-tight">
@@ -165,19 +165,17 @@ export default function Cart() {
                 <p className="text-sm">Subtotal</p>
                 <p className="text-sm">{FormattedPrice(totalPrice)}</p>
               </div>
-              <Separator className="my-2" />
               <div className="flex items-center justify-between">
                 <p className="text-sm">Shipping</p>
-                <p className="text-sm">Free</p>
+                <p className="text-sm uppercase">Free</p>
               </div>
-              <Separator className="my-2" />
               <div className="flex items-center justify-between">
                 <p className="text-sm">Tax</p>
                 <p className="text-sm">Calculated at checkout</p>
               </div>
               <Separator className="my-2" />
-              <div className="flex items-center justify-between mb-5">
-                <p className="test-sm">Estimated total</p>
+              <div className="flex justify-between mb-5">
+                <p className="text-sm">Estimated total</p>
                 <h2 className="text-3xl font-semibold tracking-tight">
                   {FormattedPrice(totalPrice)}
                 </h2>

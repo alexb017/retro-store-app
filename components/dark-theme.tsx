@@ -20,13 +20,13 @@ export function ModeToggle() {
     >
       {theme === 'dark' ? (
         <>
-          <MoonIcon className="w-5 h-5 mr-2" />
-          <span>Switch to dark theme</span>
+          <SunIcon className="w-5 h-5 mr-2" />
+          <span>Switch to light theme</span>
         </>
       ) : (
         <>
-          <SunIcon className="w-5 h-5 mr-2" />
-          <span>Switch to light theme</span>
+          <MoonIcon className="w-5 h-5 mr-2" />
+          <span>Switch to dark theme</span>
         </>
       )}
     </DropdownMenuItem>
