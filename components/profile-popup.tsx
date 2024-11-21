@@ -2,7 +2,13 @@
 
 import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
-import { ShoppingCart, Heart, UserRound, LogOut } from 'lucide-react';
+import {
+  ShoppingBagIcon,
+  HeartIcon,
+  UserIcon,
+  ArrowRightStartOnRectangleIcon,
+  CodeBracketIcon,
+} from '@heroicons/react/24/outline';
 import { Button } from './ui/button';
 import {
   DropdownMenu,
@@ -14,6 +20,8 @@ import {
   DropdownMenuTrigger,
 } from './ui/dropdown-menu';
 import useUserData from '@/lib/use-user-data';
+import { ModeToggle } from './dark-theme';
+import Link from 'next/link';
 
 export default function ProfilePopup({
   uid,
@@ -25,7 +33,6 @@ export default function ProfilePopup({
   const [userProfile] = useUserData(uid ?? '');
   const router = useRouter();
   const pathname = usePathname();
-  const usernameFromEmail = userProfile?.email?.split('@')[0];
 
   return (
     <DropdownMenu modal={false}>
@@ -46,48 +53,47 @@ export default function ProfilePopup({
             </Button>
           </DropdownMenuTrigger>
         </>
-      ) : (
-        <>
-          <DropdownMenuTrigger asChild>
-            <Button
-              size="icon"
-              className="w-8 h-8 p-0 rounded-full text-black bg-zinc-200 hover:bg-zinc-200 dark:text-zinc-400 dark:bg-zinc-800 focus-visible:ring-0 focus-visible:ring-offset-0"
-            >
-              <UserRound className="w-5 h-5" />
-            </Button>
-          </DropdownMenuTrigger>
-        </>
-      )}
-      <DropdownMenuContent className="w-56 rounded-xl" align="end">
+      ) : null}
+      <DropdownMenuContent className="w-56 rounded-xl shadow-2xl" align="end">
         <DropdownMenuLabel>Hi, {userProfile?.displayName}!</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem
-            className="cursor-pointer rounded-md"
+            className="rounded-xl"
             onClick={() => router.push(`/profile`)}
           >
-            <UserRound className="w-4 h-4 mr-2" />
+            <UserIcon className="w-5 h-5 mr-2" />
             <span>Profile</span>
           </DropdownMenuItem>
           <DropdownMenuItem
-            className="cursor-pointer rounded-md"
+            className="rounded-xl"
             onClick={() => router.push(`/favorites`)}
           >
-            <Heart className="w-4 h-4 mr-2" />
+            <HeartIcon className="w-5 h-5 mr-2" />
             <span>Favorites</span>
           </DropdownMenuItem>
           <DropdownMenuItem
-            className="cursor-pointer rounded-md"
+            className="rounded-xl"
             onClick={() => router.push(`/cart`)}
           >
-            <ShoppingCart className="w-4 h-4 mr-2" />
+            <ShoppingBagIcon className="w-5 h-5 mr-2" />
             <span>Cart</span>
+          </DropdownMenuItem>
+          <ModeToggle />
+          <DropdownMenuItem asChild className="rounded-xl">
+            <Link
+              href="https://github.com/alexb017/retro-store-app"
+              target="_blank"
+            >
+              <CodeBracketIcon className="w-5 h-5 mr-2" />
+              <span>Source code</span>
+            </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem
-            className="cursor-pointer rounded-md"
+            className="rounded-xl"
             onClick={() => {
               try {
                 userSignOut();
@@ -100,8 +106,8 @@ export default function ProfilePopup({
               }
             }}
           >
-            <LogOut className="w-4 h-4 mr-2" />
-            <span>Sign out</span>
+            <ArrowRightStartOnRectangleIcon className="w-5 h-5 mr-2" />
+            <span>Sign Out</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
