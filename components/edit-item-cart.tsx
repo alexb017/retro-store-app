@@ -1,6 +1,6 @@
 'use client';
 
-import { Plus, Minus } from 'lucide-react';
+import { PlusIcon, MinusIcon } from '@heroicons/react/24/outline';
 import { decrementQuantity, incrementQuantity } from '@/lib/actions';
 import { Button } from './ui/button';
 import { type CartItem } from '@/lib/types';
@@ -15,7 +15,7 @@ export default function EditItemQuantity({
   uid: string;
 }) {
   async function updateItem() {
-    if (item?.quantity <= 1 && type === 'minus') {
+    if (item?.quantity === 1 && type === 'minus') {
       return;
     }
 
@@ -32,16 +32,16 @@ export default function EditItemQuantity({
     <Button
       size="icon"
       onClick={updateItem}
-      className={`px-3 py-2 bg-transparent hover:bg-transparent text-zinc-500 hover:text-black transition-all ease-in-out dark:text-zinc-400 dark:hover:text-white ${
+      className={`p-0 w-9 h-9 bg-transparent hover:bg-neutral-100 rounded-full text-neutral-500 hover:text-black transition-all duration-200 ease-in dark:hover:text-white dark:hover:bg-neutral-800 ${
         item?.quantity === 1 && type === 'minus'
-          ? 'cursor-not-allowed opacity-30 hover:text-zinc-500 dark:hover:text-zinc-400'
+          ? 'cursor-not-allowed opacity-30 text-black hover:bg-transparent dark:text-white dark:hover:bg-transparent'
           : ''
       }`}
     >
       {type === 'plus' ? (
-        <Plus className="w-5 h-5" />
+        <PlusIcon className="w-5 h-5" />
       ) : (
-        <Minus className="w-5 h-5" />
+        <MinusIcon className="w-5 h-5" />
       )}
     </Button>
   );

@@ -1,3 +1,4 @@
+import { Button } from './ui/button';
 import { deleteItemCart } from '@/lib/actions';
 
 export default function DeleteItemCart({
@@ -8,11 +9,12 @@ export default function DeleteItemCart({
   id: string;
 }) {
   return (
-    <button
+    <Button
+      variant="link"
       onClick={async () => await deleteItemCart(uid, id)}
-      className="flex items-center text-sm text-blue-500 border-b border-zinc-500 hover:text-black transition-all ease-in-out dark:text-blue-400 dark:hover:border-zinc-400"
+      className="h-4 p-0 text-blue-600 dark:text-blue-400"
     >
       Remove
-    </button>
+    </Button>
   );
 }

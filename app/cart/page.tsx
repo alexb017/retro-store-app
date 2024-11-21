@@ -1,3 +1,4 @@
+import Cart from '@/components/cart';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -7,8 +8,8 @@ export const metadata: Metadata = {
 
 export default function CartPage() {
   return (
-    <>
-      <h1>Cart</h1>
-    </>
+    <div className="w-full md:max-w-3xl mx-auto">
+      <Cart />
+    </div>
   );
 }

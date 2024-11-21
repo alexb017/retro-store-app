@@ -11,7 +11,7 @@ import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { User } from 'firebase/auth';
 import { type FavoriteItem } from '@/lib/types';
-import { ArchiveBoxIcon, PlusIcon } from '@heroicons/react/24/outline';
+import { HeartIcon, PlusIcon } from '@heroicons/react/24/outline';
 import { createCart } from '@/lib/actions';
 import useCartData from '@/lib/use-cart-data';
 import { incrementQuantity } from '@/lib/actions';
@@ -29,7 +29,7 @@ export default function Favorite() {
         <>
           <div className="flex flex-col items-center justify-center h-[calc(100vh-104px)]">
             <div className="flex flex-col items-center gap-4">
-              <ArchiveBoxIcon className="h-16 w-16 text-neutral-200 dark:text-neutral-700" />
+              <HeartIcon className="h-16 w-16 text-neutral-200 dark:text-neutral-700" />
               <div className="flex flex-col items-center gap-2">
                 <h4 className="text-xl font-semibold tracking-tight">
                   Your favorites is empty.
@@ -74,16 +74,16 @@ export default function Favorite() {
                       <Image
                         src={fav?.image}
                         alt={fav?.name}
-                        width={120}
-                        height={120}
+                        width={128}
+                        height={128}
                         objectFit="cover"
                       />
                     </div>
                     <div className="flex flex-col pt-4">
                       <div className="flex flex-col items-start">
-                        <h4 className="text-xl font-semibold tracking-tight">
+                        <h3 className="text-2xl font-semibold tracking-tight">
                           {`${fav?.name} - ${color}${size}${space}`}
-                        </h4>
+                        </h3>
                         <Link
                           href={fav?.path_url ?? '/'}
                           className="text-sm text-blue-600 hover:underline dark:text-blue-400"
@@ -93,14 +93,14 @@ export default function Favorite() {
                       </div>
                     </div>
                   </div>
-                  <div className="flex flex-col items-end gap-1 pt-4">
+                  <div className="flex flex-col items-end gap-2 pt-4">
                     <div className="flex flex-col items-end">
                       <p className="text-xs text-neutral-500 dark:text-neutral-400">
                         Price
                       </p>
-                      <h4 className="text-xl font-semibold tracking-tight">
+                      <h3 className="text-2xl font-semibold tracking-tight">
                         {FormattedPrice(fav?.price)}
-                      </h4>
+                      </h3>
                     </div>
                     <div className="flex gap-4">
                       <Button
