@@ -1,8 +1,11 @@
+import { UserMetadata } from 'firebase/auth';
+
 export type UserProfile = {
   uid: string;
   email: string | null;
   displayName: string | null;
   photoURL: string | null;
+  metadata: UserMetadata;
 };
 
 export type ImageUrls = {

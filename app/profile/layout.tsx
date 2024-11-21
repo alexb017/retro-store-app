@@ -1,4 +1,7 @@
+import Profile from '@/components/profile';
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
+import Loading from './loading';
 
 export const metadata: Metadata = {
   title: 'Profile',
@@ -14,7 +17,7 @@ export default function ProfileLayout({
     <div className="w-full md:max-w-3xl mx-auto">
       <div className="flex gap-4 p-4">
         <div className="w-1/3">
-          <h1>Profile</h1>
+          <Profile />
         </div>
         <div className="w-2/3">{children}</div>
       </div>

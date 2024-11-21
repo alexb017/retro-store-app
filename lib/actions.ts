@@ -20,11 +20,11 @@ import { db } from './firebase';
 import { type ProductInfoType, type UserProfile, type CartItem } from './types';
 
 export async function createUser(user: UserProfile, data: object) {
-  const { uid, email, displayName, photoURL } = user;
+  const { uid, email, displayName, photoURL, metadata } = user;
   const userRef = doc(db, 'users', uid);
   const userSnapshot = await getDoc(userRef);
 
-  console.log('user', user);
+  // console.log('user', user);
 
   const userId = uid;
 
@@ -35,6 +35,7 @@ export async function createUser(user: UserProfile, data: object) {
         email,
         displayName,
         photoURL,
+        metadata,
         ...data,
       });
     } catch (error) {
