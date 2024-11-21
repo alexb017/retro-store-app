@@ -1,6 +1,5 @@
 import { Button } from './ui/button';
 import { deleteItemFavorite } from '@/lib/actions';
-import { Trash2 } from 'lucide-react';
 
 export default function DeleteItemFavorite({
   uid,
@@ -11,11 +10,10 @@ export default function DeleteItemFavorite({
 }) {
   return (
     <Button
-      variant="ghost"
+      variant="link"
       onClick={async () => await deleteItemFavorite(uid, id)}
-      className="text-xs rounded-full transition-all duration-200 ease-in"
+      className="h-4 p-0 text-blue-600 dark:text-blue-400"
     >
-      <Trash2 className="w-4 h-4" />
       Delete
     </Button>
   );

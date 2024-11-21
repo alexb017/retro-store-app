@@ -1,3 +1,4 @@
+import Favorite from '@/components/favorites';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -7,8 +8,8 @@ export const metadata: Metadata = {
 
 export default function FavoritesPage() {
   return (
-    <>
-      <h1>Favorites page</h1>
-    </>
+    <div className="w-full md:max-w-3xl mx-auto">
+      <Favorite />
+    </div>
   );
 }

@@ -52,9 +52,9 @@ export default function Navbar() {
         <div className="hidden lg:flex items-center gap-5">
           <Link
             href="/"
-            className="flex items-center gap-1 text-xl font-bold leading-none tracking-tighter"
+            className="flex items-center text-xl font-bold leading-none tracking-tighter"
           >
-            <LogoIcon classname="w-8 h-8" />
+            <LogoIcon classname="w-8 h-8 -rotate-45" />
             store
           </Link>
           {links.map((link) => (

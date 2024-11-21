@@ -1,8 +1,9 @@
-import { Heart } from 'lucide-react';
+import { HeartIcon } from '@heroicons/react/24/outline';
+import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid';
 import { createFavorites } from '@/lib/actions';
 import { usePathname, useSearchParams } from 'next/navigation';
 import useFavoriteData from '@/lib/use-favorite-data';
-import DeleteItemFavorite from './delete-item-favorite';
+import { deleteItemFavorite } from '@/lib/actions';
 import { Button } from './ui/button';
 import { type ProductInfoType, type FavoriteItem } from '@/lib/types';
 
@@ -65,24 +66,33 @@ export default function AddToFavorite({
   return (
     <>
       {!removeItemFavorite ? (
-        <>
-          <Button
-            size="icon"
-            disabled={disableBtn}
-            className={`flex bg-transparent h-auto w-auto hover:bg-transparent text-zinc-500 hover:text-blue-500 transition-all dark:text-zinc-400 dark:hover:text-blue-500 ${
-              disableBtn
-                ? 'cursor-not-allowed opacity-50 disabled:pointer-events-auto'
-                : 'cursor-pointer'
-            }`}
-            onClick={async () => {
-              // Add item to favorite
-              await createFavorites(uid, addToFavorite);
-            }}
-          >
-            <Heart size={24} />
-          </Button>
-        </>
-      ) : null}
+        <Button
+          size="icon"
+          disabled={disableBtn}
+          className={`flex bg-transparent h-auto w-auto hover:bg-transparent text-neutral-500 hover:text-blue-600 transition-all dark:text-neutral-400 dark:hover:text-blue-400 ${
+            disableBtn
+              ? 'cursor-not-allowed opacity-50 disabled:pointer-events-auto'
+              : 'cursor-pointer'
+          }`}
+          onClick={async () => {
+            // Add item to favorite
+            await createFavorites(uid, addToFavorite);
+          }}
+        >
+          <HeartIcon className="w-5 h-5" />
+        </Button>
+      ) : (
+        <Button
+          size="icon"
+          className="flex bg-transparent h-auto w-auto hover:bg-transparent text-blue-600 hover:text-blue-500 dark:text-neutral-400 dark:hover:text-blue-400"
+          onClick={async () => {
+            // Delete item from favorite
+            await deleteItemFavorite(uid, removeItemFavorite?.id_favorite);
+          }}
+        >
+          <HeartSolidIcon className="w-5 h-5" />
+        </Button>
+      )}
     </>
   );
 }
