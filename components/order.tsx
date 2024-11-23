@@ -57,9 +57,6 @@ export default function Order({ orderId }: { orderId: string }) {
         <h4 className="text-xl font-semibold tracking-tight">
           Order ID {order.order_id}
         </h4>
-        <p className="text-xs text-neutral-500 dark:text-neutral-400">
-          {dateStr}
-        </p>
       </div>
       <ul>
         {order.items.map((item: CartItem, index) => {
@@ -86,9 +83,7 @@ export default function Order({ orderId }: { orderId: string }) {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <h4 className="text-xl font-semibold tracking-tight">
-                    {item.name}
-                  </h4>
+                  <p className="text-base">{item.name}</p>
                   <p className="text-sm text-neutral-500 dark:text-neutral-400">
                     {color}
                     {size}
@@ -97,9 +92,7 @@ export default function Order({ orderId }: { orderId: string }) {
                 </div>
               </div>
               <div className="flex flex-col items-end">
-                <h4 className="text-xl font-semibold tracking-tight">
-                  {FormattedPrice(item.price)}
-                </h4>
+                <p className="text-base">{FormattedPrice(item.price)}</p>
                 <p className="text-sm text-neutral-500 dark:text-neutral-400">
                   Qty {item.quantity}
                 </p>
@@ -109,19 +102,22 @@ export default function Order({ orderId }: { orderId: string }) {
         })}
       </ul>
       <div className="flex justify-between pt-4 border-t border-neutral-200 dark:border-neutral-800">
-        <p className="text-xs">
-          Status:{' '}
-          <span className="text-green-500 font-semibold uppercase">
-            {order.status}
-          </span>
-        </p>
+        <div>
+          <p className="text-xs text-neutral-500 dark:text-neutral-400">
+            {dateStr}
+          </p>
+          <p className="text-xs">
+            Status:{' '}
+            <span className="text-green-500 font-semibold uppercase">
+              {order.status}
+            </span>
+          </p>
+        </div>
         <div className="flex flex-col items-end">
           <p className="text-xs text-neutral-500 dark:text-neutral-400">
             Total amount
           </p>
-          <h4 className="text-xl font-semibold tracking-tight">
-            {FormattedPrice(totalPrice)}
-          </h4>
+          <h4 className="text-xl">{FormattedPrice(totalPrice)}</h4>
         </div>
       </div>
     </div>

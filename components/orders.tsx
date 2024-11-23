@@ -92,9 +92,7 @@ export default function Orders() {
                     <p className="text-xs text-neutral-500 dark:text-neutral-400">
                       Total amount
                     </p>
-                    <h4 className="text-xl font-semibold tracking-tight">
-                      {FormattedPrice(totalPrice)}
-                    </h4>
+                    <p className="text-base">{FormattedPrice(totalPrice)}</p>
                     <Button
                       asChild
                       variant="link"
