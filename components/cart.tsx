@@ -116,7 +116,6 @@ export default function Cart() {
                             alt={item?.name}
                             width={128}
                             height={128}
-                            objectFit="cover"
                           />
                         </div>
                         <div className="flex flex-col items-start gap-2 pt-4">
@@ -166,12 +165,13 @@ export default function Cart() {
                 <p className="text-sm">{FormattedPrice(totalPrice)}</p>
               </div>
               <div className="flex items-center justify-between">
-                <p className="text-sm">Shipping</p>
-                <p className="text-sm uppercase">Free</p>
-              </div>
-              <div className="flex items-center justify-between">
-                <p className="text-sm">Tax</p>
-                <p className="text-sm">Calculated at checkout</p>
+                <div>
+                  <p className="text-sm">Shipping</p>
+                  <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                    Free shipping (5-7 bussiness days)
+                  </p>
+                </div>
+                <p className="text-sm">Free</p>
               </div>
               <Separator className="my-2" />
               <div className="flex justify-between mb-5">

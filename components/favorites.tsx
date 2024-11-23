@@ -76,7 +76,6 @@ export default function Favorite() {
                         alt={fav?.name}
                         width={128}
                         height={128}
-                        objectFit="cover"
                       />
                     </div>
                     <div className="flex flex-col pt-4">

@@ -1,7 +1,5 @@
+import Orders from '@/components/orders';
+
 export default function ProfilePage() {
-  return (
-    <>
-      <h1>Orders</h1>
-    </>
-  );
+  return <Orders />;
 }
