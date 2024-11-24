@@ -55,8 +55,8 @@ export default async function Home() {
           <ThreeItems />
         </div>
         <BannerSignup />
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 }
