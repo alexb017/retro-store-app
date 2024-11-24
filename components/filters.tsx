@@ -16,19 +16,19 @@ export default function Filters() {
   const searchParams = useSearchParams();
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4">
-      <p className="text-sm text-zinc-500 font-medium dark:text-zinc-400">
+    <div className="flex flex-col items-end gap-2">
+      <p className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
         Sort by
       </p>
       <ul className="flex flex-row gap-2">
         {filters.map((filter, index) => (
           <li key={index}>
             <Button
-              className={`text-sm text-black py-1 px-3 h-auto border-2 rounded-full transition-all dark:text-zinc-400 ${
+              className={`text-xs font-medium text-black py-1 px-3 h-auto border rounded-full transition-all dark:text-neutral-400 ${
                 searchParams.get('sort') === filter.sort ||
                 (!searchParams.get('sort') && filter.sort === 'rel')
-                  ? 'border-blue-500 bg-blue-50 hover:bg-blue-50 dark:bg-blue-950 dark:text-white'
-                  : 'border-zinc-100 bg-zinc-100 hover:bg-zinc-200 hover:border-zinc-200 dark:hover:text-white dark:border-zinc-900 dark:hover:border-zinc-800 dark:bg-zinc-900 dark:hover:bg-zinc-800'
+                  ? 'border-blue-600 bg-blue-50 hover:bg-blue-50 dark:bg-blue-950 dark:text-white'
+                  : 'border-neutral-100 bg-neutral-100 hover:bg-neutral-200 hover:border-neutral-200 dark:hover:text-white dark:border-neutral-900 dark:hover:border-neutral-800 dark:bg-neutral-900 dark:hover:bg-neutral-800'
               }`}
               onClick={() => {
                 const newParams = new URLSearchParams(searchParams.toString());

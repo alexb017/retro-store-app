@@ -24,7 +24,7 @@ export default async function CarouselItems() {
         {firstEightElements?.map((item: Products, index: number) => (
           <CarouselItem
             key={index}
-            className="sm:basis-1/2 xl:basis-1/3 hover:scale-[1.01] transition-transform duration-300 ease-in-out"
+            className="sm:basis-1/2 xl:basis-1/3 hover:scale-[1.01] transition-transform duration-200 ease-in-out"
           >
             <div className="p-1">
               <Card className="flex flex-col items-start gap-2 bg-transparent border-none shadow-none">
@@ -32,13 +32,12 @@ export default async function CarouselItems() {
                   href={`/product/${item?.handle}`}
                   className="flex flex-col gap-4"
                 >
-                  <CardHeader className="justify-center p-0 aspect-[3/4] overflow-hidden rounded-3xl bg-neutral-100 dark:bg-neutral-900">
+                  <CardHeader className="justify-center p-0 aspect-[6/7] overflow-hidden rounded-3xl bg-neutral-100 dark:bg-neutral-900">
                     <Image
                       src={item?.image}
                       alt={item?.name}
-                      width={400}
+                      width={500}
                       height={500}
-                      className=""
                     />
                   </CardHeader>
                   <CardContent className="flex items-start justify-between p-0">

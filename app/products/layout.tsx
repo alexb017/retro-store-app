@@ -5,6 +5,7 @@ import MobileCollections from '@/components/mobile-collections';
 import MobileFilters from '@/components/mobile-filters';
 import { Suspense } from 'react';
 import { Metadata } from 'next';
+import BannerSignup from '@/components/banner-signup';
 
 export const metadata: Metadata = {
   title: 'Products',
@@ -18,11 +19,18 @@ export default function LayoutSearch({
 }) {
   return (
     <>
-      <div className="mx-auto flex flex-col gap-8 p-4 pb-4 max-w-screen-2xl">
-        <div className="w-full hidden md:block">
-          <Collections />
+      <div className="mx-auto flex flex-col gap-8 p-4 max-w-screen-2xl">
+        <div className="flex flex-col items-center gap-2 py-5">
+          <h1 className="text-4xl font-semibold tracking-tight lg:text-5xl">
+            Products
+          </h1>
+          <p className="text-center text-neutral-500 dark:text-neutral-400">
+            We have a wide range of products to choose from. <br></br> Find the
+            best products for you.
+          </p>
         </div>
-        <div className="w-full hidden md:block">
+        <div className="w-full hidden md:flex justify-between">
+          <Collections />
           <Suspense fallback={null}>
             <Filters />
           </Suspense>
@@ -35,9 +43,10 @@ export default function LayoutSearch({
         <div className="w-full md:hidden block">
           <MobileFilters />
         </div>
-        <div className="min-h-screen w-full">{children}</div>
+        <div className="w-full">{children}</div>
+        <BannerSignup />
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 }
