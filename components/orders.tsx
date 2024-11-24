@@ -62,7 +62,7 @@ export default function Orders() {
                   className={`w-full flex justify-between ${
                     index === 0
                       ? 'pb-4'
-                      : 'border-t border-neutral-200 py-4 dark:border-neutral-800'
+                      : 'border-t-2 border-dashed border-neutral-200 py-4 dark:border-neutral-800'
                   }`}
                 >
                   <div className="flex flex-col items-start gap-2">

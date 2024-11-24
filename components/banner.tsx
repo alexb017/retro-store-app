@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { type Banner } from '@/lib/types';
 import { Button } from '@/components/ui/button';
@@ -60,41 +60,49 @@ export default function BannerItem({ item }: { item: Banner[] }) {
 
   return (
     <>
-      <div className="relative flex flex-col sm:flex-row w-full h-[600px] lg:h-[512px] rounded-3xl overflow-hidden bg-red-50 dark:bg-zinc-900">
+      <div className="relative flex flex-col sm:flex-row w-full h-[600px] lg:h-[512px] rounded-3xl overflow-hidden bg-neutral-100 dark:bg-zinc-900">
         {item[index] && (
           <div className="flex flex-col sm:flex-row w-full h-full">
             <div
-              className={`flex flex-col items-start justify-between p-12 sm:pb-6 sm:p-20 h-full sm:w-2/4 ${
+              className={`flex flex-col items-start justify-between p-12 sm:pb-[26.6px] sm:p-20 h-full sm:w-2/4 ${
                 animate ? 'animate-slide-in-text' : ''
               }`}
             >
               <div className="flex flex-col items-start gap-4">
-                <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+                <h1 className="text-4xl font-semibold tracking-tight lg:text-5xl">
                   {description}
                 </h1>
                 <div>
-                  <p className="text-base">{name}</p>
-                  <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+                  <p className="text-base text-neutral-500 dark:text-neutral-400">
+                    {name}
+                  </p>
+                  <h3 className="text-2xl font-semibold tracking-tight">
                     {FormattedPrice(price)}
                   </h3>
                 </div>
                 <Button
                   asChild
-                  className="bg-blue-500 shadow text-base hover:bg-blue-600 dark:text-white"
+                  variant="default"
+                  className="rounded-full px-6 bg-blue-600 dark:text-white dark:bg-blue-400 dark:hover:bg-blue-500"
                 >
                   <Link href={`/product/${handle}`}>Buy</Link>
                 </Button>
               </div>
-              <div className="flex items-center gap-4 mt-6 sm:mt-0">
-                {item[index]?.colors?.map((color, index) => {
-                  return (
-                    <Badge
-                      key={index}
-                      style={{ backgroundColor: color }}
-                      className={`w-4 h-4 p-0 shadow-[0_0_0_3px_rgba(255,255,255,0.8)] border border-zinc-200 dark:border-zinc-500 dark:shadow-[0_0_0_3px_rgba(66,66,66,0.8)]`}
-                    />
-                  );
-                })}
+              <div className="flex flex-col gap-2 mt-6 sm:mt-0">
+                <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                  Colors available
+                </p>
+                <div className="flex items-center gap-4">
+                  {item[index]?.colors?.map((color, index) => {
+                    return (
+                      <Badge
+                        key={index}
+                        style={{ backgroundColor: color }}
+                        className={`w-4 h-4 p-0 shadow-[0_0_0_3px_rgba(255,255,255,0.8)] border border-neutral-200 dark:border-neutral-500 dark:shadow-[0_0_0_3px_rgba(66,66,66,0.8)]`}
+                      />
+                    );
+                  })}
+                </div>
               </div>
             </div>
             <div className="sm:w-2/4 h-full flex items-center justify-center scale-150 sm:translate-y-16">
@@ -113,23 +121,23 @@ export default function BannerItem({ item }: { item: Banner[] }) {
 
         {item?.length > 0 ? (
           <div className="absolute right-[5%] bottom-[5%]">
-            <div className="flex h-11 items-center justify-between gap-1 rounded-full p-1 bg-white text-zinc-700 dark:text-white dark:bg-zinc-950">
+            <div className="flex h-11 items-center justify-between gap-1 rounded-full p-1 bg-white text-neutral-700 dark:text-white dark:bg-neutral-950">
               <Button
                 size="icon"
-                className="flex items-center justify-center text-zinc-700 w-[36px] h-full p-0 bg-transparent rounded-full hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-800"
+                className="flex items-center justify-center text-zinc-700 w-[36px] h-full p-0 bg-transparent rounded-full hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-800"
                 onClick={prevBanner}
               >
-                <ChevronLeft className="w-5 h-5" />
+                <ArrowLeftIcon className="w-5 h-5" />
               </Button>
               <div className="text-sm w-[31px] text-center font-medium">
                 {index + 1} / {item?.length}
               </div>
               <Button
                 size="icon"
-                className="flex items-center justify-center text-zinc-700 w-[36px] h-full p-0 bg-transparent rounded-full hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-800"
+                className="flex items-center justify-center text-neutral-700 w-[36px] h-full p-0 bg-transparent rounded-full hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-800"
                 onClick={nextBanner}
               >
-                <ChevronRight className="w-5 h-5" />
+                <ArrowRightIcon className="w-5 h-5" />
               </Button>
             </div>
           </div>

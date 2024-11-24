@@ -101,7 +101,7 @@ export default function Order({ orderId }: { orderId: string }) {
           );
         })}
       </ul>
-      <div className="flex justify-between pt-4 border-t border-neutral-200 dark:border-neutral-800">
+      <div className="flex justify-between pt-4 border-t-2 border-dashed border-neutral-200 dark:border-neutral-800">
         <div>
           <p className="text-xs text-neutral-500 dark:text-neutral-400">
             {dateStr}
