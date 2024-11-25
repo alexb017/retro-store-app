@@ -30,10 +30,14 @@ export default function LayoutSearch({
           </p>
         </div>
         <div className="w-full hidden md:flex justify-between">
-          <Collections />
-          <Suspense fallback={null}>
-            <Filters />
-          </Suspense>
+          <div className="w-1/2">
+            <Collections />
+          </div>
+          <div className="w-1/2">
+            <Suspense fallback={null}>
+              <Filters />
+            </Suspense>
+          </div>
         </div>
         <div className="w-full md:hidden block">
           <Suspense fallback={null}>

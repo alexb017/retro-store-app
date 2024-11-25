@@ -27,11 +27,7 @@ export default async function ThreeItems() {
               {mainElement?.info}
             </p>
             <h4 className="text-xl">{FormattedPrice(mainElement?.price)}</h4>
-            <Button
-              asChild
-              variant="outline"
-              className="h-12 px-6 rounded-full"
-            >
+            <Button asChild variant="outline" className="px-5 rounded-full">
               <Link href={`/product/${mainElement?.handle}`}>View product</Link>
             </Button>
           </CardContent>
@@ -65,11 +61,7 @@ export default async function ThreeItems() {
                   {item?.info}
                 </p>
                 <h4 className="text-xl">{FormattedPrice(item?.price)}</h4>
-                <Button
-                  asChild
-                  variant="outline"
-                  className="h-12 px-6 rounded-full"
-                >
+                <Button asChild variant="outline" className="px-5 rounded-full">
                   <Link href={`/product/${item?.handle}`}>View product</Link>
                 </Button>
               </CardContent>

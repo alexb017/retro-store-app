@@ -4,7 +4,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { Button } from './ui/button';
 
 const links = [
-  { name: 'All', href: '/products' },
+  { name: 'All products', href: '/products' },
   { name: 'Phones', href: '/products/phones' },
   { name: 'Watches', href: '/products/watches' },
   { name: 'Sweaters', href: '/products/sweaters' },
@@ -24,14 +24,15 @@ export default function Collections() {
       <p className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
         Collections
       </p>
-      <ul className="flex flex-row gap-2">
+      <ul className="flex flex-wrap justify-start gap-2">
         {links.map((link, index) => (
           <li key={index}>
             <Button
-              className={`text-xs font-medium text-black py-1 px-3 h-auto border rounded-full transition-all dark:text-neutral-400 ${
+              variant="outline"
+              className={`px-5 rounded-full ${
                 pathname === link.href
-                  ? 'border-blue-600 bg-blue-50 hover:bg-blue-50 dark:bg-blue-950 dark:text-white'
-                  : 'border-neutral-100 bg-neutral-100 hover:bg-neutral-200 hover:border-neutral-200 dark:hover:text-white dark:border-neutral-900 dark:hover:border-neutral-800 dark:bg-neutral-900 dark:hover:bg-neutral-800'
+                  ? 'text-black border-black bg-neutral-100 dark:hover:text-black dark:hover:bg-neutral-100'
+                  : ''
               }`}
               onClick={() => {
                 router.push(link.href, { scroll: false });

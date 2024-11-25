@@ -83,7 +83,7 @@ export default function BannerItem({ item }: { item: Banner[] }) {
                 <Button
                   asChild
                   variant="default"
-                  className="rounded-full px-6 bg-blue-600 dark:text-white dark:bg-blue-400 dark:hover:bg-blue-500"
+                  className="px-5 rounded-full bg-blue-600 dark:text-white dark:bg-blue-400 dark:hover:bg-blue-500"
                 >
                   <Link href={`/product/${handle}`}>Buy</Link>
                 </Button>
