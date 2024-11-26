@@ -26,19 +26,19 @@ export default function Footer() {
               <p className="font-medium">Store</p>
               <Link
                 href="/about"
-                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400"
+                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-all duration-200 ease-in"
               >
                 About
               </Link>
               <Link
                 href="/contact"
-                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400"
+                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-all duration-200 ease-in"
               >
                 Contact
               </Link>
               <Link
                 href="/faq"
-                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400"
+                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-all duration-200 ease-in"
               >
                 FAQ
               </Link>
@@ -51,31 +51,31 @@ export default function Footer() {
               <p className="font-medium">Products</p>
               <Link
                 href="/products/phones"
-                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400"
+                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-all duration-200 ease-in"
               >
                 Phones
               </Link>
               <Link
                 href="/products/watches"
-                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400"
+                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-all duration-200 ease-in"
               >
                 Watches
               </Link>
               <Link
                 href="/products/t-shirts"
-                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400"
+                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-all duration-200 ease-in"
               >
                 T-shirts
               </Link>
               <Link
                 href="/products/hats"
-                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400"
+                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-all duration-200 ease-in"
               >
                 Hats
               </Link>
               <Link
                 href="/products/hoodies"
-                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400"
+                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-all duration-200 ease-in"
               >
                 Hoodies
               </Link>
@@ -88,19 +88,19 @@ export default function Footer() {
               <p className="font-medium">Social</p>
               <Link
                 href="#"
-                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400"
+                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-all duration-200 ease-in"
               >
                 Facebook
               </Link>
               <Link
                 href="#"
-                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400"
+                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-all duration-200 ease-in"
               >
                 Instagram
               </Link>
               <Link
                 href="#"
-                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400"
+                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-all duration-200 ease-in"
               >
                 Twitter
               </Link>
@@ -110,10 +110,13 @@ export default function Footer() {
       </div>
       <div className="flex items-center justify-between">
         <p className="text-sm text-center sm:text-start text-neutral-500 dark:text-neutral-400">
-          &copy; 2024 Retro Store. All rights reserved.
+          &copy; 2024 Retro Store App. All rights reserved.
         </p>
-        <div className="flex items-center">
-          <StripeIcon classname="text-[#635BFF] w-11 h-auto" />
+        <div className="flex items-center gap-1 italic text-sm text-neutral-500 dark:text-neutral-400">
+          Powered by
+          <p className="text-[#635BFF] text-base font-black tracking-tight">
+            stripe
+          </p>
         </div>
       </div>
     </div>
