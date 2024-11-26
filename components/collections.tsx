@@ -31,7 +31,7 @@ export default function Collections() {
               variant="outline"
               className={`px-5 rounded-full ${
                 pathname === link.href
-                  ? 'text-black border-black bg-neutral-100 dark:hover:text-black dark:hover:bg-neutral-100'
+                  ? 'border-black bg-neutral-100 dark:bg-neutral-900 dark:border-neutral-400'
                   : ''
               }`}
               onClick={() => {

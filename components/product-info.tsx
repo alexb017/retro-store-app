@@ -11,6 +11,13 @@ import { useContext } from 'react';
 import { AuthContext } from '@/app/AuthContext';
 import { User } from 'firebase/auth';
 import Link from 'next/link';
+import { Separator } from './ui/separator';
+import {
+  ShieldCheckIcon,
+  ArchiveBoxIcon,
+  PhoneArrowUpRightIcon,
+  ArrowRightIcon,
+} from '@heroicons/react/24/outline';
 
 export default function ProductInfo({ product }: { product: ProductInfoType }) {
   const { user } = useContext(AuthContext) as { user: User | null };
@@ -39,7 +46,7 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
     <div className="flex flex-col gap-4">
       <div className="flex flex-col">
         <div className="flex items-center gap-4">
-          <h1 className="text-4xl font-extrabold tracking-tight">
+          <h1 className="text-4xl font-semibold tracking-tight">
             {product?.name}
           </h1>
           {user && (
@@ -50,24 +57,22 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
             />
           )}
         </div>
-        <p className="text-zinc-500 text-2xl font-semibold tracking-tight dark:text-zinc-400">
+        <h3 className="text-neutral-500 text-2xl font-semibold tracking-tight dark:text-neutral-400">
           {FormattedPrice(product?.price)}
-        </p>
+        </h3>
       </div>
       {(product?.colors?.length ?? 0) > 0 ||
       (product?.storage?.length ?? 0) > 0 ? (
-        <div className="h-[1px] w-full block bg-zinc-200 dark:bg-zinc-700"></div>
+        <Separator />
       ) : null}
       {(product?.colors?.length ?? 0) > 0 && (
         <div>
-          <h3 className="text-xl font-semibold tracking-tight mb-2">
+          <h4 className="text-xl font-semibold tracking-tight mb-2">
             Choose your color
-          </h3>
+          </h4>
           <div className="flex items-center gap-2">
             {product?.colors?.map((color) => {
               const isActive = color.toLowerCase() === searchParamColor;
-              const classname =
-                'text-sm font-medium border-2 text-black dark:text-white rounded-full hover:border-blue-500 transition-all dark:hover:border-blue-500';
 
               const optionSearchParams = new URLSearchParams(
                 searchParams.toString()
@@ -79,15 +84,16 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
 
               return (
                 <Button
+                  variant="outline"
                   onClick={() => {
                     router.replace(optionUrl, { scroll: false });
                   }}
                   key={color}
-                  className={
+                  className={`px-5 rounded-full ${
                     isActive
-                      ? `${classname} border-blue-500 bg-blue-50 hover:bg-blue-50 dark:bg-blue-950`
-                      : `${classname} border-zinc-200 bg-transparent hover:bg-transparent dark:border-zinc-700`
-                  }
+                      ? `border-black bg-neutral-100 dark:bg-neutral-900 dark:border-neutral-400`
+                      : ``
+                  }`}
                 >
                   {color}
                 </Button>
@@ -98,14 +104,12 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
       )}
       {(product?.storage?.length ?? 0) > 0 && (
         <div>
-          <h3 className="text-xl font-semibold tracking-tight mb-2">
+          <h4 className="text-xl font-semibold tracking-tight mb-2">
             Choose your storage space
-          </h3>
+          </h4>
           <div className="flex items-center flex-wrap gap-2">
             {product?.storage?.map((storage, index) => {
               const isActive = storage?.space === searchParamSpace;
-              const classname =
-                'flex items-center justify-center text-sm border-2 text-black dark:text-white rounded-xl aspect-square w-24 h-24 hover:border-blue-500 transition-all dark:hover:border-blue-500';
 
               const optionSearchParams = new URLSearchParams(
                 searchParams.toString()
@@ -118,19 +122,20 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
 
               return (
                 <Button
+                  variant="outline"
                   onClick={() => {
                     router.replace(optionUrl, { scroll: false });
                   }}
                   key={index}
-                  className={
+                  className={`px-5 rounded-xl aspect-square w-24 h-24 ${
                     isActive
-                      ? `${classname} border-blue-500 bg-blue-50 hover:bg-blue-50 dark:bg-blue-950`
-                      : `${classname} border-zinc-200 bg-transparent hover:bg-transparent dark:border-zinc-700`
-                  }
+                      ? `border-black bg-neutral-100 dark:bg-neutral-900 dark:border-neutral-400`
+                      : ``
+                  }`}
                 >
                   <div className="flex flex-col items-center">
                     <h3 className="font-medium">{storage?.space} GB</h3>
-                    <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                    <p className="text-xs text-neutral-500 dark:text-neutral-400">
                       {FormattedPrice(storage?.price)}
                     </p>
                   </div>
@@ -142,14 +147,12 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
       )}
       {(product?.size?.length ?? 0) > 0 && (
         <div>
-          <h3 className="text-xl font-semibold tracking-tight mb-2">
+          <h4 className="text-xl font-semibold tracking-tight mb-2">
             Choose your size
-          </h3>
+          </h4>
           <div className="flex items-center flex-wrap gap-2">
             {product?.size?.map((size: string) => {
               const isActive = size === searchParamSize;
-              const classname =
-                'text-sm font-medium uppercase border-2 text-black dark:text-white rounded-full py-1 px-4 hover:border-blue-500 transition-all dark:hover:border-blue-500';
 
               const optionSearchParams = new URLSearchParams(
                 searchParams.toString()
@@ -161,15 +164,16 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
 
               return (
                 <Button
+                  variant="outline"
                   onClick={() => {
                     router.replace(optionUrl, { scroll: false });
                   }}
                   key={size}
-                  className={
+                  className={`px-5 rounded-full uppercase ${
                     isActive
-                      ? `${classname} border-blue-500 bg-blue-50 hover:bg-blue-50 dark:bg-blue-950`
-                      : `${classname} border-zinc-200 bg-transparent hover:bg-transparent dark:border-zinc-700`
-                  }
+                      ? `border-black bg-neutral-100 dark:bg-neutral-900 dark:border-neutral-400`
+                      : ``
+                  }`}
                 >
                   {size}
                 </Button>
@@ -179,12 +183,9 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
         </div>
       )}
       {!user ? (
-        <Link
-          href="/login"
-          className="flex items-center justify-center gap-4 w-full p-4 rounded-full bg-blue-500 text-white font-semibold tracking-tight transition-colors hover:bg-blue-600"
-        >
-          Sign in & Check Out
-        </Link>
+        <Button asChild variant="default" className="h-14 rounded-full">
+          <Link href="/login">Sign in & Check Out</Link>
+        </Button>
       ) : (
         <AddToCart
           item={product}
@@ -194,20 +195,47 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
         />
       )}
       <div>
-        <h3 className="text-xl font-semibold tracking-tight mb-1">
+        <h4 className="text-xl font-semibold tracking-tight mb-1">
           Description
-        </h3>
-        <p className="text-sm">{product?.description}</p>
-      </div>
-      {/* {!user && (
-        <p className="text-sm text-gray-500">
-          You must be{' '}
-          <Link href="/login" className="underline">
-            sign in
-          </Link>{' '}
-          to buy.
+        </h4>
+        <p className="text-sm text-neutral-500 dark:text-neutral-400">
+          {product?.description}
         </p>
-      )} */}
+      </div>
+      <div className="flex flex-col w-full">
+        <Link
+          href="#"
+          className="flex items-center justify-between py-4 text-neutral-500 dark:text-neutral-400"
+        >
+          <div className="flex items-center gap-2">
+            <ShieldCheckIcon className="w-5 h-5" />
+            <p>Warranty</p>
+          </div>
+          <ArrowRightIcon className="w-5 h-5" />
+        </Link>
+        <Separator />
+        <Link
+          href="#"
+          className="flex items-center justify-between py-4 text-neutral-500 dark:text-neutral-400"
+        >
+          <div className="flex items-center gap-2">
+            <ArchiveBoxIcon className="w-5 h-5" />
+            <p>Shipping & delivery</p>
+          </div>
+          <ArrowRightIcon className="w-5 h-5" />
+        </Link>
+        <Separator />
+        <Link
+          href="#"
+          className="flex items-center justify-between py-4 text-neutral-500 dark:text-neutral-400"
+        >
+          <div className="flex items-center gap-2">
+            <PhoneArrowUpRightIcon className="w-5 h-5" />
+            <p>Support</p>
+          </div>
+          <ArrowRightIcon className="w-5 h-5" />
+        </Link>
+      </div>
     </div>
   );
 }

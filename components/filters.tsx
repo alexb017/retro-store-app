@@ -28,7 +28,7 @@ export default function Filters() {
               className={`px-5 rounded-full ${
                 searchParams.get('sort') === filter.sort ||
                 (!searchParams.get('sort') && filter.sort === 'rel')
-                  ? 'text-black border-black bg-neutral-100 dark:hover:text-black dark:hover:bg-neutral-100'
+                  ? 'border-black bg-neutral-100 dark:bg-neutral-900 dark:border-neutral-400'
                   : ''
               }`}
               onClick={() => {

@@ -36,7 +36,7 @@ export default function BannerSignup() {
   return (
     <div className="flex items-center justify-center bg-neutral-100 rounded-3xl p-12 dark:bg-neutral-900">
       <div className="flex flex-col items-center gap-4">
-        <EnvelopeIcon className="w-12 h-12 text-blue-600" />
+        <EnvelopeIcon className="w-12 h-12 text-neutral-500 dark:text-neutral-400" />
         <h1 className="text-4xl font-semibold text-center tracking-tight sm:w-96">
           Subscribe to our newsletter and get the latest news.
         </h1>

@@ -39,9 +39,9 @@ export default function AddToCart({
     ) ?? 0;
 
   const classDefault =
-    'flex items-center justify-center gap-2 w-full text-base p-4 h-auto rounded-full bg-blue-500 font-semibold tracking-tight text-white hover:bg-blue-600 transition-colors';
+    'flex items-center justify-center gap-2 w-full text-base p-4 h-auto rounded-full bg-blue-600 font-semibold tracking-tight text-white hover:bg-blue-700';
   const classFavorite =
-    'flex items-center gap-2 text-sm rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-500 dark:text-zinc-400 dark:bg-zinc-900 dark:hover:bg-zinc-800';
+    'flex items-center gap-2 text-sm rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-500 dark:text-neutral-400 dark:bg-neutral-900 dark:hover:bg-neutral-800';
 
   const cartItems: CartItem = {
     id_cart: '',

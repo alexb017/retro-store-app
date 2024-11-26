@@ -19,7 +19,7 @@ export default function LayoutSearch({
 }) {
   return (
     <>
-      <div className="mx-auto flex flex-col gap-8 p-4 max-w-screen-2xl">
+      <div className="mx-auto flex flex-col gap-8 p-5 max-w-screen-2xl">
         <div className="flex flex-col items-center gap-2 py-5">
           <h1 className="text-4xl font-semibold tracking-tight lg:text-5xl">
             Products

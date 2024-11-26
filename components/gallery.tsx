@@ -15,37 +15,23 @@ export default function Gallery({
 
   return (
     <>
-      <div className="relative aspect-square h-full max-h-[500px] w-full">
-        {images[imageIndex] && (
-          <Image
-            src={imageURL}
-            alt={`${name}-${imageIndex}`}
-            fill
-            className="object-contain"
-            sizes="(min-width: 1024px) 66vw, 100vw"
-            quality={80}
-            priority={true}
-          />
-        )}
-
-        <div className="absolute bottom-0 w-full flex justify-center">
+      <div className="flex gap-5 w-full">
+        <div className="flex items-center justify-center w-20">
           {images.length > 1 ? (
-            <ul className="flex items-center justify-center flex-wrap gap-2 py-1 lg:mb-0">
+            <ul className="flex flex-col gap-4">
               {images.map((image: any, index) => {
                 const isActive = index === imageIndex;
-                const classname =
-                  'cursor-pointer object-contain py-2 backdrop-blur-lg border-2 rounded-xl hover:border-blue-500 bg-opacity-30 transition-all dark:hover:border-blue-500';
 
                 return (
                   <li key={index} className="flex w-20 h-20">
                     <Image
                       src={image.url}
                       alt={`${name}-${image?.color}`}
-                      className={
+                      className={`object-contain rounded-2xl p-1 bg-neutral-100 cursor-pointer dark:bg-neutral-900 ${
                         isActive
-                          ? `${classname} border-blue-500`
-                          : `${classname} border-zinc-300 dark:border-zinc-600`
-                      }
+                          ? 'outline outline-offset-2 outline-1 outline-black dark:outline-neutral-400'
+                          : ''
+                      }`}
                       width={80}
                       height={80}
                       quality={80}
@@ -56,6 +42,18 @@ export default function Gallery({
               })}
             </ul>
           ) : null}
+        </div>
+        <div className="flex items-center justify-center w-full aspect-square rounded-3xl bg-neutral-100 dark:bg-neutral-900">
+          {images[imageIndex] && (
+            <Image
+              src={imageURL}
+              alt={`${name}-${imageIndex}`}
+              width={800}
+              height={800}
+              quality={80}
+              priority={true}
+            />
+          )}
         </div>
       </div>
     </>

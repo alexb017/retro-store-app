@@ -60,7 +60,7 @@ export default function BannerItem({ item }: { item: Banner[] }) {
 
   return (
     <>
-      <div className="relative flex flex-col sm:flex-row w-full h-[600px] lg:h-[512px] rounded-3xl overflow-hidden bg-neutral-100 dark:bg-zinc-900">
+      <div className="relative flex flex-col sm:flex-row w-full h-[600px] lg:h-[512px] rounded-3xl overflow-hidden bg-neutral-100 dark:bg-neutral-900">
         {item[index] && (
           <div className="flex flex-col sm:flex-row w-full h-full">
             <div
@@ -80,11 +80,7 @@ export default function BannerItem({ item }: { item: Banner[] }) {
                     {FormattedPrice(price)}
                   </h3>
                 </div>
-                <Button
-                  asChild
-                  variant="default"
-                  className="px-5 rounded-full bg-blue-600 dark:text-white dark:bg-blue-400 dark:hover:bg-blue-500"
-                >
+                <Button asChild variant="default" className="px-5 rounded-full">
                   <Link href={`/product/${handle}`}>Buy</Link>
                 </Button>
               </div>
@@ -121,10 +117,10 @@ export default function BannerItem({ item }: { item: Banner[] }) {
 
         {item?.length > 0 ? (
           <div className="absolute right-[5%] bottom-[5%]">
-            <div className="flex h-11 items-center justify-between gap-1 rounded-full p-1 bg-white text-neutral-700 dark:text-white dark:bg-neutral-950">
+            <div className="flex h-11 items-center justify-between gap-1 rounded-full p-1 bg-white text-neutral-700 dark:text-white dark:bg-neutral-800">
               <Button
                 size="icon"
-                className="flex items-center justify-center text-zinc-700 w-[36px] h-full p-0 bg-transparent rounded-full hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-800"
+                className="flex items-center justify-center text-neutral-700 w-[36px] h-full p-0 bg-transparent rounded-full hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-900"
                 onClick={prevBanner}
               >
                 <ArrowLeftIcon className="w-5 h-5" />
@@ -134,7 +130,7 @@ export default function BannerItem({ item }: { item: Banner[] }) {
               </div>
               <Button
                 size="icon"
-                className="flex items-center justify-center text-neutral-700 w-[36px] h-full p-0 bg-transparent rounded-full hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-800"
+                className="flex items-center justify-center text-neutral-700 w-[36px] h-full p-0 bg-transparent rounded-full hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-900"
                 onClick={nextBanner}
               >
                 <ArrowRightIcon className="w-5 h-5" />

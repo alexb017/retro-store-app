@@ -6,6 +6,8 @@ import ProductGrid from '@/components/product-grid';
 import { type Products, type ProductInfoType } from '@/lib/types';
 import { Suspense } from 'react';
 import { Metadata } from 'next';
+import BannerSignup from '@/components/banner-signup';
+import ShippingBanner from '@/components/shipping-banner';
 
 export const metadata: Metadata = {
   title: 'Product',
@@ -23,16 +25,9 @@ export default async function ProductPage({
 
   return (
     <>
-      <div className="mx-auto max-w-screen-2xl p-4">
-        {/* <Link
-          href="/"
-          className="inline-flex items-center gap-2 pb-5 text-gray-500 group hover:text-black transition-all ease-in-out"
-        >
-          <ArrowLeftIcon classname="h-5 group-hover:scale-105 transition-all ease-in-out" />
-          Go back to the main page
-        </Link> */}
-        <div className="flex flex-col gap-6 sm:flex-row">
-          <div className="flex items-center justify-center h-full w-full aspect-square rounded-3xl p-1 bg-zinc-100 basis-full sm:basis-3/6 lg:basis-4/6 dark:bg-zinc-900">
+      <div className="flex flex-col gap-5 mx-auto max-w-screen-2xl p-5">
+        <div className="flex flex-col gap-5 sm:flex-row">
+          <div className="flex items-center justify-center h-full w-full basis-full sm:basis-3/6 lg:basis-4/6">
             <Gallery
               images={product?.images?.map((image: string) => ({
                 url: image,
@@ -46,9 +41,13 @@ export default async function ProductPage({
             </Suspense>
           </div>
         </div>
-        <RelatedProducts category={product?.category} />
+        <ShippingBanner />
+        <div className="flex flex-col gap-24">
+          <RelatedProducts category={product?.category} />
+          <BannerSignup />
+          <Footer />
+        </div>
       </div>
-      <Footer />
     </>
   );
 }
@@ -61,13 +60,13 @@ async function RelatedProducts({ category }: { category: string }) {
   );
 
   return (
-    <div className="py-12">
+    <div className="flex flex-col gap-5">
       {filteredProducts.length > 0 && (
-        <h2 className="mb-4 text-3xl font-semibold tracking-tight">
+        <h2 className="text-3xl font-semibold tracking-tight">
           Related Products
         </h2>
       )}
-      <ul className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:grid-cols-3">
+      <ul className="grid grid-cols-2 lg:grid-cols-3 gap-5">
         <ProductGrid products={filteredProducts} />
       </ul>
     </div>
