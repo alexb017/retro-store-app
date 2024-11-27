@@ -1,4 +1,4 @@
-import { Plus } from 'lucide-react';
+import { PlusIcon } from '@heroicons/react/24/outline';
 import { createCart, incrementQuantity } from '@/lib/actions';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
@@ -68,7 +68,8 @@ export default function AddToCart({
     <>
       <Button
         disabled={disableBtn}
-        className={`${classname === 'default' ? classDefault : classFavorite} ${
+        variant="default"
+        className={`h-14 rounded-full ${
           disableBtn
             ? 'cursor-not-allowed opacity-50 disabled:cursor-not-allowed disabled:pointer-events-auto'
             : 'cursor-pointer'
@@ -83,7 +84,7 @@ export default function AddToCart({
           await createCart(uid, itemToAdd);
         }}
       >
-        <Plus className="w-5 h-5" />
+        <PlusIcon className="w-5 h-5" />
         Add item to cart
       </Button>
     </>

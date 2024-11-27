@@ -69,9 +69,9 @@ export default function AddToFavorite({
         <Button
           size="icon"
           disabled={disableBtn}
-          className={`flex bg-transparent h-auto w-auto hover:bg-transparent text-neutral-500 hover:text-blue-600 transition-all dark:text-neutral-400 dark:hover:text-blue-400 ${
+          className={`flex bg-transparent h-auto w-auto hover:bg-transparent text-neutral-500 hover:text-red-500 transition-all duration-200 ease-in dark:text-neutral-400 dark:hover:text-red-400 ${
             disableBtn
-              ? 'cursor-not-allowed opacity-50 disabled:pointer-events-auto'
+              ? 'cursor-not-allowed opacity-50 disabled:pointer-events-auto hover:text-neutral-500 dark:hover:text-neutral-400'
               : 'cursor-pointer'
           }`}
           onClick={async () => {
@@ -79,18 +79,18 @@ export default function AddToFavorite({
             await createFavorites(uid, addToFavorite);
           }}
         >
-          <HeartIcon className="w-5 h-5" />
+          <HeartIcon className="w-6 h-6" />
         </Button>
       ) : (
         <Button
           size="icon"
-          className="flex bg-transparent h-auto w-auto hover:bg-transparent text-blue-600 hover:text-blue-500 dark:text-neutral-400 dark:hover:text-blue-400"
+          className="flex bg-transparent h-auto w-auto hover:bg-transparent text-red-500 hover:text-red-400 transition-all duration-200 ease-in"
           onClick={async () => {
             // Delete item from favorite
             await deleteItemFavorite(uid, removeItemFavorite?.id_favorite);
           }}
         >
-          <HeartSolidIcon className="w-5 h-5" />
+          <HeartSolidIcon className="w-6 h-6" />
         </Button>
       )}
     </>
