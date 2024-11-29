@@ -53,11 +53,11 @@ export default function Order({ orderId }: { orderId: string }) {
 
   return (
     <div className="flex flex-col gap-4">
-      <div>
+      {/* <div>
         <h4 className="text-xl font-semibold tracking-tight">
           Order ID {order.order_id}
         </h4>
-      </div>
+      </div> */}
       <ul>
         {order.items.map((item: CartItem, index) => {
           const color =

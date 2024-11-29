@@ -8,6 +8,15 @@ import { Suspense } from 'react';
 import { Metadata } from 'next';
 import BannerSignup from '@/components/banner-signup';
 import ShippingBanner from '@/components/shipping-banner';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Product',
@@ -26,6 +35,25 @@ export default async function ProductPage({
   return (
     <>
       <div className="flex flex-col gap-5 mx-auto max-w-screen-2xl p-5">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link href="/">Home</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link href="/products">Products</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{product?.name}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
         <div className="flex flex-col gap-5 sm:flex-row">
           <div className="flex items-center justify-center h-full w-full basis-full sm:basis-3/6 lg:basis-4/6">
             <Gallery
