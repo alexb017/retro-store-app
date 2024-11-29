@@ -1,7 +1,10 @@
+import { Suspense } from 'react';
+import SuccessMessage from '@/components/success-message';
+
 export default function SuccessPage() {
   return (
-    <>
-      <h1>Success</h1>
-    </>
+    <Suspense fallback={null}>
+      <SuccessMessage />
+    </Suspense>
   );
 }

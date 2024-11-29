@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -11,9 +10,5 @@ export default function LayoutSuccess({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <>
-      <Suspense fallback={null}>{children}</Suspense>
-    </>
-  );
+  return <div className="w-full md:max-w-3xl mx-auto p-5">{children}</div>;
 }
