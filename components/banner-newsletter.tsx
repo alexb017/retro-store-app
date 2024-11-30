@@ -20,7 +20,7 @@ const formSchema = z.object({
   email: z.string().email({ message: 'Invalid email address!' }),
 });
 
-export default function BannerSignup() {
+export default function BannerNewsletter() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -37,13 +37,13 @@ export default function BannerSignup() {
     <div className="flex items-center justify-center bg-neutral-100 rounded-3xl p-12 dark:bg-neutral-900">
       <div className="flex flex-col items-center gap-4">
         <EnvelopeIcon className="w-12 h-12 text-neutral-500 dark:text-neutral-400" />
-        <h1 className="text-4xl font-semibold text-center tracking-tight sm:w-96">
+        <h1 className="text-2xl md:text-4xl font-semibold text-center tracking-tight md:w-96">
           Subscribe to our newsletter and get the latest news.
         </h1>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="flex items-center gap-2"
+            className="flex flex-col md:flex-row md:items-center gap-2"
           >
             <FormField
               control={form.control}
@@ -52,7 +52,7 @@ export default function BannerSignup() {
                 <FormItem>
                   <FormControl>
                     <Input
-                      className="w-96 h-12 rounded-full px-5 bg-transparent"
+                      className="w-full md:w-96 h-12 rounded-full px-5 bg-transparent"
                       placeholder="Enter your email address"
                       {...field}
                     />

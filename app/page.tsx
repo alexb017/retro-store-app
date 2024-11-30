@@ -1,5 +1,5 @@
 import BannerItem from '@/components/banner';
-import BannerSignup from '@/components/banner-signup';
+import BannerNewsletter from '@/components/banner-newsletter';
 import CarouselItems from '@/components/carousel';
 import Footer from '@/components/footer';
 import ThreeItems from '@/components/three-items';
@@ -54,7 +54,7 @@ export default async function Home() {
           </div>
           <ThreeItems />
         </div>
-        <BannerSignup />
+        <BannerNewsletter />
         <Footer />
       </div>
     </>

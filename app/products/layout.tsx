@@ -5,14 +5,14 @@ import MobileCollections from '@/components/mobile-collections';
 import MobileFilters from '@/components/mobile-filters';
 import { Suspense } from 'react';
 import { Metadata } from 'next';
-import BannerSignup from '@/components/banner-signup';
+import BannerNewsletter from '@/components/banner-newsletter';
 
 export const metadata: Metadata = {
   title: 'Products',
   description: 'Find the best products for you.',
 };
 
-export default function LayoutSearch({
+export default function LayoutProducts({
   children,
 }: {
   children: React.ReactNode;
@@ -48,7 +48,7 @@ export default function LayoutSearch({
           <MobileFilters />
         </div>
         <div className="w-full">{children}</div>
-        <BannerSignup />
+        <BannerNewsletter />
         <Footer />
       </div>
     </>

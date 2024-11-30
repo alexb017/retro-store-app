@@ -6,7 +6,7 @@ import ProductGrid from '@/components/product-grid';
 import { type Products, type ProductInfoType } from '@/lib/types';
 import { Suspense } from 'react';
 import { Metadata } from 'next';
-import BannerSignup from '@/components/banner-signup';
+import BannerNewsletter from '@/components/banner-newsletter';
 import ShippingBanner from '@/components/shipping-banner';
 import {
   Breadcrumb,
@@ -72,7 +72,7 @@ export default async function ProductPage({
         <ShippingBanner />
         <div className="flex flex-col gap-24">
           <RelatedProducts category={product?.category} />
-          <BannerSignup />
+          <BannerNewsletter />
           <Footer />
         </div>
       </div>
