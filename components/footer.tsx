@@ -86,24 +86,24 @@ export default function Footer() {
           <div className="flex justify-center">
             <div className="flex flex-col items-start gap-2">
               <p className="font-medium">Social</p>
-              <Link
+              <a
                 href="#"
                 className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-all duration-200 ease-in"
               >
                 Facebook
-              </Link>
-              <Link
+              </a>
+              <a
                 href="#"
                 className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-all duration-200 ease-in"
               >
                 Instagram
-              </Link>
-              <Link
+              </a>
+              <a
                 href="#"
                 className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-all duration-200 ease-in"
               >
                 Twitter
-              </Link>
+              </a>
             </div>
           </div>
         </div>

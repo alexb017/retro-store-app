@@ -24,8 +24,8 @@ export default function MenuPopup() {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
-        <Button variant="secondary" className="rounded-full">
-          Menu
+        <Button variant="default" className="rounded-full">
+          Account
         </Button>
       </DropdownMenuTrigger>
 
