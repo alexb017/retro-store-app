@@ -63,14 +63,14 @@ export default function Favorite() {
               return (
                 <li
                   key={index}
-                  className={`w-full flex flex-row justify-between ${
+                  className={`w-full flex flex-col md:flex-row justify-between ${
                     index === 0
                       ? 'pb-4'
                       : 'border-t border-neutral-200 py-4 dark:border-neutral-800'
                   }`}
                 >
                   <div className="flex flex-row gap-4">
-                    <div className="flex items-center justify-center aspect-square">
+                    <div className="flex items-center justify-center w-32 h-32 aspect-square">
                       <Image
                         src={fav?.image}
                         alt={fav?.name}
@@ -92,8 +92,8 @@ export default function Favorite() {
                       </div>
                     </div>
                   </div>
-                  <div className="flex flex-col items-end gap-2 pt-4">
-                    <div className="flex flex-col items-end">
+                  <div className="flex flex-col md:items-end gap-2 pb-4 md:pb-0 md:pt-4 pl-[calc(128px+16px)]">
+                    <div className="flex flex-col md:items-end">
                       <p className="text-xs text-neutral-500 dark:text-neutral-400">
                         Price
                       </p>

@@ -13,7 +13,7 @@ export default function CartTestDemo() {
   return (
     <>
       {cart?.length !== 0 ? (
-        <Card className="fixed right-5 bottom-5 max-w-xs rounded-3xl shadow-2xl bg-neutral-50 dark:bg-neutral-900">
+        <Card className="md:fixed md:right-5 md:bottom-5 mt-8 md:mt-0 w-full md:max-w-xs rounded-3xl shadow-2xl bg-neutral-50 dark:bg-neutral-900">
           <CardHeader>
             <CardDescription className="text-black dark:text-white">
               For test demo, you can use the following credit card details:

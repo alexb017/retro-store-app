@@ -70,7 +70,7 @@ export default function Cart() {
   }
 
   return (
-    <div className="p-5">
+    <>
       {cart?.length === 0 ? (
         <div className="flex flex-col items-center justify-center h-[calc(100vh-104px)]">
           <div className="flex flex-col items-center gap-4">
@@ -108,9 +108,9 @@ export default function Cart() {
 
                 return (
                   <div key={index}>
-                    <li className="w-full flex flex-row justify-between">
+                    <li className="w-full flex flex-col md:flex-row md:justify-between">
                       <div className="flex gap-4">
-                        <div className="flex items-center justify-center aspect-square">
+                        <div className="flex items-center justify-center w-32 h-32 aspect-square">
                           <Image
                             src={item?.image}
                             alt={item?.name}
@@ -139,8 +139,8 @@ export default function Cart() {
                           </div>
                         </div>
                       </div>
-                      <div className="flex flex-col items-end gap-2 pt-4">
-                        <div className="flex flex-col items-end">
+                      <div className="flex flex-col items-start md:items-end gap-2 pb-4 md:pb-0 pt-4 pl-[calc(128px+16px)]">
+                        <div className="flex flex-col md:items-end">
                           <p className="text-xs text-neutral-500 dark:text-neutral-400">
                             Price
                           </p>
@@ -159,12 +159,12 @@ export default function Cart() {
                 );
               })}
             </ul>
-            <div className="flex flex-col w-full pl-[calc(128px+16px)]">
-              <div className="flex items-center justify-between">
+            <div className="flex flex-col w-full md:pl-[calc(128px+16px)]">
+              <div className="flex justify-between">
                 <p className="text-sm">Subtotal</p>
                 <p className="text-sm">{FormattedPrice(totalPrice)}</p>
               </div>
-              <div className="flex items-center justify-between">
+              <div className="flex justify-between">
                 <div>
                   <p className="text-sm">Shipping</p>
                   <p className="text-xs text-neutral-500 dark:text-neutral-400">
@@ -176,9 +176,9 @@ export default function Cart() {
               <Separator className="my-2" />
               <div className="flex justify-between mb-5">
                 <p className="text-sm">Estimated total</p>
-                <h2 className="text-3xl font-semibold tracking-tight">
+                <h1 className="text-4xl font-semibold tracking-tight">
                   {FormattedPrice(totalPrice)}
-                </h2>
+                </h1>
               </div>
               <div className="self-end">
                 <form onSubmit={handleCheckout}>
@@ -195,6 +195,6 @@ export default function Cart() {
           </div>
         </>
       )}
-    </div>
+    </>
   );
 }
