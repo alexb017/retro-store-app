@@ -9,18 +9,18 @@ import {
   SelectValue,
   SelectGroup,
   SelectItem,
-} from './ui/select';
+} from '@/components/ui/select';
 
 const collections = [
-  { label: 'All', value: '/search' },
-  { label: 'Phones', value: '/search/phones' },
-  { label: 'Watches', value: '/search/watches' },
-  { label: 'Sweaters', value: '/search/sweaters' },
-  { label: 'Drinkware', value: '/search/drinkware' },
-  { label: 'Hats', value: '/search/hats' },
-  { label: 'T-Shirts', value: '/search/t-shirts' },
-  { label: 'Hoodies', value: '/search/hoodies' },
-  { label: 'Earbuds', value: '/search/earbuds' },
+  { label: 'All products', value: '/products' },
+  { label: 'Phones', value: '/products/phones' },
+  { label: 'Watches', value: '/products/watches' },
+  { label: 'Sweaters', value: '/products/sweaters' },
+  { label: 'Drinkware', value: '/products/drinkware' },
+  { label: 'Hats', value: '/products/hats' },
+  { label: 'T-Shirts', value: '/products/t-shirts' },
+  { label: 'Hoodies', value: '/products/hoodies' },
+  { label: 'Earbuds', value: '/products/earbuds' },
 ];
 
 export default function MobileCollections() {
@@ -42,11 +42,11 @@ export default function MobileCollections() {
 
   return (
     <>
-      <p className="text-sm text-zinc-500 font-medium mb-2 dark:text-zinc-400">
+      <p className="text-xs text-neutral-500 font-medium mb-2 dark:text-neutral-400">
         Collections
       </p>
       <Select value={selected?.value} onValueChange={handleChangeURL}>
-        <SelectTrigger className="focus:ring-0 focus:ring-offset-0">
+        <SelectTrigger className="focus:ring-0 focus:ring-offset-0 rounded-full h-12 px-5">
           <SelectValue placeholder={selected?.label} />
         </SelectTrigger>
         <SelectContent>

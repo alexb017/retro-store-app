@@ -25,8 +25,10 @@ export default function LayoutProducts({
             Products
           </h1>
           <p className="text-center text-neutral-500 dark:text-neutral-400">
-            We have a wide range of products to choose from. <br></br> Find the
-            best products for you.
+            We have a wide range of products to choose from.{' '}
+            <span className="inline-block md:block">
+              Find the best products for you.
+            </span>
           </p>
         </div>
         <div className="w-full hidden md:flex justify-between">
