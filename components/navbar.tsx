@@ -44,8 +44,9 @@ export default function Navbar() {
           </Suspense>
           <Link
             href="/"
-            className="flex items-center text-xl font-bold uppercase leading-none tracking-tighter ml-4 lg:ml-0"
+            className="flex items-center text-xl font-bold leading-none tracking-tighter ml-4 lg:ml-0"
           >
+            <LogoIcon classname="w-8 h-8 -rotate-45" />
             store
           </Link>
         </div>
