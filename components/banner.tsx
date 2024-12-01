@@ -60,7 +60,7 @@ export default function BannerItem({ item }: { item: Banner[] }) {
 
   return (
     <>
-      <div className="relative flex flex-col sm:flex-row w-full h-[600px] lg:h-[512px] rounded-3xl overflow-hidden bg-neutral-100 dark:bg-neutral-900">
+      <div className="relative flex flex-col sm:flex-row w-full h-[680px] md:h-[512px] rounded-3xl overflow-hidden bg-neutral-100 dark:bg-neutral-900">
         {item[index] && (
           <div className="flex flex-col sm:flex-row w-full h-full">
             <div
@@ -80,7 +80,11 @@ export default function BannerItem({ item }: { item: Banner[] }) {
                     {FormattedPrice(price)}
                   </h3>
                 </div>
-                <Button asChild variant="default" className="px-5 rounded-full">
+                <Button
+                  asChild
+                  variant="default"
+                  className="h-12 px-5 rounded-full"
+                >
                   <Link href={`/product/${handle}`}>Buy</Link>
                 </Button>
               </div>

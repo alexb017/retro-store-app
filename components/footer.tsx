@@ -5,8 +5,8 @@ import Link from 'next/link';
 export default function Footer() {
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex p-12 border-b border-neutral-200 dark:border-neutral-700">
-        <div className="w-1/4">
+      <div className="flex flex-wrap justify-between gap-6 md:gap-0 p-12 border-b border-neutral-200 dark:border-neutral-700">
+        <div className="w-1/2 md:w-1/4">
           <div className="flex flex-col gap-4">
             <Link
               href="/"
@@ -20,7 +20,7 @@ export default function Footer() {
             </p>
           </div>
         </div>
-        <div className="w-1/4">
+        <div className="w-1/3 md:w-1/4">
           <div className="flex justify-center">
             <div className="flex flex-col items-start gap-2">
               <p className="font-medium">Store</p>
@@ -45,7 +45,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="w-1/4">
+        <div className="w-1/3 md:w-1/4">
           <div className="flex justify-center">
             <div className="flex flex-col items-start gap-2">
               <p className="font-medium">Products</p>
@@ -82,7 +82,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="w-1/4">
+        <div className="w-1/3 md:w-1/4">
           <div className="flex justify-center">
             <div className="flex flex-col items-start gap-2">
               <p className="font-medium">Social</p>
@@ -108,8 +108,8 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-between">
-        <p className="text-sm text-center sm:text-start text-neutral-500 dark:text-neutral-400">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+        <p className="text-sm sm:text-start text-neutral-500 dark:text-neutral-400 order-1 md:order-none">
           &copy; 2024 Retro Store App. All rights reserved.
         </p>
         <div className="flex items-center gap-1 italic text-sm text-neutral-500 dark:text-neutral-400">

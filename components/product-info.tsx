@@ -203,10 +203,7 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
         </p>
       </div>
       <div className="flex flex-col w-full">
-        <Link
-          href="#"
-          className="flex items-center justify-between py-4 text-neutral-500 dark:text-neutral-400"
-        >
+        <Link href="#" className="flex items-center justify-between py-4">
           <div className="flex items-center gap-2">
             <ShieldCheckIcon className="w-5 h-5" />
             <p>Warranty</p>
@@ -214,10 +211,7 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
           <ArrowRightIcon className="w-5 h-5" />
         </Link>
         <Separator />
-        <Link
-          href="#"
-          className="flex items-center justify-between py-4 text-neutral-500 dark:text-neutral-400"
-        >
+        <Link href="#" className="flex items-center justify-between py-4">
           <div className="flex items-center gap-2">
             <ArchiveBoxIcon className="w-5 h-5" />
             <p>Shipping & delivery</p>
@@ -225,10 +219,7 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
           <ArrowRightIcon className="w-5 h-5" />
         </Link>
         <Separator />
-        <Link
-          href="#"
-          className="flex items-center justify-between py-4 text-neutral-500 dark:text-neutral-400"
-        >
+        <Link href="#" className="flex items-center justify-between py-4">
           <div className="flex items-center gap-2">
             <PhoneArrowUpRightIcon className="w-5 h-5" />
             <p>Support</p>
