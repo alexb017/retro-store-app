@@ -12,9 +12,9 @@ export default async function ThreeItems() {
   const firstTwoElements = products.slice(1, 3);
 
   return (
-    <div className="flex gap-6 w-full">
-      <div className="w-1/2">
-        <Card className="flex flex-col justify-between h-full bg-neutral-100 rounded-3xl border-none shadow-none dark:bg-neutral-900 overflow-hidden">
+    <div className="flex flex-col xl:flex-row gap-6 w-full">
+      <div className="w-full xl:w-1/2">
+        <Card className="flex flex-col md:flex-row xl:flex-col h-full justify-between bg-neutral-100 rounded-3xl border-none shadow-none dark:bg-neutral-900 overflow-hidden">
           <CardContent className="flex flex-col items-start gap-2 p-12 w-full">
             <p className="text-sm text-neutral-500 dark:text-neutral-400">
               {mainElement?.category[0].toUpperCase() +
@@ -27,29 +27,35 @@ export default async function ThreeItems() {
               {mainElement?.info}
             </p>
             <h4 className="text-xl">{FormattedPrice(mainElement?.price)}</h4>
-            <Button asChild variant="outline" className="px-5 rounded-full">
+            <Button
+              asChild
+              variant="outline"
+              className="h-12 px-5 rounded-full mt-auto"
+            >
               <Link href={`/product/${mainElement?.handle}`}>View product</Link>
             </Button>
           </CardContent>
-          <CardFooter className="flex items-center justify-center w-full p-0">
-            <Image
-              src={mainElement?.image}
-              alt={mainElement?.name}
-              width={400}
-              height={400}
-              className="scale-150"
-            />
+          <CardFooter className="w-full justify-center p-0">
+            <div className="flex items-center justify-center h-80 xl:h-full">
+              <Image
+                src={mainElement?.image}
+                alt={mainElement?.name}
+                width={400}
+                height={400}
+                className="xl:scale-150 xl:-translate-y-12"
+              />
+            </div>
           </CardFooter>
         </Card>
       </div>
-      <div className="w-1/2">
+      <div className="w-full xl:w-1/2">
         <div className="flex flex-col gap-6">
           {firstTwoElements?.map((item: Products, index: number) => (
             <Card
               key={index}
-              className="flex w-full bg-neutral-100 rounded-3xl border-none shadow-none dark:bg-neutral-900"
+              className="flex flex-col md:flex-row w-full bg-neutral-100 rounded-3xl border-none shadow-none dark:bg-neutral-900"
             >
-              <CardContent className="flex flex-col items-start gap-2 p-12 w-1/2">
+              <CardContent className="flex flex-col items-start gap-2 p-12 w-full md:w-1/2">
                 <p className="text-sm text-neutral-500 dark:text-neutral-400">
                   {item?.category[0].toUpperCase() +
                     item?.category.slice(1).toLowerCase()}
@@ -61,17 +67,23 @@ export default async function ThreeItems() {
                   {item?.info}
                 </p>
                 <h4 className="text-xl">{FormattedPrice(item?.price)}</h4>
-                <Button asChild variant="outline" className="px-5 rounded-full">
+                <Button
+                  asChild
+                  variant="outline"
+                  className="h-12 px-5 rounded-full mt-auto"
+                >
                   <Link href={`/product/${item?.handle}`}>View product</Link>
                 </Button>
               </CardContent>
-              <CardFooter className="flex items-center justify-center p-0 w-1/2">
-                <Image
-                  src={item?.image}
-                  alt={item?.name}
-                  width={400}
-                  height={400}
-                />
+              <CardFooter className="p-0 justify-center w-full md:w-1/2">
+                <div className="flex items-center justify-center h-80">
+                  <Image
+                    src={item?.image}
+                    alt={item?.name}
+                    width={400}
+                    height={400}
+                  />
+                </div>
               </CardFooter>
             </Card>
           ))}

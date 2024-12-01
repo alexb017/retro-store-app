@@ -48,7 +48,7 @@ export default async function Home() {
             <h1 className="text-4xl text-center font-semibold tracking-tight lg:text-5xl">
               Best sellers.
             </h1>
-            <p className="text-neutral-500 dark:text-neutral-400">
+            <p className="text-neutral-500 text-center dark:text-neutral-400">
               Check out our best sellers and find the perfect product for you.
             </p>
           </div>
