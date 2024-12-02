@@ -47,7 +47,9 @@ export default function LayoutProducts({
           </Suspense>
         </div>
         <div className="w-full md:hidden block">
-          <MobileFilters />
+          <Suspense fallback={null}>
+            <MobileFilters />
+          </Suspense>
         </div>
         <div className="w-full">{children}</div>
         <BannerNewsletter />
