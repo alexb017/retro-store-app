@@ -6,7 +6,7 @@ import { User } from 'firebase/auth';
 import { getOrders } from '@/lib/actions';
 import { type CartItem, type OrderItems } from '@/lib/types';
 import Image from 'next/image';
-import { FormattedPrice } from '@/lib/utils';
+import { FormattedPrice, FormattedDate } from '@/lib/utils';
 
 export default function Order({ orderId }: { orderId: string }) {
   const { user } = useContext(AuthContext) as { user: User | null };
@@ -31,20 +31,6 @@ export default function Order({ orderId }: { orderId: string }) {
   if (!order) {
     return null;
   }
-
-  const date = new Date(order.created_at * 1000);
-  const weekday = date.toLocaleDateString('en-US', { weekday: 'short' });
-  const month = date.toLocaleDateString('en-US', { month: 'short' });
-  const day = date.toLocaleDateString('en-US', { day: '2-digit' });
-  const year = date.toLocaleDateString('en-US', { year: 'numeric' });
-  const time = date.toLocaleTimeString('en-US', {
-    hour: 'numeric',
-    minute: 'numeric',
-    second: 'numeric',
-    hour12: true,
-  });
-
-  const dateStr = `${weekday}, ${day} ${month} ${year} at ${time}`;
 
   const totalPrice = order.items.reduce(
     (total, current) => total + current.price * current.quantity,
@@ -104,9 +90,9 @@ export default function Order({ orderId }: { orderId: string }) {
       <div className="flex justify-between pt-4 border-t-2 border-dashed border-neutral-200 dark:border-neutral-800">
         <div>
           <p className="text-xs text-neutral-500 dark:text-neutral-400">
-            {dateStr}
+            {FormattedDate(order.created_at)}
           </p>
-          <p className="text-xs">
+          <p className="text-sm">
             Status:{' '}
             <span className="text-green-500 font-semibold uppercase">
               {order.status}
@@ -117,7 +103,9 @@ export default function Order({ orderId }: { orderId: string }) {
           <p className="text-xs text-neutral-500 dark:text-neutral-400">
             Total amount
           </p>
-          <h4 className="text-xl">{FormattedPrice(totalPrice)}</h4>
+          <h4 className="text-xl font-semibold tracking-tight">
+            {FormattedPrice(totalPrice)}
+          </h4>
         </div>
       </div>
     </div>

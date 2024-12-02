@@ -6,7 +6,7 @@ import { User } from 'firebase/auth';
 import { getOrders } from '@/lib/actions';
 import { type OrderItems, type CartItem } from '@/lib/types';
 import Image from 'next/image';
-import { FormattedPrice } from '@/lib/utils';
+import { FormattedPrice, FormattedDate } from '@/lib/utils';
 import { Button } from './ui/button';
 import Link from 'next/link';
 
@@ -62,13 +62,16 @@ export default function Orders() {
                   className={`w-full flex justify-between ${
                     index === 0
                       ? 'pb-4'
-                      : 'border-t-2 border-dashed border-neutral-200 py-4 dark:border-neutral-800'
+                      : 'border-t border-neutral-200 py-4 dark:border-neutral-800'
                   }`}
                 >
                   <div className="flex flex-col items-start gap-2">
-                    <p className="text-xs text-neutral-500 dark:text-neutral-400">
-                      Order ID {order.order_id}
-                    </p>
+                    <div>
+                      <p className="text-sm">Order ID {order.order_id}</p>
+                      <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                        {FormattedDate(order.created_at)}
+                      </p>
+                    </div>
                     <div className="flex gap-2">
                       {order.items.map((item: CartItem, index: number) => {
                         return (
@@ -92,7 +95,9 @@ export default function Orders() {
                     <p className="text-xs text-neutral-500 dark:text-neutral-400">
                       Total amount
                     </p>
-                    <p className="text-base">{FormattedPrice(totalPrice)}</p>
+                    <p className="text-xl font-semibold tracking-tight">
+                      {FormattedPrice(totalPrice)}
+                    </p>
                     <Button
                       asChild
                       variant="link"

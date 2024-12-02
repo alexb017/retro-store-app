@@ -26,3 +26,27 @@ export function FormattedPrice(price: number) {
     currency: 'USD',
   }).format(priceInDollars);
 }
+
+export function FormattedDate(createdAt: number) {
+  const date = new Date(createdAt * 1000);
+  const weekday = date.toLocaleDateString('en-US', { weekday: 'short' });
+  const month = date.toLocaleDateString('en-US', { month: 'short' });
+  const day = date.toLocaleDateString('en-US', { day: '2-digit' });
+  const year = date.toLocaleDateString('en-US', { year: 'numeric' });
+  const time = date.toLocaleTimeString('en-US', {
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    hour12: true,
+  });
+
+  return `${weekday}, ${day} ${month} ${year} at ${time}`;
+}
+
+export function cleanedDate(dateTime: string | undefined) {
+  const cleanedDateTime = dateTime?.replace(' GMT', '');
+
+  const [weekDay, day, month, year, time] = cleanedDateTime?.split(' ') ?? [];
+
+  return `${weekDay} ${day} ${month} ${year} at ${time}`;
+}

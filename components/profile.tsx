@@ -5,11 +5,16 @@ import { AuthContext } from '@/app/AuthContext';
 import { User } from 'firebase/auth';
 import useUserData from '@/lib/use-user-data';
 import Image from 'next/image';
-import { Button } from './ui/button';
+import { Button } from '@/components/ui/button';
+import { cleanedDate } from '@/lib/utils';
 
 export default function Profile() {
   const { user } = useContext(AuthContext) as { user: User | null };
   const [profileUser] = useUserData(user?.uid ?? '');
+
+  if (!profileUser) {
+    return null;
+  }
 
   return (
     <div className="flex flex-col items-start gap-4">
@@ -45,13 +50,17 @@ export default function Profile() {
         <p className="text-xs text-neutral-500 dark:text-neutral-400">
           Account created
         </p>
-        <p className="text-xs">{profileUser?.metadata.creationTime}</p>
+        <p className="text-xs">
+          {cleanedDate(profileUser?.metadata.creationTime)}
+        </p>
       </div>
       <div>
         <p className="text-xs text-neutral-500 dark:text-neutral-400">
           Last sign in
         </p>
-        <p className="text-xs">{profileUser?.metadata.lastSignInTime}</p>
+        <p className="text-xs">
+          {cleanedDate(profileUser?.metadata.lastSignInTime)}
+        </p>
       </div>
     </div>
   );

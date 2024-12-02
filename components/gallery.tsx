@@ -23,7 +23,10 @@ export default function Gallery({
                 const isActive = index === imageIndex;
 
                 return (
-                  <li key={index} className="flex w-12 h-12 xl:w-20 xl:h-20">
+                  <li
+                    key={index}
+                    className="flex w-12 h-12 xl:w-20 xl:h-20 aspect-square"
+                  >
                     <Image
                       src={image.url}
                       alt={`${name}-${image?.color}`}
