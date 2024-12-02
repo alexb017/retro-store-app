@@ -22,7 +22,7 @@ export default async function OrderPage({
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link href="/profile">Profile</Link>
+              <Link href="/profile">Orders</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />

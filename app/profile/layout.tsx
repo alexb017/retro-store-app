@@ -15,11 +15,11 @@ export default function ProfileLayout({
 }) {
   return (
     <div className="w-full md:max-w-3xl mx-auto">
-      <div className="flex gap-4 p-5">
-        <div className="w-1/3">
+      <div className="flex flex-col md:flex-row gap-8 p-5">
+        <div className="w-full md:w-1/3">
           <Profile />
         </div>
-        <div className="w-2/3">{children}</div>
+        <div className="w-full md:w-2/3">{children}</div>
       </div>
     </div>
   );
