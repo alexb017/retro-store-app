@@ -7,10 +7,56 @@ import useUserData from '@/lib/use-user-data';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { cleanedDate } from '@/lib/utils';
+import { deleteUserFromFirebase } from '@/lib/actions';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogOverlay,
+  AlertDialogPortal,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
+import { usePathname, useRouter } from 'next/navigation';
+
+async function handleDeleteAccount(userId: string, user: User) {
+  try {
+    // Call the API route to delete the user's data
+    const response = await fetch('/api/delete_user', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId }),
+    });
+
+    const data = await response.json();
+    if (!response.ok) {
+      console.error('API error:', data.error);
+      throw new Error(data.error);
+    } else {
+      console.log('User data deleted:', data.message);
+      // Delete the user from Firebase Auth
+      await deleteUserFromFirebase(user);
+    }
+  } catch (error: any) {
+    console.error('Error deleting user data:', error.message);
+    throw new Error('Failed to delete user data');
+  }
+}
 
 export default function Profile() {
-  const { user } = useContext(AuthContext) as { user: User | null };
+  const { user, userSignOut } = useContext(AuthContext) as {
+    user: User;
+    userSignOut: () => void;
+  };
   const [profileUser] = useUserData(user?.uid ?? '');
+  const pathname = usePathname();
+  const router = useRouter();
 
   if (!profileUser) {
     return null;
@@ -43,9 +89,43 @@ export default function Profile() {
         </p>
         <p className="text-sm">{profileUser?.email}</p>
       </div>
-      <Button variant="destructive" className="rounded-full" disabled>
-        Delete account
-      </Button>
+      <AlertDialog>
+        <AlertDialogTrigger asChild>
+          <Button variant="destructive" className="rounded-full">
+            Delete account
+          </Button>
+        </AlertDialogTrigger>
+        <AlertDialogContent className="sm:rounded-3xl">
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete your
+              account and remove your data from our servers.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel className="rounded-full">
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction
+              className="rounded-full"
+              onClick={async () => {
+                try {
+                  await handleDeleteAccount(user?.uid, user);
+                  userSignOut();
+                  if (pathname === '/profile') {
+                    router.push('/');
+                  }
+                } catch (error: any) {
+                  console.error('Error deleting user:', error.message);
+                }
+              }}
+            >
+              Continue
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
       <div>
         <p className="text-xs text-neutral-500 dark:text-neutral-400">
           Account created

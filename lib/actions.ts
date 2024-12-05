@@ -1,4 +1,3 @@
-import { cache } from 'react';
 import {
   collection,
   getDocs,
@@ -18,6 +17,7 @@ import {
 } from 'firebase/firestore';
 import { db } from './firebase';
 import { type ProductInfoType, type UserProfile, type CartItem } from './types';
+import { type User, deleteUser } from 'firebase/auth';
 
 export async function createUser(user: UserProfile, data: object) {
   const { uid, email, displayName, photoURL, metadata } = user;
@@ -204,5 +204,13 @@ export async function getOrders(uid: string) {
     return data;
   } catch (error) {
     throw new Error('Failed to get user order');
+  }
+}
+
+export async function deleteUserFromFirebase(user: User) {
+  try {
+    await deleteUser(user);
+  } catch (error) {
+    throw new Error('Failed to delete user');
   }
 }
