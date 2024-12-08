@@ -20,7 +20,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { createUser, checkUserExists } from '@/lib/actions';
+import { createUser, checkEmailExists } from '@/lib/actions';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Invalid email address!' }),
@@ -32,7 +32,6 @@ const formSchema = z.object({
 export default function SignIn() {
   const { googleSignIn } = useContext(AuthContext) as any;
   const router = useRouter();
-  const [error, setError] = useState('');
 
   // Define form validation
   const form = useForm<z.infer<typeof formSchema>>({
@@ -44,6 +43,13 @@ export default function SignIn() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    const checkEmail = await checkEmailExists(values.email);
+
+    if (!checkEmail) {
+      form.setError('email', { message: 'Email not found.' });
+      return;
+    }
+
     try {
       const res = await signInWithEmailAndPassword(
         auth,
@@ -58,10 +64,10 @@ export default function SignIn() {
       form.reset();
     } catch (error: any) {
       if (error.code === 'auth/invalid-credential') {
-        setError('Invalid login credentials.');
-      } else {
-        throw new Error(error);
+        form.setError('password', { message: 'Invalid password.' });
       }
+
+      // console.error('Error:', error.message);
     }
   }
 
@@ -115,8 +121,6 @@ export default function SignIn() {
                 </FormItem>
               )}
             />
-
-            {error && <p className="text-sm text-red-500">{error}</p>}
 
             <Button type="submit" className="h-12 rounded-full">
               Continue with Email

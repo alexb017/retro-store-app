@@ -220,3 +220,16 @@ export async function deleteUserFromFirebaseAuth(user: User) {
     throw new Error('Failed to delete user');
   }
 }
+
+export async function checkEmailExists(email: string) {
+  try {
+    const usersRef = collection(db, 'users');
+    const q = query(usersRef, where('email', '==', email));
+    const querySnapshot = await getDocs(q);
+
+    // if not empty, email exists
+    return !querySnapshot.empty;
+  } catch (error) {
+    throw new Error('Failed to check email exists');
+  }
+}

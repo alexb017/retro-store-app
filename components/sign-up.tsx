@@ -21,7 +21,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { createUser, checkUserExists } from '@/lib/actions';
+import { createUser, checkEmailExists } from '@/lib/actions';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Invalid email address!' }),
@@ -45,6 +45,13 @@ export default function SignUp() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    const checkEmail = await checkEmailExists(values.email);
+
+    if (checkEmail) {
+      form.setError('email', { message: 'Email already exists.' });
+      return;
+    }
+
     const displayName = values.email.split('@')[0];
     const photoURL =
       'https://firebasestorage.googleapis.com/v0/b/task-app-771ec.appspot.com/o/blank-avatar.png?alt=media&token=8be38932-3735-418d-9038-472720cc01e7';
@@ -59,7 +66,7 @@ export default function SignUp() {
       await createUser(res.user, {
         displayName,
         photoURL,
-      }); // Create user in Firestore
+      });
 
       if (res) {
         router.push('/');
@@ -67,11 +74,7 @@ export default function SignUp() {
 
       form.reset();
     } catch (error: any) {
-      if (error.code === 'auth/email-already-in-use') {
-        setError('Email address already exist.');
-      } else {
-        throw new Error(error);
-      }
+      throw new Error(error);
     }
   }
 
@@ -132,8 +135,6 @@ export default function SignUp() {
                   </FormItem>
                 )}
               />
-
-              {error && <p className="text-sm text-red-500">{error}</p>}
 
               <Button type="submit" className="h-12 rounded-full">
                 Continue with Email
