@@ -14,17 +14,20 @@ import {
   arrayRemove,
   increment,
   Timestamp,
+  serverTimestamp,
 } from 'firebase/firestore';
 import { db } from './firebase';
 import { type ProductInfoType, type UserProfile, type CartItem } from './types';
 import { type User, deleteUser } from 'firebase/auth';
 
 export async function createUser(user: UserProfile, data: object) {
+  if (!user) {
+    return;
+  }
+
   const { uid, email, displayName, photoURL, metadata } = user;
   const userRef = doc(db, 'users', uid);
   const userSnapshot = await getDoc(userRef);
-
-  // console.log('user', user);
 
   const userId = uid;
 
@@ -35,7 +38,10 @@ export async function createUser(user: UserProfile, data: object) {
         email,
         displayName,
         photoURL,
-        metadata,
+        metadata: {
+          creationTime: metadata.creationTime,
+          lastSignInTime: metadata.lastSignInTime,
+        },
         ...data,
       });
     } catch (error) {
@@ -207,7 +213,7 @@ export async function getOrders(uid: string) {
   }
 }
 
-export async function deleteUserFromFirebase(user: User) {
+export async function deleteUserFromFirebaseAuth(user: User) {
   try {
     await deleteUser(user);
   } catch (error) {

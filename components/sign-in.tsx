@@ -57,7 +57,7 @@ export default function SignIn() {
 
       form.reset();
     } catch (error: any) {
-      if (error.code === 'auth/invalid-login-credentials') {
+      if (error.code === 'auth/invalid-credential') {
         setError('Invalid login credentials.');
       } else {
         throw new Error(error);
@@ -130,11 +130,7 @@ export default function SignIn() {
             try {
               const res = await googleSignIn();
 
-              // Check if user exists in Firestore
-              // If not, create user
-              if (!checkUserExists(res.user.uid)) {
-                await createUser(res.user, {});
-              }
+              await createUser(res.user, {});
 
               if (res) {
                 router.push('/');
@@ -143,6 +139,7 @@ export default function SignIn() {
               if (error.code === 'auth/popup-closed-by-user') {
                 return;
               }
+              // console.error('Error signing in with Google:', error.message);
               throw new Error(error);
             }
           }}

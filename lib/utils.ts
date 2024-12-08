@@ -48,5 +48,14 @@ export function cleanedDate(dateTime: string | undefined) {
 
   const [weekDay, day, month, year, time] = cleanedDateTime?.split(' ') ?? [];
 
-  return `${weekDay} ${day} ${month} ${year} at ${time}`;
+  // Create a new Date object to format the time with AM/PM
+  const date = new Date(`${month} ${day}, ${year} ${time}`);
+  const formattedTime = date.toLocaleTimeString('en-US', {
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    hour12: true,
+  });
+
+  return `${weekDay} ${day} ${month} ${year} at ${formattedTime}`;
 }

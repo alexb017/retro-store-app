@@ -147,11 +147,7 @@ export default function SignUp() {
               try {
                 const res = await googleSignIn();
 
-                // Check if user exists in Firestore
-                // If not, create user
-                if (!checkUserExists(res.user.uid)) {
-                  await createUser(res.user, {});
-                }
+                await createUser(res.user, {});
 
                 if (res) {
                   router.push('/');

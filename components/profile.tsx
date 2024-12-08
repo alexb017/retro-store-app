@@ -7,7 +7,7 @@ import useUserData from '@/lib/use-user-data';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { cleanedDate } from '@/lib/utils';
-import { deleteUserFromFirebase } from '@/lib/actions';
+import { deleteUserFromFirebaseAuth } from '@/lib/actions';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -35,16 +35,17 @@ async function handleDeleteAccount(userId: string, user: User) {
     });
 
     const data = await response.json();
+
     if (!response.ok) {
-      console.error('API error:', data.error);
+      // console.error('API error:', data.error);
       throw new Error(data.error);
     } else {
-      console.log('User data deleted:', data.message);
+      // console.log('User data deleted:', data.message);
       // Delete the user from Firebase Auth
-      await deleteUserFromFirebase(user);
+      await deleteUserFromFirebaseAuth(user);
     }
   } catch (error: any) {
-    console.error('Error deleting user data:', error.message);
+    // console.error('Error deleting user data:', error.message);
     throw new Error('Failed to delete user data');
   }
 }
@@ -112,7 +113,9 @@ export default function Profile() {
               onClick={async () => {
                 try {
                   await handleDeleteAccount(user?.uid, user);
+
                   userSignOut();
+
                   if (pathname === '/profile') {
                     router.push('/');
                   }
