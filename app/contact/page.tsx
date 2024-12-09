@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function Contact() {
   return (
-    <div className="flex flex-col gap-12 p-5">
+    <div className="flex flex-col gap-12 p-5 pt-12">
       <div className="flex flex-col gap-4">
         <h1 className="text-4xl font-semibold tracking-tight lg:text-5xl">
           Contact
@@ -19,7 +19,7 @@ export default function Contact() {
             If you have any questions or need assistance, please contact us.
           </h4>
           <h4 className="text-xl tracking-tight">
-            We're available Monday through Friday from 9am to 5pm.
+            We&apos;re available Monday through Friday from 9am to 5pm.
           </h4>
         </div>
       </div>
@@ -38,7 +38,7 @@ export default function Contact() {
             Email address <br /> retrostore@gmail.com
           </h4>
           <h4 className="text-xl tracking-tight">
-            Send us an email and we'll get back to you as soon as possible.
+            Send us an email and we&apos;ll get back to you as soon as possible.
           </h4>
         </div>
         <div className="flex flex-col justify-between w-full md:w-1/3 bg-neutral-100 p-5 rounded-3xl aspect-square">
