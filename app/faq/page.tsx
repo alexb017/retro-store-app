@@ -17,7 +17,7 @@ const faqData = [
   {
     question: 'How do I track my order?',
     answer:
-      'Once your order has shipped, you will receive an email with a tracking number. You can use that number to track your order on the shipping carrier’s website.',
+      "Once your order has shipped, you will receive an email with a tracking number. You can use that number to track your order on the shipping carrier's website.",
   },
   {
     question: 'What payment methods do you accept?',
