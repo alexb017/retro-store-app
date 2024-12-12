@@ -88,7 +88,7 @@ export default function Cart() {
       ) : (
         <>
           <div className="flex flex-col gap-4">
-            <h2 className="text-3xl font-semibold tracking-tight text-center">
+            <h2 className="text-3xl font-extrabold tracking-tight text-center">
               Cart{' '}
               <span className="font-normal">
                 (
@@ -104,7 +104,7 @@ export default function Cart() {
                 const color =
                   item?.color.charAt(0).toUpperCase() + item?.color.slice(1);
                 const size = item?.size ? ` / ${item?.size.toUpperCase()}` : '';
-                const space = item?.space ? ` / ${item?.space}GB` : '';
+                const space = item?.space ? ` / ${item?.space}` : '';
 
                 return (
                   <div key={index}>
@@ -176,7 +176,7 @@ export default function Cart() {
               <Separator className="my-2" />
               <div className="flex justify-between mb-5">
                 <p className="text-sm">Estimated total</p>
-                <h1 className="text-4xl font-semibold tracking-tight">
+                <h1 className="text-4xl font-extrabold tracking-tight">
                   {FormattedPrice(totalPrice)}
                 </h1>
               </div>
@@ -185,7 +185,7 @@ export default function Cart() {
                   <Button
                     type="submit"
                     variant="default"
-                    className="rounded-full w-60 h-12"
+                    className="rounded-full w-60 h-12 bg-blue-600 hover:bg-blue-700 dark:text-white"
                   >
                     Proceed to Checkout
                   </Button>

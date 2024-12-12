@@ -27,10 +27,10 @@ export default function ProductGrid({ products }: { products: Products[] }) {
                 />
               </CardHeader>
               <CardContent className="flex items-start justify-between p-0">
-                <h4 className="text-xl font-light tracking-tight">
+                <h4 className="text-xl font-semibold tracking-tight">
                   {product?.name}
                 </h4>
-                <h4 className="text-xl font-light tracking-tight text-neutral-500 dark:text-neutral-400">
+                <h4 className="text-xl font-semibold tracking-tight text-neutral-500 dark:text-neutral-400">
                   {FormattedPrice(product?.price)}
                 </h4>
               </CardContent>

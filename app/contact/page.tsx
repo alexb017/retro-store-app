@@ -11,7 +11,7 @@ export default function Contact() {
   return (
     <div className="flex flex-col gap-12 p-5 pt-12">
       <div className="flex flex-col gap-4">
-        <h1 className="text-4xl font-semibold tracking-tight lg:text-5xl">
+        <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
           Contact
         </h1>
         <div>

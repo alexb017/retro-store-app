@@ -15,24 +15,21 @@ export default function Gallery({
 
   return (
     <>
-      <div className="flex flex-col lg:flex-row gap-5 w-full">
-        <div className="flex items-center justify-center xl:w-20 order-1 lg:order-none">
+      <div className="flex flex-col lg:flex-row gap-8 w-full">
+        <div className="flex items-center justify-center order-1 lg:order-none">
           {images.length > 1 ? (
             <ul className="flex flex-row lg:flex-col gap-4">
               {images.map((image: any, index) => {
                 const isActive = index === imageIndex;
 
                 return (
-                  <li
-                    key={index}
-                    className="flex w-12 h-12 xl:w-20 xl:h-20 aspect-square"
-                  >
+                  <li key={index} className="flex w-14 h-14 aspect-square">
                     <Image
                       src={image.url}
                       alt={`${name}-${image?.color}`}
-                      className={`object-contain rounded-xl md:rounded-2xl p-1 bg-neutral-100 cursor-pointer dark:bg-neutral-900 ${
+                      className={`object-contain rounded-full p-1 bg-neutral-100 cursor-pointer dark:bg-neutral-900 ${
                         isActive
-                          ? 'outline outline-offset-2 outline-1 outline-black dark:outline-neutral-400'
+                          ? 'outline outline-offset-1 outline-1 outline-blue-600'
                           : ''
                       }`}
                       width={80}

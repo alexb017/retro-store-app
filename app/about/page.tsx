@@ -13,15 +13,15 @@ export default function AboutPage() {
   return (
     <div className="flex flex-col gap-12 p-5 pt-12">
       <div className="flex flex-col gap-4">
-        <h1 className="text-4xl font-semibold tracking-tight lg:text-5xl">
+        <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
           Welcome to RetroStore!
         </h1>
-        <h3 className="text-2xl tracking-tight">
+        <h4 className="text-xl tracking-tight">
           We are a family-owned business that specializes in vintage and
           retro-inspired products. Our mission is to bring back the nostalgia of
           yesteryear by offering a curated selection of high-quality items that
           celebrate the past.
-        </h3>
+        </h4>
       </div>
       <div className="w-full h-full">
         <Image

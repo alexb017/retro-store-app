@@ -21,15 +21,15 @@ export default function LayoutProducts({
     <>
       <div className="mx-auto flex flex-col gap-8 p-5 max-w-screen-2xl">
         <div className="flex flex-col items-center gap-2 py-5">
-          <h1 className="text-4xl font-semibold tracking-tight lg:text-5xl">
+          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
             Products
           </h1>
-          <p className="text-center text-neutral-500 dark:text-neutral-400">
+          <h4 className="text-xl text-center tracking-tight">
             We have a wide range of products to choose from.{' '}
             <span className="inline-block md:block">
               Find the best products for you.
             </span>
-          </p>
+          </h4>
         </div>
         <div className="w-full hidden md:flex justify-between">
           <div className="w-1/2">

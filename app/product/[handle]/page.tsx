@@ -17,6 +17,7 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import Link from 'next/link';
+import { Separator } from '@/components/ui/separator';
 
 export const metadata: Metadata = {
   title: 'Product',
@@ -34,7 +35,7 @@ export default async function ProductPage({
 
   return (
     <>
-      <div className="flex flex-col gap-5 mx-auto max-w-screen-2xl p-5">
+      <div className="flex flex-col gap-8 mx-auto max-w-screen-2xl p-5">
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
@@ -54,7 +55,7 @@ export default async function ProductPage({
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <div className="flex flex-col gap-5 sm:flex-row">
+        <div className="flex flex-col gap-8 sm:flex-row">
           <div className="flex items-center justify-center h-full w-full basis-full sm:basis-3/6 lg:basis-4/6">
             <Gallery
               images={product?.images?.map((image: string) => ({
@@ -70,10 +71,13 @@ export default async function ProductPage({
           </div>
         </div>
         <ShippingBanner />
+        <Separator className="my-12" />
         <div className="flex flex-col gap-24">
           <RelatedProducts category={product?.category} />
-          <BannerNewsletter />
-          <Footer />
+          <div className="flex flex-col gap-8">
+            <BannerNewsletter />
+            <Footer />
+          </div>
         </div>
       </div>
     </>
@@ -88,15 +92,17 @@ async function RelatedProducts({ category }: { category: string }) {
   );
 
   return (
-    <div className="flex flex-col gap-5">
+    <>
       {filteredProducts.length > 0 && (
-        <h2 className="text-3xl font-semibold tracking-tight">
-          Related Products
-        </h2>
+        <div className="flex flex-col gap-8">
+          <h1 className="text-4xl font-semibold tracking-tight">
+            Related Products
+          </h1>
+          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <ProductGrid products={filteredProducts} />
+          </ul>
+        </div>
       )}
-      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <ProductGrid products={filteredProducts} />
-      </ul>
-    </div>
+    </>
   );
 }

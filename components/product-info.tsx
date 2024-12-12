@@ -46,7 +46,7 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
     <div className="flex flex-col gap-4">
       <div className="flex flex-col">
         <div className="flex items-center gap-4">
-          <h1 className="text-4xl font-semibold tracking-tight">
+          <h1 className="text-4xl font-extrabold tracking-tight">
             {product?.name}
           </h1>
           {user && (
@@ -89,10 +89,8 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
                     router.replace(optionUrl, { scroll: false });
                   }}
                   key={color}
-                  className={`px-5 rounded-full ${
-                    isActive
-                      ? `border-black bg-neutral-100 dark:bg-neutral-900 dark:border-neutral-400`
-                      : ``
+                  className={`px-5 rounded-full border-2 ${
+                    isActive ? `border-blue-600` : ``
                   }`}
                 >
                   {color}
@@ -109,13 +107,18 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
           </h4>
           <div className="flex items-center flex-wrap gap-2">
             {product?.storage?.map((storage, index) => {
-              const isActive = storage?.space === searchParamSpace;
+              const storageSpace =
+                Number.parseInt(storage?.space, 10) !== 1
+                  ? `${storage?.space}GB`
+                  : `${storage?.space}TB`;
+
+              const isActive = storageSpace === searchParamSpace;
 
               const optionSearchParams = new URLSearchParams(
                 searchParams.toString()
               );
 
-              optionSearchParams.set('space', storage?.space);
+              optionSearchParams.set('space', storageSpace);
               optionSearchParams.set('price', storage?.price.toString());
 
               const optionUrl = createUrl(pathname, optionSearchParams);
@@ -127,14 +130,15 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
                     router.replace(optionUrl, { scroll: false });
                   }}
                   key={index}
-                  className={`px-5 rounded-xl aspect-square w-24 h-24 ${
-                    isActive
-                      ? `border-black bg-neutral-100 dark:bg-neutral-900 dark:border-neutral-400`
-                      : ``
+                  className={`px-5 rounded-2xl aspect-square w-24 h-24 border-2 ${
+                    isActive ? `border-blue-600` : ``
                   }`}
                 >
                   <div className="flex flex-col items-center">
-                    <h3 className="font-medium">{storage?.space} GB</h3>
+                    <h3 className="font-medium">
+                      {storage?.space}{' '}
+                      {Number.parseInt(storage?.space, 10) !== 1 ? 'GB' : 'TB'}
+                    </h3>
                     <p className="text-xs text-neutral-500 dark:text-neutral-400">
                       {FormattedPrice(storage?.price)}
                     </p>
@@ -169,10 +173,8 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
                     router.replace(optionUrl, { scroll: false });
                   }}
                   key={size}
-                  className={`px-5 rounded-full uppercase ${
-                    isActive
-                      ? `border-black bg-neutral-100 dark:bg-neutral-900 dark:border-neutral-400`
-                      : ``
+                  className={`px-5 rounded-full uppercase border-2 ${
+                    isActive ? `border-blue-600` : ``
                   }`}
                 >
                   {size}
@@ -183,8 +185,12 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
         </div>
       )}
       {!user ? (
-        <Button asChild variant="default" className="h-14 rounded-full">
-          <Link href="/login">Sign in & Check Out</Link>
+        <Button
+          asChild
+          variant="default"
+          className="h-14 rounded-full bg-blue-600 hover:bg-blue-700 dark:text-white"
+        >
+          <Link href="/sign-in">Sign in & Check Out</Link>
         </Button>
       ) : (
         <AddToCart

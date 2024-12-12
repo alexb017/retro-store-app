@@ -21,6 +21,9 @@ export default function MobileMenu() {
   const links = [
     { name: 'Home', href: '/' },
     { name: 'All products', href: '/products' },
+    { name: 'About', href: '/about' },
+    { name: 'FAQ', href: '/faq' },
+    { name: 'Contact', href: '/contact' },
     { name: 'Phones', href: '/products/phones' },
     { name: 'Watches', href: '/products/watches' },
     { name: 'Earbuds', href: '/products/earbuds' },

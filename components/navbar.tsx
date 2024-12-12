@@ -36,7 +36,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed w-full top-0 left-0 z-50 h-16 bg-white dark:bg-neutral-950">
+    <nav className="fixed w-full top-0 left-0 z-50 h-16 bg-white/60 backdrop-blur-xl dark:bg-neutral-950/60">
       <div className="mx-auto max-w-7xl flex items-center justify-between h-full px-4 text-sm">
         <div className="flex items-center lg:hidden">
           <Suspense fallback={null}>

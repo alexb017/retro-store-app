@@ -43,7 +43,7 @@ export default function Favorite() {
         </>
       ) : (
         <>
-          <h2 className="text-3xl font-semibold tracking-tight text-center">
+          <h2 className="text-3xl font-extrabold tracking-tight text-center">
             Favorites{' '}
             <span className="font-light">
               (
@@ -58,7 +58,7 @@ export default function Favorite() {
               const color =
                 fav?.color.charAt(0).toUpperCase() + fav?.color.slice(1);
               const size = fav?.size ? ` / ${fav?.size.toUpperCase()}` : '';
-              const space = fav?.space ? ` / ${fav?.space}GB` : '';
+              const space = fav?.space ? ` / ${fav?.space}` : '';
 
               return (
                 <li
