@@ -10,7 +10,7 @@ export default function Footer() {
           <div className="flex flex-col gap-4">
             <Link
               href="/"
-              className="flex items-center text-xl font-bold leading-none tracking-tighter"
+              className="flex items-center text-2xl font-bold leading-none tracking-tighter"
             >
               <LogoIcon classname="w-8 h-8 -rotate-45" />
               store

@@ -56,7 +56,7 @@ export default async function ProductPage({
           </BreadcrumbList>
         </Breadcrumb>
         <div className="flex flex-col gap-8 sm:flex-row">
-          <div className="flex items-center justify-center h-full w-full basis-full sm:basis-3/6 lg:basis-4/6">
+          <div className="basis-full sm:basis-3/6 lg:basis-4/6">
             <Gallery
               images={product?.images?.map((image: string) => ({
                 url: image,
@@ -71,8 +71,7 @@ export default async function ProductPage({
           </div>
         </div>
         <ShippingBanner />
-        <Separator className="my-12" />
-        <div className="flex flex-col gap-24">
+        <div className="flex flex-col gap-24 mt-16">
           <RelatedProducts category={product?.category} />
           <div className="flex flex-col gap-8">
             <BannerNewsletter />
@@ -95,9 +94,9 @@ async function RelatedProducts({ category }: { category: string }) {
     <>
       {filteredProducts.length > 0 && (
         <div className="flex flex-col gap-8">
-          <h1 className="text-4xl font-semibold tracking-tight">
-            Related Products
-          </h1>
+          <h2 className="text-3xl font-semibold tracking-tight">
+            You might also like:
+          </h2>
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             <ProductGrid products={filteredProducts} />
           </ul>

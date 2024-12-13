@@ -19,14 +19,15 @@ export default function BannerItem({ item }: { item: Banner[] }) {
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
-    setAnimate(true);
-    const timer = setTimeout(() => {
-      setAnimate(false);
-    }, 500);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [index]);
+    if (animate) {
+      const timer = setTimeout(() => {
+        setAnimate(false);
+      }, 500);
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [animate]);
 
   // useEffect(() => {
   //   const timer = setTimeout(() => {
@@ -43,6 +44,7 @@ export default function BannerItem({ item }: { item: Banner[] }) {
   // }, [index]);
 
   function nextBanner() {
+    setAnimate(true);
     if (index < 2) {
       setIndex(index + 1);
     } else {
@@ -51,6 +53,7 @@ export default function BannerItem({ item }: { item: Banner[] }) {
   }
 
   function prevBanner() {
+    setAnimate(true);
     if (index > 0) {
       setIndex(index - 1);
     } else {

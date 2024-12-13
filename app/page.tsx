@@ -14,7 +14,7 @@ export default async function Home() {
   return (
     <>
       <div className="flex flex-col gap-24 p-5">
-        <div className="flex flex-col gap-4 mt-12">
+        <div className="flex flex-col gap-4 mt-20">
           <h1 className="text-5xl font-extrabold tracking-tight lg:text-6xl">
             Welcome to our store!{' '}
             <span className="md:block">Enjoy shopping with us.</span>

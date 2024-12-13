@@ -82,7 +82,7 @@ export default function SignUp() {
     <>
       <div className="flex flex-col gap-8 items-start w-full max-w-sm px-5">
         <div className="flex flex-col">
-          <h1 className="text-4xl font-extrabold tracking-tight">
+          <h1 className="text-4xl font-semibold tracking-tight">
             Create account
           </h1>
           <p className="text-neutral-500 dark:text-neutral-400">

@@ -34,6 +34,7 @@ export default async function CarouselItems() {
                 >
                   <CardHeader className="justify-center p-0 aspect-[6/7] overflow-hidden rounded-3xl bg-neutral-100 dark:bg-neutral-900">
                     <Image
+                      className="scale-110"
                       src={item?.image}
                       alt={item?.name}
                       width={500}

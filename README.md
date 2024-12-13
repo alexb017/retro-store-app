@@ -1,6 +1,6 @@
-# Build a full-stack e-commerce store: React, Next.js, Firebase, Tailwind, Stripe.
+# Build a fullstack e-commerce store with: React, Next.js, Firebase, Tailwind, and Stripe checkout.
 
-![Alt text](/public/Retro-Store-App-Homepage.jpg)
+![Alt text](/public/Retro-Store-App-Homepage-v2.jpg)
 
 #### Features
 
@@ -8,7 +8,7 @@
 - Authentication with email/password
 - Authentication with Google
 - Light and Dark mode
-- Stripe checkout
+- Payments with Stripe checkout
 - Build with TypeScript
 - Collections and sorted items
 - Search items
@@ -16,6 +16,7 @@
 - Modern UI using shadcn/ui
 - Styling with Tailwind
 - Responsive UI design
+- Icons from heroicons
 
 For test demo, you can use the following credit card details:
 

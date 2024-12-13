@@ -69,7 +69,7 @@ export default function AddToCart({
       <Button
         disabled={disableBtn}
         variant="default"
-        className={`h-14 rounded-full ${
+        className={`h-14 rounded-full font-semibold ${
           disableBtn
             ? 'cursor-not-allowed bg-blue-600 opacity-50 disabled:cursor-not-allowed disabled:pointer-events-auto dark:text-white hover:bg-blue-600'
             : 'cursor-pointer bg-blue-600 hover:bg-blue-700 dark:text-white'

@@ -74,7 +74,7 @@ export default function SignIn() {
   return (
     <div className="flex flex-col items-start gap-8 w-full max-w-sm px-5">
       <div className="flex flex-col">
-        <h1 className="text-4xl font-extrabold tracking-tight">Sign In</h1>
+        <h1 className="text-4xl font-semibold tracking-tight">Sign In</h1>
         <p className="text-neutral-500 dark:text-neutral-400">
           Please enter your details.
         </p>

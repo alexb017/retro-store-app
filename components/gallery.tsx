@@ -2,6 +2,13 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
 
 export default function Gallery({
   images,
@@ -10,52 +17,20 @@ export default function Gallery({
   images: { url: string }[];
   name: string;
 }) {
-  const [imageIndex, setImageIndex] = useState(0);
-  const imageURL = images[imageIndex]?.url as string;
-
   return (
-    <>
-      <div className="flex flex-col lg:flex-row gap-8 w-full">
-        <div className="flex items-center justify-center order-1 lg:order-none">
-          {images.length > 1 ? (
-            <ul className="flex flex-row lg:flex-col gap-4">
-              {images.map((image: any, index) => {
-                const isActive = index === imageIndex;
-
-                return (
-                  <li key={index} className="flex w-14 h-14 aspect-square">
-                    <Image
-                      src={image.url}
-                      alt={`${name}-${image?.color}`}
-                      className={`object-contain rounded-full p-1 bg-neutral-100 cursor-pointer dark:bg-neutral-900 ${
-                        isActive
-                          ? 'outline outline-offset-1 outline-1 outline-blue-600'
-                          : ''
-                      }`}
-                      width={80}
-                      height={80}
-                      quality={80}
-                      onClick={() => setImageIndex(index)}
-                    />
-                  </li>
-                );
-              })}
-            </ul>
-          ) : null}
-        </div>
-        <div className="flex items-center justify-center w-full aspect-square rounded-3xl bg-neutral-100 dark:bg-neutral-900">
-          {images[imageIndex] && (
-            <Image
-              src={imageURL}
-              alt={`${name}-${imageIndex}`}
-              width={800}
-              height={800}
-              quality={80}
-              priority={true}
-            />
-          )}
-        </div>
-      </div>
-    </>
+    <Carousel className="h-full bg-neutral-100 rounded-3xl aspect-square dark:bg-neutral-900">
+      <CarouselContent className="ml-0 h-full">
+        {images.map((image, index) => (
+          <CarouselItem
+            key={index}
+            className="p-0 flex items-center justify-center"
+          >
+            <Image src={image.url} alt={name} width={800} height={800} />
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious className="w-12 h-12 left-5 md:left-8 border-0 bg-neutral-200 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-800" />
+      <CarouselNext className="w-12 h-12 right-5 md:right-8 border-0 bg-neutral-200 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-800" />
+    </Carousel>
   );
 }
