@@ -15,13 +15,13 @@ export default async function Home() {
     <>
       <div className="flex flex-col gap-24 p-5">
         <div className="flex flex-col gap-4 mt-20">
-          <h1 className="text-5xl font-extrabold tracking-tight lg:text-6xl">
+          <h1 className="text-5xl font-semibold tracking-tighter lg:text-6xl">
             Welcome to our store!{' '}
             <span className="md:block">Enjoy shopping with us.</span>
           </h1>
           <div className="flex flex-col gap-4 lg:flex-row items-start lg:items-end lg:justify-between">
             <div>
-              <h4 className="text-xl tracking-tight">
+              <h4 className="text-xl tracking-tight text-neutral-500 dark:text-neutral-400">
                 The best place to find the awesome products you love.{' '}
                 <span className="md:block">
                   We bring you the best deals on the latest products.
@@ -30,8 +30,8 @@ export default async function Home() {
             </div>
             <Button
               asChild
-              variant="outline"
-              className="h-12 rounded-full px-6"
+              variant="default"
+              className="text-base h-14 rounded-full px-8 dark:bg-neutral-800 dark:text-white"
             >
               <Link href="/products">Browse all products</Link>
             </Button>
@@ -40,13 +40,10 @@ export default async function Home() {
         <BannerItem item={productsBanner.map((product) => product)} />
         <div className="flex flex-col gap-12">
           <div className="flex flex-col items-center gap-4">
-            <h1 className="text-4xl font-extrabold tracking-tight text-center lg:text-5xl">
+            <h1 className="text-4xl font-semibold tracking-tighter text-center lg:text-5xl">
               Get the best deals <br></br> on the latest products.
             </h1>
-            <Button
-              variant="link"
-              className="h-4 p-0 text-blue-600 dark:text-blue-400"
-            >
+            <Button variant="link" className="h-4 p-0 text-blue-400">
               <Link href="/products">Shop now</Link>
             </Button>
           </div>
@@ -56,10 +53,10 @@ export default async function Home() {
         </div>
         <div className="flex flex-col gap-12">
           <div className="flex flex-col items-center">
-            <h1 className="text-4xl text-center font-extrabold tracking-tight lg:text-5xl">
+            <h1 className="text-4xl text-center font-semibold tracking-tighter lg:text-5xl">
               Best sellers.
             </h1>
-            <h4 className="text-xl text-center tracking-tight">
+            <h4 className="text-xl text-center text-neutral-500 dark:text-neutral-400">
               Check out our best sellers and find the perfect product for you.
             </h4>
           </div>

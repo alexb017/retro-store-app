@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { type Banner } from '@/lib/types';
 import { Button } from '@/components/ui/button';
@@ -67,16 +67,16 @@ export default function BannerItem({ item }: { item: Banner[] }) {
         {item[index] && (
           <div className="flex flex-col sm:flex-row w-full h-full">
             <div
-              className={`flex flex-col items-start justify-between p-12 sm:pb-[26.6px] sm:p-20 h-full sm:w-2/4 ${
+              className={`flex flex-col items-start justify-between p-10 pr-0 h-full sm:w-1/3 ${
                 animate ? 'animate-slide-in-text' : ''
               }`}
             >
               <div className="flex flex-col items-start gap-4">
-                <h1 className="text-4xl font-semibold tracking-tight lg:text-5xl">
+                <h1 className="text-4xl font-semibold tracking-tighter lg:text-5xl">
                   {description}
                 </h1>
                 <div>
-                  <p className="text-base text-neutral-500 dark:text-neutral-400">
+                  <p className="text-neutral-500 dark:text-neutral-400">
                     {name}
                   </p>
                   <h3 className="text-2xl font-semibold tracking-tight">
@@ -86,7 +86,7 @@ export default function BannerItem({ item }: { item: Banner[] }) {
                 <Button
                   asChild
                   variant="default"
-                  className="h-12 px-5 rounded-full bg-blue-600 hover:bg-blue-700 dark:text-white"
+                  className="h-12 px-6 rounded-full bg-blue-400 hover:bg-blue-300 dark:text-white"
                 >
                   <Link href={`/product/${handle}`}>Buy</Link>
                 </Button>
@@ -108,7 +108,7 @@ export default function BannerItem({ item }: { item: Banner[] }) {
                 </div>
               </div>
             </div>
-            <div className="sm:w-2/4 h-full flex items-center justify-center scale-150 sm:translate-y-16">
+            <div className="sm:w-2/3 h-full flex items-center scale-125 translate-y-20">
               <Image
                 src={image}
                 alt={name}
@@ -123,24 +123,24 @@ export default function BannerItem({ item }: { item: Banner[] }) {
         )}
 
         {item?.length > 0 ? (
-          <div className="absolute right-[5%] bottom-[5%]">
-            <div className="flex h-11 items-center justify-between gap-1 rounded-full p-1 bg-white text-neutral-700 dark:text-white dark:bg-neutral-800">
+          <div className="absolute right-10 bottom-10">
+            <div className="flex h-9 items-center justify-between gap-2">
               <Button
                 size="icon"
-                className="flex items-center justify-center text-neutral-700 w-[36px] h-full p-0 bg-transparent rounded-full hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-900"
+                className="flex items-center justify-center text-neutral-500 w-9 h-9 bg-white rounded-full hover:bg-white dark:bg-neutral-700 dark:text-white dark:hover:bg-neutral-700"
                 onClick={prevBanner}
               >
-                <ArrowLeftIcon className="w-5 h-5" />
+                <ChevronLeftIcon className="w-5 h-5" />
               </Button>
-              <div className="text-sm w-[31px] text-center font-medium">
+              {/* <div className="text-sm w-[31px] text-center font-medium">
                 {index + 1} / {item?.length}
-              </div>
+              </div> */}
               <Button
                 size="icon"
-                className="flex items-center justify-center text-neutral-700 w-[36px] h-full p-0 bg-transparent rounded-full hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-900"
+                className="flex items-center justify-center text-neutral-500 w-9 h-9 bg-white rounded-full hover:bg-white dark:bg-neutral-700 dark:text-white dark:hover:bg-neutral-700"
                 onClick={nextBanner}
               >
-                <ArrowRightIcon className="w-5 h-5" />
+                <ChevronRightIcon className="w-5 h-5" />
               </Button>
             </div>
           </div>

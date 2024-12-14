@@ -66,8 +66,8 @@ export default async function CarouselItems() {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="w-12 h-12 shadow -translate-x-4" />
-      <CarouselNext className="w-12 h-12 shadow translate-x-4" />
+      <CarouselPrevious className="w-12 h-12 -translate-x-4 bg-neutral-100 border-0 dark:bg-neutral-900" />
+      <CarouselNext className="w-12 h-12 translate-x-4 bg-neutral-100 border-0 dark:bg-neutral-900" />
     </Carousel>
   );
 }

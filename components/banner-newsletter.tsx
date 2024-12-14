@@ -37,7 +37,7 @@ export default function BannerNewsletter() {
     <div className="flex items-center justify-center bg-neutral-100 rounded-3xl p-12 dark:bg-neutral-900">
       <div className="flex flex-col items-center gap-4">
         <EnvelopeIcon className="w-12 h-12 text-neutral-500 dark:text-neutral-400" />
-        <h1 className="text-2xl md:text-4xl font-semibold text-center tracking-tight md:w-96">
+        <h1 className="text-2xl md:text-4xl font-semibold text-center tracking-tighter md:w-96">
           Subscribe to our newsletter and get the latest news.
         </h1>
         <Form {...form}>
@@ -64,7 +64,7 @@ export default function BannerNewsletter() {
             <Button
               type="submit"
               variant="default"
-              className="h-12 px-6 rounded-full"
+              className="h-12 px-6 rounded-full dark:bg-neutral-800 dark:text-white"
             >
               Subscribe
             </Button>
