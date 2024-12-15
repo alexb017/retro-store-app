@@ -53,7 +53,7 @@ export default function Faq() {
         <div className="w-full max-w-3xl">
           <div className="flex flex-col gap-12">
             <div className="flex flex-col gap-4">
-              <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
+              <h1 className="text-4xl font-semibold tracking-tighter lg:text-5xl">
                 FAQ
               </h1>
               <div>

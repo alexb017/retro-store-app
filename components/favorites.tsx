@@ -43,7 +43,7 @@ export default function Favorite() {
         </>
       ) : (
         <>
-          <h2 className="text-3xl font-extrabold tracking-tight text-center">
+          <h2 className="text-3xl font-semibold tracking-tight text-center">
             Favorites{' '}
             <span className="font-light">
               (

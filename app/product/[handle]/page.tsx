@@ -55,8 +55,8 @@ export default async function ProductPage({
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <div className="flex flex-col gap-8 sm:flex-row">
-          <div className="basis-full sm:basis-3/6 lg:basis-4/6">
+        <div className="flex flex-col gap-8 lg:flex-row">
+          <div className="basis-full lg:basis-4/6">
             <Gallery
               images={product?.images?.map((image: string) => ({
                 url: image,
@@ -64,7 +64,7 @@ export default async function ProductPage({
               name={product?.handle}
             />
           </div>
-          <div className="basis-full sm:basis-3/6 lg:basis-2/6">
+          <div className="basis-full lg:basis-2/6">
             <Suspense fallback={null}>
               <ProductInfo product={product} />
             </Suspense>
@@ -95,7 +95,7 @@ async function RelatedProducts({ category }: { category: string }) {
       {filteredProducts.length > 0 && (
         <div className="flex flex-col gap-8">
           <h2 className="text-3xl font-semibold tracking-tight">
-            You might also like:
+            You might also like
           </h2>
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             <ProductGrid products={filteredProducts} />

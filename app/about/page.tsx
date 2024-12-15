@@ -13,7 +13,7 @@ export default function AboutPage() {
   return (
     <div className="flex flex-col gap-12 p-5 pt-12">
       <div className="flex flex-col gap-4">
-        <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
+        <h1 className="text-4xl font-semibold tracking-tighter lg:text-5xl">
           Welcome to RetroStore!
         </h1>
         <h4 className="text-xl tracking-tight">

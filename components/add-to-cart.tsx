@@ -71,8 +71,8 @@ export default function AddToCart({
         variant="default"
         className={`h-14 rounded-full font-semibold ${
           disableBtn
-            ? 'cursor-not-allowed bg-blue-600 opacity-50 disabled:cursor-not-allowed disabled:pointer-events-auto dark:text-white hover:bg-blue-600'
-            : 'cursor-pointer bg-blue-600 hover:bg-blue-700 dark:text-white'
+            ? 'cursor-not-allowed bg-blue-600 opacity-50 disabled:cursor-not-allowed disabled:pointer-events-auto dark:text-white hover:bg-blue-500'
+            : 'cursor-pointer bg-blue-600 hover:bg-blue-500 dark:text-white'
         }`}
         onClick={async () => {
           if (itemAlreadyExist) {

@@ -65,7 +65,7 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
           )}
         </div>
         <p className="text-sm">{product?.description}</p>
-        <h4 className="text-xl font-semibold tracking-tight">
+        <h4 className="text-2xl font-semibold tracking-tight">
           {priceLabel} {formattedPrice}
         </h4>
       </div>
@@ -74,7 +74,7 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
 
       {hasColors && (
         <div>
-          <p className="text-sm font-semibold tracking-tight mb-2">
+          <p className="text-base font-semibold tracking-tight mb-2">
             Choose your color
           </p>
           <div className="flex items-center flex-wrap gap-2">
@@ -96,9 +96,9 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
                     router.replace(optionUrl, { scroll: false });
                   }}
                   key={color}
-                  className={`px-5 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black ${
+                  className={`px-6 rounded-full ${
                     isActive
-                      ? `bg-black text-white dark:bg-white dark:text-black`
+                      ? `bg-black text-white hover:bg-black dark:text-black dark:bg-white dark:hover:bg-white`
                       : ``
                   }`}
                 >
@@ -114,7 +114,7 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
 
       {hasStorage && (
         <div>
-          <p className="text-sm font-semibold tracking-tight mb-2">
+          <p className="text-base font-semibold tracking-tight mb-2">
             Choose your storage space
           </p>
           <div className="flex items-center flex-wrap gap-2">
@@ -142,9 +142,9 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
                     router.replace(optionUrl, { scroll: false });
                   }}
                   key={index}
-                  className={`px-5 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black ${
+                  className={`px-6 rounded-full ${
                     isActive
-                      ? `bg-black text-white dark:bg-white dark:text-black`
+                      ? `bg-black text-white hover:bg-black dark:text-black dark:bg-white dark:hover:bg-white`
                       : ``
                   }`}
                 >
@@ -161,7 +161,7 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
 
       {hasSizes && (
         <div>
-          <p className="text-sm font-semibold tracking-tight mb-2">
+          <p className="text-base font-semibold tracking-tight mb-2">
             Choose your size
           </p>
           <div className="flex items-center flex-wrap gap-2">
@@ -183,9 +183,9 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
                     router.replace(optionUrl, { scroll: false });
                   }}
                   key={size}
-                  className={`px-5 rounded-full uppercase hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black ${
+                  className={`px-6 rounded-full uppercase ${
                     isActive
-                      ? `bg-black text-white dark:bg-white dark:text-black`
+                      ? `bg-black text-white hover:bg-black dark:text-black dark:bg-white dark:hover:bg-white`
                       : ``
                   }`}
                 >
@@ -197,29 +197,29 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
         </div>
       )}
 
-      <Separator />
+      <div className="flex flex-col gap-4 p-5 bg-neutral-100 rounded-3xl dark:bg-neutral-900">
+        {!user ? (
+          <Button
+            asChild
+            variant="default"
+            className="font-semibold h-14 rounded-full"
+          >
+            <Link href="/sign-in">Sign in & Check Out</Link>
+          </Button>
+        ) : (
+          <AddToCart
+            item={product}
+            disableBtn={disableBtn}
+            classname="default"
+            uid={user?.uid}
+          />
+        )}
 
-      {!user ? (
-        <Button
-          asChild
-          variant="default"
-          className="font-semibold h-14 rounded-full bg-blue-600 hover:bg-blue-700 dark:text-white"
-        >
-          <Link href="/sign-in">Sign in & Check Out</Link>
-        </Button>
-      ) : (
-        <AddToCart
-          item={product}
-          disableBtn={disableBtn}
-          classname="default"
-          uid={user?.uid}
-        />
-      )}
-
-      <p className="text-sm text-neutral-500 dark:text-neutral-400">
-        Estimated delivery time is 3-5 days. We usually ship items within 24
-        hours. Return is free within 30 days of purchase.
-      </p>
+        <p className="text-sm text-neutral-500 dark:text-neutral-400">
+          Estimated delivery time is 3-5 days. We usually ship items within 24
+          hours. Return is free within 30 days of purchase.
+        </p>
+      </div>
       <div className="flex flex-col w-full">
         <Link href="#" className="flex items-center justify-between py-4">
           <div className="flex items-center gap-2">

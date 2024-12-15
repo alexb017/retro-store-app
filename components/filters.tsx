@@ -24,11 +24,11 @@ export default function Filters() {
         {filters.map((filter, index) => (
           <li key={index}>
             <Button
-              variant="outline"
-              className={`px-5 rounded-full ${
+              variant="secondary"
+              className={`text-xs px-6 rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-700 ${
                 searchParams.get('sort') === filter.sort ||
                 (!searchParams.get('sort') && filter.sort === 'rel')
-                  ? 'border-black bg-black text-white dark:bg-white dark:text-black hover:bg-black hover:text-white'
+                  ? 'bg-black text-white dark:bg-white hover:bg-black dark:text-black dark:hover:bg-white'
                   : ''
               }`}
               onClick={() => {
