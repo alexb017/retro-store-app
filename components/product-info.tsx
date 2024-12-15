@@ -202,7 +202,7 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
           <Button
             asChild
             variant="default"
-            className="font-semibold h-14 rounded-full"
+            className="font-semibold h-14 rounded-full bg-blue-600 hover:bg-blue-500"
           >
             <Link href="/sign-in">Sign in & Check Out</Link>
           </Button>

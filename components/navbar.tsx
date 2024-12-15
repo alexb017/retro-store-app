@@ -62,7 +62,7 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="flex text-sm text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors duration-200 ease-in"
+              className="flex text-sm uppercase font-semibold text-black hover:underline dark:text-neutral-400 dark:hover:text-white transition-colors duration-200 ease-in"
             >
               {link.name}
             </Link>
@@ -83,7 +83,7 @@ export default function Navbar() {
               <div className="flex items-center gap-4">
                 <Link
                   href="/favorites"
-                  className="relative flex text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors ease-in duration-200"
+                  className="relative flex text-black dark:text-neutral-400 dark:hover:text-white transition-colors ease-in duration-200"
                 >
                   <HeartIcon className="w-5 h-5" />
                   {favorites?.length > 0 && (
@@ -94,14 +94,15 @@ export default function Navbar() {
                 </Link>
                 <Link
                   href="/cart"
-                  className="relative flex text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors ease-in duration-200"
+                  className="relative flex items-center gap-1 font-semibold uppercase text-black dark:text-neutral-400 dark:hover:text-white transition-colors ease-in duration-200"
                 >
                   <ShoppingBagIcon className="w-5 h-5" />
-                  {cart?.length > 0 && (
+                  {/* {cart?.length > 0 && (
                     <div className="absolute top-0 right-0 -mr-1 -mt-1 flex items-center justify-center h-4 w-4 rounded-full text-[10px] font-medium text-white bg-black dark:text-black dark:bg-neutral-100">
                       {quantity}
                     </div>
-                  )}
+                  )} */}
+                  Cart ({quantity})
                 </Link>
                 <ProfilePopup uid={user?.uid} userSignOut={userSignOut} />
               </div>
