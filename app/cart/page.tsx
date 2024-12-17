@@ -1,5 +1,5 @@
 import CartTestDemo from '@/components/card-test-demo';
-import Cart from '@/components/cart';
+import Cart from './cart';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {

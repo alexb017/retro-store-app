@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import EditItemQuantity from '@/components/edit-item-cart';
-import DeleteItemCart from '@/components/delete-item-cart';
+import EditItemQuantity from '@/app/cart/edit-item-cart';
+import DeleteItemCart from '@/app/cart/delete-item-cart';
 import useCartData from '@/lib/use-cart-data';
 import { FormattedPrice } from '@/lib/utils';
 import { useContext } from 'react';

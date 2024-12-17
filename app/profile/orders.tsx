@@ -7,7 +7,7 @@ import { getOrders } from '@/lib/actions';
 import { type OrderItems, type CartItem } from '@/lib/types';
 import Image from 'next/image';
 import { FormattedPrice, FormattedDate } from '@/lib/utils';
-import { Button } from './ui/button';
+import { Button } from '../../components/ui/button';
 import Link from 'next/link';
 
 export default function Orders() {

@@ -2,7 +2,7 @@
 
 import { PlusIcon, MinusIcon } from '@heroicons/react/24/outline';
 import { decrementQuantity, incrementQuantity } from '@/lib/actions';
-import { Button } from './ui/button';
+import { Button } from '../../components/ui/button';
 import { type CartItem } from '@/lib/types';
 
 export default function EditItemQuantity({

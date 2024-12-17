@@ -1,8 +1,8 @@
-import Collections from '@/components/collections';
-import Filters from '@/components/filters';
+import Collections from '@/app/products/collections';
+import Filters from '@/app/products/filters';
 import Footer from '@/components/footer';
-import MobileCollections from '@/components/mobile-collections';
-import MobileFilters from '@/components/mobile-filters';
+import MobileCollections from '@/app/products/mobile-collections';
+import MobileFilters from '@/app/products/mobile-filters';
 import { Suspense } from 'react';
 import { Metadata } from 'next';
 import BannerNewsletter from '@/components/banner-newsletter';

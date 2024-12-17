@@ -1,18 +1,17 @@
 'use client';
 
 import { usePathname, useRouter } from 'next/navigation';
-import { Button } from './ui/button';
+import { Button } from '../../components/ui/button';
 
 const links = [
   { name: 'All products', href: '/products' },
   { name: 'Phones', href: '/products/phones' },
   { name: 'Watches', href: '/products/watches' },
   { name: 'Sweaters', href: '/products/sweaters' },
-  { name: 'Drinkware', href: '/products/drinkware' },
+  { name: 'Tablets', href: '/products/tablets' },
   { name: 'Hats', href: '/products/hats' },
   { name: 'T-Shirts', href: '/products/t-shirts' },
   { name: 'Hoodies', href: '/products/hoodies' },
-  { name: 'Earbuds', href: '/products/earbuds' },
 ];
 
 export default function Collections() {

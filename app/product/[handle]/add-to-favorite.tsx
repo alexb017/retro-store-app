@@ -4,7 +4,7 @@ import { createFavorites } from '@/lib/actions';
 import { usePathname, useSearchParams } from 'next/navigation';
 import useFavoriteData from '@/lib/use-favorite-data';
 import { deleteItemFavorite } from '@/lib/actions';
-import { Button } from './ui/button';
+import { Button } from '../../../components/ui/button';
 import { type ProductInfoType, type FavoriteItem } from '@/lib/types';
 
 export default function AddToFavorite({

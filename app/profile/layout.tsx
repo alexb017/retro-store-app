@@ -1,4 +1,4 @@
-import Profile from '@/components/profile';
+import Profile from '@/app/profile/profile';
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import Loading from './loading';

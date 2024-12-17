@@ -6,7 +6,7 @@ import { AuthContext } from '@/app/AuthContext';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FormattedPrice } from '@/lib/utils';
-import DeleteItemFavorite from '@/components/delete-item-favorite';
+import DeleteItemFavorite from '@/app/favorites/delete-item-favorite';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { User } from 'firebase/auth';

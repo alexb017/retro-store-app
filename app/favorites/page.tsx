@@ -1,4 +1,4 @@
-import Favorite from '@/components/favorites';
+import Favorite from '@/app/favorites/favorites';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {

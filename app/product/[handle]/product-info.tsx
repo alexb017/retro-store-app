@@ -1,7 +1,7 @@
 'use client';
 
-import AddToCart from './add-to-cart';
-import { FormattedPrice } from '../lib/utils';
+import AddToCart from '../../cart/add-to-cart';
+import { FormattedPrice } from '@/lib/utils';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import AddToFavorite from './add-to-favorite';
 import { createUrl } from '@/lib/utils';
@@ -11,7 +11,7 @@ import { useContext } from 'react';
 import { AuthContext } from '@/app/AuthContext';
 import { User } from 'firebase/auth';
 import Link from 'next/link';
-import { Separator } from './ui/separator';
+import { Separator } from '@/components/ui/separator';
 import {
   ShieldCheckIcon,
   ArchiveBoxIcon,
@@ -202,7 +202,7 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
           <Button
             asChild
             variant="default"
-            className="font-semibold h-14 rounded-full bg-blue-600 hover:bg-blue-500"
+            className="font-semibold h-14 rounded-full bg-blue-600 hover:bg-blue-500 dark:text-white"
           >
             <Link href="/sign-in">Sign in & Check Out</Link>
           </Button>

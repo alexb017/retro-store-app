@@ -1,6 +1,6 @@
 import { getProduct, getProducts } from '@/lib/actions';
-import Gallery from '@/components/gallery';
-import ProductInfo from '@/components/product-info';
+import Gallery from './gallery';
+import ProductInfo from './product-info';
 import Footer from '@/components/footer';
 import ProductGrid from '@/components/product-grid';
 import { type Products, type ProductInfoType } from '@/lib/types';

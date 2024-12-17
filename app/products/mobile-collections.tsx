@@ -16,11 +16,10 @@ const collections = [
   { label: 'Phones', value: '/products/phones' },
   { label: 'Watches', value: '/products/watches' },
   { label: 'Sweaters', value: '/products/sweaters' },
-  { label: 'Drinkware', value: '/products/drinkware' },
+  { label: 'Tablets', value: '/products/tablets' },
   { label: 'Hats', value: '/products/hats' },
   { label: 'T-Shirts', value: '/products/t-shirts' },
   { label: 'Hoodies', value: '/products/hoodies' },
-  { label: 'Earbuds', value: '/products/earbuds' },
 ];
 
 export default function MobileCollections() {

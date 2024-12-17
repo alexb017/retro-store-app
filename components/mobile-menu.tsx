@@ -26,19 +26,18 @@ export default function MobileMenu() {
     { name: 'Contact', href: '/contact' },
     { name: 'Phones', href: '/products/phones' },
     { name: 'Watches', href: '/products/watches' },
-    { name: 'Earbuds', href: '/products/earbuds' },
+    { name: 'Tablets', href: '/products/tablets' },
     { name: 'T-Shirts', href: '/products/t-shirts' },
     { name: 'Sweaters', href: '/products/sweaters' },
     { name: 'Hats', href: '/products/hats' },
     { name: 'Hoodies', href: '/products/hoodies' },
-    { name: 'Drinkware', href: '/products/drinkware' },
   ];
 
   return (
     <>
       <Button
         onClick={openMenu}
-        variant="outline"
+        variant="secondary"
         size="icon"
         className="rounded-full focus:outline-none"
       >
@@ -75,7 +74,7 @@ export default function MobileMenu() {
                   className="focus:outline-none rounded-full"
                   onClick={closeMenu}
                   aria-label="close mobile menu"
-                  variant="outline"
+                  variant="secondary"
                   size="icon"
                 >
                   <XMarkIcon className="w-5 h-5" />
@@ -93,8 +92,8 @@ export default function MobileMenu() {
                     <Button
                       asChild
                       key={link.name}
-                      variant="outline"
-                      className="px-5 rounded-full"
+                      variant="secondary"
+                      className="px-6 rounded-full"
                     >
                       <Link href={link.href}>{link.name}</Link>
                     </Button>

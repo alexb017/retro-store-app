@@ -2,7 +2,7 @@ import { PlusIcon } from '@heroicons/react/24/outline';
 import { createCart, incrementQuantity } from '@/lib/actions';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { Button } from './ui/button';
+import { Button } from '@/components/ui/button';
 import { type ProductInfoType, type CartItem } from '@/lib/types';
 import useCartData from '@/lib/use-cart-data';
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
-import { Button } from './ui/button';
+import { Button } from '../../components/ui/button';
 import { createUrl } from '@/lib/utils';
 
 const filters = [

@@ -1,4 +1,4 @@
-import { Button } from './ui/button';
+import { Button } from '../../components/ui/button';
 import { deleteItemCart } from '@/lib/actions';
 
 export default function DeleteItemCart({
