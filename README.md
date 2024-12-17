@@ -24,3 +24,6 @@ For test demo, you can use the following credit card details:
 - Month: Any valid month
 - Year: Current year or above
 - CVC: Any 3 digits
+
+> [!NOTE]
+> All the tech images (phones, watches, etc.) are downloaded from [store.google.com](https://store.google.com), is just for **demo purpose**.

@@ -108,12 +108,12 @@ export default function BannerItem({ item }: { item: Banner[] }) {
                 </div>
               </div>
             </div>
-            <div className="sm:w-2/3 h-full flex items-center scale-125 translate-y-20">
+            <div className="sm:w-2/3 h-full flex items-center justify-center">
               <Image
                 src={image}
                 alt={name}
-                width={800}
-                height={800}
+                width={640}
+                height={640}
                 quality={80}
                 priority={true}
                 className={animate ? 'animate-slide-in-image' : ''}

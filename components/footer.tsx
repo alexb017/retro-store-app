@@ -1,6 +1,43 @@
-import StripeIcon from './icons/stripe';
 import LogoIcon from './icons/logo';
 import Link from 'next/link';
+
+const storeLinks = [
+  {
+    title: 'About',
+    href: '/about',
+  },
+  {
+    title: 'Contact',
+    href: '/contact',
+  },
+  {
+    title: 'FAQ',
+    href: '/faq',
+  },
+];
+
+const productLinks = [
+  {
+    title: 'Phones',
+    href: '/products/phones',
+  },
+  {
+    title: 'Watches',
+    href: '/products/watches',
+  },
+  {
+    title: 'T-shirts',
+    href: '/products/t-shirts',
+  },
+  {
+    title: 'Hats',
+    href: '/products/hats',
+  },
+  {
+    title: 'Hoodies',
+    href: '/products/hoodies',
+  },
+];
 
 export default function Footer() {
   return (
@@ -24,24 +61,15 @@ export default function Footer() {
           <div className="flex justify-center">
             <div className="flex flex-col items-start gap-2">
               <p className="font-medium">Store</p>
-              <Link
-                href="/about"
-                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-all duration-200 ease-in"
-              >
-                About
-              </Link>
-              <Link
-                href="/contact"
-                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-all duration-200 ease-in"
-              >
-                Contact
-              </Link>
-              <Link
-                href="/faq"
-                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-all duration-200 ease-in"
-              >
-                FAQ
-              </Link>
+              {storeLinks.map((link) => (
+                <Link
+                  key={link.title}
+                  href={link.href}
+                  className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-all duration-200 ease-in"
+                >
+                  {link.title}
+                </Link>
+              ))}
             </div>
           </div>
         </div>
@@ -49,36 +77,15 @@ export default function Footer() {
           <div className="flex justify-center">
             <div className="flex flex-col items-start gap-2">
               <p className="font-medium">Products</p>
-              <Link
-                href="/products/phones"
-                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-all duration-200 ease-in"
-              >
-                Phones
-              </Link>
-              <Link
-                href="/products/watches"
-                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-all duration-200 ease-in"
-              >
-                Watches
-              </Link>
-              <Link
-                href="/products/t-shirts"
-                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-all duration-200 ease-in"
-              >
-                T-shirts
-              </Link>
-              <Link
-                href="/products/hats"
-                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-all duration-200 ease-in"
-              >
-                Hats
-              </Link>
-              <Link
-                href="/products/hoodies"
-                className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-all duration-200 ease-in"
-              >
-                Hoodies
-              </Link>
+              {productLinks.map((link) => (
+                <Link
+                  key={link.title}
+                  href={link.href}
+                  className="text-sm hover:text-black dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-all duration-200 ease-in"
+                >
+                  {link.title}
+                </Link>
+              ))}
             </div>
           </div>
         </div>

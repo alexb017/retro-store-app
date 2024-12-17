@@ -72,7 +72,7 @@ export default function Orders() {
                         {FormattedDate(order.created_at)}
                       </p>
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex flex-wrap gap-2">
                       {order.items.map((item: CartItem, index: number) => {
                         return (
                           <div

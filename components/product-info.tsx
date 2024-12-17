@@ -53,7 +53,7 @@ export default function ProductInfo({ product }: { product: ProductInfoType }) {
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-1">
         <div className="flex items-center gap-4">
-          <h2 className="text-3xl font-semibold tracking-tight">
+          <h2 className="text-3xl font-semibold tracking-tighter">
             {product?.name}
           </h2>
           {user && (

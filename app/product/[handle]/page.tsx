@@ -86,15 +86,19 @@ export default async function ProductPage({
 async function RelatedProducts({ category }: { category: string }) {
   const products = (await getProducts()) as Products[];
 
-  const filteredProducts = products.filter(
-    (product) => product?.category === category
-  );
+  // Show only 3 random products, excluding the current item
+  // The sort approach is not the best, but it's good enough for this example
+  // Is a common trick to shuffle an array randomly
+  const filteredProducts = products
+    .filter((product) => product.category !== category)
+    .sort(() => 0.5 - Math.random())
+    .slice(0, 3);
 
   return (
     <>
       {filteredProducts.length > 0 && (
         <div className="flex flex-col gap-8">
-          <h2 className="text-3xl font-semibold tracking-tight">
+          <h2 className="text-3xl font-semibold tracking-tighter">
             You might also like
           </h2>
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">

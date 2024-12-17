@@ -25,7 +25,7 @@ export default function Gallery({
             key={index}
             className="p-0 flex items-center justify-center"
           >
-            <Image src={image.url} alt={name} width={800} height={800} />
+            <Image src={image.url} alt={name} width={640} height={640} />
           </CarouselItem>
         ))}
       </CarouselContent>

@@ -8,8 +8,8 @@ import { FormattedPrice } from '@/lib/utils';
 
 export default async function ThreeItems() {
   const products = (await getProducts()) as Products[];
-  const mainElement = products[6];
-  const firstTwoElements = products.slice(1, 3);
+  const mainElement = products[3];
+  const firstTwoElements = products.slice(5, 7);
 
   return (
     <div className="flex flex-col xl:flex-row gap-6 w-full">
