@@ -87,7 +87,7 @@ export default function Navbar() {
                 >
                   <HeartIcon className="w-5 h-5" />
                   {favorites?.length > 0 && (
-                    <div className="absolute top-0 right-0 -mr-1 -mt-1 flex items-center justify-center h-4 w-4 rounded-full text-[10px] font-medium text-white bg-red-500">
+                    <div className="absolute -top-1.5 -right-1.5 flex items-center justify-center h-4 w-4 rounded-full text-[8px] font-medium text-white bg-red-500">
                       {countFavorite}
                     </div>
                   )}

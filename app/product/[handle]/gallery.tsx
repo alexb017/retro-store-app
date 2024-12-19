@@ -18,7 +18,7 @@ export default function Gallery({
   name: string;
 }) {
   return (
-    <Carousel className="h-full bg-neutral-100 rounded-3xl xl:aspect-square dark:bg-neutral-900">
+    <Carousel className="h-full bg-neutral-100 rounded-3xl aspect-square dark:bg-neutral-900">
       <CarouselContent className="ml-0 h-full">
         {images.map((image, index) => (
           <CarouselItem

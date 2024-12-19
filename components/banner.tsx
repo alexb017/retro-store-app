@@ -108,7 +108,7 @@ export default function BannerItem({ item }: { item: Banner[] }) {
                 </div>
               </div>
             </div>
-            <div className="sm:w-2/3 h-full flex items-center justify-center">
+            <div className="sm:w-2/3 h-full flex items-center justify-center scale-125 lg:scale-100">
               <Image
                 src={image}
                 alt={name}
