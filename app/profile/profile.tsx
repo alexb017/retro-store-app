@@ -23,7 +23,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import { usePathname, useRouter } from 'next/navigation';
 
-async function handleDeleteAccount(userId: string, user: User) {
+async function handleDeleteAccount(userId: string) {
   try {
     // Call the API route to delete the user's data
     const response = await fetch('/api/delete_user', {
@@ -39,10 +39,6 @@ async function handleDeleteAccount(userId: string, user: User) {
     if (!response.ok) {
       // console.error('API error:', data.error);
       throw new Error(data.error);
-    } else {
-      // console.log('User data deleted:', data.message);
-      // Delete the user from Firebase Auth
-      await deleteUserFromFirebaseAuth(user);
     }
   } catch (error: any) {
     // console.error('Error deleting user data:', error.message);
@@ -112,7 +108,7 @@ export default function Profile() {
               className="rounded-full"
               onClick={async () => {
                 try {
-                  await handleDeleteAccount(user?.uid, user);
+                  await handleDeleteAccount(user?.uid);
 
                   userSignOut();
 

@@ -4,6 +4,7 @@ import {
   deleteFavorites,
   deleteOrders,
   deleteAccount,
+  deleteAccountAuth,
 } from '@/lib/helpers';
 
 export async function DELETE(req: NextRequest) {
@@ -20,6 +21,7 @@ export async function DELETE(req: NextRequest) {
     await deleteFavorites(userId);
     await deleteOrders(userId);
     await deleteAccount(userId);
+    await deleteAccountAuth(userId);
 
     return NextResponse.json({ message: 'User deleted' });
   } catch (error: any) {

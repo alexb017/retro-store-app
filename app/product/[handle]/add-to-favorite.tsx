@@ -59,6 +59,7 @@ export default function AddToFavorite({
     quantity: 1,
   };
 
+  // Remove undefined values from object
   const addToFavorite = Object.fromEntries(
     Object.entries(item).filter(([_, value]) => value !== undefined)
   );

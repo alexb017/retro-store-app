@@ -1,5 +1,6 @@
 import { db } from './firebase-admin';
 import { type OrderItems } from './types';
+import { getAuth } from 'firebase-admin/auth';
 
 // Get the user's cart
 export async function getCartItems(userId: string) {
@@ -120,5 +121,16 @@ export async function deleteAccount(userId: string) {
     await db.collection('users').doc(userId).delete();
   } catch (error: any) {
     throw new Error('Failed to delete account');
+  }
+}
+
+// Delete the user's account from the firebase authentication
+export async function deleteAccountAuth(userId: string) {
+  try {
+    await getAuth().deleteUser(userId);
+  } catch (error: any) {
+    throw new Error(
+      'Failed to delete account from the firebase authentication'
+    );
   }
 }

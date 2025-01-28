@@ -38,13 +38,13 @@ export default async function ThreeItems() {
             </Button>
           </CardContent>
           <CardFooter className="w-full h-full justify-center p-0">
-            <div className="flex items-center justify-center h-80 xl:h-full">
+            <div className="flex items-center justify-center h-80">
               <Image
                 src={mainElement?.image}
                 alt={mainElement?.name}
                 width={400}
                 height={400}
-                className="xl:scale-150 xl:-translate-y-4"
+                className="xl:scale-125 xl:-translate-y-4"
               />
             </div>
           </CardFooter>
